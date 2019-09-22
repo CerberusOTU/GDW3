@@ -12,12 +12,17 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rb;
     public CapsuleCollider col;
+
     //jumping var
     private float distToGround;
+
+    //crouching Var
+    Vector3 origScale;
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
         distToGround = col.bounds.extents.y;
+        origScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     //Check if player is grounded
@@ -74,6 +79,15 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector3.up * 0.8f, ForceMode.Impulse);
         } 
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 0.5f, transform.localScale.z);
+        } 
+        else
+        {
+            transform.localScale = origScale;
+        }
     }
 
 }
