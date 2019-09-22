@@ -53,6 +53,7 @@ public class Gun : MonoBehaviour
         isReloading = false;
     }
 
+
     void Shoot()
     {
         currentAmmo--;

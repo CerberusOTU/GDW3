@@ -10,13 +10,25 @@ public class PlayerController : MonoBehaviour
 
     private PlayerMotor motor;
 
+    public Rigidbody rb;
+    public CapsuleCollider col;
+    //jumping var
+    private float distToGround;
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        distToGround = col.bounds.extents.y;
+    }
+
+    //Check if player is grounded
+    bool isGrounded()
+    {
+       return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 
     void Update()
     {
+
         if (Input.GetButton("Fire3"))
         {
             speed = 15f;
@@ -56,6 +68,12 @@ public class PlayerController : MonoBehaviour
 
         //apply Camera rotation
         motor.CamRotate(_CamRotation);
+
+        
+        if (isGrounded() && Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * 0.8f, ForceMode.Impulse);
+        } 
     }
 
 }

@@ -6,19 +6,20 @@ public class aimDownSights : MonoBehaviour
     public Vector3 hitFirePos;
 
     public Canvas crossHair;
-    float aimSpeed = 0.15f;
+    float aimSpeed = 0.10f;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButton("Fire2"))
         {
-            transform.localPosition = Vector3.Slerp(transform.localPosition, aimDownPos, aimSpeed /** Time.time*/);
+            transform.localPosition = Vector3.Slerp(transform.localPosition, aimDownPos, aimSpeed);
             crossHair.enabled = false;
         }
         else
         {
-            transform.localPosition = hitFirePos;
+            transform.localPosition =  Vector3.Slerp(transform.localPosition, hitFirePos, aimSpeed);
+            //transform.localPosition = hitFirePos;
             crossHair.enabled = true;
         }
     }
