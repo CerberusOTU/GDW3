@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Gun : MonoBehaviour
 {
+    public Text scoreText;
+
     public float damage = 10f;
     public float range = 100f;
     public float impactForce = 30f;
@@ -31,9 +34,13 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <=0)
         {
+            scoreText.text = "Reloading";
             StartCoroutine(Reload());
             return;
         }
+
+        else scoreText.text = currentAmmo.ToString();
+
         //player has inputted time to shoot
         if (Input.GetButton("Fire1") && Time.time >= nextTimetoFire)
         {

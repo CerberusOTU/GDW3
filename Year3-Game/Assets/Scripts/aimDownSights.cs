@@ -6,7 +6,7 @@ public class aimDownSights : MonoBehaviour
     public Vector3 hitFirePos;
 
     public Canvas crossHair;
-    float aimSpeed = 0.10f;
+    float aimSpeed = 0.20f;
 
     // Update is called once per frame
     void Update()
