@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     public float impactForce = 30f;
     public float fireRate = 10f;
 
-    public int maxAmmo = 15;
+    public int maxAmmo = 30;
     private int currentAmmo = -1;
     public float reloadTime = 1f;
     private bool isReloading = false;
@@ -46,6 +46,12 @@ public class Gun : MonoBehaviour
         {
             nextTimetoFire = Time.time + 1f / fireRate;
             Shoot();
+        }
+
+        if (Input.GetKey(KeyCode.R) && currentAmmo != maxAmmo)
+        {
+            scoreText.text = "Reloading";
+            StartCoroutine(Reload());
         }
     }
 
