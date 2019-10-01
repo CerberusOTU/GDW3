@@ -6,15 +6,22 @@ public class Gun : MonoBehaviour
 {
     public Text scoreText;
 
+    //Basic Gun Properties
     public float damage = 10f;
     public float range = 100f;
     public float impactForce = 30f;
     public float fireRate = 10f;
 
+    //Reload Properties
     public int maxAmmo = 30;
     private int currentAmmo = -1;
     public float reloadTime = 1f;
     private bool isReloading = false;
+
+    //Recoil Properties
+    public float maxRecoil_x = -20f;
+    public float recoilSpeed = 10f;
+    private float currentRecoil = 0f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -29,6 +36,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Determine whether reloading or out of ammo
         if (isReloading)
             return;
 
@@ -39,20 +47,29 @@ public class Gun : MonoBehaviour
             return;
         }
 
+
         else scoreText.text = currentAmmo.ToString();
 
         //player has inputted time to shoot
         if (Input.GetButton("Fire1") && Time.time >= nextTimetoFire)
         {
             nextTimetoFire = Time.time + 1f / fireRate;
+            
+            //Recoil
+            currentRecoil += 0.1f;
+
             Shoot();
         }
+        
 
+        //As long as clip is not full, player can reload
         if (Input.GetKey(KeyCode.R) && currentAmmo != maxAmmo)
         {
             scoreText.text = "Reloading";
             StartCoroutine(Reload());
         }
+
+        
     }
 
     IEnumerator Reload()
@@ -72,6 +89,19 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         muzzleFlash.Play();
         RaycastHit hitInfo;
+
+        //Add recoil to move the camera and player orientation
+        if (currentRecoil > 0)
+        {
+            Quaternion maxRecoil = Quaternion.Euler (maxRecoil_x, 0f, 0f);
+            fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation,maxRecoil,Time.deltaTime * recoilSpeed);
+            currentRecoil -= Time.deltaTime;
+        }
+        else
+        {
+            currentRecoil = 0f;
+            fpsCam.transform.localRotation = Quaternion.Slerp (fpsCam.transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
+        }
 
         //check if we actually hit anything
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
