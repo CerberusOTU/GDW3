@@ -17,7 +17,7 @@ public class Motion : MonoBehaviour
     //camera FOV when sprinting variables
     public Camera cam;
     private float baseFOV;
-    private float FOVmod = 0.85f;
+    private float FOVmod = 1.15f;
 
     void Start()
     {
