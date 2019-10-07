@@ -32,6 +32,13 @@ public class Motion : MonoBehaviour
        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, ground);
     }
 
+    private void Update()
+    {
+         if (isGrounded() && Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        } 
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -45,12 +52,6 @@ public class Motion : MonoBehaviour
 
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         bool isSprinting = sprint && verticalMove > 0; //&& !isJumping;
-        
-
-        if (isGrounded() && Input.GetKey(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        } 
 
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove);
         direction.Normalize();
