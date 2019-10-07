@@ -79,21 +79,21 @@ public class Gun : MonoBehaviour
             Debug.Log(hitInfo.transform.name);
 
             //find the target component on obect we just hit and store it
-            //Target target = hitInfo.transform.GetComponent<Target>();
+            Target target = hitInfo.transform.GetComponent<Target>();
 
-            DestructionTarget desTarget = hitInfo.transform.GetComponent<DestructionTarget>();
+            //DestructionTarget desTarget = hitInfo.transform.GetComponent<DestructionTarget>();
 
             //apply damage to target
-           // if (target != null)
-           // {
-           //     target.takeDamage(damage);
-            //}
+            if (target != null)
+            {
+                target.takeDamage(damage);
+            }
 
              //apply damage to target
-            if (desTarget != null)
+           /*  if (desTarget != null)
             {
                 desTarget.takeDamage(damage);
-            }
+            } */
 
 
             //apply force to target on impact

@@ -13,9 +13,14 @@ public class Weapon : MonoBehaviour
     
     public Canvas crossHair;
     
+    public Camera cam;
+    //BulletHole Variables ////
+     private PoolManager _pool;
+    //////////////////////////
+    
     void Start()
     {
-        
+         _pool = GameObject.FindObjectOfType<PoolManager>();
     }
 
     void Update()
@@ -28,6 +33,11 @@ public class Weapon : MonoBehaviour
         if(currentWeapon != null)
         {
             Aim(Input.GetMouseButton(1));
+
+            if(Input.GetMouseButton(0))
+            {
+                Shoot();
+            }
         }
     }
 
@@ -67,4 +77,49 @@ public class Weapon : MonoBehaviour
         }
 
     }
+
+    void Shoot()
+    {
+        RaycastHit hitInfo = new RaycastHit();
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, 100f))
+        {
+            Debug.Log(hitInfo.transform.name);
+
+            Target target = hitInfo.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                target.takeDamage(10f);
+            }
+
+            //check if we hit a wall so we can display bulletholes
+            if(hitInfo.collider.tag == "Wall")
+            {
+                
+                for(int i = 0; i < _pool.holeList.Count; i++)
+                {
+                    //if object is inactive in list, use it
+                    if(_pool.holeList[i].activeInHierarchy == false)
+                    {
+                        _pool.holeList[i].SetActive(true);
+                        _pool.holeList[i].transform.position = hitInfo.point;
+                        _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                        break;
+                    }
+                    //in case we go through the entire list and require more bullet holes, create some  
+                    else
+                    {
+                        if(i == _pool.holeList.Count - 1)
+                        {
+                        GameObject newBullet = Instantiate(_pool.bulletHole) as GameObject;
+                        newBullet.transform.parent = _pool.transform;
+                        newBullet.SetActive(false);
+                        _pool.holeList.Add(newBullet);               
+                        }     
+                    }
+                }
+            }
+             
+        }
+
+    }   
 }
