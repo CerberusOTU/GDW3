@@ -105,7 +105,7 @@ public class Weapon : MonoBehaviour
                         _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
                         break;
                     }
-                    //in case we go through the entire list and require more bullet holes, create some  
+                   /*  //in case we go through the entire list and require more bullet holes, create some  
                     else
                     {
                         if(i == _pool.holeList.Count - 1)
@@ -115,7 +115,7 @@ public class Weapon : MonoBehaviour
                         newBullet.SetActive(false);
                         _pool.holeList.Add(newBullet);               
                         }     
-                    }
+                    } */
                 }
             }
              
