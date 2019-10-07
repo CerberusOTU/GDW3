@@ -7,7 +7,7 @@ public class Look : MonoBehaviour
     public static bool cursorLocked = true;
     public Transform player;
     public Transform cams;
-
+    public Transform weapon;
     public float xSens;
     public float ySens;
 
@@ -17,6 +17,8 @@ public class Look : MonoBehaviour
     void Start()
     {
         camCenter = cams.localRotation; //set rotation origin for cameras to camCenter
+
+       
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class Look : MonoBehaviour
 
         if(Quaternion.Angle(camCenter, delta) < maxAngle)
         {
-        cams.localRotation = delta;
+            cams.localRotation = delta;
         }
     }
 
@@ -45,7 +47,6 @@ public class Look : MonoBehaviour
         Quaternion adj = Quaternion.AngleAxis(input, Vector3.up);
         Quaternion delta = player.localRotation * adj;
         player.localRotation = delta;
-        
     }
 
     void CursorLock()
