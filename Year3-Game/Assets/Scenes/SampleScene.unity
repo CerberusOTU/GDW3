@@ -12750,6 +12750,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   cam: {fileID: 963194227}
+  weaponParent: {fileID: 1454538943}
 --- !u!114 &1834482316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12819,6 +12820,7 @@ MonoBehaviour:
   loadout:
   - {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
   weaponParent: {fileID: 1454538943}
+  crossHair: {fileID: 303765475}
 --- !u!1 &1838391335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8509748679803293226, guid: c7c07049fdccec942a12e55936dd72c6,

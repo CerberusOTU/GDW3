@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Motion : MonoBehaviour
 {
+
+    float horizontalMove;
+    float verticalMove;
     public float speed;
     public float sprintModifier;
+
+    bool isSprinting;
     private Rigidbody rb;
     private CapsuleCollider col;
     private float distToGround;
@@ -19,12 +24,23 @@ public class Motion : MonoBehaviour
     private float baseFOV;
     private float FOVmod = 0.98f;
 
+    //HeadBob variables
+    public Transform weaponParent;
+    private Vector3 weaponParentOrigin;
+
+    private float movementCounter;
+    private float idleCounter;
+
+    private Vector3 targetBob;
+    /////////////////
     void Start()
     {
         baseFOV = cam.fieldOfView;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         distToGround = col.bounds.extents.y;
+
+        weaponParentOrigin = weaponParent.localPosition;
     }
     //Check if player is grounded
     bool isGrounded()
@@ -38,20 +54,39 @@ public class Motion : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         } 
+
+        if(horizontalMove == 0 && verticalMove == 0)
+        {
+            HeadBob(idleCounter, 0.01f, 0.01f);
+            idleCounter += Time.deltaTime;
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 2f);
+        }
+        else if(isSprinting)
+        {
+            HeadBob(movementCounter, 0.075f, 0.05f);
+            movementCounter += Time.deltaTime * 7;
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 15f);
+        }
+        else
+        {
+            HeadBob(movementCounter, 0.025f, 0.025f);
+            movementCounter += Time.deltaTime * 5;
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 6f);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float horizontalMove = Input.GetAxisRaw("Horizontal");
-        float verticalMove = Input.GetAxisRaw("Vertical");
+        horizontalMove = Input.GetAxisRaw("Horizontal");
+        verticalMove = Input.GetAxisRaw("Vertical");
 
         //bool isGrounded = Physics.Raycast(groundDetect.transform.localPosition, Vector3.down, 0.1f, ground);
         //bool jump = Input.GetKey(KeyCode.Space);
         //bool isJumping = jump && isGrounded;
 
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        bool isSprinting = sprint && verticalMove > 0; //&& !isJumping;
+        isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove);
         direction.Normalize();
@@ -71,7 +106,10 @@ public class Motion : MonoBehaviour
         Vector3 targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
         targetVelocity.y = rb.velocity.y;
         rb.velocity =  targetVelocity;
+    }
 
-        
+    void HeadBob(float _z, float xIntensity, float yIntensity) 
+    {
+        targetBob = weaponParentOrigin + new Vector3(Mathf.Cos(_z) * xIntensity, Mathf.Sin(_z * 2) * yIntensity,0);
     }
 }

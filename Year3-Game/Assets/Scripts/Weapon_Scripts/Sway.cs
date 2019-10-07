@@ -26,7 +26,7 @@ public class Sway : MonoBehaviour
         float yMouse = Input.GetAxis("Mouse Y");
 
         //calculate target Rotation
-        Quaternion xAdjustRot = Quaternion.AngleAxis(intensity * xMouse, Vector3.up);
+        Quaternion xAdjustRot = Quaternion.AngleAxis(-intensity * xMouse, Vector3.up);
         Quaternion yAdjustRot = Quaternion.AngleAxis(intensity * yMouse, Vector3.right);
 
         Quaternion targetRot = origRot * xAdjustRot * yAdjustRot;
