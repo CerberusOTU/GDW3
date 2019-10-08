@@ -57,9 +57,16 @@ public class Motion : MonoBehaviour
 
         if(horizontalMove == 0 && verticalMove == 0)
         {
-            HeadBob(idleCounter, 0.01f, 0.01f);
-            idleCounter += Time.deltaTime;
-            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 2f);
+            if(Input.GetMouseButton(1))
+            {
+                //stop headbob && swaying
+            }
+            else
+            {
+                HeadBob(idleCounter, 0.01f, 0.01f);
+                idleCounter += Time.deltaTime;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 2f);
+            }
         }
         else if(isSprinting)
         {

@@ -8,7 +8,6 @@ public class Sway : MonoBehaviour
     public float smooth;
 
     private Quaternion origRot;
-
     private void Start()
     {
         origRot = transform.localRotation;
@@ -21,6 +20,10 @@ public class Sway : MonoBehaviour
 
     private void UpdateSway()
     {
+        if(Input.GetMouseButton(1))
+        {
+            intensity = 0;
+        }
         //controls
         float xMouse = Input.GetAxis("Mouse X");
         float yMouse = Input.GetAxis("Mouse Y");
@@ -33,5 +36,6 @@ public class Sway : MonoBehaviour
 
         //rotate towards target rotation
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRot, Time.deltaTime * smooth);
+
     }
 }

@@ -17,6 +17,8 @@ public class Weapon : MonoBehaviour
     //BulletHole Variables ////
      private PoolManager _pool;
     //////////////////////////
+
+    private float currentCool;
     
     void Start()
     {
@@ -34,10 +36,17 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0) && currentCool <= 0)
             {
                 Shoot();
             }
+        }
+
+        currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
+
+        if(currentCool > 0)
+        {
+            currentCool -= Time.deltaTime;
         }
     }
 
@@ -80,8 +89,18 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        Transform spawn = cam.transform;
+
+        //bloom
+        Vector3 bloom = spawn.position + spawn.forward * 1000f;
+        bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * spawn.up;
+        bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * spawn.right;
+        bloom -= spawn.position;
+        bloom.Normalize();
+
+
         RaycastHit hitInfo = new RaycastHit();
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, 100f))
+        if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
         {
             Debug.Log(hitInfo.transform.name);
 
@@ -121,5 +140,10 @@ public class Weapon : MonoBehaviour
              
         }
 
+        //GUN FX
+        currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
+        currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
+
+        currentCool = loadout[currentIndex].firerate;
     }   
 }

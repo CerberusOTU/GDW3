@@ -7,6 +7,9 @@ public class _Gun : ScriptableObject
 {
    public string name;
    public float firerate;
+   public float bloom;
+   public float recoil;
+   public float kickBack;
    public float aimSpeed;
    public GameObject obj;
 }
