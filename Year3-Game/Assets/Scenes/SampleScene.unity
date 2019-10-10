@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366863, g: 0.48428386, b: 0.56453276, a: 1}
+  m_IndirectSpecularColor: {r: 0.43668664, g: 0.48428446, b: 0.56453353, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22454,8 +22454,8 @@ MonoBehaviour:
   player: {fileID: 1834482319}
   cams: {fileID: 963194228}
   weapon: {fileID: 1454538943}
-  xSens: 100
-  ySens: 100
+  xSens: 250
+  ySens: 250
   maxAngle: 60
 --- !u!54 &1834482317
 Rigidbody:

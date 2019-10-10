@@ -10,7 +10,7 @@ public class Motion : MonoBehaviour
     public float speed;
     public float sprintModifier;
 
-    bool isSprinting;
+    public bool isSprinting;
     private Rigidbody rb;
     private CapsuleCollider col;
     private float distToGround;
@@ -32,6 +32,7 @@ public class Motion : MonoBehaviour
     private float idleCounter;
 
     private Vector3 targetBob;
+
     /////////////////
     void Start()
     {
@@ -60,6 +61,7 @@ public class Motion : MonoBehaviour
             if(Input.GetMouseButton(1))
             {
                 //stop headbob && swaying
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin ,Time.deltaTime * 2f);
             }
             else
             {
@@ -76,9 +78,18 @@ public class Motion : MonoBehaviour
         }
         else
         {
-            HeadBob(movementCounter, 0.025f, 0.025f);
-            movementCounter += Time.deltaTime * 5;
-            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 6f);
+            if(Input.GetMouseButton(1))
+            {
+                HeadBob(movementCounter, 0.005f, 0.005f);
+                movementCounter += Time.deltaTime * 5;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 3f);
+            }
+            else
+            {
+                HeadBob(movementCounter, 0.025f, 0.025f);
+                movementCounter += Time.deltaTime * 5;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 6f);
+            }
         }
     }
 
@@ -100,10 +111,16 @@ public class Motion : MonoBehaviour
         
         float adjustedSpeed = speed;
 
+        //allow the player to sprint        
         if(isSprinting)
         {
             adjustedSpeed *= sprintModifier;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
+        }
+        //slow down character if walking and aiming down sights
+        else if(Input.GetMouseButton(1))
+        {
+            adjustedSpeed = speed / 2;
         }
         else
         {

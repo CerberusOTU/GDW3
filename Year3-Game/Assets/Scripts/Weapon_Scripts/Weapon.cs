@@ -21,10 +21,14 @@ public class Weapon : MonoBehaviour
     private float currentRecoil;
 
     private float currentCool;
+
+   private Motion player;
     
     void Start()
     {
          _pool = GameObject.FindObjectOfType<PoolManager>();
+
+         player = GameObject.FindObjectOfType<Motion>();
     }
 
     void Update()
@@ -43,10 +47,10 @@ public class Weapon : MonoBehaviour
                 currentRecoil += 0.1f;
                 Shoot();
             }
-
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
         }
 
-        currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
+        
 
         if(currentCool > 0)
         {
@@ -76,7 +80,7 @@ public class Weapon : MonoBehaviour
         Transform ADS = currentWeapon.transform.Find("States/ADS");
         Transform Hip = currentWeapon.transform.Find("States/Hip");
 
-        if(isAiming)
+        if(isAiming && !player.isSprinting)
         {
             //ADS
             anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
