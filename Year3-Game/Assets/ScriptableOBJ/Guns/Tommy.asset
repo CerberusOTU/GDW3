@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Tommy
   m_EditorClassIdentifier: 
   name: Tommy Gun
-  firerate: 0.15
+  firerate: 0.08
   bloom: 20
   recoil: 1
-  kickBack: 0.05
+  maxRecoil_x: -10
+  recoilSpeed: 5
+  kickBack: 0.02
   aimSpeed: 15
   obj: {fileID: 7244827515920905702, guid: 2cf8dfec482951344868086159d70896, type: 3}

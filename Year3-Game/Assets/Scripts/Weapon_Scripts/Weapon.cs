@@ -18,6 +18,8 @@ public class Weapon : MonoBehaviour
      private PoolManager _pool;
     //////////////////////////
 
+    private float currentRecoil;
+
     private float currentCool;
     
     void Start()
@@ -38,8 +40,10 @@ public class Weapon : MonoBehaviour
 
             if(Input.GetMouseButton(0) && currentCool <= 0)
             {
+                currentRecoil += 0.1f;
                 Shoot();
             }
+
         }
 
         currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
@@ -98,6 +102,18 @@ public class Weapon : MonoBehaviour
         bloom -= spawn.position;
         bloom.Normalize();
 
+         if (currentRecoil > 0)
+        {
+            Quaternion maxRecoil = Quaternion.Euler (loadout[currentIndex].maxRecoil_x, 0f, 0f);
+            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation,maxRecoil,Time.deltaTime * loadout[currentIndex].recoilSpeed);
+            currentRecoil -= Time.deltaTime;
+        }
+        else
+        {
+            currentRecoil = 0f;
+            cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, Quaternion.identity, Time.deltaTime * loadout[currentIndex].recoilSpeed / 2);
+        }
+
 
         RaycastHit hitInfo = new RaycastHit();
         if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
@@ -141,9 +157,8 @@ public class Weapon : MonoBehaviour
         }
 
         //GUN FX
-        currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
+       // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
-
         currentCool = loadout[currentIndex].firerate;
     }   
 }
