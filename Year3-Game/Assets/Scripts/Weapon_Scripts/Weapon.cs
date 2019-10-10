@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviour
 
     private float currentRecoil;
 
+    private float adjustedBloom;
+
     private float currentCool;
 
    private Motion player;
@@ -99,10 +101,18 @@ public class Weapon : MonoBehaviour
     {
         Transform spawn = cam.transform;
 
+        if(Input.GetMouseButton(1))
+        {
+             adjustedBloom = loadout[currentIndex].bloom / 3;
+        }
+        else
+        {
+             adjustedBloom = loadout[currentIndex].bloom;
+        }
         //bloom
         Vector3 bloom = spawn.position + spawn.forward * 1000f;
-        bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * spawn.up;
-        bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * spawn.right;
+        bloom += Random.Range(-adjustedBloom, adjustedBloom) * spawn.up;
+        bloom += Random.Range(-adjustedBloom, adjustedBloom) * spawn.right;
         bloom -= spawn.position;
         bloom.Normalize();
 
