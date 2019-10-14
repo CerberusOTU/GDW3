@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43668664, g: 0.48428446, b: 0.56453353, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366863, g: 0.48428386, b: 0.56453276, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12525,6 +12525,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2534866581884222612, guid: 9ad09eb47cf6f5b4d894d21f9300adda,
+        type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
     - target: {fileID: -5975033157549033438, guid: 9ad09eb47cf6f5b4d894d21f9300adda,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -12600,6 +12605,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2416733968201007103, guid: 9ad09eb47cf6f5b4d894d21f9300adda,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e4ef9cc73626284698aa4fd6a7c6395, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad09eb47cf6f5b4d894d21f9300adda, type: 3}
 --- !u!1 &1043820134 stripped
@@ -16144,6 +16154,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!1 &1318232217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2534866581884222612, guid: 9ad09eb47cf6f5b4d894d21f9300adda,
+    type: 3}
+  m_PrefabInstance: {fileID: 1039526595}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1318232221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318232217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a14d17e1b52b745bccbf49378a373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 6d2d13fa86e064245b1903aa9a79e63c, type: 2}
+  - {fileID: 2100000, guid: 5e4ef9cc73626284698aa4fd6a7c6395, type: 2}
 --- !u!1001 &1324710209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22433,6 +22464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 330
   sprintModifier: 1.3
+  isSprinting: 0
   jumpForce: 0.5
   ground:
     serializedVersion: 2
@@ -33338,6 +33370,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f6bb9028103cba247a073252c491687c, type: 2}
+    - target: {fileID: 2756742399161006917, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e69bff5b93364df46bb1a468c6c860bc, type: 3}
 --- !u!4 &2112433538 stripped
