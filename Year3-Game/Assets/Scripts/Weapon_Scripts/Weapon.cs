@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     private GameObject currentWeapon;
     
     public Canvas crossHair;
+    public Canvas hitMark;
     
     public Camera cam;
     //BulletHole Variables ////
@@ -29,8 +30,9 @@ public class Weapon : MonoBehaviour
     void Start()
     {
          _pool = GameObject.FindObjectOfType<PoolManager>();
-
          player = GameObject.FindObjectOfType<Motion>();
+
+         hitMark.enabled = false;
     }
 
     void Update()
@@ -137,6 +139,7 @@ public class Weapon : MonoBehaviour
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
+                 StartCoroutine(displayHitmark());
                 target.takeDamage(10f);
             }
 
@@ -175,4 +178,12 @@ public class Weapon : MonoBehaviour
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
     }   
+
+     IEnumerator displayHitmark()
+    {
+        hitMark.enabled = true;
+
+        yield return new WaitForSeconds(0.05f);
+        hitMark.enabled = false;
+    }
 }
