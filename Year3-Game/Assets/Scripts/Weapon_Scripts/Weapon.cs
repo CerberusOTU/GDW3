@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -26,17 +27,39 @@ public class Weapon : MonoBehaviour
     private float currentCool;
 
    private Motion player;
+
+   //Ammo UI///
+    public Text currAmmoText;
+    public Text maxAmmoText;
+   ///////////////////
     
     void Start()
     {
          _pool = GameObject.FindObjectOfType<PoolManager>();
          player = GameObject.FindObjectOfType<Motion>();
-
          hitMark.enabled = false;
+
+         loadout[0].currentAmmo = loadout[0].maxAmmo;
+         loadout[1].currentAmmo = loadout[1].maxAmmo;
     }
 
     void Update()
     {
+
+         if (loadout[currentIndex].isReloading)
+            return;
+
+        if (loadout[currentIndex].currentAmmo == -1)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+        else 
+        {
+            currAmmoText.text = loadout[currentIndex].currentAmmo.ToString();
+            maxAmmoText.text = loadout[currentIndex].maxAmmo.ToString();
+        }
+        
         if(Input.GetKeyUp(KeyCode.Alpha1))
         {
             Equip(0);
@@ -106,6 +129,7 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         Transform spawn = cam.transform;
+        loadout[currentIndex].currentAmmo--;
 
         if(Input.GetMouseButton(1))
         {
@@ -189,5 +213,15 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(0.05f);
         hitMark.enabled = false;
+    }
+
+     IEnumerator Reload()
+    {
+        loadout[currentIndex].isReloading = true;
+
+        yield return new WaitForSeconds(loadout[currentIndex].reloadTime);
+
+        loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
+        loadout[currentIndex].isReloading = false;
     }
 }

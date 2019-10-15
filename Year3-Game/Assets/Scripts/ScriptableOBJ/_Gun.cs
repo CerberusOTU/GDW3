@@ -13,5 +13,14 @@ public class _Gun : ScriptableObject
    public float recoilSpeed;
    public float kickBack;
    public float aimSpeed;
+
+   //Ammo & reloading
+   public float reloadTime;
+   public int maxAmmo;
+
+   public int currentAmmo;
+   
+   public bool isReloading;
+   //////////////
    public GameObject obj;
 }
