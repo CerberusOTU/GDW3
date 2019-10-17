@@ -11,6 +11,7 @@ public class _Gun : ScriptableObject
    public float recoil;
    public float maxRecoil_x;
    public float recoilSpeed;
+   public float recoilDampen; //Less is more
    public float kickBack;
    public float aimSpeed;
 

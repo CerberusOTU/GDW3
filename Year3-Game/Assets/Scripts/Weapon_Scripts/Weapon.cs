@@ -21,6 +21,8 @@ public class Weapon : MonoBehaviour
     //////////////////////////
 
     private float currentRecoil;
+    private float tempTime;
+    private float timeFiringHeld;
 
     private float adjustedBloom;
 
@@ -144,11 +146,17 @@ public class Weapon : MonoBehaviour
         bloom -= spawn.position;
         bloom.Normalize();
 
+        ///-----Recoil-----/////
+        if (Input.GetMouseButtonDown(0))
+        {
+            tempTime = Time.time;
+        }
          if (currentRecoil > 0)
         {
+            timeFiringHeld = Time.time - tempTime;
             Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
             Debug.Log(maxRecoil);
-            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation,maxRecoil,Time.deltaTime * loadout[currentIndex].recoilSpeed);
+            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation,maxRecoil,Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1,loadout[currentIndex].recoilDampen,timeFiringHeld));
             currentRecoil -= Time.deltaTime;
         }
         else
@@ -222,5 +230,6 @@ public class Weapon : MonoBehaviour
 
         loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
         loadout[currentIndex].isReloading = false;
+        tempTime = Time.time;
     }
 }
