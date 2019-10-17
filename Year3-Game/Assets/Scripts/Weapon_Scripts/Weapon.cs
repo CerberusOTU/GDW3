@@ -146,7 +146,8 @@ public class Weapon : MonoBehaviour
 
          if (currentRecoil > 0)
         {
-            Quaternion maxRecoil = Quaternion.Euler (loadout[currentIndex].maxRecoil_x, 0f, 0f);
+            Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
+            Debug.Log(maxRecoil);
             cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation,maxRecoil,Time.deltaTime * loadout[currentIndex].recoilSpeed);
             currentRecoil -= Time.deltaTime;
         }

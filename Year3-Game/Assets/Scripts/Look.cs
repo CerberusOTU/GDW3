@@ -38,6 +38,10 @@ public class Look : MonoBehaviour
         if(Quaternion.Angle(camCenter, delta) < maxAngle)
         {
             cams.localRotation = delta;
+        } 
+        else if(cams.localRotation.eulerAngles.x < (360 - maxAngle))
+        {
+            cams.localRotation = Quaternion.Euler(360 - maxAngle, 0, 0);
         }
     }
 
