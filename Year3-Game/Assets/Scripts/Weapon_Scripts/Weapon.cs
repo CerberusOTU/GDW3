@@ -45,11 +45,20 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        currAmmoText.text = loadout[currentIndex].currentAmmo.ToString();
-        maxAmmoText.text = loadout[currentIndex].maxAmmo.ToString();
 
+         if (loadout[currentIndex].isReloading)
+            return;
 
-        
+        if (loadout[currentIndex].currentAmmo == -1)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+        else 
+        {
+            currAmmoText.text = loadout[currentIndex].currentAmmo.ToString();
+            maxAmmoText.text = loadout[currentIndex].maxAmmo.ToString();
+        }
         
         if(Input.GetKeyUp(KeyCode.Alpha1))
         {
@@ -72,14 +81,7 @@ public class Weapon : MonoBehaviour
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
         }
 
-        if (loadout[currentIndex].isReloading)
-        return;
-
-        if (loadout[currentIndex].currentAmmo == 0)
-        {
-            StartCoroutine(Reload());
-            return;
-        }
+        
 
         if(currentCool > 0)
         {
