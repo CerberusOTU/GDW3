@@ -29,8 +29,7 @@ public class Weapon : MonoBehaviour
    private Motion player;
 
    //Ammo UI///
-    public Text currAmmoText;
-    public Text maxAmmoText;
+    public Text AmmoText;
    ///////////////////
     
     void Start()
@@ -45,20 +44,19 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        AmmoText.text = loadout[currentIndex].currentAmmo.ToString() + "/" +  loadout[currentIndex].maxAmmo.ToString();
 
-         if (loadout[currentIndex].isReloading)
+        if (loadout[currentIndex].isReloading)
+        {
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
             return;
-
-        if (loadout[currentIndex].currentAmmo == -1)
+        }
+        if (loadout[currentIndex].currentAmmo == 0)
         {
             StartCoroutine(Reload());
             return;
         }
-        else 
-        {
-            currAmmoText.text = loadout[currentIndex].currentAmmo.ToString();
-            maxAmmoText.text = loadout[currentIndex].maxAmmo.ToString();
-        }
+        
         
         if(Input.GetKeyUp(KeyCode.Alpha1))
         {
