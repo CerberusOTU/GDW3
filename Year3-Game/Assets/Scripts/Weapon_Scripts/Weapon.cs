@@ -59,6 +59,10 @@ public class Weapon : MonoBehaviour
             return;
         }
         
+        if (Input.GetKey(KeyCode.R) && loadout[currentIndex].currentAmmo != loadout[currentIndex].maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
         
         if(Input.GetKeyUp(KeyCode.Alpha1))
         {
