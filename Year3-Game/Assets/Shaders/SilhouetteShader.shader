@@ -8,7 +8,7 @@ Shader "Custom/SilhouetteShader"
     {
         _Colour ("Main Colour", Color) = (0,0,0,1)
         _OutlineColour ("Outline Colour", Color) = (0,0,0,1)
-        _Outline ("Outline Width", Range(0.0,0.1)) = 0.005
+        _Outline ("Outline Width", Range(0.0,1.0)) = 0.005
         _MainTex ("Base (RGB)", 2D) = "white" {}
     }
 
@@ -27,6 +27,7 @@ Shader "Custom/SilhouetteShader"
     };
     uniform float _Outline;
     uniform float4 _OutlineColour; 
+    uniform float4 _Colour;
 
     //-----Copy of vertex data scaled according to normals-----
     v2f vert (appdata v)
@@ -80,7 +81,7 @@ Shader "Custom/SilhouetteShader"
             Name "BASE"
             ZWrite On
             ZTest LEqual
-            Blend SrcAlpha OneMinusSrcAlpha
+            //Blend SrcAlpha OneMinusSrcAlpha
             Material 
             {  
                 Diffuse[_Colour]
@@ -132,7 +133,7 @@ Shader "Custom/SilhouetteShader"
             Name "BASE"
             ZWrite On
             ZTest LEqual
-            Blend SrcAlpha OneMinusSrcAlpha
+            //Blend SrcAlpha OneMinusSrcAlpha
             Material 
             {  
                 Diffuse[_Colour]
