@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366863, g: 0.48428386, b: 0.56453276, a: 1}
+  m_IndirectSpecularColor: {r: 0.43668664, g: 0.48428446, b: 0.56453353, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4922,7 +4922,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 01a0feae0a843bd458f5f6565bdd6db4,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 01a0feae0a843bd458f5f6565bdd6db4,
         type: 3}
@@ -33575,6 +33575,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2416733968201007103, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2416733968201007103, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -3033667219593020291, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
+    - target: {fileID: -2416733968201007103, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: -3033667219593020291, guid: e69bff5b93364df46bb1a468c6c860bc,
+        type: 3}
     - target: {fileID: 2756742399161006917, guid: e69bff5b93364df46bb1a468c6c860bc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -33585,11 +33602,6 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -2416733968201007103, guid: e69bff5b93364df46bb1a468c6c860bc,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4fede5f7147e87447a38ff72a106b25c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e69bff5b93364df46bb1a468c6c860bc, type: 3}
 --- !u!4 &2112433538 stripped

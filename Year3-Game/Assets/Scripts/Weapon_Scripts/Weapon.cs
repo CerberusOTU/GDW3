@@ -77,11 +77,12 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButton(0) && currentCool <= 0)
+            if(Input.GetMouseButton(0) && currentCool <= 0 && isAiming == false)
             {
                 currentRecoil += 0.1f;
                 Shoot();
             }
+            
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
         }
 
