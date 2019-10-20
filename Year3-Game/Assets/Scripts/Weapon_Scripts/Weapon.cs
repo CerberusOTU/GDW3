@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButton(0) && currentCool <= 0 && isAiming == false)
+            if(Input.GetMouseButton(0) && currentCool <= 0)
             {
                 currentRecoil += 0.1f;
                 Shoot();

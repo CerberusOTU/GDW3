@@ -22657,6 +22657,21 @@ MonoBehaviour:
   hitMark: {fileID: 476119517}
   cam: {fileID: 963194227}
   AmmoText: {fileID: 1550698547}
+--- !u!114 &1834482321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834482314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a841e59c6bedcc44d8c3c873e629403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partner: {fileID: 1851889855}
+  baseMat: {fileID: 2100000, guid: b36cb3a34b382f54397aaf8f42c4977c, type: 2}
+  xrayMat: {fileID: 2100000, guid: 5e4ef9cc73626284698aa4fd6a7c6395, type: 2}
 --- !u!1 &1838391335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8509748679803293226, guid: c7c07049fdccec942a12e55936dd72c6,
