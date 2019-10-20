@@ -42,10 +42,14 @@ public class Weapon : MonoBehaviour
 
          loadout[0].currentAmmo = loadout[0].maxAmmo;
          loadout[1].currentAmmo = loadout[1].maxAmmo;
+
+         Equip(0);
     }
 
     void Update()
     {
+        var d = Input.GetAxis("Mouse ScrollWheel");
+
         AmmoText.text = loadout[currentIndex].currentAmmo.ToString() + "/" +  loadout[currentIndex].maxAmmo.ToString();
 
         if (loadout[currentIndex].isReloading)
@@ -64,11 +68,12 @@ public class Weapon : MonoBehaviour
             StartCoroutine(Reload());
         }
         
-        if(Input.GetKeyUp(KeyCode.Alpha1))
+        //d > 0f is scrolling up
+        if(Input.GetKeyUp(KeyCode.Alpha1) && currentIndex != 0 || d > 0f && currentIndex != 0)
         {
             Equip(0);
         }
-        else if(Input.GetKeyUp(KeyCode.Alpha2))
+        else if(Input.GetKeyUp(KeyCode.Alpha2) && currentIndex != 1 || d < 0f && currentIndex != 1)
         {
             Equip(1);
         }
