@@ -10,6 +10,7 @@ public class ToggleSilhouette : MonoBehaviour
  void Start () {
  
            meshRenderer = GetComponent<MeshRenderer>();
+           meshRenderer.material = materials[0];
  }
  
  void Update () {

@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
    //Ammo UI///
     public Text AmmoText;
    ///////////////////
-    
+
     void Start()
     {
          _pool = GameObject.FindObjectOfType<PoolManager>();
@@ -44,6 +44,7 @@ public class Weapon : MonoBehaviour
          loadout[1].currentAmmo = loadout[1].maxAmmo;
 
          Equip(0);
+         
     }
 
     void Update()
@@ -97,6 +98,7 @@ public class Weapon : MonoBehaviour
         {
             currentCool -= Time.deltaTime;
         }
+
     }
 
     void Equip(int _ind)
@@ -107,7 +109,6 @@ public class Weapon : MonoBehaviour
         }
 
         currentIndex = _ind;
-
         GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject; 
         newWeapon.transform.localPosition = Vector3.zero;   
         newWeapon.transform.localEulerAngles = Vector3.zero;   
@@ -241,5 +242,6 @@ public class Weapon : MonoBehaviour
         loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
         loadout[currentIndex].isReloading = false;
         tempTime = Time.time;
+        
     }
 }

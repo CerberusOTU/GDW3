@@ -41,7 +41,11 @@ public class Look : MonoBehaviour
         } 
         else if(cams.localRotation.eulerAngles.x < (360 - maxAngle))
         {
-            cams.localRotation = Quaternion.Euler(360 - maxAngle, 0, 0);
+            cams.localRotation = Quaternion.Slerp(cams.localRotation, Quaternion.Euler(360 - maxAngle, 0, 0), Time.deltaTime * 4f);
+        }
+        else if(cams.localRotation.eulerAngles.x < (maxAngle))
+        {
+            cams.localRotation = Quaternion.Slerp(cams.localRotation, Quaternion.Euler(maxAngle, 0, 0), Time.deltaTime * 4f);
         }
     }
 
