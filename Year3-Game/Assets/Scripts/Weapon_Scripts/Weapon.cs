@@ -254,7 +254,7 @@ public class Weapon : MonoBehaviour
                     if(_pool.holeList[i].activeInHierarchy == false)
                     {
                         _pool.holeList[i].SetActive(true);
-                        _pool.holeList[i].transform.position = hitInfo.point;
+                        _pool.holeList[i].transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
                         _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
                         break;
                     }
