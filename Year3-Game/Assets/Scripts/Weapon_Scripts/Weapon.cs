@@ -34,6 +34,7 @@ public class Weapon : MonoBehaviour
    //Ammo UI///
     public Text AmmoText;
     public Text AmmoText2;
+    public Text Reloading;
     public Image WeaponSlot1;
     public Image WeaponSlot2;
     public Image MainWeapon;
@@ -106,7 +107,8 @@ public class Weapon : MonoBehaviour
 
         if (loadout[currentIndex].isReloading)
         {
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f);
+            Reloading.text = "Reloading...";
             return;
         }
         if (loadout[currentIndex].currentAmmo == 0)
@@ -296,6 +298,8 @@ public class Weapon : MonoBehaviour
 
         loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
         loadout[currentIndex].isReloading = false;
+        Reloading.text = " ";
+
         tempTime = Time.time;
     }
 }
