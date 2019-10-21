@@ -20,7 +20,7 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash;
 
     private float nextTimetoFire = 0f;
-
+   
     void Start()
     {
         currentAmmo = maxAmmo;

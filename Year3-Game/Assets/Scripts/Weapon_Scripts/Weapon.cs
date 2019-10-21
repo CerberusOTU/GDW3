@@ -31,9 +31,18 @@ public class Weapon : MonoBehaviour
     private float currentCool;
 
    private Motion player;
-
    //Ammo UI///
     public Text AmmoText;
+    public Text AmmoText2;
+    public Image WeaponSlot1;
+    public Image WeaponSlot2;
+    public Image MainWeapon;
+    public Image SideWeapon;
+
+   Vector3 temp;
+    Vector3 temp2;
+ 
+
    ///////////////////
 
     void Start()
@@ -41,6 +50,11 @@ public class Weapon : MonoBehaviour
          _pool = GameObject.FindObjectOfType<PoolManager>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
+
+        temp2 = transform.localScale;
+        temp2.x = 1f;
+        temp2.y = 1f;
+
 
          loadout[0].currentAmmo = loadout[0].maxAmmo;
          loadout[1].currentAmmo = loadout[1].maxAmmo;
@@ -53,7 +67,42 @@ public class Weapon : MonoBehaviour
     {
         var d = Input.GetAxis("Mouse ScrollWheel");
 
-        AmmoText.text = loadout[currentIndex].currentAmmo.ToString() + "/" +  loadout[currentIndex].maxAmmo.ToString();
+        AmmoText.text = loadout[0].currentAmmo.ToString();
+        AmmoText2.text = loadout[1].currentAmmo.ToString();
+
+        if (loadout[currentIndex] == loadout[0])
+        {
+            temp = transform.localScale;
+
+            temp.x = 0.75f;
+            temp.y = 0.75f;
+
+
+         //  AmmoText2.transform.localScale = temp;
+            WeaponSlot1.transform.localScale = temp;
+         //   SideWeapon.transform.localScale = temp;
+            //////////
+          //  AmmoText.transform.localScale = temp2;
+            WeaponSlot2.transform.localScale = temp2;
+          //  MainWeapon.transform.localScale = temp2;
+        }
+        if (loadout[currentIndex] == loadout[1])
+        {
+            temp = transform.localScale;
+
+            temp.x = 0.75f;
+            temp.y = 0.75f;
+
+
+           // AmmoText.transform.localScale = temp;
+            WeaponSlot2.transform.localScale = temp;
+           // MainWeapon.transform.localScale = temp;
+            //////
+           // AmmoText2.transform.localScale = temp2;
+            WeaponSlot1.transform.localScale = temp2;
+            //SideWeapon.transform.localScale = temp2;
+
+        }
 
         if (loadout[currentIndex].isReloading)
         {
