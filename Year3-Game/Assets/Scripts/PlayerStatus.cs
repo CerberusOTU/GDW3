@@ -24,19 +24,12 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
+
         var tempColor = DamageOverlay.color;
         tempColor.a = -(PlayerHealth) * 0.01f + 1;
-
         var tempColor2 = DamageFlash.color;
-        HealthText.text = (PlayerHealth).ToString();
-        //Health Bar Transform
-        temp = transform.localScale;
-        temp.x = 1f;
-        temp.y = 1f;
-        Health.transform.localScale = temp;
-        tempColor2.a -= 0.02f;
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V) && PlayerHealth > 25)
         {
             PlayerHealth -= 25;
             tempColor2.a = 0.8f;
@@ -45,6 +38,15 @@ public class PlayerStatus : MonoBehaviour
         {
             PlayerHealth += 1;
         }
+        HealthText.text = (PlayerHealth).ToString();
+        //Health Bar Transform
+        temp = transform.localScale;
+        temp.x = 1f;
+        temp.y = 1f;
+        Health.transform.localScale = temp;
+        tempColor2.a -= 0.02f;
+
+       
                 DamageOverlay.color = tempColor;
             DamageFlash.color = tempColor2;
 

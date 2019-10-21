@@ -42,8 +42,9 @@ public class Weapon : MonoBehaviour
 
    Vector3 temp;
     Vector3 temp2;
- 
 
+    public ParticleSystem muzzleFlash;
+    Transform tempMuzzle;
    ///////////////////
 
     void Start()
@@ -162,6 +163,17 @@ public class Weapon : MonoBehaviour
             currentCool -= Time.deltaTime;
         }
 
+        if (Input.GetMouseButton(1))
+        {
+            tempMuzzle = currentWeapon.transform.Find("States/ADS/MuzzlePos");
+            muzzleFlash.transform.position = tempMuzzle.position;
+        }
+        else
+        {
+            tempMuzzle = currentWeapon.transform.Find("States/Hip/MuzzlePos");
+            muzzleFlash.transform.position = tempMuzzle.position;
+        }
+
     }
 
     void Equip(int _ind)
@@ -202,6 +214,8 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        muzzleFlash.Play();
+
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
 
