@@ -22,6 +22,8 @@ public class Weapon : MonoBehaviour
 
     private float currentRecoil;
     private float tempTime;
+    private bool origPosReset = true;
+    Quaternion saveInitShot;
     private float timeFiringHeld;
 
     private float adjustedBloom;
@@ -85,8 +87,18 @@ public class Weapon : MonoBehaviour
 
             if(Input.GetMouseButton(0) && currentCool <= 0)
             {
-                currentRecoil += 0.1f;
+                origPosReset = false;
                 Shoot();
+            }
+            // Return back to original left click position
+            if (!Input.GetMouseButton(0) && origPosReset == false)
+            {
+                cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f)
+                {
+                    Debug.Log(origPosReset);
+                    origPosReset = true;
+                }
             }
             
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
@@ -161,20 +173,14 @@ public class Weapon : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             tempTime = Time.time;
+            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x,0f,0f);
+
         }
-         if (currentRecoil > 0)
-        {
-            timeFiringHeld = Time.time - tempTime;
-            Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
-            Debug.Log(maxRecoil);
-            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation,maxRecoil,Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1,loadout[currentIndex].recoilDampen,timeFiringHeld));
-            currentRecoil -= Time.deltaTime;
-        }
-        else
-        {
-            currentRecoil = 0f;
-            cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, Quaternion.identity, Time.deltaTime * loadout[currentIndex].recoilSpeed / 2);
-        }
+
+        // Recoil Dampen
+        timeFiringHeld = Time.time - tempTime;
+        Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
+        cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1,loadout[currentIndex].recoilDampen,timeFiringHeld));
 
 
         RaycastHit hitInfo = new RaycastHit();
@@ -236,12 +242,11 @@ public class Weapon : MonoBehaviour
      IEnumerator Reload()
     {
         loadout[currentIndex].isReloading = true;
-
+        
         yield return new WaitForSeconds(loadout[currentIndex].reloadTime);
 
         loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
         loadout[currentIndex].isReloading = false;
         tempTime = Time.time;
-        
     }
 }
