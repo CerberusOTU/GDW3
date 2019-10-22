@@ -16,7 +16,6 @@ public class Motion : MonoBehaviour
     private float distToGround;
 
     public float jumpForce;
-    //public GameObject groundDetect;
     public LayerMask ground;
 
     //camera FOV when sprinting variables
@@ -34,11 +33,14 @@ public class Motion : MonoBehaviour
     private Vector3 targetBob;
 
     /////////////////
+
+    public GameObject groundDetect;
     void Start()
     {
         baseFOV = cam.fieldOfView;
-        rb = GetComponent<Rigidbody>();
-        col = GetComponent<CapsuleCollider>();
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        col = this.gameObject.GetComponent<CapsuleCollider>();
+        
         distToGround = col.bounds.extents.y;
 
         weaponParentOrigin = weaponParent.localPosition;
@@ -46,12 +48,13 @@ public class Motion : MonoBehaviour
     //Check if player is grounded
     bool isGrounded()
     {
-       return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, ground);
+       return Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f);
     }
 
-    private void Update()
+    void Update()
     {
-         if (isGrounded() && Input.GetKey(KeyCode.Space))
+
+        if (isGrounded() && Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         } 
@@ -91,6 +94,7 @@ public class Motion : MonoBehaviour
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 6f);
             }
         }
+        
     }
 
     // Update is called once per frame
@@ -98,10 +102,6 @@ public class Motion : MonoBehaviour
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
-
-        //bool isGrounded = Physics.Raycast(groundDetect.transform.localPosition, Vector3.down, 0.1f, ground);
-        //bool jump = Input.GetKey(KeyCode.Space);
-        //bool isJumping = jump && isGrounded;
 
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;

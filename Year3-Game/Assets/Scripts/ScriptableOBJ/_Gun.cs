@@ -6,6 +6,7 @@ using UnityEngine;
 public class _Gun : ScriptableObject
 {
    public string name;
+   public string className;
    public float firerate;
    public float bloom;
    public float recoil;

@@ -47,8 +47,11 @@ public class Weapon : MonoBehaviour
     Transform tempMuzzle;
    ///////////////////
 
+    Rigidbody rigid;
     void Start()
     {
+        rigid = this.gameObject.GetComponent<Rigidbody>();
+        
          _pool = GameObject.FindObjectOfType<PoolManager>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
@@ -71,6 +74,14 @@ public class Weapon : MonoBehaviour
 
         AmmoText.text = loadout[0].currentAmmo.ToString();
         AmmoText2.text = loadout[1].currentAmmo.ToString();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+         if (rigid != null)
+         {
+             rigid.AddForce(transform.up * 2f, ForceMode.Impulse);
+         }
+     }
 
         if (loadout[currentIndex] == loadout[0])
         {
@@ -137,7 +148,12 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButton(0) && currentCool <= 0)
+            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].className == "Pistol")
+            {
+                origPosReset = false;
+                Shoot();
+            }
+            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].className != "Pistol")
             {
                 origPosReset = false;
                 Shoot();
