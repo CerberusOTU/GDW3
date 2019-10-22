@@ -90,7 +90,7 @@ public class Weapon : MonoBehaviour
                 //if the user presses F
                 if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
                 {
-                    if(checkWeapon.collider.name == "M1911(1)")
+                    if(checkWeapon.collider.name == "Revolver")
                     {
                         checkWeapon.collider.name = loadout[0].name;
                         loadout[0] = M1911;
