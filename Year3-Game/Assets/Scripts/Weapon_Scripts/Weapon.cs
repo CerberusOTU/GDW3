@@ -46,8 +46,13 @@ public class Weapon : MonoBehaviour
     public ParticleSystem muzzleFlash;
     Transform tempMuzzle;
    ///////////////////
-
     Rigidbody rigid;
+
+    //GUNS//
+    public _Gun M1911;
+    public _Gun Tommy;
+
+    /////////////////////////
     void Start()
     {
         rigid = this.gameObject.GetComponent<Rigidbody>();
@@ -70,6 +75,35 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        RaycastHit checkWeapon = new RaycastHit();
+
+        //if we hit something
+         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 10f))
+        {
+            //if it is tagged as a weapon
+            if (checkWeapon.collider.tag == "Weapon")
+            {
+                //if the user presses F
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if(checkWeapon.collider.name == "M1911(1)")
+                    {
+                        checkWeapon.collider.name = loadout[currentIndex].name;
+                        loadout[currentIndex] = M1911;
+                        Equip(currentIndex);
+                        Debug.Log(checkWeapon.collider.name);
+                    }
+                    else if(checkWeapon.collider.name == "Tommy")
+                    {
+                        checkWeapon.collider.name = loadout[currentIndex].name;
+                        loadout[currentIndex] = Tommy;
+                        Equip(currentIndex);
+                        Debug.Log(checkWeapon.collider.name);
+                    }
+                }
+            }
+        }
+
         var d = Input.GetAxis("Mouse ScrollWheel");
 
         AmmoText.text = loadout[0].currentAmmo.ToString();

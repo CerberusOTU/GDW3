@@ -89,12 +89,16 @@ public class Motion : MonoBehaviour
         //check crouch state
         Crouch();
 
-        if (isGrounded() && Input.GetKey(KeyCode.Space))
+        if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         } 
 
-        if(horizontalMove == 0 && verticalMove == 0)
+        if(!isGrounded())
+        {
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin,Time.deltaTime * 2f);
+        }
+        else if(horizontalMove == 0 && verticalMove == 0)
         {
             if(Input.GetMouseButton(1))
             {
