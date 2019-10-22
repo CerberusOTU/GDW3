@@ -18,6 +18,7 @@ public class Motion : MonoBehaviour
     public float jumpForce;
     public LayerMask ground;
 
+    public GameObject groundDetect;
     //camera FOV when sprinting variables
     public Camera cam;
     private float baseFOV;
@@ -32,9 +33,11 @@ public class Motion : MonoBehaviour
 
     private Vector3 targetBob;
 
+    private bool isCrouching = true;
+    private Vector3 baseCamTrans;
+    private Vector3 crouchCamTrans;
+    private bool crouchLerp;
     /////////////////
-
-    public GameObject groundDetect;
     void Start()
     {
         baseFOV = cam.fieldOfView;
@@ -44,6 +47,9 @@ public class Motion : MonoBehaviour
         distToGround = col.bounds.extents.y;
 
         weaponParentOrigin = weaponParent.localPosition;
+
+        baseCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y, cam.transform.localPosition.z);
+        crouchCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y - 1f, cam.transform.localPosition.z);
     }
     //Check if player is grounded
     bool isGrounded()
@@ -51,8 +57,37 @@ public class Motion : MonoBehaviour
        return Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f);
     }
 
+    void Crouch()
+    {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            if(isCrouching == false)
+            {
+                isCrouching = true;
+            }
+            else
+            {
+                isCrouching = false;
+            }
+        }
+
+        if(isCrouching == false)
+        {
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
+            
+        }
+        else
+        {
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
+            
+        }
+        
+    }
+
     void Update()
     {
+        //check crouch state
+        Crouch();
 
         if (isGrounded() && Input.GetKey(KeyCode.Space))
         {
@@ -65,6 +100,12 @@ public class Motion : MonoBehaviour
             {
                 //stop headbob && swaying
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin ,Time.deltaTime * 2f);
+            }
+            else if (isCrouching == false)
+            {
+                HeadBob(idleCounter, 0.01f, 0.01f);
+                idleCounter += Time.deltaTime;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime);
             }
             else
             {
@@ -82,8 +123,23 @@ public class Motion : MonoBehaviour
         else
         {
             if(Input.GetMouseButton(1))
-            {
+            {   
+                if (isCrouching == false)
+                {
                 HeadBob(movementCounter, 0.005f, 0.005f);
+                movementCounter += Time.deltaTime * 5;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime);
+                }
+                else
+                {
+                HeadBob(movementCounter, 0.005f, 0.005f);
+                movementCounter += Time.deltaTime * 5;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 3f);
+                }
+            }
+            else if (isCrouching == false)
+            {
+               HeadBob(movementCounter, 0.025f, 0.025f);
                 movementCounter += Time.deltaTime * 5;
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 3f);
             }
@@ -118,9 +174,17 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
-        else if(Input.GetMouseButton(1))
+        else if(Input.GetMouseButton(1) && isCrouching == true)
         {
             adjustedSpeed = speed / 2;
+        }
+        else if(isCrouching == false && Input.GetMouseButton(1))
+        {
+            adjustedSpeed = speed / 3;
+        }
+        else if(isCrouching == false && !Input.GetMouseButton(1))
+        {
+            adjustedSpeed = speed / 1.5f;
         }
         else
         {
