@@ -35,6 +35,7 @@ public class Weapon : MonoBehaviour
     public Text AmmoText;
     public Text AmmoText2;
     public Text Reloading;
+    public Text PickUp;
     public Image WeaponSlot1;
     public Image WeaponSlot2;
     public Image MainWeapon;
@@ -78,29 +79,36 @@ public class Weapon : MonoBehaviour
         RaycastHit checkWeapon = new RaycastHit();
 
         //if we hit something
-         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 10f))
+         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 3f))
         {
             //if it is tagged as a weapon
             if (checkWeapon.collider.tag == "Weapon")
             {
+                PickUp.enabled = true;
+                PickUp.text = "Press E to Pick Up " + checkWeapon.collider.name;
+
                 //if the user presses F
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
                 {
                     if(checkWeapon.collider.name == "M1911(1)")
                     {
-                        checkWeapon.collider.name = loadout[currentIndex].name;
-                        loadout[currentIndex] = M1911;
-                        Equip(currentIndex);
+                        checkWeapon.collider.name = loadout[0].name;
+                        loadout[0] = M1911;
+                        Equip(0);
                         Debug.Log(checkWeapon.collider.name);
                     }
                     else if(checkWeapon.collider.name == "Tommy")
                     {
-                        checkWeapon.collider.name = loadout[currentIndex].name;
-                        loadout[currentIndex] = Tommy;
-                        Equip(currentIndex);
+                        checkWeapon.collider.name = loadout[0].name;
+                        loadout[0] = Tommy;
+                        Equip(0);
                         Debug.Log(checkWeapon.collider.name);
                     }
                 }
+            }
+            else
+            {
+                PickUp.enabled = false;
             }
         }
 
