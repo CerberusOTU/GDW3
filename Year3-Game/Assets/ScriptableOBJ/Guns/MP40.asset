@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cad8cfb182fe44bbb8b32aeddfa656, type: 3}
   m_Name: MP40
   m_EditorClassIdentifier: 
-  name: mp40
+  name: MP40
   className: SMG
   firerate: 0.1
   bloom: 15
@@ -24,6 +24,6 @@ MonoBehaviour:
   aimSpeed: 15
   reloadTime: 1
   maxAmmo: 30
-  currentAmmo: 24
+  currentAmmo: 30
   isReloading: 0
   obj: {fileID: 2823661718330635503, guid: ab7b22a8f3cb82e47b0292cceb23d1bf, type: 3}

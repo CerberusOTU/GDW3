@@ -86,7 +86,7 @@ public class Weapon : MonoBehaviour
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
-                PickUp.text = "Press E to Pick Up " + checkWeapon.collider.name;
+                PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
 
                 //if the user presses F
                 if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
@@ -105,7 +105,7 @@ public class Weapon : MonoBehaviour
                         Equip(0);
                         Debug.Log(checkWeapon.collider.name);
                     }
-                    else if (checkWeapon.collider.name == "mp40")
+                    else if (checkWeapon.collider.name == "MP40")
                     {
                         checkWeapon.collider.name = loadout[0].name;
                         loadout[0] = MP40;
