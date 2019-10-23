@@ -55,6 +55,12 @@ public class Weapon : MonoBehaviour
     public _Gun MP40;
 
     /////////////////////////
+
+    //to switch our gun meshes in scene
+    bool isSwitched = false;
+    RaycastHit checkWeapon;
+
+
     void Start()
     {
         rigid = this.gameObject.GetComponent<Rigidbody>();
@@ -77,48 +83,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        RaycastHit checkWeapon = new RaycastHit();
-
-        //if we hit something
-         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 3f))
-        {
-            //if it is tagged as a weapon
-            if (checkWeapon.collider.tag == "Weapon")
-            {
-                PickUp.enabled = true;
-                PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
-
-                //if the user presses F
-                if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
-                {
-                    if(checkWeapon.collider.name == "Revolver")
-                    {
-                        checkWeapon.collider.name = loadout[0].name;
-                        loadout[0] = M1911;
-                        Equip(0);
-                        Debug.Log(checkWeapon.collider.name);
-                    }
-                    else if(checkWeapon.collider.name == "Tommy")
-                    {
-                        checkWeapon.collider.name = loadout[0].name;
-                        loadout[0] = Tommy;
-                        Equip(0);
-                        Debug.Log(checkWeapon.collider.name);
-                    }
-                    else if (checkWeapon.collider.name == "MP40")
-                    {
-                        checkWeapon.collider.name = loadout[0].name;
-                        loadout[0] = MP40;
-                        Equip(0);
-                        Debug.Log(checkWeapon.collider.name);
-                    }
-                }
-            }
-            else
-            {
-                PickUp.enabled = false;
-            }
-        }
+        SwitchWeapon();
 
         var d = Input.GetAxis("Mouse ScrollWheel");
 
@@ -381,5 +346,59 @@ public class Weapon : MonoBehaviour
         Reloading.text = " ";
 
         tempTime = Time.time;
+    }
+
+    void SwitchWeapon()
+    {
+         checkWeapon = new RaycastHit();
+
+        //if we hit something
+         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 3f))
+        {
+            //if it is tagged as a weapon
+            if (checkWeapon.collider.tag == "Weapon")
+            {
+                PickUp.enabled = true;
+                PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
+
+                //if the user presses E
+                if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
+                {
+                    if(checkWeapon.collider.name == "Revolver")
+                    {
+                        checkWeapon.collider.name = loadout[0].name;
+                        loadout[0] = M1911;
+                        Equip(0);
+                        Debug.Log(checkWeapon.collider.name);
+                    }
+                    else if(checkWeapon.collider.name == "Tommy")
+                    {
+                        checkWeapon.collider.name = loadout[0].name;
+                        loadout[0] = Tommy;
+                        Equip(0);
+                        Debug.Log(checkWeapon.collider.name);
+                    }
+                    else if (checkWeapon.collider.name == "MP40")
+                    {
+                        loadout[0] = MP40;
+                        Equip(0);
+                    }
+                }
+            }
+            else
+            {
+                PickUp.enabled = false;
+            }
+        }
+
+    }
+
+    public RaycastHit getHitObj()
+    {
+        return checkWeapon;
+    }
+    public int getIndex()
+    {
+        return currentIndex;
     }
 }
