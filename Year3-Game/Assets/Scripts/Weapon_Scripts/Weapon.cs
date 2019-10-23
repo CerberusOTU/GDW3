@@ -52,6 +52,7 @@ public class Weapon : MonoBehaviour
     //GUNS//
     public _Gun M1911;
     public _Gun Tommy;
+    public _Gun MP40;
 
     /////////////////////////
     void Start()
@@ -101,6 +102,13 @@ public class Weapon : MonoBehaviour
                     {
                         checkWeapon.collider.name = loadout[0].name;
                         loadout[0] = Tommy;
+                        Equip(0);
+                        Debug.Log(checkWeapon.collider.name);
+                    }
+                    else if (checkWeapon.collider.name == "mp40")
+                    {
+                        checkWeapon.collider.name = loadout[0].name;
+                        loadout[0] = MP40;
                         Equip(0);
                         Debug.Log(checkWeapon.collider.name);
                     }
