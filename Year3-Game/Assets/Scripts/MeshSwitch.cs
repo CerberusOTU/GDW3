@@ -24,11 +24,12 @@ public class MeshSwitch : MonoBehaviour
                         Transform temp = weapon.getHitObj().collider.GetComponent<Transform>();
                         
                         GameObject tempMesh = null;
+
                         if(weapon.loadout[0].name == "Tommy")
                         {
                             tempMesh = Tommy;
                         }
-                        else  if(weapon.loadout[0].name == "MP40")
+                        else if(weapon.loadout[0].name == "MP40")
                         {
                             tempMesh = MP40;
                         }
@@ -69,7 +70,7 @@ public class MeshSwitch : MonoBehaviour
                             tempMesh = Revolver;
                         }
 
-                        GameObject switched = Instantiate(Tommy, temp.position, Quaternion.identity) as GameObject;
+                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
                         switched.name = weapon.loadout[0].name;
                         Destroy(weapon.getHitObj().collider.gameObject);
                     }

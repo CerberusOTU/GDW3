@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
     //to switch our gun meshes in scene
     bool isSwitched = false;
     RaycastHit checkWeapon;
-
+    
 
     void Start()
     {
@@ -401,4 +401,9 @@ public class Weapon : MonoBehaviour
     {
         return currentIndex;
     }
+    public bool checkSwitch()
+    {
+        return isSwitched;
+    }
+
 }
