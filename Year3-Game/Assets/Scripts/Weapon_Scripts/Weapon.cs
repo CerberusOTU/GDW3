@@ -6,6 +6,12 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public _Gun[] loadout;
+    
+    public GameObject[] gunMeshes;
+    //0 = Tommy
+    //1 = Revolver
+    //2 = MP40
+
     public Transform weaponParent;
 
     private int currentIndex;
@@ -83,6 +89,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        PickUp.enabled = false;
         SwitchWeapon();
 
         var d = Input.GetAxis("Mouse ScrollWheel");
@@ -348,7 +355,7 @@ public class Weapon : MonoBehaviour
         tempTime = Time.time;
     }
 
-    void SwitchWeapon()
+     void SwitchWeapon()
     {
          checkWeapon = new RaycastHit();
 
@@ -360,34 +367,82 @@ public class Weapon : MonoBehaviour
             {
                 PickUp.enabled = true;
                 PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
-
+                
                 //if the user presses E
                 if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
                 {
                     if(checkWeapon.collider.name == "Revolver")
                     {
-                        checkWeapon.collider.name = loadout[0].name;
+                        Transform temp = checkWeapon.collider.GetComponent<Transform>();
+                        
+                        GameObject tempMesh = null;
+
+                        if(loadout[0].name == "Tommy")
+                        {
+                            Debug.Log(loadout[0].name);
+                            tempMesh = gunMeshes[0];
+                        }
+                        else if(loadout[0].name == "MP40")
+                        {
+                            tempMesh = gunMeshes[2];
+                        }
+
+                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        switched.name = loadout[0].name;
+                        Destroy(checkWeapon.collider.gameObject);
+
+                        
                         loadout[0] = M1911;
                         Equip(0);
-                        Debug.Log(checkWeapon.collider.name);
+    
+
                     }
                     else if(checkWeapon.collider.name == "Tommy")
                     {
-                        checkWeapon.collider.name = loadout[0].name;
+
+                        Transform temp = checkWeapon.collider.GetComponent<Transform>();
+                        
+                        GameObject tempMesh = null;
+                        if(loadout[0].name == "Revolver")
+                        {
+                            tempMesh = gunMeshes[1];
+                        }
+                        else  if(loadout[0].name == "MP40")
+                        {
+                            tempMesh = gunMeshes[2];
+                        
+                        }
+                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        switched.name = loadout[0].name;
+                        Destroy(checkWeapon.collider.gameObject);
+
+                        
                         loadout[0] = Tommy;
                         Equip(0);
-                        Debug.Log(checkWeapon.collider.name);
                     }
                     else if (checkWeapon.collider.name == "MP40")
                     {
+                        Transform temp = checkWeapon.collider.GetComponent<Transform>();
+                        
+                        GameObject tempMesh = null;
+                        if(loadout[0].name == "Tommy")
+                        {
+                            tempMesh = gunMeshes[0];
+                        }
+                        else if(loadout[0].name == "Revolver")
+                        {
+                            tempMesh = gunMeshes[1];
+                        }
+
+                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        switched.name = loadout[0].name;
+                        Destroy(checkWeapon.collider.gameObject);
+                        
                         loadout[0] = MP40;
                         Equip(0);
+
                     }
                 }
-            }
-            else
-            {
-                PickUp.enabled = false;
             }
         }
 
