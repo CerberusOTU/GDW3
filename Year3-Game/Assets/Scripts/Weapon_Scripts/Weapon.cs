@@ -12,6 +12,11 @@ public class Weapon : MonoBehaviour
     //1 = Revolver
     //2 = MP40
 
+    public _Gun[] scriptOBJ;
+    //0 = Tommy
+    //1 = Revolver
+    //2 = MP40
+
     public Transform weaponParent;
 
     private int currentIndex;
@@ -65,6 +70,10 @@ public class Weapon : MonoBehaviour
     //to switch our gun meshes in scene
     bool isSwitched = false;
     RaycastHit checkWeapon;
+
+    //Throwing Grenade
+    public float throwForce = 40f;
+    public GameObject grenadePrefab;
     
 
     void Start()
@@ -79,9 +88,14 @@ public class Weapon : MonoBehaviour
         temp2.x = 1f;
         temp2.y = 1f;
 
+        //M1911 reset ammo
+        loadout[1].currentAmmo = loadout[1].maxAmmo;
 
-         loadout[0].currentAmmo = loadout[0].maxAmmo;
-         loadout[1].currentAmmo = loadout[1].maxAmmo;
+        //primary guns reset ammo
+        for(int i = 0; i < scriptOBJ.Length; i++)
+        {
+            scriptOBJ[i].currentAmmo = scriptOBJ[i].maxAmmo;
+        }
 
          Equip(0);
          
@@ -103,7 +117,12 @@ public class Weapon : MonoBehaviour
          {
              rigid.AddForce(transform.up * 2f, ForceMode.Impulse);
          }
-     }
+        }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            throwGrenade();
+        }
 
         if (loadout[currentIndex] == loadout[0])
         {
@@ -392,7 +411,7 @@ public class Weapon : MonoBehaviour
                         Destroy(checkWeapon.collider.gameObject);
 
                         
-                        loadout[0] = M1911;
+                        loadout[0] = scriptOBJ[1];
                         Equip(0);
     
 
@@ -417,7 +436,7 @@ public class Weapon : MonoBehaviour
                         Destroy(checkWeapon.collider.gameObject);
 
                         
-                        loadout[0] = Tommy;
+                        loadout[0] = scriptOBJ[0];
                         Equip(0);
                     }
                     else if (checkWeapon.collider.name == "MP40")
@@ -438,27 +457,21 @@ public class Weapon : MonoBehaviour
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
                         
-                        loadout[0] = MP40;
+                        loadout[0] = scriptOBJ[2];
                         Equip(0);
 
                     }
                 }
             }
         }
-
     }
 
-    public RaycastHit getHitObj()
+    void throwGrenade()
     {
-        return checkWeapon;
-    }
-    public int getIndex()
-    {
-        return currentIndex;
-    }
-    public bool checkSwitch()
-    {
-        return isSwitched;
+        Debug.Log("Grenade");
+        GameObject grenade = Instantiate(grenadePrefab, cam.transform.position, cam.transform.rotation);
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        rb.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);    
     }
 
 }
