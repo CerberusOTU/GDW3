@@ -2,7 +2,7 @@
 
 
 
-Shader "Custom/SilhouetteShader"
+Shader "Custom/XraySilhouette"
 {
     Properties
     {

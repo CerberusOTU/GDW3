@@ -8750,7 +8750,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.6350876e-27, y: 0, z: 0, w: 7.7e-44}
+  m_BoundingSphereOverride: {x: 0, y: 4.6994e-41, z: 8.76e-43, w: 1.2396256e-27}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -29002,10 +29002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2a515337d9a5149a3e92ad224a5659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tommy: {fileID: 2571426827672897269, guid: 85bcf67fabef6fd4793cc4cff80d461a, type: 3}
-  MP40: {fileID: 5903964947378846557, guid: 563655c487eddba4baa04df7b7c646db, type: 3}
-  Revolver: {fileID: 6471413429216083511, guid: 555b3837dafe6b8489e24183b67fff3f,
-    type: 3}
+  Tommy: {fileID: 0}
+  MP40: {fileID: 0}
+  Revolver: {fileID: 0}
 --- !u!1 &1838391335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8509748679803293226, guid: c7c07049fdccec942a12e55936dd72c6,
