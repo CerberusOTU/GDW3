@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XRay : MonoBehaviour
+public class XRayToggle : MonoBehaviour
 {
     public GameObject partner;
     public Material baseMat;
