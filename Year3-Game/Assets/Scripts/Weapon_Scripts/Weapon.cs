@@ -387,7 +387,7 @@ public class Weapon : MonoBehaviour
                             tempMesh = gunMeshes[2];
                         }
 
-                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
 
@@ -412,7 +412,7 @@ public class Weapon : MonoBehaviour
                             tempMesh = gunMeshes[2];
                         
                         }
-                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
 
@@ -434,7 +434,7 @@ public class Weapon : MonoBehaviour
                             tempMesh = gunMeshes[1];
                         }
 
-                        GameObject switched = Instantiate(tempMesh, temp.position, Quaternion.identity) as GameObject;
+                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
                         
