@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Linq;
 
 public class Weapon : MonoBehaviour
 {
@@ -12,13 +13,18 @@ public class Weapon : MonoBehaviour
     //1 = Revolver
     //2 = MP40
 
+    public GameObject[] inSceneGuns;
+
     public _Gun[] scriptOBJ;
     //0 = Tommy
     //1 = Revolver
     //2 = MP40
 
+    public GameObject defaultSpawn;
+    private List<Transform> weaponSpawnPos = new List<Transform>();
     public Transform weaponParent;
-
+    
+    
     private int currentIndex;
 
     private GameObject currentWeapon;
@@ -98,7 +104,44 @@ public class Weapon : MonoBehaviour
         }
 
          Equip(0);
-         
+
+        //generate spawn transforms
+         for(int i = 0; i < 3; i++)
+         {
+             Transform temp = Instantiate(defaultSpawn.transform); 
+             weaponSpawnPos.Add(temp);
+             temp.transform.parent = this.transform;
+         }
+
+        //set weapon spawn locations
+
+        //straight wall
+        weaponSpawnPos[0].position = new Vector3(45.3f, 6.6f, -60.5f);
+        weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,180f,0f);
+
+        //right wall
+        weaponSpawnPos[1].position = new Vector3(31.7f, 7.7f, -86.05f);
+        weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,270f,0f);
+
+        //left wall
+        weaponSpawnPos[2].position = new Vector3(32.9f, 7.2f, -54.1f);
+        weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,90f,0f);
+
+        //random index number for spawn locations
+        var numList = new List<int>();
+        for(int k = 0; k < weaponSpawnPos.Count; k++)
+        {
+            numList.Add(k);
+        }
+        numList = numList.OrderBy(i => Random.value).ToList();
+
+        //set the in scene guns to the random transforms
+        for(int i = 0; i < inSceneGuns.Length; i++)
+        { 
+            inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
+            inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
+        }
+
     }
 
     void Update()
@@ -106,7 +149,7 @@ public class Weapon : MonoBehaviour
         PickUp.enabled = false;
         SwitchWeapon();
 
-        var d = Input.GetAxis("Mouse ScrollWheel");
+        float d = Input.GetAxis("Mouse ScrollWheel");
 
         AmmoText.text = loadout[0].currentAmmo.ToString();
         AmmoText2.text = loadout[1].currentAmmo.ToString();
@@ -308,8 +351,6 @@ public class Weapon : MonoBehaviour
         RaycastHit hitInfo = new RaycastHit();
         if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
         {
-            Debug.Log(hitInfo.transform.name);
-
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
@@ -404,6 +445,10 @@ public class Weapon : MonoBehaviour
                         else if(loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
+                        } 
+                        else if(loadout[0].name == "Revolver")
+                        {
+                            tempMesh = gunMeshes[1];
                         }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
@@ -429,7 +474,10 @@ public class Weapon : MonoBehaviour
                         else  if(loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
-                        
+                        }
+                        else if(loadout[0].name == "Tommy")
+                        {
+                            tempMesh = gunMeshes[0];
                         }
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
@@ -452,7 +500,10 @@ public class Weapon : MonoBehaviour
                         {
                             tempMesh = gunMeshes[1];
                         }
-
+                        else if(loadout[0].name == "MP40")
+                        {
+                            tempMesh = gunMeshes[2];
+                        }
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
