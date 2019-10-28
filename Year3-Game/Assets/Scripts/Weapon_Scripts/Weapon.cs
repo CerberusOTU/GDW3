@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     //0 = Tommy
     //1 = Revolver
     //2 = MP40
+    //3 = Shotgun
 
     public GameObject[] inSceneGuns;
 
@@ -19,6 +20,7 @@ public class Weapon : MonoBehaviour
     //0 = Tommy
     //1 = Revolver
     //2 = MP40
+    //3 = Shotgun
 
     public GameObject defaultSpawn;
     private List<Transform> weaponSpawnPos = new List<Transform>();
@@ -70,6 +72,7 @@ public class Weapon : MonoBehaviour
     public _Gun M1911;
     public _Gun Tommy;
     public _Gun MP40;
+    public _Gun Shotgun;
 
     /////////////////////////
 
@@ -106,7 +109,7 @@ public class Weapon : MonoBehaviour
          Equip(0);
 
         //generate spawn transforms
-         for(int i = 0; i < 3; i++)
+         for(int i = 0; i < 4; i++)
          {
              Transform temp = Instantiate(defaultSpawn.transform); 
              weaponSpawnPos.Add(temp);
@@ -126,6 +129,9 @@ public class Weapon : MonoBehaviour
         //left wall
         weaponSpawnPos[2].position = new Vector3(32.9f, 7.2f, -54.1f);
         weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,90f,0f);
+
+        weaponSpawnPos[3].position = new Vector3(35.9f, 7.2f, -50.1f);
+        weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
         //random index number for spawn locations
         var numList = new List<int>();
@@ -450,6 +456,10 @@ public class Weapon : MonoBehaviour
                         {
                             tempMesh = gunMeshes[1];
                         }
+                        else if (loadout[0].name == "Shotgun")
+                        {
+                            tempMesh = gunMeshes[3];
+                        }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
@@ -479,6 +489,11 @@ public class Weapon : MonoBehaviour
                         {
                             tempMesh = gunMeshes[0];
                         }
+                        else if (loadout[0].name == "Shotgun")
+                        {
+                            tempMesh = gunMeshes[3];
+                        }
+
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
@@ -504,12 +519,50 @@ public class Weapon : MonoBehaviour
                         {
                             tempMesh = gunMeshes[2];
                         }
+                        else if (loadout[0].name == "Shotgun")
+                        {
+                            tempMesh = gunMeshes[3];
+                        }
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
                         
                         loadout[0] = scriptOBJ[2];
                         Equip(0);
+
+                    }
+                    else if (checkWeapon.collider.name == "Shotgun")
+                    {
+                        Transform temp = checkWeapon.collider.GetComponent<Transform>();
+
+                        GameObject tempMesh = null;
+
+                        
+                        if (loadout[0].name == "MP40")
+                        {
+                            tempMesh = gunMeshes[2];
+                        }
+                        else if (loadout[0].name == "Revolver")
+                        {
+                            tempMesh = gunMeshes[1];
+                        }
+                        else if (loadout[0].name == "Tommy")
+                        {
+                            tempMesh = gunMeshes[0];
+                        }
+                       else if (loadout[0].name == "Shotgun")
+                        {
+                            tempMesh = gunMeshes[3];
+                        }
+
+                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
+                        switched.name = loadout[0].name;
+                        Destroy(checkWeapon.collider.gameObject);
+
+
+                        loadout[0] = scriptOBJ[3];
+                        Equip(0);
+
 
                     }
                 }
