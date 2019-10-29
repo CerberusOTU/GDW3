@@ -130,7 +130,7 @@ public class Weapon : MonoBehaviour
         weaponSpawnPos[2].position = new Vector3(32.9f, 7.2f, -54.1f);
         weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,90f,0f);
 
-        weaponSpawnPos[3].position = new Vector3(35.9f, 7.2f, -50.1f);
+        weaponSpawnPos[3].position = new Vector3(35.9f, 7.2f, -54.1f);
         weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
         //random index number for spawn locations
