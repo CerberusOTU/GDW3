@@ -171,6 +171,12 @@ public class Motion : MonoBehaviour
         
         float adjustedSpeed = speed;
 
+        if(Input.GetMouseButton(1))
+        {
+            isSprinting = false;
+            adjustedSpeed = speed;
+        }   
+
         //allow the player to sprint        
         if(isSprinting)
         {
