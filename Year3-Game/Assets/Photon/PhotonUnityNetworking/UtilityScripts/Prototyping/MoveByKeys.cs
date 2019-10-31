@@ -61,6 +61,7 @@ namespace Photon.Pun.UtilityScripts
         // Update is called once per frame
         public void FixedUpdate()
         {
+            Debug.Log(photonView.IsMine);
             if (!photonView.IsMine)
             {
                 return;
