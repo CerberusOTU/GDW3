@@ -11,6 +11,8 @@ public class Look : MonoBehaviour
     public float xSens;
     public float ySens;
 
+    private float adjustY;
+    private float adjustX;
     public float maxAngle;
 
     private Quaternion camCenter;
@@ -31,7 +33,15 @@ public class Look : MonoBehaviour
 
     void SetY()
     {
-        float input = Input.GetAxis("Mouse Y") * ySens * Time.deltaTime;
+        if(Input.GetMouseButton(1))
+        {
+            adjustY = ySens / 4.5f;
+        }
+        else
+        {
+            adjustY = ySens;
+        }
+        float input = Input.GetAxis("Mouse Y") * adjustY * Time.deltaTime;
         Quaternion adj = Quaternion.AngleAxis(input, -Vector3.right);
         Quaternion delta = cams.localRotation * adj;
 
@@ -39,11 +49,7 @@ public class Look : MonoBehaviour
         {
             cams.localRotation = delta;
         } 
-        else if(cams.localRotation.eulerAngles.x < (360 - maxAngle))
-        {
-            cams.localRotation = Quaternion.Slerp(cams.localRotation, Quaternion.Euler(360 - maxAngle, 0, 0), Time.deltaTime * 4f);
-        }
-        else if(cams.localRotation.eulerAngles.x < (maxAngle))
+        else if(cams.localRotation.eulerAngles.x < maxAngle)
         {
             cams.localRotation = Quaternion.Slerp(cams.localRotation, Quaternion.Euler(maxAngle, 0, 0), Time.deltaTime * 4f);
         }
@@ -51,7 +57,16 @@ public class Look : MonoBehaviour
 
      void SetX()
     {
-        float input = Input.GetAxis("Mouse X") * ySens * Time.deltaTime;
+        if(Input.GetMouseButton(1))
+        {
+            adjustX = xSens / 4.5f;
+        }
+        else
+        {
+            adjustX = xSens;
+        }
+
+        float input = Input.GetAxis("Mouse X") * adjustX * Time.deltaTime;
         Quaternion adj = Quaternion.AngleAxis(input, Vector3.up);
         Quaternion delta = player.localRotation * adj;
         player.localRotation = delta;
@@ -71,7 +86,7 @@ public class Look : MonoBehaviour
         }
         else
         {
-           Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = true;
 
             if(Input.GetKeyDown(KeyCode.Escape))

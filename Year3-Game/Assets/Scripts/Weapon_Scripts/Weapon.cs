@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Weapon : MonoBehaviour
 {
-    public _Gun[] loadout;
+   public _Gun[] loadout;
     
     public GameObject[] gunMeshes;
     //0 = Tommy
@@ -99,11 +99,12 @@ public class Weapon : MonoBehaviour
 
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].maxAmmo;
-
+        loadout[1].isReloading = false;
         //primary guns reset ammo
         for(int i = 0; i < scriptOBJ.Length; i++)
         {
             scriptOBJ[i].currentAmmo = scriptOBJ[i].maxAmmo;
+            scriptOBJ[i].isReloading = false;
         }
 
          Equip(0);
@@ -116,22 +117,19 @@ public class Weapon : MonoBehaviour
              temp.transform.parent = this.transform;
          }
 
-        //set weapon spawn locations
+    //set weapon spawn locations
 
-        //straight wall
-        weaponSpawnPos[0].position = new Vector3(45.3f, 6.6f, -60.5f);
-        weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,180f,0f);
+    weaponSpawnPos[0].position = new Vector3(16.94f, 3.728f, 9.426f);
+    weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,90f,90f);
 
-        //right wall
-        weaponSpawnPos[1].position = new Vector3(31.7f, 7.7f, -86.05f);
-        weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,270f,0f);
+    weaponSpawnPos[1].position = new Vector3(11.73f, 4.792f, -6.374f);
+    weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,90f,0f);
+    
+    weaponSpawnPos[2].position = new Vector3(8.876f, 3.68f, 6.75f);
+    weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,160f,90f);
 
-        //left wall
-        weaponSpawnPos[2].position = new Vector3(32.9f, 7.2f, -54.1f);
-        weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,90f,0f);
-
-        weaponSpawnPos[3].position = new Vector3(35.9f, 7.2f, -54.1f);
-        weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+    weaponSpawnPos[3].position = new Vector3(0.14f, 4.26f, 3.161f);
+    weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 0f, 0f);
 
         //random index number for spawn locations
         var numList = new List<int>();
@@ -238,12 +236,12 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].className == "Pistol")
+            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single")
             {
                 origPosReset = false;
                 Shoot();
             }
-            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].className != "Pistol")
+            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto")
             {
                 origPosReset = false;
                 Shoot();
@@ -340,6 +338,16 @@ public class Weapon : MonoBehaviour
         bloom -= spawn.position;
         bloom.Normalize();
 
+        Vector3[] bloomShotty = new Vector3[8];
+        for(int i =0; i < 8; i++)
+        {
+            bloomShotty[i] = spawn.position + spawn.forward * 1000f;
+            bloomShotty[i] += Random.Range(-adjustedBloom, adjustedBloom) * spawn.up;
+            bloomShotty[i] += Random.Range(-adjustedBloom, adjustedBloom) * spawn.right;
+            bloomShotty[i] -= spawn.position;
+            bloomShotty[i].Normalize();
+        }
+
         ///-----Recoil-----/////
         if (Input.GetMouseButtonDown(0))
         {
@@ -355,12 +363,22 @@ public class Weapon : MonoBehaviour
 
 
         RaycastHit hitInfo = new RaycastHit();
-        if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
+
+        
+        //bloom
+        if(loadout[currentIndex].className == "Shotgun")
         {
-            Target target = hitInfo.transform.GetComponent<Target>();
+            Target target;
+            for(int j =0; j < 8;j++)
+            {
+
+            Physics.Raycast(spawn.position, bloomShotty[j], out hitInfo, 100f);
+            
+            target = hitInfo.transform.GetComponent<Target>();
+
             if (target != null)
             {
-                 StartCoroutine(displayHitmark());
+                StartCoroutine(displayHitmark());
                 target.takeDamage(10f);
             }
 
@@ -378,6 +396,35 @@ public class Weapon : MonoBehaviour
                         _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
                         break;
                     }
+                }
+            }
+        
+            }    
+        }
+        else if(loadout[currentIndex].className != "Shotgun")
+        {
+            Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+            Target target = hitInfo.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                 StartCoroutine(displayHitmark());
+                target.takeDamage(10f);
+            }
+
+            //check if we hit a wall so we can display bulletholes
+            if(hitInfo.collider.tag == "Wall")
+            {
+                for(int i = 0; i < _pool.holeList.Count; i++)
+                {
+                    //if object is inactive in list, use it
+                    if(_pool.holeList[i].activeInHierarchy == false)
+                    {
+                        _pool.holeList[i].SetActive(true);
+                        _pool.holeList[i].transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                        _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                        
+                        break;
+                    }
                    /*  //in case we go through the entire list and require more bullet holes, create some  
                     else
                     {
@@ -391,8 +438,11 @@ public class Weapon : MonoBehaviour
                     } */
                 }
             }
+
+           
              
         }
+        
 
         //GUN FX
        // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
@@ -577,5 +627,4 @@ public class Weapon : MonoBehaviour
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         rb.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);    
     }
-
 }
