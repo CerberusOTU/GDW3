@@ -98,12 +98,13 @@ public class Weapon : MonoBehaviour
         temp2.y = 1f;
 
         //M1911 reset ammo
-        loadout[1].currentAmmo = loadout[1].maxAmmo;
+        loadout[1].currentAmmo = loadout[1].clipSize;
         loadout[1].isReloading = false;
         //primary guns reset ammo
         for(int i = 0; i < scriptOBJ.Length; i++)
         {
-            scriptOBJ[i].currentAmmo = scriptOBJ[i].maxAmmo;
+            scriptOBJ[i].currentAmmo = scriptOBJ[i].clipSize;
+
             scriptOBJ[i].isReloading = false;
         }
 
@@ -155,8 +156,8 @@ public class Weapon : MonoBehaviour
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
-        AmmoText.text = loadout[0].currentAmmo.ToString();
-        AmmoText2.text = loadout[1].currentAmmo.ToString();
+        AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
+        AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -217,7 +218,7 @@ public class Weapon : MonoBehaviour
             return;
         }
         
-        if (Input.GetKey(KeyCode.R) && loadout[currentIndex].currentAmmo != loadout[currentIndex].maxAmmo)
+        if (Input.GetKey(KeyCode.R) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             StartCoroutine(Reload());
         }
@@ -236,12 +237,12 @@ public class Weapon : MonoBehaviour
         {
             Aim(Input.GetMouseButton(1));
 
-            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single")
+            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
-            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto")
+            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -322,7 +323,7 @@ public class Weapon : MonoBehaviour
 
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
-
+        
         if(Input.GetMouseButton(1))
         {
              adjustedBloom = loadout[currentIndex].bloom / 3;
@@ -463,8 +464,9 @@ public class Weapon : MonoBehaviour
         loadout[currentIndex].isReloading = true;
         
         yield return new WaitForSeconds(loadout[currentIndex].reloadTime);
-
-        loadout[currentIndex].currentAmmo = loadout[currentIndex].maxAmmo;
+        
+        loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+        loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
         loadout[currentIndex].isReloading = false;
         Reloading.text = " ";
 
