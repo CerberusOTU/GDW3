@@ -5,6 +5,8 @@ using UnityEngine;
 public class Tutorial_Manager : MonoBehaviour
 {
     private Ingame_GUI tutorialGUI;
+    // Variables
+    private int count = 0;
     // Game Achievement Triggers //
     public GameObject MovementTrigger; //WASD
     public GameObject JumpTrigger; //Space
@@ -30,6 +32,9 @@ public class Tutorial_Manager : MonoBehaviour
     public bool b_grenadeComplete = false;
     [System.NonSerialized]
     public bool b_xrayComplete = false;
+
+    [System.NonSerialized]
+    public bool b_tutorialComplete = false;
 
 
     // Player Components //
@@ -77,6 +82,7 @@ public class Tutorial_Manager : MonoBehaviour
 
     public void Notify(string _achievement)
     {
+        count++;
         switch (_achievement)
         {
             case "MOVEMENT_COMPLETE":
@@ -106,8 +112,10 @@ public class Tutorial_Manager : MonoBehaviour
             case "XRAY_COMPLETE":
                 tutorialGUI.crossList[6] = isCompleteTex;
                 b_xrayComplete = true;
-            break;
-            
+            break;           
         }
+
+        if (count == 7)
+            b_tutorialComplete = true;
     }
 }
