@@ -83,13 +83,18 @@ public class Weapon : MonoBehaviour
     //Throwing Grenade
     public float throwForce = 40f;
     public GameObject grenadePrefab;
-    
+
+
+    //**************TUTORIAL VARIABLES**************/
+    [System.NonSerialized]
+    public Tutorial_Manager _tutManager;
 
     void Start()
     {
         rigid = this.gameObject.GetComponent<Rigidbody>();
         
          _pool = GameObject.FindObjectOfType<PoolManager>();
+         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
 
@@ -563,6 +568,9 @@ public class Weapon : MonoBehaviour
                         loadout[0] = scriptOBJ[3];
                         Equip(0);
 
+                         // Tutorial completion check
+                        if (!_tutManager.b_swapComplete)
+                            _tutManager.Notify("SWAP_COMPLETE");
 
                     }
                 }
@@ -576,6 +584,9 @@ public class Weapon : MonoBehaviour
         GameObject grenade = Instantiate(grenadePrefab, cam.transform.position, cam.transform.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         rb.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);    
-    }
+        // Tutorial completion check
+            if (!_tutManager.b_grenadeComplete)
+                _tutManager.Notify("GRENADE_COMPLETE");
+   }
 
 }

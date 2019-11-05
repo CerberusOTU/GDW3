@@ -15,6 +15,23 @@ public class Tutorial_Manager : MonoBehaviour
     public Texture2D isCompleteTex;
     public Texture2D notCompleteTex;
 
+    // Completion Bools
+    [System.NonSerialized]
+    public bool b_movementComplete = false;
+    [System.NonSerialized]
+    public bool b_jumpComplete = false;
+    [System.NonSerialized]
+    public bool b_crouchComplete = false;
+    [System.NonSerialized]
+    public bool b_swapComplete = false;
+    [System.NonSerialized]
+    public bool b_shootingComplete = false;
+    [System.NonSerialized]
+    public bool b_grenadeComplete = false;
+    [System.NonSerialized]
+    public bool b_xrayComplete = false;
+
+
     // Player Components //
     private Rigidbody playerRB;
     private CapsuleCollider playerCC; 
@@ -32,7 +49,6 @@ public class Tutorial_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Check Player movement completion
 
     }
 
@@ -44,7 +60,6 @@ public class Tutorial_Manager : MonoBehaviour
             {
                 Debug.Log("Movement Complete");
                 Notify("MOVEMENT_COMPLETE");
-                tutorialGUI.crossList[0] = isCompleteTex;
             }
             else if(collider.gameObject == JumpTrigger)
             {
@@ -60,19 +75,39 @@ public class Tutorial_Manager : MonoBehaviour
         }
     }
 
-    void Notify(string _achievement)
+    public void Notify(string _achievement)
     {
         switch (_achievement)
         {
             case "MOVEMENT_COMPLETE":
                 tutorialGUI.crossList[0] = isCompleteTex;
+                b_movementComplete = true;
             break;
             case "JUMP_COMPLETE":
                 tutorialGUI.crossList[1] = isCompleteTex;
+                b_jumpComplete = true;
             break;
             case "CROUCH_COMPLETE":
                 tutorialGUI.crossList[2] = isCompleteTex;
+                b_crouchComplete = true;
             break;
+            case "SWAP_COMPLETE":
+                tutorialGUI.crossList[3] = isCompleteTex;
+                b_swapComplete = true;
+            break;
+            case "SHOOTING_COMPLETE":
+                tutorialGUI.crossList[4] = isCompleteTex;
+                b_shootingComplete = true;
+            break;
+            case "GRENADE_COMPLETE":
+                tutorialGUI.crossList[5] = isCompleteTex;
+                b_grenadeComplete = true;
+            break;
+            case "XRAY_COMPLETE":
+                tutorialGUI.crossList[6] = isCompleteTex;
+                b_xrayComplete = true;
+            break;
+            
         }
     }
 }

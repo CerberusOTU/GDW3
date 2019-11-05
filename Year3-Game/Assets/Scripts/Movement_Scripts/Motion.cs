@@ -37,12 +37,22 @@ public class Motion : MonoBehaviour
     private Vector3 baseCamTrans;
     private Vector3 crouchCamTrans;
     private bool crouchLerp;
+
+
+    private Weapon _weapon; // Link Weapon Script
+
+    //**************TUTORIAL VARIABLES**************/
+    [System.NonSerialized]
+    private Tutorial_Manager _tutManager;
+
     /////////////////
     void Start()
     {
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
         col = this.gameObject.GetComponent<CapsuleCollider>();
+        _weapon = gameObject.GetComponent<Weapon>();
+        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
         
         distToGround = col.bounds.extents.y;
 
@@ -69,6 +79,9 @@ public class Motion : MonoBehaviour
             {
                 isCrouching = false;
             }
+            // Tutorial completion check
+            //if (!_tutManager.b_crouchComplete)
+                //_tutManager.Notify("CROUCH_COMPLETE");
         }
 
         if(isCrouching == false)
@@ -92,6 +105,9 @@ public class Motion : MonoBehaviour
         if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            // Tutorial completion check
+            //if (!_tutManager.b_jumpComplete)
+                //_tutManager.Notify("JUMP_COMPLETE");
         } 
 
         if(!isGrounded())
@@ -170,12 +186,6 @@ public class Motion : MonoBehaviour
         direction.Normalize();
         
         float adjustedSpeed = speed;
-
-        if(Input.GetMouseButton(1))
-        {
-            isSprinting = false;
-            adjustedSpeed = speed;
-        }   
 
         //allow the player to sprint        
         if(isSprinting)
