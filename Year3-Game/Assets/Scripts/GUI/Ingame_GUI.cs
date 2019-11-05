@@ -8,13 +8,13 @@ public class Ingame_GUI : MonoBehaviour
     public int BoxFontSize;
     public int LabelFontSize;
     public int ButtonFontSize;
-    public string test;
+    public string Title;
     public Texture2D temp;
     public List<Texture2D> crossList;
 
     void Start()
     {
-        for(int i =0; i < 7; i++)
+        for(int i =0; i < 8; i++)
         {
             crossList.Add(temp);
         }
@@ -26,8 +26,8 @@ public class Ingame_GUI : MonoBehaviour
         GUI.skin.box.fontSize = BoxFontSize;
         GUI.skin.button.fontSize = ButtonFontSize;
 
-        GUILayout.BeginArea (new Rect (Screen.width - 300, (Screen.height * 0.5f) - 350, 300, 350));
-        GUI.Box(new Rect(0,0,300,350), test);
+        GUILayout.BeginArea (new Rect (Screen.width - 300, (Screen.height * 0.5f) - 390, 300, 390));
+        GUI.Box(new Rect(0,0,300,390), Title);
 
         GUI.Label(new Rect(10,50, 30, 30), crossList[0]);
         GUI.Label(new Rect(50,55, 200, 30), "Move");
@@ -45,10 +45,13 @@ public class Ingame_GUI : MonoBehaviour
         GUI.Label(new Rect(50,215, 200, 30), "Shooting / Aim");
 
         GUI.Label(new Rect(10,250, 30, 30), crossList[5]);
-        GUI.Label(new Rect(50,255, 200, 30), "Grenade");
+        GUI.Label(new Rect(50,255, 200, 30), "Reload");
 
         GUI.Label(new Rect(10,290, 30, 30), crossList[6]);
-        GUI.Label(new Rect(50,295, 200, 30), "Find Partner");
+        GUI.Label(new Rect(50,295, 200, 30), "Grenade");
+
+        GUI.Label(new Rect(10,330, 30, 30), crossList[7]);
+        GUI.Label(new Rect(50,335, 200, 30), "Find Partner");
         GUILayout.EndArea();
     }
 }

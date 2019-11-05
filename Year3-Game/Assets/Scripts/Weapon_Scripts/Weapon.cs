@@ -424,6 +424,10 @@ public class Weapon : MonoBehaviour
         Reloading.text = " ";
 
         tempTime = Time.time;
+
+        // Tutorial completion check
+        if (!_tutManager.b_reloadComplete)
+            _tutManager.Notify("RELOAD_COMPLETE");
     }
 
      void SwitchWeapon()

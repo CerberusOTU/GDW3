@@ -11,9 +11,7 @@ public class Tutorial_Manager : MonoBehaviour
     public GameObject MovementTrigger; //WASD
     public GameObject JumpTrigger; //Space
     public GameObject CrouchTrigger; //CTRL
-    public GameObject PickUpTrigger; //"E"
     public GameObject ShootingTrigger; // LClick, RClick
-    public GameObject XRayTrigger; //"F"
     public Texture2D isCompleteTex;
     public Texture2D notCompleteTex;
 
@@ -28,6 +26,8 @@ public class Tutorial_Manager : MonoBehaviour
     public bool b_swapComplete = false;
     [System.NonSerialized]
     public bool b_shootingComplete = false;
+    [System.NonSerialized]
+    public bool b_reloadComplete = false;
     [System.NonSerialized]
     public bool b_grenadeComplete = false;
     [System.NonSerialized]
@@ -46,7 +46,7 @@ public class Tutorial_Manager : MonoBehaviour
         tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI>();
         playerRB = this.GetComponent<Rigidbody>();
         playerCC = this.GetComponent<CapsuleCollider>();
-        for(int i =0; i < 7; i++)
+        for(int i =0; i < 8; i++)
         {
             tutorialGUI.crossList[i] = notCompleteTex;
         }
@@ -105,17 +105,21 @@ public class Tutorial_Manager : MonoBehaviour
                 tutorialGUI.crossList[4] = isCompleteTex;
                 b_shootingComplete = true;
             break;
-            case "GRENADE_COMPLETE":
+            case "RELOAD_COMPLETE":
                 tutorialGUI.crossList[5] = isCompleteTex;
+                b_xrayComplete = true;
+            break;
+            case "GRENADE_COMPLETE":
+                tutorialGUI.crossList[6] = isCompleteTex;
                 b_grenadeComplete = true;
             break;
             case "XRAY_COMPLETE":
-                tutorialGUI.crossList[6] = isCompleteTex;
+                tutorialGUI.crossList[7] = isCompleteTex;
                 b_xrayComplete = true;
-            break;           
+            break;      
         }
 
-        if (count == 7)
+        if (count == 8)
             b_tutorialComplete = true;
     }
 }
