@@ -7,6 +7,8 @@ public class Motion : MonoBehaviour
 
     float horizontalMove;
     float verticalMove;
+
+    Vector3 targetVelocity;
     public float speed;
     public float sprintModifier;
 
@@ -105,9 +107,6 @@ public class Motion : MonoBehaviour
         if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            // Tutorial completion check
-            //if (!_tutManager.b_jumpComplete)
-                //_tutManager.Notify("JUMP_COMPLETE");
         } 
 
         if(!isGrounded())
@@ -212,8 +211,11 @@ public class Motion : MonoBehaviour
         }
 
 
-        Vector3 targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-        rb.AddForce(targetVelocity, ForceMode.VelocityChange); 
+        if(isGrounded())
+        {
+            targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
+            rb.AddForce(targetVelocity, ForceMode.VelocityChange); 
+        }
         //targetVelocity.y = rb.velocity.y;
         //rb.velocity =  targetVelocity;
     }
