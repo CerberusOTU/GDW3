@@ -28,6 +28,7 @@ public class Grenade : MonoBehaviour
 
     void Explode()
     {
+        GameObject tempEffect = Instantiate(explosionEffect, transform.position, transform.rotation);
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach(Collider nearbyObj in colliders)
         {
@@ -37,7 +38,6 @@ public class Grenade : MonoBehaviour
                 rb.AddExplosionForce(force * 10f, transform.position, radius);
             }
         }
-
         Destroy(gameObject);
     }
 }
