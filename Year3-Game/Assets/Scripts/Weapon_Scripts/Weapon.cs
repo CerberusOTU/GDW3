@@ -259,7 +259,6 @@ public class Weapon : MonoBehaviour
                 cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
                 {
-                    Debug.Log(origPosReset);
                     origPosReset = true;
                 }
             }
@@ -362,6 +361,12 @@ public class Weapon : MonoBehaviour
         RaycastHit hitInfo = new RaycastHit();
         if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
         {
+            if(hitInfo.collider.name == "Cube(6)")
+            {
+                if (!_tutManager.b_shootingComplete)
+                _tutManager.Notify("SHOOTING_COMPLETE");
+            }
+
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {

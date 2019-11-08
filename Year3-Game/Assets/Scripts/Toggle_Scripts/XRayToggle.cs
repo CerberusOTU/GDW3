@@ -25,8 +25,8 @@ public class XRayToggle : MonoBehaviour
         {
             partner.GetComponent<MeshRenderer> ().material = xrayMat;
             // Tutorial completion check
-            //if (!_tutManager.b_xrayComplete)
-             //   _tutManager.Notify("XRAY_COMPLETE");
+            if (!_tutManager.b_xrayComplete)
+                _tutManager.Notify("XRAY_COMPLETE");
         }
         else
         {

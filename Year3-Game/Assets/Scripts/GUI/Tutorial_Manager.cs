@@ -54,11 +54,6 @@ public class Tutorial_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.X))
-        {
-             if (!b_xrayComplete)
-                Notify("XRAY_COMPLETE");
-        }
     }
 
     void OnTriggerEnter(Collider collider)
