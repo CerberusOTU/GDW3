@@ -361,11 +361,27 @@ public class Weapon : MonoBehaviour
         RaycastHit hitInfo = new RaycastHit();
         if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
         {
-            if(hitInfo.collider.name == "Cube(6)")
+
+            //Shooting tasklist///////////
+            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
             {
+                _tutManager.Target1 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+            {
+                _tutManager.Target2 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+            {
+                _tutManager.Target3 = true;
+            }
+            
+            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+            {  
                 if (!_tutManager.b_shootingComplete)
                 _tutManager.Notify("SHOOTING_COMPLETE");
             }
+            //////////////////////////////////////
 
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)

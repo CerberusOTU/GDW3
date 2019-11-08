@@ -7,6 +7,10 @@ public class Tutorial_Manager : MonoBehaviour
     private Ingame_GUI tutorialGUI;
     // Variables
     private int count = 0;
+    public int TargetCount = 0;
+    public bool Target1 = false;
+    public bool Target2 = false;
+    public bool Target3 = false;
     // Game Achievement Triggers //
     public GameObject MovementTrigger; //WASD
     public GameObject JumpTrigger; //Space
