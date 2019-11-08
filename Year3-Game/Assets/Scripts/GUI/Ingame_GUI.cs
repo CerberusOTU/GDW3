@@ -14,10 +14,6 @@ public class Ingame_GUI : MonoBehaviour
 
     void Start()
     {
-        for(int i =0; i < 8; i++)
-        {
-            crossList.Add(temp);
-        }
     }
     
     void OnGUI()

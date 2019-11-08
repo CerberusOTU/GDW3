@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Tutorial_Manager : MonoBehaviour
 {
     private Ingame_GUI tutorialGUI;
     // Variables
     private int count = 0;
+    private int tasksCount = 8;
     public int TargetCount = 0;
     public bool Target1 = false;
     public bool Target2 = false;
@@ -50,9 +52,9 @@ public class Tutorial_Manager : MonoBehaviour
         tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI>();
         playerRB = this.GetComponent<Rigidbody>();
         playerCC = this.GetComponent<CapsuleCollider>();
-        for(int i =0; i < 8; i++)
+        for(int i = 0; i < tasksCount; i++)
         {
-            tutorialGUI.crossList[i] = notCompleteTex;
+            tutorialGUI.crossList.Add(notCompleteTex);
         }
     }
     // Update is called once per frame
@@ -122,7 +124,7 @@ public class Tutorial_Manager : MonoBehaviour
             break;      
         }
 
-        if (count == 8)
+        if (count == tasksCount)
             b_tutorialComplete = true;
     }
 }
