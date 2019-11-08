@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7736,7 +7736,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968480975}
-  m_Material: {fileID: 13400000, guid: 9de5dd406c5cafd45a6d1152a3948547, type: 2}
+  m_Material: {fileID: 13400000, guid: 7ff0ba6fee43c394a85382f2f5cc6374, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8392,11 +8392,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1834482317, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: m_Drag
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1834482317, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: m_Mass
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834482317, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1834482315, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: jumpForce
@@ -8408,7 +8412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1834482315, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: speed
-      value: 330
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[0]

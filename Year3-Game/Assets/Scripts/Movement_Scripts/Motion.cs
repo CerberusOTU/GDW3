@@ -211,9 +211,11 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
+
         Vector3 targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-        targetVelocity.y = rb.velocity.y;
-        rb.velocity =  targetVelocity;
+        rb.AddForce(targetVelocity, ForceMode.VelocityChange); 
+        //targetVelocity.y = rb.velocity.y;
+        //rb.velocity =  targetVelocity;
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity) 
