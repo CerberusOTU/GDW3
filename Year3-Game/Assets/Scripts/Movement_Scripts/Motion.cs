@@ -37,6 +37,8 @@ public class Motion : MonoBehaviour
     private Vector3 baseCamTrans;
     private Vector3 crouchCamTrans;
     private bool crouchLerp;
+
+    private Vector3 targetVelocity;
     /////////////////
     void Start()
     {
@@ -201,9 +203,11 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
-        Vector3 targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-        targetVelocity.y = rb.velocity.y;
-        rb.velocity =  targetVelocity;
+         if(isGrounded())
+        {
+            targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
+            rb.AddForce(targetVelocity, ForceMode.VelocityChange); 
+        }
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity) 

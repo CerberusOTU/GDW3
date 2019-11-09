@@ -81,6 +81,9 @@ public class Weapon : MonoBehaviour
     RaycastHit checkWeapon;
 
     //Throwing Grenade
+    
+    //Throwing Grenade
+    private bool isCookingNade = false;
     public float throwForce = 40f;
     public GameObject grenadePrefab;
     
@@ -167,8 +170,13 @@ public class Weapon : MonoBehaviour
          }
         }
 
-        if(Input.GetKeyDown(KeyCode.G))
+        if(Input.GetKey(KeyCode.G))
         {
+            isCookingNade = true;
+            throwGrenade();
+        }else if (Input.GetKeyUp(KeyCode.G))
+        {
+            isCookingNade = false;
             throwGrenade();
         }
 
@@ -622,11 +630,33 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
+    Rigidbody rb_Grenade;
+    bool isNewNade = true;
     void throwGrenade()
     {
-        Debug.Log("Grenade");
-        GameObject grenade = Instantiate(grenadePrefab, cam.transform.position, cam.transform.rotation);
-        Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        rb.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);    
+       if (isNewNade)
+        {
+            GameObject grenade = Instantiate(grenadePrefab, cam.transform.position + (cam.transform.forward * 0.5f), cam.transform.rotation);
+            rb_Grenade = grenade.GetComponent<Rigidbody>();
+            isNewNade = false;
+        }
+        else
+        {
+            if (isCookingNade)
+            {
+            
+                rb_Grenade.position = cam.transform.position + (cam.transform.forward * 0.5f);
+                rb_Grenade.useGravity = false;
+                rb_Grenade.freezeRotation = true;        
+            }
+            else if (!isCookingNade)
+            {
+                isNewNade = true;
+                rb_Grenade.useGravity = true;
+                rb_Grenade.freezeRotation = false;
+                rb_Grenade.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);      
+            }
+        }
     }
 }
