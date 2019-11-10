@@ -13,7 +13,7 @@ public class PluginReader : MonoBehaviour
 
    void Start()
    {
-
+      
    }
 
    void Update()
@@ -28,7 +28,6 @@ public class PluginReader : MonoBehaviour
       {
          LogMetrics(this.transform.position, 0.0f, 0.0f);
       }
-      
-      
+           
    }
 }
