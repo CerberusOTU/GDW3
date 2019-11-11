@@ -29,9 +29,10 @@ public class PoolManager : MonoBehaviour
         GameObject objectToSpawn = bulletHoleList.Dequeue();
         objectToSpawn.SetActive(true);
         
-        GameObject temp = Instantiate(bulletHole); 
+        /*GameObject temp = Instantiate(bulletHole); 
         temp.SetActive(false);
-        bulletHoleList.Enqueue(temp);
+        */
+        bulletHoleList.Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }
