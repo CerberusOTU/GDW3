@@ -8,7 +8,8 @@ public class Ingame_GUI : MonoBehaviour
     public int BoxFontSize;
     public int LabelFontSize;
     public int ButtonFontSize;
-    public string Title;
+    public string TaskTitle;
+    public string ControlTitle;
     public Texture2D temp;
     public List<Texture2D> crossList;
 
@@ -22,8 +23,8 @@ public class Ingame_GUI : MonoBehaviour
         GUI.skin.box.fontSize = BoxFontSize;
         GUI.skin.button.fontSize = ButtonFontSize;
 
-        GUILayout.BeginArea (new Rect (Screen.width - 300, (Screen.height * 0.5f) - 390, 300, 390));
-        GUI.Box(new Rect(0,0,300,390), Title);
+        GUILayout.BeginArea (new Rect (Screen.width - 300, 0, 300, 390));
+        GUI.Box(new Rect(0,0,300,390), TaskTitle);
 
         GUI.Label(new Rect(10,50, 30, 30), crossList[0]);
         GUI.Label(new Rect(50,55, 200, 30), "Move");
@@ -48,6 +49,22 @@ public class Ingame_GUI : MonoBehaviour
 
         GUI.Label(new Rect(10,330, 30, 30), crossList[7]);
         GUI.Label(new Rect(50,335, 200, 30), "Find Partner");
+        GUILayout.EndArea();
+
+        //Gui
+        GUILayout.BeginArea (new Rect (0,0, 200, 200));
+        GUI.Box(new Rect(0,0,150,220), ControlTitle);
+
+        GUI.Label(new Rect(10,25, 150, 30), "Move - WASD");
+        GUI.Label(new Rect(10,50, 150, 30), "Jump - Space");
+        GUI.Label(new Rect(10,75, 150, 30), "Crouch - C");
+        GUI.Label(new Rect(10,100, 150, 30), "Grenade - G");
+        GUI.Label(new Rect(10,125, 150, 30), "Xray - X");
+        GUI.Label(new Rect(10,150, 150, 30), "Shoot - LClick");
+        GUI.Label(new Rect(10,175, 150, 30), "Aim - RClick");
+        GUI.Label(new Rect(10,200, 150, 30), "Reload - R");
+
+
         GUILayout.EndArea();
     }
 }
