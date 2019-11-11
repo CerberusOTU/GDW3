@@ -81,18 +81,20 @@ public class Motion : MonoBehaviour
             {
                 isCrouching = false;
             }
-            // Tutorial completion check
-            //if (!_tutManager.b_crouchComplete)
-                //_tutManager.Notify("CROUCH_COMPLETE");
+            //Tutorial completion check
+            if (!_tutManager.b_crouchComplete)
+                _tutManager.Notify("CROUCH_COMPLETE");
         }
 
         if(isCrouching == false)
         {
+            col.height = 1f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
             
         }
         else
         {
+            col.height = 2f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
             
         }
