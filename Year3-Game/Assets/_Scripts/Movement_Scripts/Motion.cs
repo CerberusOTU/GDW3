@@ -14,7 +14,7 @@ public class Motion : MonoBehaviour
 
     public bool isSprinting;
     private Rigidbody rb;
-    private CapsuleCollider col;
+    private BoxCollider col;
     private float distToGround;
 
     public float jumpForce;
@@ -52,7 +52,7 @@ public class Motion : MonoBehaviour
     {
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
-        col = this.gameObject.GetComponent<CapsuleCollider>();
+        col = this.gameObject.GetComponent<BoxCollider>();
         _weapon = gameObject.GetComponent<Weapon>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
         
@@ -88,13 +88,13 @@ public class Motion : MonoBehaviour
 
         if(isCrouching == false)
         {
-            col.height = 1f;
+            //col.height = 1f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
             
         }
         else
         {
-            col.height = 2f;
+            //col.height = 2f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
             
         }

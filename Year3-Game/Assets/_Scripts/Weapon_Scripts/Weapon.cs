@@ -354,6 +354,16 @@ public class Weapon : MonoBehaviour
         bloom -= spawn.position;
         bloom.Normalize();
 
+        Vector3[] bloomShotty = new Vector3[8];
+        for(int i =0; i < 8; i++)
+        {
+            bloomShotty[i] = spawn.position + spawn.forward * 1000f;
+            bloomShotty[i] += Random.Range(-adjustedBloom, adjustedBloom) * spawn.up;
+            bloomShotty[i] += Random.Range(-adjustedBloom, adjustedBloom) * spawn.right;
+            bloomShotty[i] -= spawn.position;
+            bloomShotty[i].Normalize();
+        }
+
         ///-----Recoil-----/////
         if (Input.GetMouseButtonDown(0))
         {
@@ -369,8 +379,22 @@ public class Weapon : MonoBehaviour
 
 
         RaycastHit hitInfo = new RaycastHit();
-        if(Physics.Raycast(spawn.position, bloom, out hitInfo, 100f))
+
+        if(loadout[currentIndex].className == "Shotgun")
         {
+            Target target;
+            for(int j =0; j < 8;j++)
+            {
+
+            Physics.Raycast(spawn.position, bloomShotty[j], out hitInfo, 100f);
+            
+            target = hitInfo.transform.GetComponent<Target>();
+
+            if (target != null)
+            {
+                StartCoroutine(displayHitmark());
+                target.takeDamage(10f);
+            }
 
             //Shooting tasklist///////////
             if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
@@ -391,15 +415,6 @@ public class Weapon : MonoBehaviour
                 if (!_tutManager.b_shootingComplete)
                 _tutManager.Notify("SHOOTING_COMPLETE");
             }
-            //////////////////////////////////////
-
-            Target target = hitInfo.transform.GetComponent<Target>();
-            if (target != null)
-            {
-                StartCoroutine(displayHitmark());
-                target.takeDamage(10f);
-            }
-
             //check if we hit a wall so we can display bulletholes
             if(hitInfo.collider.tag == "Wall")
             {
@@ -409,7 +424,43 @@ public class Weapon : MonoBehaviour
             }
              
         }
+    } else if(loadout[currentIndex].className != "Shotgun")
+        {
+            Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+            Target target = hitInfo.transform.GetComponent<Target>();
+            if (target != null)
+            {
+                 StartCoroutine(displayHitmark());
+                target.takeDamage(10f);
+            }
 
+              //Shooting tasklist///////////
+            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+            {
+                _tutManager.Target1 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+            {
+                _tutManager.Target2 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+            {
+                _tutManager.Target3 = true;
+            }
+            
+            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+            {  
+                if (!_tutManager.b_shootingComplete)
+                _tutManager.Notify("SHOOTING_COMPLETE");
+            }
+
+           if(hitInfo.collider.tag == "Wall")
+            {
+                GameObject temp = _pool.GetBulletHole();
+                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            }
+        } 
         //GUN FX
        // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
