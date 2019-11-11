@@ -6,7 +6,8 @@ public class PoolManager : MonoBehaviour
 {
     public GameObject bulletHole;
     public int spawnCount;
-    public List<GameObject> holeList;
+    
+    public Queue<GameObject> bulletHoleList = new Queue<GameObject>();
 
     private void Start()
     {
@@ -17,11 +18,21 @@ public class PoolManager : MonoBehaviour
     {
          for(int i =0; i < spawnCount; i++)
         {
-            GameObject temp = Instantiate(bulletHole);   
-            holeList.Add(temp);         
-
-            temp.transform.parent = this.transform;
+            GameObject temp = Instantiate(bulletHole); 
             temp.SetActive(false);
+            bulletHoleList.Enqueue(temp);
         }
+    }
+
+    public GameObject GetBulletHole()
+    {
+        GameObject objectToSpawn = bulletHoleList.Dequeue();
+        objectToSpawn.SetActive(true);
+        
+        GameObject temp = Instantiate(bulletHole); 
+        temp.SetActive(false);
+        bulletHoleList.Enqueue(temp);
+
+        return objectToSpawn;
     }
 }
