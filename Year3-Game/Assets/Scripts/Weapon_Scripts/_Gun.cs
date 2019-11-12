@@ -20,6 +20,7 @@ public class _Gun : ScriptableObject
    //Ammo & reloading
    public float reloadTime;
 
+   public int alwaysMax;
    public int maxAmmo;
    public int clipSize;
 

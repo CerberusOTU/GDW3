@@ -102,12 +102,13 @@ public class Weapon : MonoBehaviour
 
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].clipSize;
+        loadout[1].maxAmmo = loadout[1].alwaysMax;
         loadout[1].isReloading = false;
         //primary guns reset ammo
         for(int i = 0; i < scriptOBJ.Length; i++)
         {
             scriptOBJ[i].currentAmmo = scriptOBJ[i].clipSize;
-
+            scriptOBJ[i].maxAmmo = scriptOBJ[i].alwaysMax;
             scriptOBJ[i].isReloading = false;
         }
 
