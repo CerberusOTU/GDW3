@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using XInputDotNetPure;
 public class Motion : MonoBehaviour
 {
+    Controller controller;
 
     float horizontalMove;
     float verticalMove;
@@ -52,6 +53,7 @@ public class Motion : MonoBehaviour
 
         baseCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y, cam.transform.localPosition.z);
         crouchCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y - 1f, cam.transform.localPosition.z);
+        controller = GameObject.FindObjectOfType<Controller>();
     }
     //Check if player is grounded
     bool isGrounded()
@@ -102,7 +104,7 @@ public class Motion : MonoBehaviour
         }
         else if(horizontalMove == 0 && verticalMove == 0)
         {
-            if(Input.GetMouseButton(1))
+            if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
             {
                 //stop headbob && swaying
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin ,Time.deltaTime * 2f);
@@ -128,7 +130,7 @@ public class Motion : MonoBehaviour
         }
         else
         {
-            if(Input.GetMouseButton(1))
+            if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
             {   
                 if (isCrouching == false)
                 {
@@ -162,10 +164,25 @@ public class Motion : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal");
-        verticalMove = Input.GetAxisRaw("Vertical");
+        if(controller.state.IsConnected)
+        {
+            horizontalMove = controller.state.ThumbSticks.Left.X;
+        }
+        else
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal");
+        }
+        if(controller.state.IsConnected)
+        {
+            verticalMove = controller.state.ThumbSticks.Left.Y;
+        }
+        else
+        {
+            verticalMove = Input.GetAxisRaw("Vertical");
+        }
+        
 
-        bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state.Buttons.LeftStick == ButtonState.Pressed;
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove);
@@ -173,7 +190,7 @@ public class Motion : MonoBehaviour
         
         float adjustedSpeed = speed;
 
-        if(Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
             isSprinting = false;
             adjustedSpeed = speed;
@@ -186,15 +203,15 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
-        else if(Input.GetMouseButton(1) && isCrouching == true)
+        else if((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == true)
         {
             adjustedSpeed = speed / 2;
         }
-        else if(isCrouching == false && Input.GetMouseButton(1))
+        else if(isCrouching == false && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
         {
             adjustedSpeed = speed / 3;
         }
-        else if(isCrouching == false && !Input.GetMouseButton(1))
+        else if(isCrouching == false && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
         {
             adjustedSpeed = speed / 1.5f;
         }

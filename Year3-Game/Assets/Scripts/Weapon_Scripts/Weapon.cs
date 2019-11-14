@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using XInputDotNetPure;
 
 public class Weapon : MonoBehaviour
 {
+
+    //Controller Variables//
+    Controller controller;
+
+    float vibrateVal = 0;
+
+    //////////////////////
    public _Gun[] loadout;
     
     public GameObject[] gunMeshes;
@@ -95,7 +103,8 @@ public class Weapon : MonoBehaviour
          _pool = GameObject.FindObjectOfType<PoolManager>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
-
+         controller = GameObject.FindObjectOfType<Controller>();
+         
         temp2 = transform.localScale;
         temp2.x = 1f;
         temp2.y = 1f;
@@ -153,8 +162,24 @@ public class Weapon : MonoBehaviour
 
     }
 
+    void FixedUpdate()
+    {
+        GamePad.SetVibration(controller.playerIndex, vibrateVal, vibrateVal);
+    }
+
     void Update()
     {
+
+        if(controller.state.Triggers.Right == 1)
+        {
+            vibrateVal = 0.5f;
+        }
+        else
+        {
+            vibrateVal = 0;
+        }
+        ///////////////////////////////////
+        
         PickUp.enabled = false;
         SwitchWeapon();
 
@@ -244,20 +269,20 @@ public class Weapon : MonoBehaviour
         
         if(currentWeapon != null)
         {
-            Aim(Input.GetMouseButton(1));
+            Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
 
             if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
-            else if(Input.GetMouseButton(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+            else if((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
             // Return back to original left click position
-            if (!Input.GetMouseButton(0) && origPosReset == false)
+            if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0)  && origPosReset == false)
             {
                 cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
@@ -277,7 +302,7 @@ public class Weapon : MonoBehaviour
             currentCool -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
             tempMuzzle = currentWeapon.transform.Find("States/ADS/MuzzlePos");
             muzzleFlash.transform.position = tempMuzzle.position;
@@ -333,7 +358,7 @@ public class Weapon : MonoBehaviour
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
         
-        if(Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
              adjustedBloom = loadout[currentIndex].bloom / 3;
         }

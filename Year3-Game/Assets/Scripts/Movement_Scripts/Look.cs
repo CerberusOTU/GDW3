@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Look : MonoBehaviour
 {
+    Controller controller;
     public static bool cursorLocked = true;
     public Transform player;
     public Transform cams;
@@ -14,13 +15,15 @@ public class Look : MonoBehaviour
     private float adjustY;
     private float adjustX;
     public float maxAngle;
+    float inputY;
+    float inputX;
 
     private Quaternion camCenter;
     void Start()
     {
         camCenter = cams.localRotation; //set rotation origin for cameras to camCenter
 
-       
+       controller = GameObject.FindObjectOfType<Controller>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,8 @@ public class Look : MonoBehaviour
 
     void SetY()
     {
-        if(Input.GetMouseButton(1))
+        
+        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
             adjustY = ySens / 4.5f;
         }
@@ -41,8 +45,17 @@ public class Look : MonoBehaviour
         {
             adjustY = ySens;
         }
-        float input = Input.GetAxis("Mouse Y") * adjustY * Time.deltaTime;
-        Quaternion adj = Quaternion.AngleAxis(input, -Vector3.right);
+        
+        if(controller.state.IsConnected)
+        {
+            inputY = controller.state.ThumbSticks.Right.Y;
+        }
+        else
+        {
+            inputY = Input.GetAxis("Mouse Y") * adjustY * Time.deltaTime;
+        }
+
+        Quaternion adj = Quaternion.AngleAxis(inputY, -Vector3.right);
         Quaternion delta = cams.localRotation * adj;
 
         if(Quaternion.Angle(camCenter, delta) < maxAngle)
@@ -57,7 +70,7 @@ public class Look : MonoBehaviour
 
      void SetX()
     {
-        if(Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
             adjustX = xSens / 4.5f;
         }
@@ -66,8 +79,18 @@ public class Look : MonoBehaviour
             adjustX = xSens;
         }
 
-        float input = Input.GetAxis("Mouse X") * adjustX * Time.deltaTime;
-        Quaternion adj = Quaternion.AngleAxis(input, Vector3.up);
+        
+        if(controller.state.IsConnected)
+        {
+            inputX = controller.state.ThumbSticks.Right.X;
+        }
+        else
+        {
+            inputX = Input.GetAxis("Mouse X") * adjustX * Time.deltaTime;
+        }
+
+
+        Quaternion adj = Quaternion.AngleAxis(inputX, Vector3.up);
         Quaternion delta = player.localRotation * adj;
         player.localRotation = delta;
     }
