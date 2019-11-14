@@ -164,11 +164,14 @@ public class Weapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        GamePad.SetVibration(controller.playerIndex, vibrateVal, vibrateVal);
+       // GamePad.SetVibration(controller.playerIndex, controller.state.Triggers.Right, controller.state.Triggers.Right);
     }
 
     void Update()
     {
+        
+        controller.prevState = controller.state;
+        controller.state = GamePad.GetState(controller.playerIndex);
 
         if(controller.state.Triggers.Right == 1)
         {
@@ -188,19 +191,22 @@ public class Weapon : MonoBehaviour
         AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
         AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || controller.prevState.Buttons.A == ButtonState.Released && controller.state.Buttons.A == ButtonState.Pressed)
         {
-         if (rigid != null)
-         {
-             rigid.AddForce(transform.up * 2f, ForceMode.Impulse);
-         }
+            Debug.Log("I Jumped");
+
+            if (rigid != null)
+            {
+                rigid.AddForce(transform.up * 2f, ForceMode.Impulse);
+            }
+                
         }
 
-        if(Input.GetKey(KeyCode.G))
+        if(Input.GetKey(KeyCode.G) || controller.state.Buttons.RightShoulder == ButtonState.Pressed)
         {
             isCookingNade = true;
             throwGrenade();
-        }else if (Input.GetKeyUp(KeyCode.G))
+        }else if (Input.GetKeyUp(KeyCode.G) || controller.prevState.Buttons.RightShoulder == ButtonState.Pressed && controller.state.Buttons.RightShoulder == ButtonState.Released)
         {
             isCookingNade = false;
             throwGrenade();
@@ -252,17 +258,17 @@ public class Weapon : MonoBehaviour
             return;
         }
         
-        if (Input.GetKey(KeyCode.R) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if ((Input.GetKey(KeyCode.R) || controller.prevState.Buttons.X == ButtonState.Released && controller.state.Buttons.X == ButtonState.Pressed) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             StartCoroutine(Reload());
         }
         
         //d > 0f is scrolling up
-        if(Input.GetKeyUp(KeyCode.Alpha1) && currentIndex != 0 || d > 0f && currentIndex != 0)
+        if((Input.GetKeyUp(KeyCode.Alpha1) || controller.prevState.Buttons.Y == ButtonState.Released && controller.state.Buttons.Y == ButtonState.Pressed) && currentIndex != 0 || d > 0f && currentIndex != 0)
         {
             Equip(0);
         }
-        else if(Input.GetKeyUp(KeyCode.Alpha2) && currentIndex != 1 || d < 0f && currentIndex != 1)
+        else if((Input.GetKeyUp(KeyCode.Alpha2) || controller.prevState.Buttons.Y == ButtonState.Released && controller.state.Buttons.Y == ButtonState.Pressed)  && currentIndex != 1 || d < 0f && currentIndex != 1)
         {
             Equip(1);
         }
