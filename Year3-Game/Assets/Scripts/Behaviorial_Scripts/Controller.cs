@@ -9,6 +9,9 @@ public class Controller : MonoBehaviour
     public GamePadState state;
     public GamePadState prevState;
 
+     public GamePadState state2;
+    public GamePadState prevState2;
+
     // Use this for initialization
     void Start()
     {
@@ -34,5 +37,11 @@ public class Controller : MonoBehaviour
                 }
             }
         }
+
+        prevState = state;
+        state = GamePad.GetState((PlayerIndex)0);
+
+        prevState2 = state2;
+        state2 = GamePad.GetState((PlayerIndex)1);
     }
 }

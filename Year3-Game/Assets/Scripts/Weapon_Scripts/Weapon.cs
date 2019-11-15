@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     Controller controller;
 
     bool m_isAxisInUse = false;
+    bool buttonInUse = false;
     bool vibrate = false;
     bool shootDown = false;
     //////////////////////
@@ -180,13 +181,10 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         
-        controller.prevState = controller.state;
-        controller.state = GamePad.GetState(controller.playerIndex);
         ///////////////////////////////////
         
         PickUp.enabled = false;
         SwitchWeapon();
-        getShootDown();
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
@@ -249,7 +247,7 @@ public class Weapon : MonoBehaviour
             return;
         }
         
-        if ((Input.GetKey(KeyCode.R) || controller.prevState.Buttons.X == ButtonState.Released && controller.state.Buttons.X == ButtonState.Pressed) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if ((Input.GetKey(KeyCode.R) || Input.GetButton("Reload")) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             StartCoroutine(Reload());
         }
@@ -267,7 +265,8 @@ public class Weapon : MonoBehaviour
         if(currentWeapon != null)
         {
             Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
-
+            
+            getShootDown();
             /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
@@ -655,7 +654,7 @@ public class Weapon : MonoBehaviour
 
     void getShootDown()
     {
-         if(Input.GetAxisRaw("Shoot") != 0)
+         if(controller.state.Triggers.Right == 1)
         {
          if(m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
          {
@@ -665,7 +664,7 @@ public class Weapon : MonoBehaviour
              m_isAxisInUse = true;
          }
         }
-        if( Input.GetAxisRaw("Shoot") == 0)
+        if(controller.state.Triggers.Right < 1)
         {
             m_isAxisInUse = false;
         }   

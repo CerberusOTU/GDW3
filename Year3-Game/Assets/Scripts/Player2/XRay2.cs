@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class XRayToggle : MonoBehaviour
+public class XRay2 : MonoBehaviour
 {
     public GameObject partner;
     public Material baseMat;
@@ -16,7 +15,7 @@ public class XRayToggle : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("XRay"))
+        if(Input.GetButton("XRay2"))
         {
             partner.GetComponent<MeshRenderer> ().material = xrayMat;
         }
