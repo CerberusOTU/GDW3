@@ -63,7 +63,7 @@ public class Motion : MonoBehaviour
 
     void Crouch()
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C) || Input.GetButtonDown("Crouch"))
         {
             if(isCrouching == false)
             {
@@ -93,7 +93,7 @@ public class Motion : MonoBehaviour
         //check crouch state
         Crouch();
 
-        if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         } 
@@ -181,7 +181,6 @@ public class Motion : MonoBehaviour
             verticalMove = Input.GetAxisRaw("Vertical");
         }
         
-
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state.Buttons.LeftStick == ButtonState.Pressed;
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 

@@ -11,8 +11,9 @@ public class Weapon : MonoBehaviour
     //Controller Variables//
     Controller controller;
 
-    float vibrateVal = 0;
-
+    bool m_isAxisInUse = false;
+    bool vibrate = false;
+    bool shootDown = false;
     //////////////////////
    public _Gun[] loadout;
     
@@ -164,7 +165,16 @@ public class Weapon : MonoBehaviour
 
     void FixedUpdate()
     {
-       // GamePad.SetVibration(controller.playerIndex, controller.state.Triggers.Right, controller.state.Triggers.Right);
+        /* if((Input.GetAxis("Shoot") == 1) && !loadout[currentIndex].isReloading)
+        {   
+            GamePad.SetVibration(controller.playerIndex, 1, 0);
+        }
+        else
+        {
+            GamePad.SetVibration(controller.playerIndex, 0, 0);
+        } */
+
+       
     }
 
     void Update()
@@ -172,41 +182,22 @@ public class Weapon : MonoBehaviour
         
         controller.prevState = controller.state;
         controller.state = GamePad.GetState(controller.playerIndex);
-
-        if(controller.state.Triggers.Right == 1)
-        {
-            vibrateVal = 0.5f;
-        }
-        else
-        {
-            vibrateVal = 0;
-        }
         ///////////////////////////////////
         
         PickUp.enabled = false;
         SwitchWeapon();
+        getShootDown();
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
         AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
         AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();;
 
-        if (Input.GetKeyDown(KeyCode.Space) || controller.prevState.Buttons.A == ButtonState.Released && controller.state.Buttons.A == ButtonState.Pressed)
-        {
-            Debug.Log("I Jumped");
-
-            if (rigid != null)
-            {
-                rigid.AddForce(transform.up * 2f, ForceMode.Impulse);
-            }
-                
-        }
-
-        if(Input.GetKey(KeyCode.G) || controller.state.Buttons.RightShoulder == ButtonState.Pressed)
+        if(Input.GetKey(KeyCode.G) || Input.GetButton("Grenade"))
         {
             isCookingNade = true;
             throwGrenade();
-        }else if (Input.GetKeyUp(KeyCode.G) || controller.prevState.Buttons.RightShoulder == ButtonState.Pressed && controller.state.Buttons.RightShoulder == ButtonState.Released)
+        }else if (Input.GetKeyUp(KeyCode.G) || Input.GetButtonUp("Grenade"))
         {
             isCookingNade = false;
             throwGrenade();
@@ -264,11 +255,11 @@ public class Weapon : MonoBehaviour
         }
         
         //d > 0f is scrolling up
-        if((Input.GetKeyUp(KeyCode.Alpha1) || controller.prevState.Buttons.Y == ButtonState.Released && controller.state.Buttons.Y == ButtonState.Pressed) && currentIndex != 0 || d > 0f && currentIndex != 0)
+        if((Input.GetKeyUp(KeyCode.Alpha1) || Input.GetButtonDown("Switch")) && currentIndex != 0 || d > 0f && currentIndex != 0)
         {
             Equip(0);
         }
-        else if((Input.GetKeyUp(KeyCode.Alpha2) || controller.prevState.Buttons.Y == ButtonState.Released && controller.state.Buttons.Y == ButtonState.Pressed)  && currentIndex != 1 || d < 0f && currentIndex != 1)
+        else if((Input.GetKeyUp(KeyCode.Alpha2) || Input.GetButtonDown("Switch"))  && currentIndex != 1 || d < 0f && currentIndex != 1)
         {
             Equip(1);
         }
@@ -277,12 +268,12 @@ public class Weapon : MonoBehaviour
         {
             Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
 
-            if(Input.GetMouseButtonDown(0) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
+            /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
-            else if((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+            else  */if((Input.GetMouseButton(0) || (Input.GetAxis("Shoot") == 1)) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -662,6 +653,23 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    void getShootDown()
+    {
+         if(Input.GetAxisRaw("Shoot") != 0)
+        {
+         if(m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
+         {
+             // Call your event function here.
+             origPosReset = false;
+             Shoot();
+             m_isAxisInUse = true;
+         }
+        }
+        if( Input.GetAxisRaw("Shoot") == 0)
+        {
+            m_isAxisInUse = false;
+        }   
+    }
 
     Rigidbody rb_Grenade;
     bool isNewNade = true;

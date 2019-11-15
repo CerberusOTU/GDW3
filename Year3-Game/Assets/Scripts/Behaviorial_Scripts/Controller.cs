@@ -9,9 +9,6 @@ public class Controller : MonoBehaviour
     public GamePadState state;
     public GamePadState prevState;
 
-    float count = 0;
-    public bool buttonDown;
-
     // Use this for initialization
     void Start()
     {
@@ -25,7 +22,7 @@ public class Controller : MonoBehaviour
         // Will find the first controller that is connected ans use it
         if (!playerIndexSet || !prevState.IsConnected)
         {
-            for (int i = 0; i < 2; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 PlayerIndex testPlayerIndex = (PlayerIndex)i;
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
@@ -37,28 +34,5 @@ public class Controller : MonoBehaviour
                 }
             }
         }
-
-        //prevState = state;
-       // state = GamePad.GetState(playerIndex);
     }
-
-   public bool getDown(ButtonState button)
-    {
-        if(button == ButtonState.Pressed)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    IEnumerator buttonDelay()
-    {
-        buttonDown = true;
-        yield return 0.2f;
-        buttonDown = false;
-    }
-
 }
