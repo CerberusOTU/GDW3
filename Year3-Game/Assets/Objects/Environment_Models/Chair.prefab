@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4297161686817101655}
   m_Layer: 0
-  m_Name: Chair (17)
+  m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6770465766405357785}
-  m_Mesh: {fileID: -2432090755550338912, guid: 8bbe5c38103886e4ea3c75f5e60650a5, type: 3}
+  m_Mesh: {fileID: -8954430899404420750, guid: 8bbe5c38103886e4ea3c75f5e60650a5, type: 3}
 --- !u!23 &2354863933195369548
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -88,7 +88,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3033667219593020291, guid: 8bbe5c38103886e4ea3c75f5e60650a5, type: 3}
+  - {fileID: 2100000, guid: 14db0da318c8d8d41b43f46bf1fe4c0c, type: 2}
+  - {fileID: 2100000, guid: a392914f55a6050499ec96237f3df88d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
