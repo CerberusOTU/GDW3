@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 public class Target : MonoBehaviour
 {
-
     public GameObject defaultSpawn;
     private List<Transform> SpawnPos = new List<Transform>();
 
@@ -25,16 +24,16 @@ public class Target : MonoBehaviour
 
          //set weapon spawn locations
 
-    SpawnPos[0].position = new Vector3(27f, 3.65f, 34f);
+    SpawnPos[0].position = new Vector3(27f, 3.2f, 34f);
     SpawnPos[0].localRotation *= Quaternion.Euler(0f,180f,0f);
 
-    SpawnPos[1].position = new Vector3(45f, 3.65f, 6f);
+    SpawnPos[1].position = new Vector3(45f, 3.2f, 6f);
     SpawnPos[1].localRotation *= Quaternion.Euler(0f,270f,0f);
     
-    SpawnPos[2].position = new Vector3(10f, 3.65f, -19.5f);
+    SpawnPos[2].position = new Vector3(10f, 3.2f, -19.5f);
     SpawnPos[2].localRotation *= Quaternion.Euler(0f,90,0f);
 
-    SpawnPos[3].position = new Vector3(-10f, 3.65f, 5.5f);
+    SpawnPos[3].position = new Vector3(-10f, 3.2f, 5.5f);
     SpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
     
     }

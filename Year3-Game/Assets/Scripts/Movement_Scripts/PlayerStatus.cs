@@ -26,9 +26,9 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        var tempColor = DamageOverlay.color;
+        /* var tempColor = DamageOverlay.color;
         tempColor.a = -(PlayerHealth) * 0.01f + 1;
-        var tempColor2 = DamageFlash.color;
+        var tempColor2 = DamageFlash.color; */
 
         if (tookDamage == true && PlayerHealth > 10)
         {
