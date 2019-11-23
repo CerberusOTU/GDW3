@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatus2 : MonoBehaviour
 {
    ///UI///
     public Text HealthText;
@@ -26,10 +26,10 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        var tempColor = DamageOverlay.color;
+        /* var tempColor = DamageOverlay.color;
         tempColor.a = -(PlayerHealth) * 0.01f + 1;
         var tempColor2 = DamageFlash.color;
-
+ */
         if (tookDamage == true && PlayerHealth > 10)
         {
             //PlayerHealth -= 10;
@@ -49,8 +49,9 @@ public class PlayerStatus : MonoBehaviour
         //tempColor2.a -= 0.02f;
 
        
-       // DamageOverlay.color = tempColor;
-        //DamageFlash.color = tempColor2;
+          //  DamageOverlay.color = tempColor;
+          //  DamageFlash.color = tempColor2;
+
     }
 
 }

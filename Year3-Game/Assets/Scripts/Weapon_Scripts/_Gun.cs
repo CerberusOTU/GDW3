@@ -26,6 +26,7 @@ public class _Gun : ScriptableObject
 
    public int currentAmmo;
    
+   [SerializeField]
    public bool isReloading;
    //////////////
    public GameObject obj;
