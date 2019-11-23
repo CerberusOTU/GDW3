@@ -188,8 +188,25 @@ public class Weapon2 : MonoBehaviour
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
-        AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
-        AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();;
+        if(loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >=0)
+        {
+            AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
+        }
+        else
+        {
+            AmmoText.text = "0 / 0";
+        }
+
+        if(loadout[1].maxAmmo >= 0 && loadout[1].currentAmmo >=0)
+        {
+           AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();
+        }
+        else
+        {
+            AmmoText2.text = "0 / 0";
+        }
+        
+        
 
         if(Input.GetKey(KeyCode.G) || Input.GetButton("Grenade2"))
         {
@@ -537,6 +554,8 @@ public class Weapon2 : MonoBehaviour
                         else if(loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
+                            scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
+                            scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -570,6 +589,8 @@ public class Weapon2 : MonoBehaviour
                         else if(loadout[0].name == "Tommy")
                         {
                             tempMesh = gunMeshes[0];
+                            scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
+                            scriptOBJ[0].currentAmmo = scriptOBJ[0].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -600,6 +621,8 @@ public class Weapon2 : MonoBehaviour
                         else if(loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
+                            scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
+                            scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -635,6 +658,8 @@ public class Weapon2 : MonoBehaviour
                        else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
+                            scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
+                            scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
                         }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
