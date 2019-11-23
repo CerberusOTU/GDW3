@@ -5,7 +5,6 @@ using XInputDotNetPure;
 public class Movement2 : MonoBehaviour
 {
     Controller controller;
-
     float horizontalMove;
     float verticalMove;
     public float speed;
@@ -16,6 +15,7 @@ public class Movement2 : MonoBehaviour
     private CapsuleCollider col;
     private float distToGround;
 
+    private bool jumpInUse;
     public float jumpForce;
     public LayerMask ground;
 
@@ -38,6 +38,8 @@ public class Movement2 : MonoBehaviour
     private Vector3 baseCamTrans;
     private Vector3 crouchCamTrans;
     private bool crouchLerp;
+
+    private bool crouchInUse;
 
     private Vector3 targetVelocity;
     /////////////////
@@ -63,7 +65,8 @@ public class Movement2 : MonoBehaviour
 
     void Crouch()
     {
-        if(Input.GetKeyDown(KeyCode.C) || Input.GetButtonDown("Crouch"))
+        
+        if(controller.state2.Buttons.B == ButtonState.Pressed && controller.prevState2.Buttons.B == ButtonState.Released)
         {
             if(isCrouching == false)
             {
@@ -78,7 +81,6 @@ public class Movement2 : MonoBehaviour
         if(isCrouching == false)
         {
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
-            
         }
         else
         {
@@ -88,15 +90,49 @@ public class Movement2 : MonoBehaviour
         
     }
 
+    void getJumpDown()
+    {
+         if(controller.state2.Buttons.A == ButtonState.Pressed)
+        {
+         if(jumpInUse == false && isGrounded())
+         {
+             // Call your event function here.
+             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+             jumpInUse = true;
+         }
+        }
+        if(controller.state2.Buttons.A == ButtonState.Released)
+        {
+            jumpInUse = false;
+        }   
+    }
+
+     void getCrouchDown()
+    {
+         if(controller.state2.Buttons.B == ButtonState.Pressed)
+        {
+         if(crouchInUse == false)
+         {
+             // Call your event function here.
+             Crouch();
+             crouchInUse = true;
+         }
+        }
+        if(controller.state2.Buttons.B == ButtonState.Released)
+        {
+            crouchInUse = false;
+        }   
+    }
+
     void Update()
     {
-        //check crouch state22
+        //check crouch state
         Crouch();
-
-        if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
+        getJumpDown();
+        /* if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        } 
+        } */ 
 
         if(!isGrounded())
         {

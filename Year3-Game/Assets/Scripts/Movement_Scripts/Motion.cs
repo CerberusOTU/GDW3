@@ -16,6 +16,7 @@ public class Motion : MonoBehaviour
     private CapsuleCollider col;
     private float distToGround;
 
+    private bool jumpInUse;
     public float jumpForce;
     public LayerMask ground;
 
@@ -38,6 +39,7 @@ public class Motion : MonoBehaviour
     private Vector3 baseCamTrans;
     private Vector3 crouchCamTrans;
     private bool crouchLerp;
+    private bool crouchInUse;
 
     private Vector3 targetVelocity;
     /////////////////
@@ -63,7 +65,8 @@ public class Motion : MonoBehaviour
 
     void Crouch()
     {
-        if(Input.GetKeyDown(KeyCode.C) || Input.GetButtonDown("Crouch"))
+        //if(Input.GetKeyDown(KeyCode.C) || Input.GetButtonDown("Crouch"))
+        if(controller.state.Buttons.B == ButtonState.Pressed && controller.prevState.Buttons.B == ButtonState.Released)
         {
             if(isCrouching == false)
             {
@@ -88,15 +91,34 @@ public class Motion : MonoBehaviour
         
     }
 
+    void getCrouchDown()
+    {
+         if(controller.state.Buttons.B == ButtonState.Pressed)
+        {
+         if(crouchInUse == false)
+         {
+             // Call your event function here.
+             Crouch();
+             crouchInUse = true;
+         }
+        }
+        if(controller.state.Buttons.B == ButtonState.Released)
+        {
+            crouchInUse = false;
+        }   
+    }
+
+
     void Update()
     {
         //check crouch state
+        //getCrouchDown();
         Crouch();
-
-        if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
+        getJumpDown();
+        /* if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        } 
+        }  */
 
         if(!isGrounded())
         {
@@ -161,6 +183,23 @@ public class Motion : MonoBehaviour
         
     }
 
+    void getJumpDown()
+    {
+         if(controller.state.Buttons.A == ButtonState.Pressed)
+        {
+         if(jumpInUse == false && isGrounded())
+         {
+             // Call your event function here.
+             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+             jumpInUse = true;
+         }
+        }
+        if(controller.state.Buttons.A == ButtonState.Released)
+        {
+            jumpInUse = false;
+        }   
+    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {

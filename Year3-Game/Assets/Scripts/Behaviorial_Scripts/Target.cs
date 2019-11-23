@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Target : MonoBehaviour
 {
@@ -16,6 +15,8 @@ public class Target : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        this.gameObject.transform.position = new Vector3(20f,3.5f,7f);
+        health = 100f;
     }
 }

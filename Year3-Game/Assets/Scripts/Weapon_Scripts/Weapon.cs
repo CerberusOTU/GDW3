@@ -7,7 +7,6 @@ using XInputDotNetPure;
 
 public class Weapon : MonoBehaviour
 {
-
     //Controller Variables//
     Controller controller;
 
@@ -166,15 +165,14 @@ public class Weapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        /* if((Input.GetAxis("Shoot") == 1) && !loadout[currentIndex].isReloading)
+        if((controller.state.Triggers.Right == 1) && !loadout[currentIndex].isReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
         {   
-            GamePad.SetVibration(controller.playerIndex, 1, 0);
+            GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
         }
         else
         {
-            GamePad.SetVibration(controller.playerIndex, 0, 0);
-        } */
-
+            GamePad.SetVibration((PlayerIndex)0, 0, 0);
+        }
        
     }
 
@@ -191,11 +189,11 @@ public class Weapon : MonoBehaviour
         AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
         AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();;
 
-        if(Input.GetKey(KeyCode.G) || Input.GetButton("Grenade"))
+        if(Input.GetButton("Grenade"))
         {
             isCookingNade = true;
             throwGrenade();
-        }else if (Input.GetKeyUp(KeyCode.G) || Input.GetButtonUp("Grenade"))
+        }else if (Input.GetButtonUp("Grenade"))
         {
             isCookingNade = false;
             throwGrenade();
@@ -247,17 +245,17 @@ public class Weapon : MonoBehaviour
             return;
         }
         
-        if ((Input.GetKey(KeyCode.R) || Input.GetButton("Reload")) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             StartCoroutine(Reload());
         }
         
         //d > 0f is scrolling up
-        if((Input.GetKeyUp(KeyCode.Alpha1) || Input.GetButtonDown("Switch")) && currentIndex != 0 || d > 0f && currentIndex != 0)
+        if(controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0 || d > 0f && currentIndex != 0)
         {
             Equip(0);
         }
-        else if((Input.GetKeyUp(KeyCode.Alpha2) || Input.GetButtonDown("Switch"))  && currentIndex != 1 || d < 0f && currentIndex != 1)
+        else if(controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1 || d < 0f && currentIndex != 1)
         {
             Equip(1);
         }
@@ -272,7 +270,7 @@ public class Weapon : MonoBehaviour
                 origPosReset = false;
                 Shoot();
             }
-            else  */if((Input.GetMouseButton(0) || (Input.GetAxis("Shoot") == 1)) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+            else  */if((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -514,10 +512,10 @@ public class Weapon : MonoBehaviour
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
-                PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
+                PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
                 
                 //if the user presses E
-                if (Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
+                if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && currentIndex == 0)
                 {
                     if(checkWeapon.collider.name == "Revolver")
                     {
