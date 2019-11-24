@@ -44,7 +44,6 @@ public class Weapon2 : MonoBehaviour
     
     public Canvas crossHair;
     public Canvas hitMark;
-    
     public Camera cam;
     //BulletHole Variables ////
      private PoolManager _pool;
@@ -98,7 +97,7 @@ public class Weapon2 : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
     
-
+    Score2 score;
     void Start()
     {
         rigid = this.gameObject.GetComponent<Rigidbody>();
@@ -107,7 +106,8 @@ public class Weapon2 : MonoBehaviour
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
          controller = GameObject.FindObjectOfType<Controller>();
-         
+         score = GameObject.FindObjectOfType<Score2>();
+
         temp2 = transform.localScale;
         temp2.x = 1f;
         temp2.y = 1f;
@@ -180,7 +180,10 @@ public class Weapon2 : MonoBehaviour
 
     void Update()
     {
-        
+        if(Time.timeScale != 1f)
+        {
+            crossHair.enabled = false;
+        }
         ///////////////////////////////////
         
         PickUp.enabled = false;
@@ -427,6 +430,10 @@ public class Weapon2 : MonoBehaviour
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
+                if(target.health == 10)
+                {
+                    score.Kills += 1;
+                } 
                 target.takeDamage(10f);
             }
 
@@ -456,6 +463,10 @@ public class Weapon2 : MonoBehaviour
             if (target != null)
             {
                  StartCoroutine(displayHitmark());
+                  if(target.health == 10)
+                {
+                    score.Kills += 1;
+                } 
                 target.takeDamage(10f);
             }
 

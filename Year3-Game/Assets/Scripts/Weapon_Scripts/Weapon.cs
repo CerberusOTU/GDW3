@@ -95,16 +95,17 @@ public class Weapon : MonoBehaviour
     private bool isCookingNade = false;
     public float throwForce = 40f;
     public GameObject grenadePrefab;
-    
+
+    Score score;
 
     void Start()
     {
-        rigid = this.gameObject.GetComponent<Rigidbody>();
-        
+         rigid = this.gameObject.GetComponent<Rigidbody>();
          _pool = GameObject.FindObjectOfType<PoolManager>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
          controller = GameObject.FindObjectOfType<Controller>();
+         score = GameObject.FindObjectOfType<Score>();
          
         temp2 = transform.localScale;
         temp2.x = 1f;
@@ -179,6 +180,11 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        //for when game ends
+        if(Time.timeScale != 1f)
+        {
+            crossHair.enabled = false;
+        }
         ///////////////////////////////////
         
         PickUp.enabled = false;
@@ -423,7 +429,14 @@ public class Weapon : MonoBehaviour
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
+                if(target.health == 10)
+                {
+                    score.Kills += 1;
+                }
                 target.takeDamage(10f);
+                
+                
+                
             }
 
             //check if we hit a wall so we can display bulletholes
@@ -451,8 +464,14 @@ public class Weapon : MonoBehaviour
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
-                 StartCoroutine(displayHitmark());
+                StartCoroutine(displayHitmark());
+                if(target.health == 10)
+                {
+                    score.Kills += 1;
+                }
                 target.takeDamage(10f);
+                
+                
             }
 
             //check if we hit a wall so we can display bulletholes
