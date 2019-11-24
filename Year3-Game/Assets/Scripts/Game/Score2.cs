@@ -30,14 +30,15 @@ public class Score2 : MonoBehaviour
         killScore2.text = Kills.ToString();
 
         
-        if(Kills == 10 && safety < 1)
+        if(Kills == 1 && safety < 1)
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
         }
 
-        if(Time.timeScale != 1f && Kills < 10)
+        if(Time.timeScale != 1f && Kills < 1)
         {
+            Destroy(GetComponent<Target>());
             player1.enabled = false;
             player2.enabled = false;
 
@@ -48,8 +49,9 @@ public class Score2 : MonoBehaviour
             condition.text = "YOU LOSE";
         }
 
-        if(Kills == 10)
+        if(Kills == 1)
         {
+            Destroy(GetComponent<Target>());
             player1.enabled = false;
             player2.enabled = false;
 

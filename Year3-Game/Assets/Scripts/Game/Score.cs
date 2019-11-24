@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -30,14 +31,15 @@ public class Score : MonoBehaviour
         killScore.text = Kills.ToString();
         killScore2.text = Kills.ToString();
 
-        if(Kills == 10 && safety < 1)
+        if(Kills == 1 && safety < 1)
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
         }
 
-        if(Time.timeScale != 1f && Kills < 10)
+        if(Time.timeScale != 1f && Kills < 1)
         {
+            Destroy(GetComponent<Target>());
             player1.enabled = false;
             player2.enabled = false;
 
@@ -48,8 +50,9 @@ public class Score : MonoBehaviour
             condition.text = "YOU LOSE";
         }
 
-        if(Kills == 10)
+        if(Kills == 1)
         {
+            Destroy(GetComponent<Target>());
             player1.enabled = false;
             player2.enabled = false;
 
@@ -62,6 +65,7 @@ public class Score : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= 2.5)
             {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;  
             }
