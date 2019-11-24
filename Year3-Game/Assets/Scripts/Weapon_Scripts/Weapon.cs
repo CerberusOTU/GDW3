@@ -130,22 +130,22 @@ public class Weapon : MonoBehaviour
          {
              Transform temp = Instantiate(defaultSpawn.transform); 
              weaponSpawnPos.Add(temp);
-             temp.transform.parent = this.transform;
+             //temp.transform.parent = this.transform;
          }
 
     //set weapon spawn locations
 
-    weaponSpawnPos[0].position = new Vector3(16.94f, 3.728f, 9.426f);
-    weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,90f,90f);
+    weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
+    weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,90f, 0f);
 
-    weaponSpawnPos[1].position = new Vector3(11.73f, 4.792f, -6.374f);
+    weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
     weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,90f,0f);
     
-    weaponSpawnPos[2].position = new Vector3(8.876f, 3.68f, 6.75f);
-    weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,160f,90f);
+    weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
+    weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,-75f,90f);
 
-    weaponSpawnPos[3].position = new Vector3(0.14f, 4.26f, 3.161f);
-    weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 0f, 0f);
+    weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
+    weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
 
         //random index number for spawn locations
         var numList = new List<int>();

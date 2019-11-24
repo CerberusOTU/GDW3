@@ -25,8 +25,6 @@ public class Weapon2 : MonoBehaviour
     //2 = MP40
     //3 = Shotgun
 
-    public GameObject[] inSceneGuns;
-
     public _Gun[] scriptOBJ;
     //0 = Tommy
     //1 = Revolver
@@ -125,43 +123,6 @@ public class Weapon2 : MonoBehaviour
         }
 
          Equip(0);
-
-        //generate spawn transforms
-         for(int i = 0; i < 4; i++)
-         {
-             Transform temp = Instantiate(defaultSpawn.transform); 
-             weaponSpawnPos.Add(temp);
-             temp.transform.parent = this.transform;
-         }
-
-    //set weapon spawn locations
-
-    weaponSpawnPos[0].position = new Vector3(16.94f, 3.728f, 9.426f);
-    weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,90f,90f);
-
-    weaponSpawnPos[1].position = new Vector3(11.73f, 4.792f, -6.374f);
-    weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,90f,0f);
-    
-    weaponSpawnPos[2].position = new Vector3(8.876f, 3.68f, 6.75f);
-    weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,160f,90f);
-
-    weaponSpawnPos[3].position = new Vector3(0.14f, 4.26f, 3.161f);
-    weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, 0f, 0f);
-
-        //random index number for spawn locations
-        var numList = new List<int>();
-        for(int k = 0; k < weaponSpawnPos.Count; k++)
-        {
-            numList.Add(k);
-        }
-        numList = numList.OrderBy(i => Random.value).ToList();
-
-        //set the in scene guns to the random transforms
-        for(int i = 0; i < inSceneGuns.Length; i++)
-        { 
-            inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
-            inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
-        }
 
     }
 
