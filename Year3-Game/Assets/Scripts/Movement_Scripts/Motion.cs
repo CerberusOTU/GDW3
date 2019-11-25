@@ -258,15 +258,15 @@ public class Motion : MonoBehaviour
         //slow down character if walking and aiming down sights
         else if((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == true)
         {
-            adjustedSpeed = speed / 2;
+            adjustedSpeed = speed / 1.5f;
         }
         else if(isCrouching == false && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
         {
-            adjustedSpeed = speed / 3;
+            adjustedSpeed = speed / 2f;
         }
         else if(isCrouching == false && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
         {
-            adjustedSpeed = speed / 1.5f;
+            adjustedSpeed = speed / 0.5f;
         }
         else
         {

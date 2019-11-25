@@ -478,6 +478,7 @@ public class Weapon : MonoBehaviour
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
+                
                 if(target.health == 10)
                 {
                     score.Kills += 1;

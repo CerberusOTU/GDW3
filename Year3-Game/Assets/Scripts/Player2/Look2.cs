@@ -48,7 +48,7 @@ public class Look2 : MonoBehaviour
         
         if(controller.state2.IsConnected)
         {
-            inputY = controller.state2.ThumbSticks.Right.Y;
+            inputY = controller.state2.ThumbSticks.Right.Y * adjustY * Time.deltaTime;
         }
         else
         {
@@ -82,7 +82,7 @@ public class Look2 : MonoBehaviour
         
         if(controller.state2.IsConnected)
         {
-            inputX = controller.state2.ThumbSticks.Right.X;
+            inputX = controller.state2.ThumbSticks.Right.X * adjustX * Time.deltaTime;
         }
         else
         {
