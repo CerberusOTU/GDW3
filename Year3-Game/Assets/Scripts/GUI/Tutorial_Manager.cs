@@ -57,6 +57,20 @@ public class Tutorial_Manager : MonoBehaviour
 
     void Start()
     {
+        
+        ///////////////COMPLETE/////////////// IGNORE TUTORIAL
+        // Completion Bools
+        b_movementComplete = false;
+        b_jumpComplete = false;
+        b_crouchComplete = false;
+        b_swapComplete = false;
+        b_shootingComplete = false;
+        b_reloadComplete = false;
+        b_grenadeComplete = false;
+        b_xrayComplete = false;
+        b_tutorialComplete = false;
+        /////////////////////////
+        
         tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI>();
         playerRB = this.GetComponent<Rigidbody>();
         playerCC = this.GetComponent<CapsuleCollider>();

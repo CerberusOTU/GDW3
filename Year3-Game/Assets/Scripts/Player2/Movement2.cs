@@ -12,7 +12,7 @@ public class Movement2 : MonoBehaviour
 
     public bool isSprinting;
     private Rigidbody rb;
-    private CapsuleCollider col;
+    private BoxCollider col;
     private float distToGround;
 
     private bool jumpInUse;
@@ -47,7 +47,7 @@ public class Movement2 : MonoBehaviour
     {
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
-        col = this.gameObject.GetComponent<CapsuleCollider>();
+        col = this.gameObject.GetComponent<BoxCollider>();
         
         distToGround = col.bounds.extents.y;
 

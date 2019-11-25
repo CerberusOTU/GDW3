@@ -94,7 +94,6 @@ public class Weapon : MonoBehaviour
     //Throwing Grenade
     private bool isCookingNade = false;
     public float throwForce = 40f;
-    private bool isCookingNade = false;
     public GameObject grenadePrefab;
 
     Score score;
@@ -469,22 +468,6 @@ public class Weapon : MonoBehaviour
                 if (!_tutManager.b_shootingComplete)
                 _tutManager.Notify("SHOOTING_COMPLETE");
             }
-            //check if we hit a wall so we can display bulletholes
-            if(hitInfo.collider.tag == "Wall")
-            {
-                
-                for(int i = 0; i < _pool.holeList.Count; i++)
-                {
-                    //if object is inactive in list, use it
-                    if(_pool.holeList[i].activeInHierarchy == false)
-                    {
-                        _pool.holeList[i].SetActive(true);
-                        _pool.holeList[i].transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                        _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-                        break;
-                    }
-                }
-            }
         
             }    
         }
@@ -502,34 +485,6 @@ public class Weapon : MonoBehaviour
                 target.takeDamage(10f);
                 
                 
-            }
-
-            //check if we hit a wall so we can display bulletholes
-            if(hitInfo.collider.tag == "Wall")
-            {
-                for(int i = 0; i < _pool.holeList.Count; i++)
-                {
-                    //if object is inactive in list, use it
-                    if(_pool.holeList[i].activeInHierarchy == false)
-                    {
-                        _pool.holeList[i].SetActive(true);
-                        _pool.holeList[i].transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                        _pool.holeList[i].transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-                        
-                        break;
-                    }
-                   /*  //in case we go through the entire list and require more bullet holes, create some  
-                    else
-                    {
-                        if(i == _pool.holeList.Count - 1)
-                        {
-                        GameObject newBullet = Instantiate(_pool.bulletHole) as GameObject;
-                        newBullet.transform.parent = _pool.transform;
-                        newBullet.SetActive(false);
-                        _pool.holeList.Add(newBullet);               
-                        }     
-                    } */
-                }
             }
 
            
@@ -563,15 +518,14 @@ public class Weapon : MonoBehaviour
                 temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
                 temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
             }
-        } 
-        //GUN FX
+            //GUN FX
        // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
 
         _metricsLogger.shotsTaken++;
-    }   
-
+        } 
+          
      IEnumerator displayHitmark()
     {
         _metricsLogger.shotsHit++;

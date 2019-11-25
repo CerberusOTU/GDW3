@@ -43,8 +43,6 @@ public class Motion : MonoBehaviour
     private bool crouchLerp;
     private bool crouchInUse;
 
-    private Vector3 targetVelocity;
-
 
     private Weapon _weapon; // Link Weapon Script
 
