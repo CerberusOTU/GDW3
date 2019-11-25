@@ -41,8 +41,7 @@ public class Tutorial_Manager : MonoBehaviour
     [System.NonSerialized]
     public bool b_xrayComplete = false;
 
-    [System.NonSerialized]
-    public bool b_tutorialComplete = false;
+    public bool b_tutorialComplete;
 
 
     RaycastHit checkTask;
@@ -60,32 +59,38 @@ public class Tutorial_Manager : MonoBehaviour
         
         ///////////////COMPLETE/////////////// IGNORE TUTORIAL
         // Completion Bools
-        b_movementComplete = false;
-        b_jumpComplete = false;
-        b_crouchComplete = false;
-        b_swapComplete = false;
-        b_shootingComplete = false;
-        b_reloadComplete = false;
-        b_grenadeComplete = false;
-        b_xrayComplete = false;
-        b_tutorialComplete = false;
-        /////////////////////////
-        
-        tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI>();
-        playerRB = this.GetComponent<Rigidbody>();
-        playerCC = this.GetComponent<CapsuleCollider>();
-        for(int i = 0; i < tasksCount; i++)
+        if (b_tutorialComplete)
         {
-            tutorialGUI.crossList.Add(notCompleteTex);
+            b_movementComplete = true;
+            b_jumpComplete = true;
+            b_crouchComplete = true;
+            b_swapComplete = true;
+            b_shootingComplete = true;
+            b_reloadComplete = true;
+            b_grenadeComplete = true;
+            b_xrayComplete = true;
+            b_tutorialComplete = true;
+        }else if(!b_tutorialComplete){
+        
+
+            tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI>();
+            playerRB = this.GetComponent<Rigidbody>();
+            playerCC = this.GetComponent<CapsuleCollider>();
+            for(int i = 0; i < tasksCount; i++)
+            {
+                tutorialGUI.crossList.Add(notCompleteTex);
+            }
+            CompleteText.enabled = false;
         }
-        CompleteText.enabled = false;
     }
     // Update is called once per frame
     void Update()
     {
-        HintText.enabled = false;
-        //Give Hint
-        GiveHint();
+        if (!b_tutorialComplete){
+            HintText.enabled = false;
+            //Give Hint
+            GiveHint();
+        }
     }
 
 

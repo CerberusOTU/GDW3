@@ -6,7 +6,7 @@ public class PoolManager : MonoBehaviour
 {
     public GameObject bulletHole;
     public int spawnCount;
-    public Queue<GameObject> holeList;
+    public Queue<GameObject> holeList = new Queue<GameObject>();
 
     private void Start()
     {
