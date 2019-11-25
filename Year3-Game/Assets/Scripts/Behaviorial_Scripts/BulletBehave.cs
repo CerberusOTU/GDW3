@@ -6,11 +6,12 @@ public class BulletBehave : MonoBehaviour
 {
     void OnEnable()
     {
-        Invoke("Disable", 2.0f);
+        StartCoroutine(Disable());
     }
 
-    private void Disable()
+    IEnumerator Disable()
     {
+        yield return new WaitForSeconds(2f);
         this.transform.gameObject.SetActive(false);
     }
 }

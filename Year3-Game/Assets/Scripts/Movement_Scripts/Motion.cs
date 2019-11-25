@@ -8,12 +8,14 @@ public class Motion : MonoBehaviour
 
     float horizontalMove;
     float verticalMove;
+
+    Vector3 targetVelocity;
     public float speed;
     public float sprintModifier;
 
     public bool isSprinting;
     private Rigidbody rb;
-    private CapsuleCollider col;
+    private BoxCollider col;
     private float distToGround;
 
     private bool jumpInUse;
@@ -42,12 +44,22 @@ public class Motion : MonoBehaviour
     private bool crouchInUse;
 
     private Vector3 targetVelocity;
+
+
+    private Weapon _weapon; // Link Weapon Script
+
+    //**************TUTORIAL VARIABLES**************/
+    [System.NonSerialized]
+    private Tutorial_Manager _tutManager;
+
     /////////////////
     void Start()
     {
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
-        col = this.gameObject.GetComponent<CapsuleCollider>();
+        col = this.gameObject.GetComponent<BoxCollider>();
+        _weapon = gameObject.GetComponent<Weapon>();
+        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
         
         distToGround = col.bounds.extents.y;
 
@@ -76,15 +88,20 @@ public class Motion : MonoBehaviour
             {
                 isCrouching = false;
             }
+            //Tutorial completion check
+            if (!_tutManager.b_crouchComplete)
+                _tutManager.Notify("CROUCH_COMPLETE");
         }
 
         if(isCrouching == false)
         {
+            //col.height = 1f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
             
         }
         else
         {
+            //col.height = 2f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
             
         }

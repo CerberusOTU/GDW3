@@ -94,14 +94,24 @@ public class Weapon : MonoBehaviour
     //Throwing Grenade
     private bool isCookingNade = false;
     public float throwForce = 40f;
+    private bool isCookingNade = false;
     public GameObject grenadePrefab;
 
     Score score;
+
+
+    //**************TUTORIAL VARIABLES**************/
+    [System.NonSerialized]
+    public Tutorial_Manager _tutManager;
+        //Metrics Manager
+        public MetricsLogger _metricsLogger;
 
     void Start()
     {
          rigid = this.gameObject.GetComponent<Rigidbody>();
          _pool = GameObject.FindObjectOfType<PoolManager>();
+         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
+         _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
          player = GameObject.FindObjectOfType<Motion>();
          hitMark.enabled = false;
          controller = GameObject.FindObjectOfType<Controller>();
@@ -368,6 +378,7 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        
         muzzleFlash.Play();
 
         Transform spawn = cam.transform;
@@ -439,6 +450,25 @@ public class Weapon : MonoBehaviour
                 
             }
 
+            //Shooting tasklist///////////
+            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+            {
+                _tutManager.Target1 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+            {
+                _tutManager.Target2 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+            {
+                _tutManager.Target3 = true;
+            }
+            
+            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+            {  
+                if (!_tutManager.b_shootingComplete)
+                _tutManager.Notify("SHOOTING_COMPLETE");
+            }
             //check if we hit a wall so we can display bulletholes
             if(hitInfo.collider.tag == "Wall")
             {
@@ -507,14 +537,45 @@ public class Weapon : MonoBehaviour
         }
         
 
+              //Shooting tasklist///////////
+            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+            {
+                _tutManager.Target1 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+            {
+                _tutManager.Target2 = true;
+            }
+            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+            {
+                _tutManager.Target3 = true;
+            }
+            
+            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+            {  
+                if (!_tutManager.b_shootingComplete)
+                _tutManager.Notify("SHOOTING_COMPLETE");
+            }
+
+           if(hitInfo.collider.tag == "Wall")
+            {
+                GameObject temp = _pool.GetBulletHole();
+                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            }
+        } 
         //GUN FX
        // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
+
+        _metricsLogger.shotsTaken++;
     }   
 
      IEnumerator displayHitmark()
     {
+        _metricsLogger.shotsHit++;
+        Debug.Log(_metricsLogger.shotsHit);
         hitMark.enabled = true;
 
         yield return new WaitForSeconds(0.05f);
@@ -533,6 +594,10 @@ public class Weapon : MonoBehaviour
         Reloading.text = " ";
 
         tempTime = Time.time;
+
+        // Tutorial completion check
+        if (!_tutManager.b_reloadComplete)
+            _tutManager.Notify("RELOAD_COMPLETE");
     }
 
      void SwitchWeapon()
@@ -679,6 +744,9 @@ public class Weapon : MonoBehaviour
                         loadout[0] = scriptOBJ[3];
                         Equip(0);
 
+                         // Tutorial completion check
+                        if (!_tutManager.b_swapComplete)
+                            _tutManager.Notify("SWAP_COMPLETE");
 
                     }
                 }
