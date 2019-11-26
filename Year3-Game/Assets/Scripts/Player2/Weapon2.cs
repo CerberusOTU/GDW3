@@ -179,7 +179,7 @@ public class Weapon2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((controller.state2.Triggers.Right == 1) && PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+        if ((controller.state2.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
         {
             GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
         }
@@ -281,7 +281,7 @@ public class Weapon2 : MonoBehaviour
             PlayerisReloading = true;
         }
 
-        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevstate2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -289,12 +289,12 @@ public class Weapon2 : MonoBehaviour
         }
 
         //d > 0f is scrolling up
-        if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevstate2.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+        if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevState2.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
         {
             reloadCancel = true;
             Equip(0);
         }
-        else if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevstate2.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
+        else if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevState2.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
         {
             reloadCancel = true;
             Equip(1);
@@ -312,7 +312,7 @@ public class Weapon2 : MonoBehaviour
                 Shoot();
             }
             else  */
-            if ((Input.GetMouseButton(0) || controller.state2.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
+            if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state2.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -421,7 +421,7 @@ public class Weapon2 : MonoBehaviour
         }
 
         ///-----RECOIL-----/////
-        if (Input.GetMouseButtonDown(0) || controller.state2.Triggers.Right == 1 && controller.prevstate2.Triggers.Right < 1)
+        if (Input.GetMouseButtonDown(0) || controller.state2.Triggers.Right == 1 && controller.prevState2.Triggers.Right < 1)
         {
             //tempTime = Time.time;
             //saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
@@ -551,7 +551,7 @@ public class Weapon2 : MonoBehaviour
     private bool PlayerisReloading = false;
     void Reload()
     {
-
+        Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
             if (!origPosReset)
@@ -611,7 +611,7 @@ public class Weapon2 : MonoBehaviour
                 PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
 
                 //if the user presses E
-                if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevstate2.Buttons.X == ButtonState.Released && currentIndex == 0)
+                if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && currentIndex == 0)
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -760,7 +760,7 @@ public class Weapon2 : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
-                if (currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
+                if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
@@ -778,22 +778,22 @@ public class Weapon2 : MonoBehaviour
 
     void getShootUp()
     {
-        if (controller.state2.Triggers.Right == 0 || PlayerisReloading)
+        if (controller.state2.Triggers.Right == 0)
         {
+            if (!m_isAxisInUseUp)
+            {
+                m_isAxisInUseUp = true;
+            }
             if (!origPosReset)
             {
-                if (!m_isAxisInUseUp)
-                {
-                    m_isAxisInUseUp = true;
-                }
-                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
                 {
                     //Debug.Log(origPosReset);
                     origPosReset = true;
+                    return;
                 }
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
             }
-
         }
         if (controller.state2.Triggers.Right > 0)
         {

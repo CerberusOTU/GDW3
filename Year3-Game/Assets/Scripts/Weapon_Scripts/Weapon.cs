@@ -179,7 +179,7 @@ public class Weapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((controller.state.Triggers.Right == 1) && PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+        if ((controller.state.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
         {
             GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
         }
@@ -312,7 +312,7 @@ public class Weapon : MonoBehaviour
                 Shoot();
             }
             else  */
-            if ((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
+            if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -551,7 +551,7 @@ public class Weapon : MonoBehaviour
     private bool PlayerisReloading = false;
     void Reload()
     {
-
+        Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
             if (!origPosReset)
@@ -760,7 +760,7 @@ public class Weapon : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
-                if (currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
+                if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
@@ -778,22 +778,22 @@ public class Weapon : MonoBehaviour
 
     void getShootUp()
     {
-        if (controller.state.Triggers.Right == 0 || PlayerisReloading)
+        if (controller.state.Triggers.Right == 0)
         {
+            if (!m_isAxisInUseUp)
+            {
+                m_isAxisInUseUp = true;
+            }
             if (!origPosReset)
             {
-                if (!m_isAxisInUseUp)
-                {
-                    m_isAxisInUseUp = true;
-                }
-                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
                 {
                     //Debug.Log(origPosReset);
                     origPosReset = true;
+                    return;
                 }
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
             }
-
         }
         if (controller.state.Triggers.Right > 0)
         {
