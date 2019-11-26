@@ -10,7 +10,8 @@ public class Weapon2 : MonoBehaviour
     //Controller Variables//
     Controller controller;
 
-    bool m_isAxisInUse = false;
+    bool m_isAxisInUseDown = false;
+    bool m_isAxisInUseUp = false;
     bool buttonInUse = false;
     bool vibrate = false;
     bool shootDown = false;
@@ -202,6 +203,7 @@ public class Weapon2 : MonoBehaviour
         SwitchWeapon();
         Reload();
 
+
         float d = Input.GetAxis("Mouse ScrollWheel");
 
         if (loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >= 0)
@@ -249,6 +251,7 @@ public class Weapon2 : MonoBehaviour
             WeaponSlot2.transform.localScale = temp2;
             //  MainWeapon.transform.localScale = temp2;
         }
+
         if (loadout[currentIndex] == loadout[1])
         {
             temp = transform.localScale;
@@ -278,7 +281,7 @@ public class Weapon2 : MonoBehaviour
             PlayerisReloading = true;
         }
 
-        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevstate2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -286,12 +289,12 @@ public class Weapon2 : MonoBehaviour
         }
 
         //d > 0f is scrolling up
-        if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+        if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevstate2.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
         {
             reloadCancel = true;
             Equip(0);
         }
-        else if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
+        else if ((controller.state2.Buttons.Y == ButtonState.Pressed && controller.prevstate2.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
         {
             reloadCancel = true;
             Equip(1);
@@ -302,6 +305,7 @@ public class Weapon2 : MonoBehaviour
             Aim((Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1));
 
             getShootDown();
+            getShootUp();
             /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
@@ -316,12 +320,12 @@ public class Weapon2 : MonoBehaviour
             // Return back to original left click position
             if ((!Input.GetMouseButton(0) || controller.state2.Triggers.Right == 0) && origPosReset == false)
             {
-                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
-                {
-                    //Debug.Log(origPosReset);
-                    origPosReset = true;
-                }
+                //cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                //if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
+                //{
+                //Debug.Log(origPosReset);
+                //origPosReset = true;
+                //}
             }
 
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
@@ -416,14 +420,14 @@ public class Weapon2 : MonoBehaviour
             bloomShotty[i].Normalize();
         }
 
-        ///-----Recoil-----/////
-        if (Input.GetMouseButtonDown(0) || controller.state2.Triggers.Right == 1)
+        ///-----RECOIL-----/////
+        if (Input.GetMouseButtonDown(0) || controller.state2.Triggers.Right == 1 && controller.prevstate2.Triggers.Right < 1)
         {
-            tempTime = Time.time;
-            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+            //tempTime = Time.time;
+            //saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
         }
 
-        // Recoil Dampen
+        //Recoil Dampen
         timeFiringHeld = Time.time - tempTime;
         Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
         cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1, loadout[currentIndex].recoilDampen, timeFiringHeld));
@@ -550,11 +554,14 @@ public class Weapon2 : MonoBehaviour
 
         if (PlayerisReloading)
         {
-            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-            if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
+            if (!origPosReset)
             {
-                //Debug.Log(origPosReset);
-                origPosReset = true;
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
+                {
+                    //Debug.Log(origPosReset);
+                    origPosReset = true;
+                }
             }
             if (loadout[currentIndex].maxAmmo > 0)
             {
@@ -604,7 +611,7 @@ public class Weapon2 : MonoBehaviour
                 PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
 
                 //if the user presses E
-                if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && currentIndex == 0)
+                if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevstate2.Buttons.X == ButtonState.Released && currentIndex == 0)
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -749,7 +756,7 @@ public class Weapon2 : MonoBehaviour
     {
         if (controller.state2.Triggers.Right == 1)
         {
-            if (m_isAxisInUse == false)
+            if (m_isAxisInUseDown == false)
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
@@ -759,12 +766,38 @@ public class Weapon2 : MonoBehaviour
                     origPosReset = false;
                     Shoot();
                 }
-                m_isAxisInUse = true;
+                m_isAxisInUseDown = true;
             }
+
         }
         if (controller.state2.Triggers.Right < 1)
         {
-            m_isAxisInUse = false;
+            m_isAxisInUseDown = false;
+        }
+    }
+
+    void getShootUp()
+    {
+        if (controller.state2.Triggers.Right == 0 || PlayerisReloading)
+        {
+            if (!origPosReset)
+            {
+                if (!m_isAxisInUseUp)
+                {
+                    m_isAxisInUseUp = true;
+                }
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state2.ThumbSticks.Right.Y != 0 || controller.state2.ThumbSticks.Right.X != 0)
+                {
+                    //Debug.Log(origPosReset);
+                    origPosReset = true;
+                }
+            }
+
+        }
+        if (controller.state2.Triggers.Right > 0)
+        {
+            m_isAxisInUseUp = false;
         }
     }
 
