@@ -582,8 +582,16 @@ public class Weapon2 : MonoBehaviour
                 if (reloadDelay >= loadout[currentIndex].reloadTime)
                 {
                     Debug.Log("Reload Finished");
-                    loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
-                    loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
+                    int tempAmmoNeeded = (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                    int tempReloadAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                    if (loadout[currentIndex].maxAmmo >= tempAmmoNeeded)
+                    {
+                        loadout[currentIndex].maxAmmo = tempReloadAmmo;
+                        loadout[currentIndex].currentAmmo += tempAmmoNeeded;
+                    }else
+                    {
+                        loadout[currentIndex].currentAmmo += loadout[currentIndex].maxAmmo;
+                    }
                     PlayerisReloading = false;
                     Reloading.text = " ";
 

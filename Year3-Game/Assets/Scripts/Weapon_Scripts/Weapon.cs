@@ -582,8 +582,17 @@ public class Weapon : MonoBehaviour
                 if (reloadDelay >= loadout[currentIndex].reloadTime)
                 {
                     Debug.Log("Reload Finished");
-                    loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
-                    loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
+                    int tempAmmoNeeded = (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                    int tempReloadAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                    if (loadout[currentIndex].maxAmmo >= tempAmmoNeeded)
+                    {
+                        loadout[currentIndex].maxAmmo = tempReloadAmmo;
+                        loadout[currentIndex].currentAmmo += tempAmmoNeeded;
+                    }else
+                    {
+                        loadout[currentIndex].currentAmmo += loadout[currentIndex].maxAmmo;
+                        loadout[currentIndex].maxAmmo = 0;
+                    }
                     PlayerisReloading = false;
                     Reloading.text = " ";
 
@@ -593,6 +602,10 @@ public class Weapon : MonoBehaviour
                     if (!_tutManager.b_reloadComplete)
                         _tutManager.Notify("RELOAD_COMPLETE");
                 }
+            }
+            else
+            {
+                PlayerisReloading = false;
             }
         }
     }
