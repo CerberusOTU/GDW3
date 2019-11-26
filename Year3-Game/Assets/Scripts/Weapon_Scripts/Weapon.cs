@@ -270,9 +270,12 @@ public class Weapon : MonoBehaviour
 
         if (loadout[currentIndex].currentAmmo == 0)
         {
+            if (!PlayerisReloading)
+            {
+                reloadDelay = 0.0f;
+            }
             reloadCancel = false;
             PlayerisReloading = true;
-            reloadDelay = 0.0f;
         }
 
         if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
@@ -288,7 +291,7 @@ public class Weapon : MonoBehaviour
             reloadCancel = true;
             Equip(0);
         }
-        else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1 ) || (d < 0f && currentIndex != 1))
+        else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
         {
             reloadCancel = true;
             Equip(1);
@@ -305,7 +308,7 @@ public class Weapon : MonoBehaviour
                 Shoot();
             }
             else  */
-            if ((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+            if ((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -544,36 +547,39 @@ public class Weapon : MonoBehaviour
     private bool PlayerisReloading = false;
     void Reload()
     {
-        
+
         if (PlayerisReloading)
         {
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
-            reloadDelay += Time.deltaTime;
-            Reloading.text = "Reloading..."+ reloadDelay/loadout[currentIndex].reloadTime;
-            Debug.Log("Reloading..."+ reloadDelay/loadout[currentIndex].reloadTime);
-            if (reloadCancel)
+            if (loadout[currentIndex].maxAmmo > 0)
             {
-                Debug.Log("Reload Cancelled");
-                reloadDelay = 0.0f;
-                reloadCancel = false;
-                PlayerisReloading = false;
-                Reloading.text = " ";
-                tempTime = Time.time;
-                return;
-            }
-            if (reloadDelay >= loadout[currentIndex].reloadTime)
-            {
-                Debug.Log("Reload Finished");
-                loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
-                loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
-                PlayerisReloading = false;
-                Reloading.text = " ";
+                currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
+                reloadDelay += Time.deltaTime;
+                Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
+                Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
+                if (reloadCancel)
+                {
+                    Debug.Log("Reload Cancelled");
+                    reloadDelay = 0.0f;
+                    reloadCancel = false;
+                    PlayerisReloading = false;
+                    Reloading.text = " ";
+                    tempTime = Time.time;
+                    return;
+                }
+                if (reloadDelay >= loadout[currentIndex].reloadTime)
+                {
+                    Debug.Log("Reload Finished");
+                    loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                    loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
+                    PlayerisReloading = false;
+                    Reloading.text = " ";
 
-                tempTime = Time.time;
+                    tempTime = Time.time;
 
-                // Tutorial completion check
-                if (!_tutManager.b_reloadComplete)
-                    _tutManager.Notify("RELOAD_COMPLETE");
+                    // Tutorial completion check
+                    if (!_tutManager.b_reloadComplete)
+                        _tutManager.Notify("RELOAD_COMPLETE");
+                }
             }
         }
     }
@@ -737,7 +743,7 @@ public class Weapon : MonoBehaviour
     {
         if (controller.state.Triggers.Right == 1)
         {
-            if (m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
+            if (m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
             {
                 // Call your event function here.
                 origPosReset = false;
