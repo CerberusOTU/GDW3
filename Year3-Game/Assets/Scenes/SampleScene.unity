@@ -4310,6 +4310,7 @@ MonoBehaviour:
   - {fileID: 6471413429216083511, guid: 555b3837dafe6b8489e24183b67fff3f, type: 3}
   - {fileID: 5903964947378846557, guid: 563655c487eddba4baa04df7b7c646db, type: 3}
   - {fileID: 218970910587641325, guid: 6d1fff2fa28fc06428887b1f149e4944, type: 3}
+  inSceneGuns: []
   scriptOBJ:
   - {fileID: 11400000, guid: 36b2d035283fa40438325263850b714f, type: 2}
   - {fileID: 11400000, guid: a72fca0ec53058c419125abf909126bc, type: 2}
@@ -4336,6 +4337,7 @@ MonoBehaviour:
   throwForce: 40
   grenadePrefab: {fileID: 5474407304477632719, guid: b029acee6ddf3e242aee45adfc4855cc,
     type: 3}
+  _metricsLogger: {fileID: 0}
 --- !u!114 &275475524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4497,7 +4499,7 @@ Transform:
   - {fileID: 574451777}
   - {fileID: 275255453}
   m_Father: {fileID: 1677615534}
-  m_RootOrder: 214
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &293124823
 GameObject:
@@ -8324,7 +8326,7 @@ Transform:
   - {fileID: 2136232482}
   - {fileID: 585487009}
   m_Father: {fileID: 1677615534}
-  m_RootOrder: 42
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: -276.726, z: 0}
 --- !u!4 &566007781 stripped
 Transform:
@@ -26603,6 +26605,7 @@ Transform:
   - {fileID: 1190166177}
   - {fileID: 797745750}
   - {fileID: 949900780}
+  - {fileID: 558436321}
   - {fileID: 1628811580}
   - {fileID: 1934704299}
   - {fileID: 1560708846}
@@ -26620,7 +26623,8 @@ Transform:
   - {fileID: 1811588883}
   - {fileID: 147969799}
   - {fileID: 1964904652}
-  - {fileID: 558436321}
+  - {fileID: 1875555005}
+  - {fileID: 282303062}
   - {fileID: 59264537}
   - {fileID: 1237247646}
   - {fileID: 566007781}
@@ -26679,7 +26683,6 @@ Transform:
   - {fileID: 869488621}
   - {fileID: 556431820}
   - {fileID: 629235859}
-  - {fileID: 1875555005}
   - {fileID: 399525444}
   - {fileID: 1146172603}
   - {fileID: 1663151142}
@@ -26792,7 +26795,6 @@ Transform:
   - {fileID: 138066068}
   - {fileID: 1276985798}
   - {fileID: 993069221}
-  - {fileID: 282303062}
   - {fileID: 645135131}
   - {fileID: 1344918355}
   - {fileID: 1615850377}
@@ -29791,7 +29793,7 @@ Transform:
   - {fileID: 1017812987}
   - {fileID: 914711357}
   m_Father: {fileID: 1677615534}
-  m_RootOrder: 101
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1875638367
 PrefabInstance:
@@ -33415,6 +33417,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb,
         type: 2}
+    - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: maxAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1834482321, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: partner
       value: 

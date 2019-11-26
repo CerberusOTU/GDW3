@@ -14,7 +14,7 @@ public class Look : MonoBehaviour
 
     private float adjustY;
     private float adjustX;
-    public float maxAngle;
+    public float maxAngle = 60.0f;
     float inputY;
     float inputX;
 
@@ -62,7 +62,7 @@ public class Look : MonoBehaviour
         {
             cams.localRotation = delta;
         } 
-        else if(cams.localRotation.eulerAngles.x < maxAngle)
+        else if(cams.localRotation.eulerAngles.x < (360-maxAngle) && cams.localRotation.eulerAngles.x > maxAngle)
         {
             cams.localRotation = Quaternion.Slerp(cams.localRotation, Quaternion.Euler(maxAngle, 0, 0), Time.deltaTime * 4f);
         }

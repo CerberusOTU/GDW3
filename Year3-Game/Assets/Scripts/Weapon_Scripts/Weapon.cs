@@ -202,6 +202,7 @@ public class Weapon : MonoBehaviour
         SwitchWeapon();
         Reload();
 
+
         float d = Input.GetAxis("Mouse ScrollWheel");
 
         if (loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >= 0)
@@ -249,6 +250,7 @@ public class Weapon : MonoBehaviour
             WeaponSlot2.transform.localScale = temp2;
             //  MainWeapon.transform.localScale = temp2;
         }
+
         if (loadout[currentIndex] == loadout[1])
         {
             temp = transform.localScale;
@@ -317,7 +319,7 @@ public class Weapon : MonoBehaviour
             if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0) && origPosReset == false)
             {
                 cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
                 {
                     //Debug.Log(origPosReset);
                     origPosReset = true;
@@ -416,14 +418,14 @@ public class Weapon : MonoBehaviour
             bloomShotty[i].Normalize();
         }
 
-        ///-----Recoil-----/////
-        if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1)
+        ///-----RECOIL-----/////
+        if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1)
         {
-            tempTime = Time.time;
-            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+            //tempTime = Time.time;
+            //saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
         }
 
-        // Recoil Dampen
+        //Recoil Dampen
         timeFiringHeld = Time.time - tempTime;
         Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
         cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1, loadout[currentIndex].recoilDampen, timeFiringHeld));
@@ -550,6 +552,12 @@ public class Weapon : MonoBehaviour
 
         if (PlayerisReloading)
         {
+            cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+            if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
+            {
+                //Debug.Log(origPosReset);
+                origPosReset = true;
+            }
             if (loadout[currentIndex].maxAmmo > 0)
             {
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
@@ -743,13 +751,19 @@ public class Weapon : MonoBehaviour
     {
         if (controller.state.Triggers.Right == 1)
         {
-            if (m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
+            if (m_isAxisInUse == false)
             {
-                // Call your event function here.
-                origPosReset = false;
-                Shoot();
+                tempTime = Time.time;
+                saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+                if (currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
+                {
+                    // Call your event function here.
+                    origPosReset = false;
+                    Shoot();
+                }
                 m_isAxisInUse = true;
             }
+
         }
         if (controller.state.Triggers.Right < 1)
         {
