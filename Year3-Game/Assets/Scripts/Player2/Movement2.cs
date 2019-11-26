@@ -48,27 +48,27 @@ public class Movement2 : MonoBehaviour
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
         col = this.gameObject.GetComponent<BoxCollider>();
-        
+
         distToGround = col.bounds.extents.y;
 
         weaponParentOrigin = weaponParent.localPosition;
 
-        baseCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y, cam.transform.localPosition.z);
-        crouchCamTrans = new Vector3(cam.transform.localPosition.x,cam.transform.localPosition.y - 1f, cam.transform.localPosition.z);
+        baseCamTrans = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, cam.transform.localPosition.z);
+        crouchCamTrans = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y - 1f, cam.transform.localPosition.z);
         controller = GameObject.FindObjectOfType<Controller>();
     }
     //Check if player is grounded
     bool isGrounded()
     {
-       return Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f);
+        return Physics.Raycast(groundDetect.transform.position, Vector3.down, 0.1f);
     }
 
     void Crouch()
     {
-        
-        if(controller.state2.Buttons.B == ButtonState.Pressed && controller.prevState2.Buttons.B == ButtonState.Released)
+
+        if (controller.state2.Buttons.B == ButtonState.Pressed && controller.prevState2.Buttons.B == ButtonState.Released)
         {
-            if(isCrouching == false)
+            if (isCrouching == false)
             {
                 isCrouching = true;
             }
@@ -78,50 +78,50 @@ public class Movement2 : MonoBehaviour
             }
         }
 
-        if(isCrouching == false)
+        if (isCrouching == false)
         {
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
         }
         else
         {
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
-            
+
         }
-        
+
     }
 
     void getJumpDown()
     {
-         if(controller.state2.Buttons.A == ButtonState.Pressed)
+        if (controller.state2.Buttons.A == ButtonState.Pressed)
         {
-         if(jumpInUse == false && isGrounded())
-         {
-             // Call your event function here.
-             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-             jumpInUse = true;
-         }
+            if (jumpInUse == false && isGrounded())
+            {
+                // Call your event function here.
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                jumpInUse = true;
+            }
         }
-        if(controller.state2.Buttons.A == ButtonState.Released)
+        if (controller.state2.Buttons.A == ButtonState.Released)
         {
             jumpInUse = false;
-        }   
+        }
     }
 
-     void getCrouchDown()
+    void getCrouchDown()
     {
-         if(controller.state2.Buttons.B == ButtonState.Pressed)
+        if (controller.state2.Buttons.B == ButtonState.Pressed)
         {
-         if(crouchInUse == false)
-         {
-             // Call your event function here.
-             Crouch();
-             crouchInUse = true;
-         }
+            if (crouchInUse == false)
+            {
+                // Call your event function here.
+                Crouch();
+                crouchInUse = true;
+            }
         }
-        if(controller.state2.Buttons.B == ButtonState.Released)
+        if (controller.state2.Buttons.B == ButtonState.Released)
         {
             crouchInUse = false;
-        }   
+        }
     }
 
     void Update()
@@ -132,121 +132,123 @@ public class Movement2 : MonoBehaviour
         /* if (isGrounded() && (Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Jump")))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        } */ 
+        } */
 
-        if(!isGrounded())
+        if (!isGrounded())
         {
-            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin,Time.deltaTime * 2f);
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin, Time.deltaTime * 2f);
         }
-        else if(horizontalMove == 0 && verticalMove == 0)
+        else if (horizontalMove == 0 && verticalMove == 0)
         {
-            if(Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
+            if (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
             {
                 //stop headbob && swaying
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin ,Time.deltaTime * 2f);
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin, Time.deltaTime * 2f);
             }
             else if (isCrouching == false)
             {
                 HeadBob(idleCounter, 0.01f, 0.01f);
                 idleCounter += Time.deltaTime;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime);
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime);
             }
             else
             {
                 HeadBob(idleCounter, 0.01f, 0.01f);
                 idleCounter += Time.deltaTime;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 2f);
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 2f);
             }
         }
-        else if(isSprinting)
+        else if (isSprinting)
         {
             HeadBob(movementCounter, 0.05f, 0.025f);
             movementCounter += Time.deltaTime * 7;
-            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 15f);
+            weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 15f);
         }
         else
         {
-            if(Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
-            {   
+            if (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
+            {
                 if (isCrouching == false)
                 {
-                HeadBob(movementCounter, 0.005f, 0.005f);
-                movementCounter += Time.deltaTime * 5;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime);
+                    HeadBob(movementCounter, 0.005f, 0.005f);
+                    movementCounter += Time.deltaTime * 5;
+                    weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime);
                 }
                 else
                 {
-                HeadBob(movementCounter, 0.005f, 0.005f);
-                movementCounter += Time.deltaTime * 5;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 3f);
+                    HeadBob(movementCounter, 0.005f, 0.005f);
+                    movementCounter += Time.deltaTime * 5;
+                    weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 3f);
                 }
             }
             else if (isCrouching == false)
             {
-               HeadBob(movementCounter, 0.025f, 0.025f);
+                HeadBob(movementCounter, 0.025f, 0.025f);
                 movementCounter += Time.deltaTime * 5;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 3f);
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 3f);
             }
             else
             {
                 HeadBob(movementCounter, 0.025f, 0.025f);
                 movementCounter += Time.deltaTime * 5;
-                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob,Time.deltaTime * 6f);
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 6f);
             }
         }
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(controller.state2.IsConnected)
+        if (isGrounded())
         {
-            horizontalMove = controller.state2.ThumbSticks.Left.X;
+            if (controller.state2.IsConnected)
+            {
+                horizontalMove = controller.state2.ThumbSticks.Left.X;
+            }
+            else
+            {
+                horizontalMove = Input.GetAxisRaw("Horizontal");
+            }
+            if (controller.state2.IsConnected)
+            {
+                verticalMove = controller.state2.ThumbSticks.Left.Y;
+            }
+            else
+            {
+                verticalMove = Input.GetAxisRaw("Vertical");
+            }
         }
-        else
-        {
-            horizontalMove = Input.GetAxisRaw("Horizontal");
-        }
-        if(controller.state2.IsConnected)
-        {
-            verticalMove = controller.state2.ThumbSticks.Left.Y;
-        }
-        else
-        {
-            verticalMove = Input.GetAxisRaw("Vertical");
-        }
-        
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state2.Buttons.LeftStick == ButtonState.Pressed;
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove);
         direction.Normalize();
-        
+
         float adjustedSpeed = speed;
 
-        if(Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
+        if (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1)
         {
             isSprinting = false;
             adjustedSpeed = speed;
-        }   
+        }
 
         //allow the player to sprint        
-        if(isSprinting)
+        if (isSprinting)
         {
             adjustedSpeed *= sprintModifier;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
-        else if((Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1) && isCrouching == true)
+        else if ((Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1) && isCrouching == true)
         {
             adjustedSpeed = speed / 2;
         }
-        else if(isCrouching == false && (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1))
+        else if (isCrouching == false && (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1))
         {
             adjustedSpeed = speed / 3;
         }
-        else if(isCrouching == false && (!Input.GetMouseButton(1) || controller.state2.Triggers.Left == 0))
+        else if (isCrouching == false && (!Input.GetMouseButton(1) || controller.state2.Triggers.Left == 0))
         {
             adjustedSpeed = speed / 1.5f;
         }
@@ -255,15 +257,15 @@ public class Movement2 : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
-         if(isGrounded())
+        if (isGrounded())
         {
             targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-            rb.AddForce(targetVelocity, ForceMode.VelocityChange); 
+            rb.AddForce(targetVelocity, ForceMode.VelocityChange);
         }
     }
 
-    void HeadBob(float _z, float xIntensity, float yIntensity) 
+    void HeadBob(float _z, float xIntensity, float yIntensity)
     {
-        targetBob = weaponParentOrigin + new Vector3(Mathf.Cos(_z) * xIntensity, Mathf.Sin(_z * 2) * yIntensity,0);
+        targetBob = weaponParentOrigin + new Vector3(Mathf.Cos(_z) * xIntensity, Mathf.Sin(_z * 2) * yIntensity, 0);
     }
 }

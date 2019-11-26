@@ -174,7 +174,6 @@ public class Weapon : MonoBehaviour
             inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
             inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
         }
-
     }
 
     void FixedUpdate()
@@ -187,7 +186,6 @@ public class Weapon : MonoBehaviour
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
         }
-
     }
 
     void Update()
