@@ -15,8 +15,8 @@ public class Weapon : MonoBehaviour
     bool vibrate = false;
     bool shootDown = false;
     //////////////////////
-   public _Gun[] loadout;
-    
+    public _Gun[] loadout;
+
     public GameObject[] gunMeshes;
     //0 = Tommy
     //1 = Revolver
@@ -34,18 +34,18 @@ public class Weapon : MonoBehaviour
     public GameObject defaultSpawn;
     private List<Transform> weaponSpawnPos = new List<Transform>();
     public Transform weaponParent;
-    
-    
+
+
     private int currentIndex;
 
     private GameObject currentWeapon;
-    
+
     public Canvas crossHair;
     public Canvas hitMark;
-    
+
     public Camera cam;
     //BulletHole Variables ////
-     private PoolManager _pool;
+    private PoolManager _pool;
     //////////////////////////
 
     private float currentRecoil;
@@ -53,13 +53,15 @@ public class Weapon : MonoBehaviour
     private bool origPosReset = true;
     Quaternion saveInitShot;
     private float timeFiringHeld;
+    private bool reloadCancel = false;
+    private float reloadDelay = 0.0f;
 
     private float adjustedBloom;
 
     private float currentCool;
 
-   private Motion player;
-   //Ammo UI///
+    private Motion player;
+    //Ammo UI///
     public Text AmmoText;
     public Text AmmoText2;
     public Text Reloading;
@@ -69,12 +71,12 @@ public class Weapon : MonoBehaviour
     public Image MainWeapon;
     public Image SideWeapon;
 
-   Vector3 temp;
+    Vector3 temp;
     Vector3 temp2;
 
     public ParticleSystem muzzleFlash;
     Transform tempMuzzle;
-   ///////////////////
+    ///////////////////
     Rigidbody rigid;
 
     //GUNS//
@@ -90,7 +92,7 @@ public class Weapon : MonoBehaviour
     RaycastHit checkWeapon;
 
     //Throwing Grenade
-    
+
     //Throwing Grenade
     private bool isCookingNade = false;
     public float throwForce = 40f;
@@ -102,20 +104,20 @@ public class Weapon : MonoBehaviour
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
-        //Metrics Manager
-        public MetricsLogger _metricsLogger;
+    //Metrics Manager
+    public MetricsLogger _metricsLogger;
 
     void Start()
     {
-         rigid = this.gameObject.GetComponent<Rigidbody>();
-         _pool = GameObject.FindObjectOfType<PoolManager>();
-         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
-         _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
-         player = GameObject.FindObjectOfType<Motion>();
-         hitMark.enabled = false;
-         controller = GameObject.FindObjectOfType<Controller>();
-         score = GameObject.FindObjectOfType<Score>();
-         
+        rigid = this.gameObject.GetComponent<Rigidbody>();
+        _pool = GameObject.FindObjectOfType<PoolManager>();
+        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
+        _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
+        player = GameObject.FindObjectOfType<Motion>();
+        hitMark.enabled = false;
+        controller = GameObject.FindObjectOfType<Controller>();
+        score = GameObject.FindObjectOfType<Score>();
+
         temp2 = transform.localScale;
         temp2.x = 1f;
         temp2.y = 1f;
@@ -125,40 +127,40 @@ public class Weapon : MonoBehaviour
         loadout[1].maxAmmo = loadout[1].alwaysMax;
         loadout[1].isReloading = false;
         //primary guns reset ammo
-        for(int i = 0; i < scriptOBJ.Length; i++)
+        for (int i = 0; i < scriptOBJ.Length; i++)
         {
             scriptOBJ[i].currentAmmo = scriptOBJ[i].clipSize;
             scriptOBJ[i].maxAmmo = scriptOBJ[i].alwaysMax;
             scriptOBJ[i].isReloading = false;
         }
 
-         Equip(0);
+        Equip(0);
 
         //generate spawn transforms
-         for(int i = 0; i < 4; i++)
-         {
-             Transform temp = Instantiate(defaultSpawn.transform); 
-             weaponSpawnPos.Add(temp);
-             //temp.transform.parent = this.transform;
-         }
+        for (int i = 0; i < 4; i++)
+        {
+            Transform temp = Instantiate(defaultSpawn.transform);
+            weaponSpawnPos.Add(temp);
+            //temp.transform.parent = this.transform;
+        }
 
-    //set weapon spawn locations
+        //set weapon spawn locations
 
-    weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
-    weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f,90f, 0f);
+        weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
+        weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-    weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
-    weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f,90f,0f);
-    
-    weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
-    weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f,-75f,90f);
+        weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
+        weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-    weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
-    weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
+        weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
+        weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
+
+        weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
+        weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
 
         //random index number for spawn locations
         var numList = new List<int>();
-        for(int k = 0; k < weaponSpawnPos.Count; k++)
+        for (int k = 0; k < weaponSpawnPos.Count; k++)
         {
             numList.Add(k);
         }
@@ -166,8 +168,8 @@ public class Weapon : MonoBehaviour
         numList = numList.OrderBy(i => Random.value).ToList();
 
         //set the in scene guns to the random transforms
-        for(int i = 0; i < inSceneGuns.Length; i++)
-        { 
+        for (int i = 0; i < inSceneGuns.Length; i++)
+        {
             inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
             inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
         }
@@ -176,32 +178,33 @@ public class Weapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        if((controller.state.Triggers.Right == 1) && !loadout[currentIndex].isReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
-        {   
+        if ((controller.state.Triggers.Right == 1) && PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+        {
             GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
         }
         else
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
         }
-       
+
     }
 
     void Update()
     {
         //for when game ends
-        if(Time.timeScale != 1f)
+        if (Time.timeScale != 1f)
         {
             crossHair.enabled = false;
         }
         ///////////////////////////////////
-        
+
         PickUp.enabled = false;
         SwitchWeapon();
+        Reload();
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
-        if(loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >=0)
+        if (loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >= 0)
         {
             AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
         }
@@ -210,20 +213,21 @@ public class Weapon : MonoBehaviour
             AmmoText.text = "0 / 0";
         }
 
-        if(loadout[1].maxAmmo >= 0 && loadout[1].currentAmmo >=0)
+        if (loadout[1].maxAmmo >= 0 && loadout[1].currentAmmo >= 0)
         {
-           AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();
+            AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();
         }
         else
         {
             AmmoText2.text = "0 / 0";
         }
 
-        if(Input.GetButton("Grenade"))
+        if (Input.GetButton("Grenade"))
         {
             isCookingNade = true;
             throwGrenade();
-        }else if (Input.GetButtonUp("Grenade"))
+        }
+        else if (Input.GetButtonUp("Grenade"))
         {
             isCookingNade = false;
             throwGrenade();
@@ -237,13 +241,13 @@ public class Weapon : MonoBehaviour
             temp.y = 0.75f;
 
 
-         //  AmmoText2.transform.localScale = temp;
+            //  AmmoText2.transform.localScale = temp;
             WeaponSlot1.transform.localScale = temp;
-         //   SideWeapon.transform.localScale = temp;
+            //   SideWeapon.transform.localScale = temp;
             //////////
-          //  AmmoText.transform.localScale = temp2;
+            //  AmmoText.transform.localScale = temp2;
             WeaponSlot2.transform.localScale = temp2;
-          //  MainWeapon.transform.localScale = temp2;
+            //  MainWeapon.transform.localScale = temp2;
         }
         if (loadout[currentIndex] == loadout[1])
         {
@@ -253,75 +257,76 @@ public class Weapon : MonoBehaviour
             temp.y = 0.75f;
 
 
-           // AmmoText.transform.localScale = temp;
+            // AmmoText.transform.localScale = temp;
             WeaponSlot2.transform.localScale = temp;
-           // MainWeapon.transform.localScale = temp;
+            // MainWeapon.transform.localScale = temp;
             //////
-           // AmmoText2.transform.localScale = temp2;
+            // AmmoText2.transform.localScale = temp2;
             WeaponSlot1.transform.localScale = temp2;
             //SideWeapon.transform.localScale = temp2;
 
         }
 
-        if (loadout[currentIndex].isReloading)
-        {
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f);
-            Reloading.text = "Reloading...";
-            return;
-        }
+
         if (loadout[currentIndex].currentAmmo == 0)
         {
-            StartCoroutine(Reload());
-            return;
+            reloadCancel = false;
+            PlayerisReloading = true;
+            reloadDelay = 0.0f;
         }
-        
+
         if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
         {
-            StartCoroutine(Reload());
+            reloadCancel = false;
+            PlayerisReloading = true;
+            reloadDelay = 0.0f;
         }
-        
+
         //d > 0f is scrolling up
-        if(controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0 || d > 0f && currentIndex != 0)
+        if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
         {
+            reloadCancel = true;
             Equip(0);
         }
-        else if(controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1 || d < 0f && currentIndex != 1)
+        else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1 ) || (d < 0f && currentIndex != 1))
         {
+            reloadCancel = true;
             Equip(1);
         }
-        
-        if(currentWeapon != null)
+
+        if (currentWeapon != null)
         {
             Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
-            
+
             getShootDown();
             /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
-            else  */if((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+            else  */
+            if ((Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
                 Shoot();
             }
             // Return back to original left click position
-            if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0)  && origPosReset == false)
+            if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0) && origPosReset == false)
             {
-                cam.transform.localRotation = Quaternion.Slerp (cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
                 {
                     //Debug.Log(origPosReset);
                     origPosReset = true;
                 }
             }
-            
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime *4f); 
+
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
         }
 
-        
 
-        if(currentCool > 0)
+
+        if (currentCool > 0)
         {
             currentCool -= Time.deltaTime;
         }
@@ -341,15 +346,15 @@ public class Weapon : MonoBehaviour
 
     void Equip(int _ind)
     {
-        if(currentWeapon != null) 
+        if (currentWeapon != null)
         {
             Destroy(currentWeapon);
         }
 
         currentIndex = _ind;
-        GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject; 
-        newWeapon.transform.localPosition = Vector3.zero;   
-        newWeapon.transform.localEulerAngles = Vector3.zero;   
+        GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localEulerAngles = Vector3.zero;
 
         currentWeapon = newWeapon;
     }
@@ -360,7 +365,7 @@ public class Weapon : MonoBehaviour
         Transform ADS = currentWeapon.transform.Find("States/ADS");
         Transform Hip = currentWeapon.transform.Find("States/Hip");
 
-        if(isAiming && !player.isSprinting)
+        if (isAiming && !player.isSprinting)
         {
             //ADS
             anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
@@ -377,19 +382,19 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        
+
         muzzleFlash.Play();
 
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
-        
-        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+
+        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
         {
-             adjustedBloom = loadout[currentIndex].bloom / 3;
+            adjustedBloom = loadout[currentIndex].bloom / 3;
         }
         else
         {
-             adjustedBloom = loadout[currentIndex].bloom;
+            adjustedBloom = loadout[currentIndex].bloom;
         }
         //bloom
         Vector3 bloom = spawn.position + spawn.forward * 1000f;
@@ -399,7 +404,7 @@ public class Weapon : MonoBehaviour
         bloom.Normalize();
 
         Vector3[] bloomShotty = new Vector3[8];
-        for(int i =0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             bloomShotty[i] = spawn.position + spawn.forward * 1000f;
             bloomShotty[i] += Random.Range(-adjustedBloom, adjustedBloom) * spawn.up;
@@ -409,125 +414,123 @@ public class Weapon : MonoBehaviour
         }
 
         ///-----Recoil-----/////
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1)
         {
             tempTime = Time.time;
-            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x,0f,0f);
-
+            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
         }
 
         // Recoil Dampen
         timeFiringHeld = Time.time - tempTime;
         Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
-        cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1,loadout[currentIndex].recoilDampen,timeFiringHeld));
+        cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1, loadout[currentIndex].recoilDampen, timeFiringHeld));
 
 
         RaycastHit hitInfo = new RaycastHit();
 
-        
+
         //bloom
-        if(loadout[currentIndex].className == "Shotgun")
+        if (loadout[currentIndex].className == "Shotgun")
         {
             Target target;
-            for(int j =0; j < 8;j++)
+            for (int j = 0; j < 8; j++)
             {
 
-            Physics.Raycast(spawn.position, bloomShotty[j], out hitInfo, 100f);
-            
-            target = hitInfo.transform.GetComponent<Target>();
+                Physics.Raycast(spawn.position, bloomShotty[j], out hitInfo, 100f);
 
-            if (target != null)
-            {
-                StartCoroutine(displayHitmark());
-                if(target.health == 10)
+                target = hitInfo.transform.GetComponent<Target>();
+
+                if (target != null)
                 {
-                    score.Kills += 1;
-                }
-                target.takeDamage(10f);
-                
-                
-                
-            }
+                    StartCoroutine(displayHitmark());
+                    if (target.health == 10)
+                    {
+                        score.Kills += 1;
+                    }
+                    target.takeDamage(10f);
 
-            //Shooting tasklist///////////
-            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-            {
-                _tutManager.Target1 = true;
+
+
+                }
+
+                //Shooting tasklist///////////
+                if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+                {
+                    _tutManager.Target1 = true;
+                }
+                else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+                {
+                    _tutManager.Target2 = true;
+                }
+                else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+                {
+                    _tutManager.Target3 = true;
+                }
+
+                if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+                {
+                    if (!_tutManager.b_shootingComplete)
+                        _tutManager.Notify("SHOOTING_COMPLETE");
+                }
+
             }
-            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-            {
-                _tutManager.Target2 = true;
-            }
-            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-            {
-                _tutManager.Target3 = true;
-            }
-            
-            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-            {  
-                if (!_tutManager.b_shootingComplete)
-                _tutManager.Notify("SHOOTING_COMPLETE");
-            }
-        
-            }    
         }
-        else if(loadout[currentIndex].className != "Shotgun")
+        else if (loadout[currentIndex].className != "Shotgun")
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
-                
-                if(target.health == 10)
+                if (target.health == 10)
                 {
                     score.Kills += 1;
                 }
                 target.takeDamage(10f);
-                
-                
+
+
             }
 
-           
-             
+
+
         }
-        
 
-              //Shooting tasklist///////////
-            if(hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-            {
-                _tutManager.Target1 = true;
-            }
-            else if(hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-            {
-                _tutManager.Target2 = true;
-            }
-            else if(hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-            {
-                _tutManager.Target3 = true;
-            }
-            
-            if(_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-            {  
-                if (!_tutManager.b_shootingComplete)
+
+        //Shooting tasklist///////////
+        if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+        {
+            _tutManager.Target1 = true;
+        }
+        else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+        {
+            _tutManager.Target2 = true;
+        }
+        else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+        {
+            _tutManager.Target3 = true;
+        }
+
+        if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+        {
+            if (!_tutManager.b_shootingComplete)
                 _tutManager.Notify("SHOOTING_COMPLETE");
-            }
+        }
 
-           if(hitInfo.collider.tag == "Wall")
-            {
-                GameObject temp = _pool.GetBulletHole();
-                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-            }
-            //GUN FX
-       // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
+        if (hitInfo.collider.tag == "Wall")
+        {
+            GameObject temp = _pool.GetBulletHole();
+            temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+            temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+        }
+        //GUN FX
+        // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
 
         _metricsLogger.shotsTaken++;
-        } 
-          
-     IEnumerator displayHitmark()
+    }
+
+    IEnumerator displayHitmark()
     {
         _metricsLogger.shotsHit++;
         Debug.Log(_metricsLogger.shotsHit);
@@ -537,56 +540,77 @@ public class Weapon : MonoBehaviour
         hitMark.enabled = false;
     }
 
-     IEnumerator Reload()
+
+    private bool PlayerisReloading = false;
+    void Reload()
     {
-        loadout[currentIndex].isReloading = true;
         
-        yield return new WaitForSeconds(loadout[currentIndex].reloadTime);
-        
-        loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
-        loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
-        loadout[currentIndex].isReloading = false;
-        Reloading.text = " ";
+        if (PlayerisReloading)
+        {
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
+            reloadDelay += Time.deltaTime;
+            Reloading.text = "Reloading..."+ reloadDelay/loadout[currentIndex].reloadTime;
+            Debug.Log("Reloading..."+ reloadDelay/loadout[currentIndex].reloadTime);
+            if (reloadCancel)
+            {
+                Debug.Log("Reload Cancelled");
+                reloadDelay = 0.0f;
+                reloadCancel = false;
+                PlayerisReloading = false;
+                Reloading.text = " ";
+                tempTime = Time.time;
+                return;
+            }
+            if (reloadDelay >= loadout[currentIndex].reloadTime)
+            {
+                Debug.Log("Reload Finished");
+                loadout[currentIndex].maxAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
+                loadout[currentIndex].currentAmmo = loadout[currentIndex].clipSize;
+                PlayerisReloading = false;
+                Reloading.text = " ";
 
-        tempTime = Time.time;
+                tempTime = Time.time;
 
-        // Tutorial completion check
-        if (!_tutManager.b_reloadComplete)
-            _tutManager.Notify("RELOAD_COMPLETE");
+                // Tutorial completion check
+                if (!_tutManager.b_reloadComplete)
+                    _tutManager.Notify("RELOAD_COMPLETE");
+            }
+        }
     }
 
-     void SwitchWeapon()
+    void SwitchWeapon()
     {
-         checkWeapon = new RaycastHit();
+        checkWeapon = new RaycastHit();
 
         //if we hit something
-         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 3f))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out checkWeapon, 3f))
         {
             //if it is tagged as a weapon
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
                 PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
-                
+
                 //if the user presses E
                 if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && currentIndex == 0)
                 {
-                    if(checkWeapon.collider.name == "Revolver")
+                    reloadCancel = true;
+                    if (checkWeapon.collider.name == "Revolver")
                     {
                         Transform temp = checkWeapon.collider.GetComponent<Transform>();
-                        
+
                         GameObject tempMesh = null;
 
-                        if(loadout[0].name == "Tommy")
+                        if (loadout[0].name == "Tommy")
                         {
                             Debug.Log(loadout[0].name);
                             tempMesh = gunMeshes[0];
                         }
-                        else if(loadout[0].name == "MP40")
+                        else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
-                        } 
-                        else if(loadout[0].name == "Revolver")
+                        }
+                        else if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
                         }
@@ -599,27 +623,27 @@ public class Weapon : MonoBehaviour
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
 
-                        
+
                         loadout[0] = scriptOBJ[1];
                         Equip(0);
-    
+
 
                     }
-                    else if(checkWeapon.collider.name == "Tommy")
+                    else if (checkWeapon.collider.name == "Tommy")
                     {
 
                         Transform temp = checkWeapon.collider.GetComponent<Transform>();
-                        
+
                         GameObject tempMesh = null;
-                        if(loadout[0].name == "Revolver")
+                        if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
                         }
-                        else  if(loadout[0].name == "MP40")
+                        else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
                         }
-                        else if(loadout[0].name == "Tommy")
+                        else if (loadout[0].name == "Tommy")
                         {
                             tempMesh = gunMeshes[0];
                             scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
@@ -634,24 +658,24 @@ public class Weapon : MonoBehaviour
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
 
-                        
+
                         loadout[0] = scriptOBJ[0];
                         Equip(0);
                     }
                     else if (checkWeapon.collider.name == "MP40")
                     {
                         Transform temp = checkWeapon.collider.GetComponent<Transform>();
-                        
+
                         GameObject tempMesh = null;
-                        if(loadout[0].name == "Tommy")
+                        if (loadout[0].name == "Tommy")
                         {
                             tempMesh = gunMeshes[0];
                         }
-                        else if(loadout[0].name == "Revolver")
+                        else if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
                         }
-                        else if(loadout[0].name == "MP40")
+                        else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
                         }
@@ -662,7 +686,7 @@ public class Weapon : MonoBehaviour
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                         switched.name = loadout[0].name;
                         Destroy(checkWeapon.collider.gameObject);
-                        
+
                         loadout[0] = scriptOBJ[2];
                         Equip(0);
 
@@ -673,7 +697,7 @@ public class Weapon : MonoBehaviour
 
                         GameObject tempMesh = null;
 
-                        
+
                         if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
@@ -686,7 +710,7 @@ public class Weapon : MonoBehaviour
                         {
                             tempMesh = gunMeshes[0];
                         }
-                       else if (loadout[0].name == "Shotgun")
+                        else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
                         }
@@ -699,7 +723,7 @@ public class Weapon : MonoBehaviour
                         loadout[0] = scriptOBJ[3];
                         Equip(0);
 
-                         // Tutorial completion check
+                        // Tutorial completion check
                         if (!_tutManager.b_swapComplete)
                             _tutManager.Notify("SWAP_COMPLETE");
 
@@ -711,27 +735,28 @@ public class Weapon : MonoBehaviour
 
     void getShootDown()
     {
-         if(controller.state.Triggers.Right == 1)
+        if (controller.state.Triggers.Right == 1)
         {
-         if(m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
-         {
-             // Call your event function here.
-             origPosReset = false;
-             Shoot();
-             m_isAxisInUse = true;
-         }
+            if (m_isAxisInUse == false && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
+            {
+                // Call your event function here.
+                origPosReset = false;
+                Shoot();
+                m_isAxisInUse = true;
+            }
         }
-        if(controller.state.Triggers.Right < 1)
+        if (controller.state.Triggers.Right < 1)
         {
             m_isAxisInUse = false;
-        }   
+        }
     }
 
     Rigidbody rb_Grenade;
     bool isNewNade = true;
     void throwGrenade()
     {
-       if (isNewNade)
+        reloadCancel = true;
+        if (isNewNade)
         {
             GameObject grenade = Instantiate(grenadePrefab, cam.transform.position + (cam.transform.forward * 0.5f), cam.transform.rotation);
             rb_Grenade = grenade.GetComponent<Rigidbody>();
@@ -741,17 +766,17 @@ public class Weapon : MonoBehaviour
         {
             if (isCookingNade)
             {
-            
+
                 rb_Grenade.position = cam.transform.position + (cam.transform.forward * 0.5f);
                 rb_Grenade.useGravity = false;
-                rb_Grenade.freezeRotation = true;        
+                rb_Grenade.freezeRotation = true;
             }
             else if (!isCookingNade)
             {
                 isNewNade = true;
                 rb_Grenade.useGravity = true;
                 rb_Grenade.freezeRotation = false;
-                rb_Grenade.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);      
+                rb_Grenade.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);
             }
         }
     }
