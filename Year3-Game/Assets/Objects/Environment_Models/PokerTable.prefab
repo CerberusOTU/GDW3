@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2762026565459480741}
+  - component: {fileID: 1071551824074694058}
   m_Layer: 0
   m_Name: PokerTable
   m_TagString: Untagged
@@ -31,6 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+--- !u!64 &1071551824074694058
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157400227413582518}
+  m_Material: {fileID: 13400000, guid: b2adb05b12fd6014888f4db76ed5bcfd, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -2432090755550338912, guid: ed93e8816ec1b7b42b4aa16078779f76, type: 3}
 --- !u!1 &6127061445683603931
 GameObject:
   m_ObjectHideFlags: 0
