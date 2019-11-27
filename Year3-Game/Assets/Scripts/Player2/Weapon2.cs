@@ -224,12 +224,12 @@ public class Weapon2 : MonoBehaviour
             AmmoText2.text = "0 / 0";
         }
 
-        if (Input.GetButton("Grenade"))
+        if(controller.state2.Buttons.RightShoulder == ButtonState.Pressed) 
         {
             isCookingNade = true;
             throwGrenade();
         }
-        else if (Input.GetButtonUp("Grenade"))
+        else if(controller.state2.Buttons.RightShoulder == ButtonState.Released && controller.prevState2.Buttons.RightShoulder == ButtonState.Pressed)
         {
             isCookingNade = false;
             throwGrenade();
@@ -494,7 +494,6 @@ public class Weapon2 : MonoBehaviour
                     score.Kills += 1;
                 }
                 target.takeDamage(loadout[currentIndex].damage);
-
 
             }
 

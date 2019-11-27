@@ -10,7 +10,7 @@ public class Grenade : MonoBehaviour
     public float force = 700f;
     float countdown;
     bool hasExploded = false;
-
+    
 
     void Start()
     {

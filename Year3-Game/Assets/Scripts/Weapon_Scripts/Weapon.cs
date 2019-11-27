@@ -222,12 +222,14 @@ public class Weapon : MonoBehaviour
             AmmoText2.text = "0 / 0";
         }
 
-        if (Input.GetButton("Grenade"))
+        //if (Input.GetButton("Grenade"))
+        if(controller.state.Buttons.RightShoulder == ButtonState.Pressed) 
         {
             isCookingNade = true;
             throwGrenade();
         }
-        else if (Input.GetButtonUp("Grenade"))
+        //else if (Input.GetButtonUp("Grenade"))
+        else if(controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
         {
             isCookingNade = false;
             throwGrenade();
@@ -538,7 +540,7 @@ public class Weapon : MonoBehaviour
     IEnumerator displayHitmark()
     {
         _metricsLogger.shotsHit++;
-        Debug.Log(_metricsLogger.shotsHit);
+        //Debug.Log(_metricsLogger.shotsHit);
         hitMark.enabled = true;
 
         yield return new WaitForSeconds(0.05f);
@@ -566,7 +568,7 @@ public class Weapon : MonoBehaviour
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
                 reloadDelay += Time.deltaTime;
                 Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
-                Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
+                //Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
                 if (reloadCancel)
                 {
                     Debug.Log("Reload Cancelled");
@@ -633,7 +635,6 @@ public class Weapon : MonoBehaviour
 
                         if (loadout[0].name == "Tommy")
                         {
-                            Debug.Log(loadout[0].name);
                             tempMesh = gunMeshes[0];
                         }
                         else if (loadout[0].name == "MP40")
@@ -827,7 +828,6 @@ public class Weapon : MonoBehaviour
         {
             if (isCookingNade)
             {
-
                 rb_Grenade.position = cam.transform.position + (cam.transform.forward * 0.5f);
                 rb_Grenade.useGravity = false;
                 rb_Grenade.freezeRotation = true;
