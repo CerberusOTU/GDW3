@@ -8,6 +8,7 @@ public class _Gun : ScriptableObject
    public string name;
    public string className;
    public string ShotType;
+   public float damage;
    public float firerate;
    public float bloom;
    public float recoil;

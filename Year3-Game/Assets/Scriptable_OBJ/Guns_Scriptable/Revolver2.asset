@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Revolver
   className: Pistol
   ShotType: Single
+  damage: 30
   firerate: 0.25
   bloom: 10
   recoil: 500
@@ -31,4 +32,4 @@ MonoBehaviour:
   ShotPath: event:/Gun Shots/RevolverShot
   ReloadPath: 
   isReloading: 0
-  obj: {fileID: 7118696067085070988, guid: 414b475a7d9fca74f8dc426f3fd49338, type: 3}
+  obj: {fileID: 7118696067085070988, guid: 3d4bc4a06d1777b4388d8e39a5420e66, type: 3}

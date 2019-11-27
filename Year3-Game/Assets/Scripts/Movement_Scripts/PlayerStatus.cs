@@ -26,14 +26,14 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        /* var tempColor = DamageOverlay.color;
+        var tempColor = DamageOverlay.color;
         tempColor.a = -(PlayerHealth) * 0.01f + 1;
-        var tempColor2 = DamageFlash.color; */
+        var tempColor2 = DamageFlash.color; 
 
         if (tookDamage == true && PlayerHealth > 10)
         {
             //PlayerHealth -= 10;
-            //tempColor2.a = 0.8f;
+            tempColor2.a = 0.8f;
             tookDamage = false;
         }
         if (Input.GetKey(KeyCode.B) && PlayerHealth < 100)
@@ -46,11 +46,10 @@ public class PlayerStatus : MonoBehaviour
         temp.x = 1f;
         temp.y = 1f;
         Health.transform.localScale = temp;
-        //tempColor2.a -= 0.02f;
+        tempColor2.a -= 0.02f;
 
-       
-       // DamageOverlay.color = tempColor;
-        //DamageFlash.color = tempColor2;
+        DamageOverlay.color = tempColor;
+        DamageFlash.color = tempColor2;
     }
 
 }
