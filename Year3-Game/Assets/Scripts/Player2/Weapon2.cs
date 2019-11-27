@@ -368,6 +368,7 @@ public class Weapon2 : MonoBehaviour
 
     void Aim(bool isAiming)
     {
+
         Transform anchor = currentWeapon.transform.Find("Anchor");
         Transform ADS = currentWeapon.transform.Find("States/ADS");
         Transform Hip = currentWeapon.transform.Find("States/Hip");
@@ -389,9 +390,7 @@ public class Weapon2 : MonoBehaviour
 
     void Shoot()
     {
-
         muzzleFlash.Play();
-
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
 

@@ -134,7 +134,6 @@ public class Weapon : MonoBehaviour
             scriptOBJ[i].maxAmmo = scriptOBJ[i].alwaysMax;
             scriptOBJ[i].isReloading = false;
         }
-
         Equip(0);
 
         //generate spawn transforms
@@ -269,7 +268,7 @@ public class Weapon : MonoBehaviour
         }
 
 
-        if (loadout[currentIndex].currentAmmo == 0)
+        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
         {
             if (!PlayerisReloading)
             {
@@ -277,13 +276,17 @@ public class Weapon : MonoBehaviour
             }
             reloadCancel = false;
             PlayerisReloading = true;
+            PlaySound(loadout[currentIndex].ReloadPath);
+
         }
 
-        if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
             reloadDelay = 0.0f;
+            PlaySound(loadout[currentIndex].ReloadPath);
+
         }
 
         //d > 0f is scrolling up
@@ -385,9 +388,18 @@ public class Weapon : MonoBehaviour
 
     }
 
+   
+    void PlaySound(string ShotPath)
+    {
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(path, GetComponent<Transform>().position);
+        FMODUnity.RuntimeManager.PlayOneShotAttached(ShotPath, currentWeapon);
+
+        //FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
+    }
+
     void Shoot()
     {
-
+        PlaySound(loadout[currentIndex].ShotPath);
         muzzleFlash.Play();
 
         Transform spawn = cam.transform;
@@ -549,15 +561,18 @@ public class Weapon : MonoBehaviour
     private bool PlayerisReloading = false;
     void Reload()
     {
+
         Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
+
             if (!origPosReset)
             {
                 cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
                 {
                     //Debug.Log(origPosReset);
+
                     origPosReset = true;
                 }
             }

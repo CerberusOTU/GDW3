@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: 5263156647008262442}
+  - {fileID: 5935838110044657882}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -109,15 +109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 3612592817936282641}
-  - {fileID: 5263156647008262442}
+  - {fileID: 5935838110044657882}
   EditorEvents:
   - {fileID: -7723304661962014055}
+  - {fileID: 8158345966318302112}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5263156647008262442}
+  - {fileID: 5935838110044657882}
   StringsBanks:
   - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637080443133224454
+  stringsBankWriteTime: 637103978551226740
   cacheVersion: 3
 --- !u!114 &2836827567460555134
 MonoBehaviour:
@@ -151,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637080443133224454
+  lastModified: 637103978551226740
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 730
+    Value: 780
   Exists: 1
 --- !u!114 &5263156647008262442
 MonoBehaviour:
@@ -175,3 +176,44 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &5935838110044657882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637103978551177755
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8158345966318302112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ColtShot
+  m_EditorClassIdentifier: 
+  Path: event:/ColtShot
+  guid: a40b06516ba3d04cababa29101b7b712
+  Banks:
+  - {fileID: 5935838110044657882}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1703

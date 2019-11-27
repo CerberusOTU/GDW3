@@ -25,7 +25,11 @@ public class _Gun : ScriptableObject
    public int clipSize;
 
    public int currentAmmo;
-   
+
+    //Sound
+    public string ShotPath;
+    public string ReloadPath;
+
    [SerializeField]
    public bool isReloading;
    //////////////
