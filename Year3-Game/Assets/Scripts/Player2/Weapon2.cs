@@ -454,7 +454,7 @@ public class Weapon2 : MonoBehaviour
                     {
                         score.Kills += 1;
                     }
-                    target.takeDamage(10f);
+                    target.takeDamage(loadout[currentIndex].damage);
 
 
 
@@ -493,7 +493,7 @@ public class Weapon2 : MonoBehaviour
                 {
                     score.Kills += 1;
                 }
-                target.takeDamage(10f);
+                target.takeDamage(loadout[currentIndex].damage);
 
 
             }
