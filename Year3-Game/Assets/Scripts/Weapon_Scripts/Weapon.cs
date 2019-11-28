@@ -394,8 +394,14 @@ public class Weapon : MonoBehaviour
     void Aim(bool isAiming)
     {
         Transform anchor = currentWeapon.transform.Find("Anchor");
+       // Vector3 anchorR = currentWeapon.transform.localEulerAngles.Find("Anchor");
+
+        //Transform anchor = currentWeapon.transform.Find("Anchor");
         Transform ADS = currentWeapon.transform.Find("States/ADS");
         Transform Hip = currentWeapon.transform.Find("States/Hip");
+        Transform Sprint = currentWeapon.transform.Find("States/Sprint");
+
+        //Vector3 SprintR = currentWeapon.transform.localEulerAngles.Find("States/Sprint");
 
         if (isAiming && !player.isSprinting)
         {
@@ -403,8 +409,18 @@ public class Weapon : MonoBehaviour
             anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
             crossHair.enabled = false;
         }
+        else if (!isAiming && player.isSprinting)
+        { 
+            //Hip
+            anchor.position = Vector3.Lerp(anchor.position, Sprint.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
+
+            //anchorR.rotation = Vector3.Lerp(anchorR.rotation, Sprint.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
+
+           // anchor.rotation = Vector3.Lerp(anchor.rotation, SprintR.rotation, Time.deltaTime * loadout[currentIndex].aimSpeed);
+            crossHair.enabled = true;
+        }
         else
-        {
+        { 
             //Hip
             anchor.position = Vector3.Lerp(anchor.position, Hip.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
             crossHair.enabled = true;

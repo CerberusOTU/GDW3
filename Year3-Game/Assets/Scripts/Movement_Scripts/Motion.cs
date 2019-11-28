@@ -256,6 +256,7 @@ public class Motion : MonoBehaviour
         if (isSprinting)
         {
             adjustedSpeed *= sprintModifier;
+            //weaponParent.localRotation = Quaternion.Euler(0f, 270f, 0f);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
