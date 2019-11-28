@@ -37,7 +37,7 @@ public class Motion : MonoBehaviour
 
     private Vector3 targetBob;
 
-    private bool isCrouching = true;
+    private bool isCrouching = false;
     private Vector3 baseCamTrans;
     private Vector3 crouchCamTrans;
     private bool crouchLerp;
@@ -78,20 +78,20 @@ public class Motion : MonoBehaviour
         //if(Input.GetKeyDown(KeyCode.C) || Input.GetButtonDown("Crouch"))
         if (controller.state.Buttons.B == ButtonState.Pressed && controller.prevState.Buttons.B == ButtonState.Released)
         {
-            if (isCrouching == false)
+            if (isCrouching == true)
             {
-                isCrouching = true;
+                isCrouching = false;
             }
             else
             {
-                isCrouching = false;
+                isCrouching = true;
             }
             //Tutorial completion check
             if (!_tutManager.b_crouchComplete)
                 _tutManager.Notify("CROUCH_COMPLETE");
         }
 
-        if (isCrouching == false)
+        if (isCrouching == true)
         {
             //col.height = 1f;
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, crouchCamTrans, Time.deltaTime * 5f);
@@ -146,7 +146,7 @@ public class Motion : MonoBehaviour
                 //stop headbob && swaying
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin, Time.deltaTime * 2f);
             }
-            else if (isCrouching == false)
+            else if (isCrouching == true)
             {
                 HeadBob(idleCounter, 0.01f, 0.01f);
                 idleCounter += Time.deltaTime;
@@ -169,7 +169,7 @@ public class Motion : MonoBehaviour
         {
             if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
             {
-                if (isCrouching == false)
+                if (isCrouching == true)
                 {
                     HeadBob(movementCounter, 0.005f, 0.005f);
                     movementCounter += Time.deltaTime * 5;
@@ -182,7 +182,7 @@ public class Motion : MonoBehaviour
                     weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 3f);
                 }
             }
-            else if (isCrouching == false)
+            else if (isCrouching == true)
             {
                 HeadBob(movementCounter, 0.025f, 0.025f);
                 movementCounter += Time.deltaTime * 5;
@@ -259,17 +259,17 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
-        else if ((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == true)
+        else if ((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == false)
         {
             adjustedSpeed = speed / 1.5f;
         }
-        else if (isCrouching == false && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
+        else if (isCrouching == true && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
         {
-            adjustedSpeed = speed / 2f;
+            adjustedSpeed = speed / 1.85f;
         }
-        else if (isCrouching == false && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
+        else if (isCrouching == true && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
         {
-            adjustedSpeed = speed / 0.5f;
+            adjustedSpeed = speed / 1.75f;
         }
         else
         {

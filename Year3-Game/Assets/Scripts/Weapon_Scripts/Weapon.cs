@@ -99,7 +99,6 @@ public class Weapon : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
 
-    Score score;
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -116,7 +115,6 @@ public class Weapon : MonoBehaviour
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
-        score = GameObject.FindObjectOfType<Score>();
 
         temp2 = transform.localScale;
         temp2.x = 1f;
@@ -269,7 +267,7 @@ public class Weapon : MonoBehaviour
         }
 
 
-        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading && loadout[currentIndex].maxAmmo != 0)
+        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
         {
             if (!PlayerisReloading)
             {
@@ -277,14 +275,12 @@ public class Weapon : MonoBehaviour
             }
             reloadCancel = false;
             PlayerisReloading = true;
-            
+
             if (loadout[currentIndex].maxAmmo > 0)
             {
                 PlaySound(loadout[currentIndex].ReloadPath);
             }
         }
-
-        
 
         if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
@@ -466,13 +462,7 @@ public class Weapon : MonoBehaviour
                 if (target != null)
                 {
                     StartCoroutine(displayHitmark());
-                    if (target.health == 10)
-                    {
-                        score.Kills += 1;
-                    }
                     target.takeDamage(loadout[currentIndex].damage);
-
-
 
                 }
 
@@ -496,6 +486,13 @@ public class Weapon : MonoBehaviour
                         _tutManager.Notify("SHOOTING_COMPLETE");
                 }
 
+                if (hitInfo.collider.tag == "Wall")
+                {
+                    GameObject temp = _pool.GetBulletHole();
+                    temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                    temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                }
+
             }
         }
         else if (loadout[currentIndex].className != "Shotgun")
@@ -505,16 +502,16 @@ public class Weapon : MonoBehaviour
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
-                if (target.health == 10)
-                {
-                    score.Kills += 1;
-                }
                 target.takeDamage(loadout[currentIndex].damage);
-
 
             }
 
-
+            if (hitInfo.collider.tag == "Wall")
+            {
+                GameObject temp = _pool.GetBulletHole();
+                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            }
 
         }
 
@@ -539,12 +536,7 @@ public class Weapon : MonoBehaviour
                 _tutManager.Notify("SHOOTING_COMPLETE");
         }
 
-        if (hitInfo.collider.tag == "Wall")
-        {
-            GameObject temp = _pool.GetBulletHole();
-            temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-            temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-        }
+
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
@@ -792,16 +784,11 @@ public class Weapon : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
-                if (loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
-                {
-                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
-                }
                 if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
                     Shoot();
-                   
                 }
                 m_isAxisInUseDown = true;
             }

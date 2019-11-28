@@ -8,11 +8,17 @@ public class Target : MonoBehaviour
     public float health = 50f;
     PlayerStatus healthUI;
     PlayerStatus2 healthUI2;
+
+    Score score;
+    Score2 score2;
     void Start()
     {
 
         healthUI = GameObject.FindObjectOfType<PlayerStatus>();
         healthUI2 = GameObject.FindObjectOfType<PlayerStatus2>();
+
+        score = GameObject.FindObjectOfType<Score>();
+        score2 = GameObject.FindObjectOfType<Score2>();
 
         //generate respawn transforms
          for(int i = 0; i < 4; i++)
@@ -51,8 +57,14 @@ public class Target : MonoBehaviour
             healthUI2.tookDamage = true;
             healthUI2.PlayerHealth -= amount;
         }
-        if (health <= 0f)
+        if (health <= 0f && this.gameObject.name == "Player2")
         {
+            score.Kills += 1;
+            Die();
+        }
+        else if(health <= 0f && this.gameObject.name == "Player")
+        {
+            score2.Kills += 1;
             Die();
         }
     }

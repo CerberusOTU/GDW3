@@ -15,7 +15,8 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -79,7 +80,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/TommyShot
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -102,7 +104,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/MP40Shot
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -148,6 +151,42 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1028
   Exists: 1
+--- !u!114 &-3532546677631078055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104786094226927
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3204376194644351599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104786094226927
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2907827274661226305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +220,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/ColtShot
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -244,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 3612592817936282641}
-  - {fileID: 8642007781733243954}
+  - {fileID: -3532546677631078055}
   EditorEvents:
   - {fileID: -7723304661962014055}
   - {fileID: 7226155635019862839}
@@ -253,13 +293,12 @@ MonoBehaviour:
   - {fileID: -1304757657524332531}
   - {fileID: -4651665653931959077}
   - {fileID: 800553534243533476}
-  - {fileID: -1265041307202477000}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3532546677631078055}
   StringsBanks:
   - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637104792219695080
+  stringsBankWriteTime: 637104786094303904
   cacheVersion: 3
 --- !u!114 &800553534243533476
 MonoBehaviour:
@@ -276,7 +315,8 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ColtReload
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -340,7 +380,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/ShotgunShot
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -408,11 +449,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637104792219695080
+  lastModified: 637104786094303904
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1074
+    Value: 1028
   Exists: 1
 --- !u!114 &5263156647008262442
 MonoBehaviour:
@@ -483,7 +524,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/RevolverShot
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
-  - {fileID: 8642007781733243954}
+  - {fileID: -3204376194644351599}
+  - {fileID: -3532546677631078055}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1

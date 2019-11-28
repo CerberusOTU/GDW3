@@ -2041,7 +2041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 47.7, y: 211.99997}
+  m_AnchoredPosition: {x: 47.7, y: 153}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &131113707
@@ -4680,7 +4680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Kills: 0
-  killScore: {fileID: 1480751433}
+  killScore: {fileID: 131113707}
   killScore2: {fileID: 1207215398}
   condition: {fileID: 813461494}
   player1: {fileID: 174714325}
@@ -5274,7 +5274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &311085228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11435,7 +11435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 208.79997}
+  m_AnchoredPosition: {x: 1.3732785, y: 152.08627}
   m_SizeDelta: {x: 228.42, y: 150.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &707299762
@@ -14710,7 +14710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   killScore: {fileID: 972312009}
-  killScore2: {fileID: 1207215398}
+  killScore2: {fileID: 1480751433}
   condition: {fileID: 512422988}
   player1: {fileID: 174714325}
   player2: {fileID: 532474007}
@@ -15932,7 +15932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -47.9, y: 212.4}
+  m_AnchoredPosition: {x: -46.526722, y: 155.68631}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &972312009

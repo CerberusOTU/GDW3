@@ -99,8 +99,6 @@ public class Weapon2 : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
 
-    Score score;
-
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -117,7 +115,6 @@ public class Weapon2 : MonoBehaviour
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
-        score = GameObject.FindObjectOfType<Score>();
 
         temp2 = transform.localScale;
         temp2.x = 1f;
@@ -136,7 +133,7 @@ public class Weapon2 : MonoBehaviour
         }
 
         Equip(0);
-
+/* 
         //generate spawn transforms
         for (int i = 0; i < 4; i++)
         {
@@ -173,7 +170,7 @@ public class Weapon2 : MonoBehaviour
         {
             inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
             inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
-        }
+        } */
 
     }
 
@@ -449,10 +446,6 @@ public class Weapon2 : MonoBehaviour
                 if (target != null)
                 {
                     StartCoroutine(displayHitmark());
-                    if (target.health == 10)
-                    {
-                        score.Kills += 1;
-                    }
                     target.takeDamage(loadout[currentIndex].damage);
 
 
@@ -488,10 +481,6 @@ public class Weapon2 : MonoBehaviour
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
-                if (target.health == 10)
-                {
-                    score.Kills += 1;
-                }
                 target.takeDamage(loadout[currentIndex].damage);
 
             }
