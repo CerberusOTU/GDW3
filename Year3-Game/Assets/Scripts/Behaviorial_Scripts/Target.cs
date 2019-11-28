@@ -9,6 +9,8 @@ public class Target : MonoBehaviour
     PlayerStatus healthUI;
     PlayerStatus2 healthUI2;
 
+    public float distanceToSpawnPoint1, distanceToSpawnPoint2, distanceToSpawnPoint3, distanceToSpawnPoint4;
+
     Score score;
     Score2 score2;
     void Start()
@@ -75,18 +77,79 @@ public class Target : MonoBehaviour
         int index = Random.Range(0,3);
         Debug.Log(index);
 
-        this.gameObject.transform.position = SpawnPos[index].position;
-        this.gameObject.transform.localRotation = SpawnPos[index].localRotation;
+
 
         Debug.Log(SpawnPos[index].position);
 
         health = 100f;
         if(this.gameObject.name == "Player")
         {
+
+           distanceToSpawnPoint1 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+           distanceToSpawnPoint2 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
+           distanceToSpawnPoint3 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
+           distanceToSpawnPoint4 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
+
+        //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
+        //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
+        //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
+        //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+
+        if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[0].position;
+            this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+        }
+        else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[1].position;
+            this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+        }
+        else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[2].position;
+            this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+        }
+        else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+        {
+            this.gameObject.transform.position = SpawnPos[3].position;
+            this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
+        }
             healthUI.PlayerHealth = 100;
         }
         else
         {
+            
+           distanceToSpawnPoint1 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+           distanceToSpawnPoint2 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
+           distanceToSpawnPoint3 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
+           distanceToSpawnPoint4 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
+
+        //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
+        //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
+        //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
+        //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+
+        if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[0].position;
+            this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+        }
+        else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[1].position;
+            this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+        }
+        else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+        {
+            this.gameObject.transform.position = SpawnPos[2].position;
+            this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+        }
+        else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+        {
+            this.gameObject.transform.position = SpawnPos[3].position;
+            this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
+        }
             healthUI2.PlayerHealth = 100;
         }
     }

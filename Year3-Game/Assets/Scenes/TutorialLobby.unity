@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16482879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6471413429216083511, guid: 555b3837dafe6b8489e24183b67fff3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2041274483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &18612717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2237,6 +2243,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 063290ace046dfa49983ecc9335c477d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f28dfbbb255c6b94e8552e4865866064, type: 3}
+--- !u!1 &468262849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2571426827672897269, guid: 85bcf67fabef6fd4793cc4cff80d461a,
+    type: 3}
+  m_PrefabInstance: {fileID: 506267530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &482174031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,6 +3914,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 01fe5641766cb5342af4b3f7a2b19d6e,
     type: 3}
   m_PrefabInstance: {fileID: 1106267600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &939225976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 218970910587641325, guid: 6d1fff2fa28fc06428887b1f149e4944,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073890554}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &966511100
 GameObject:
@@ -9045,14 +9063,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4407
+      objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 468262849}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 939225976}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[2]
       value: 
@@ -9060,7 +9082,7 @@ PrefabInstance:
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 16482879}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: defaultSpawn
       value: 
