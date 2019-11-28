@@ -38,6 +38,14 @@ public class Grenade : MonoBehaviour
             if(rb != null)
             {
                 rb.AddExplosionForce(force * 10f, transform.position, radius);
+                if(rb.gameObject.name == "Player")
+                {
+                     GameObject.Find("Player").GetComponent<Target>().takeDamage(100f);
+                }
+                else if(rb.gameObject.name == "Player2")
+                {
+                     GameObject.Find("Player2").GetComponent<Target>().takeDamage(100f);
+                }
             }
         }
         Destroy(gameObject);

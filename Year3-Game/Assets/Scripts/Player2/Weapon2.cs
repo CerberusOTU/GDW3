@@ -99,6 +99,7 @@ public class Weapon2 : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
 
+    int grenadeAmount = 2;
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -133,44 +134,44 @@ public class Weapon2 : MonoBehaviour
         }
 
         Equip(0);
-/* 
-        //generate spawn transforms
-        for (int i = 0; i < 4; i++)
-        {
-            Transform temp = Instantiate(defaultSpawn.transform);
-            weaponSpawnPos.Add(temp);
-            //temp.transform.parent = this.transform;
-        }
+        /* 
+                //generate spawn transforms
+                for (int i = 0; i < 4; i++)
+                {
+                    Transform temp = Instantiate(defaultSpawn.transform);
+                    weaponSpawnPos.Add(temp);
+                    //temp.transform.parent = this.transform;
+                }
 
-        //set weapon spawn locations
+                //set weapon spawn locations
 
-        weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
-        weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+                weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
+                weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-        weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
-        weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+                weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
+                weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-        weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
-        weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
+                weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
+                weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
 
-        weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
-        weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
+                weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
+                weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
 
-        //random index number for spawn locations
-        var numList = new List<int>();
-        for (int k = 0; k < weaponSpawnPos.Count; k++)
-        {
-            numList.Add(k);
-        }
+                //random index number for spawn locations
+                var numList = new List<int>();
+                for (int k = 0; k < weaponSpawnPos.Count; k++)
+                {
+                    numList.Add(k);
+                }
 
-        numList = numList.OrderBy(i => Random.value).ToList();
+                numList = numList.OrderBy(i => Random.value).ToList();
 
-        //set the in scene guns to the random transforms
-        for (int i = 0; i < inSceneGuns.Length; i++)
-        {
-            inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
-            inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
-        } */
+                //set the in scene guns to the random transforms
+                for (int i = 0; i < inSceneGuns.Length; i++)
+                {
+                    inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
+                    inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
+                } */
 
     }
 
@@ -221,17 +222,23 @@ public class Weapon2 : MonoBehaviour
             AmmoText2.text = "0 / 0";
         }
 
-        if(controller.state2.Buttons.RightShoulder == ButtonState.Pressed) 
+        if (controller.state2.IsConnected)
         {
-            isCookingNade = true;
-            throwGrenade();
+            if (grenadeAmount > 0)
+            {
+                if (controller.state2.Buttons.RightShoulder == ButtonState.Pressed)
+                {
+                    isCookingNade = true;
+                    throwGrenade();
+                }
+                else if (controller.state2.Buttons.RightShoulder == ButtonState.Released && controller.prevState2.Buttons.RightShoulder == ButtonState.Pressed)
+                {
+                    isCookingNade = false;
+                    throwGrenade();
+                    grenadeAmount--;
+                }
+            }
         }
-        else if(controller.state2.Buttons.RightShoulder == ButtonState.Released && controller.prevState2.Buttons.RightShoulder == ButtonState.Pressed)
-        {
-            isCookingNade = false;
-            throwGrenade();
-        }
-
         if (loadout[currentIndex] == loadout[0])
         {
             temp = transform.localScale;
@@ -575,7 +582,8 @@ public class Weapon2 : MonoBehaviour
                     {
                         loadout[currentIndex].maxAmmo = tempReloadAmmo;
                         loadout[currentIndex].currentAmmo += tempAmmoNeeded;
-                    }else
+                    }
+                    else
                     {
                         loadout[currentIndex].currentAmmo += loadout[currentIndex].maxAmmo;
                     }

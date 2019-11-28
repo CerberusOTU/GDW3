@@ -99,6 +99,8 @@ public class Weapon : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
 
+    int grenadeAmount = 2;
+
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -219,18 +221,24 @@ public class Weapon : MonoBehaviour
         }
 
         //if (Input.GetButton("Grenade"))
-        if (controller.state.Buttons.RightShoulder == ButtonState.Pressed)
+        if (controller.state.IsConnected == true)
         {
-            isCookingNade = true;
-            throwGrenade();
+            if (grenadeAmount > 0)
+            {
+                if (controller.state.Buttons.RightShoulder == ButtonState.Pressed)
+                {
+                    isCookingNade = true;
+                    throwGrenade();
+                }
+                //else if (Input.GetButtonUp("Grenade"))
+                else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
+                {
+                    isCookingNade = false;
+                    throwGrenade();
+                    grenadeAmount--;
+                }
+            }
         }
-        //else if (Input.GetButtonUp("Grenade"))
-        else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
-        {
-            isCookingNade = false;
-            throwGrenade();
-        }
-
         if (loadout[currentIndex] == loadout[0])
         {
             temp = transform.localScale;
