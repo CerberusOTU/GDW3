@@ -583,6 +583,8 @@ public class Weapon : MonoBehaviour
         currentCool = loadout[currentIndex].firerate;
 
         _metricsLogger.shotsTaken++;
+        if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].ShotType == "Auto")
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
     }
 
     IEnumerator displayHitmark()
@@ -824,11 +826,16 @@ public class Weapon : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+                if(loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
+
                 if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
                     Shoot();
+                    
+
                 }
                 m_isAxisInUseDown = true;
             }

@@ -16,7 +16,7 @@ MonoBehaviour:
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -24,6 +24,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 720
+--- !u!114 &-6408470455986938122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104884419093697
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-6229537007065499189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +99,7 @@ MonoBehaviour:
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -105,7 +123,7 @@ MonoBehaviour:
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -205,6 +223,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-1773272255020143070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Movement/Footstep
+  m_EditorClassIdentifier: 
+  Path: event:/Movement/Footstep
+  guid: 1cc29dc0a0d95b468d6107d20a0678a1
+  Banks:
+  - {fileID: -6408470455986938122}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 464
 --- !u!114 &-1304757657524332531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +262,7 @@ MonoBehaviour:
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -284,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 3612592817936282641}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   EditorEvents:
   - {fileID: -7723304661962014055}
   - {fileID: 7226155635019862839}
@@ -293,12 +334,14 @@ MonoBehaviour:
   - {fileID: -1304757657524332531}
   - {fileID: -4651665653931959077}
   - {fileID: 800553534243533476}
+  - {fileID: 8274468749140000505}
+  - {fileID: -1773272255020143070}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   StringsBanks:
   - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637104786094303904
+  stringsBankWriteTime: 637104884419133553
   cacheVersion: 3
 --- !u!114 &800553534243533476
 MonoBehaviour:
@@ -316,7 +359,7 @@ MonoBehaviour:
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -381,7 +424,7 @@ MonoBehaviour:
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -449,11 +492,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637104786094303904
+  lastModified: 637104884419133553
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1028
+    Value: 1122
   Exists: 1
 --- !u!114 &5263156647008262442
 MonoBehaviour:
@@ -525,7 +568,7 @@ MonoBehaviour:
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
   - {fileID: -3204376194644351599}
-  - {fileID: -3532546677631078055}
+  - {fileID: -6408470455986938122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -597,6 +640,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &8274468749140000505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Effects/Dry Clip
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Effects/Dry Clip
+  guid: 0b3924e8fd41c443ade29417f4fcaabe
+  Banks:
+  - {fileID: -6408470455986938122}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &8642007781733243954
 MonoBehaviour:
   m_ObjectHideFlags: 0
