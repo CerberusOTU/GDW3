@@ -271,7 +271,7 @@ public class Weapon2 : MonoBehaviour
         }
 
 
-        if (loadout[currentIndex].currentAmmo == 0)
+        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
         {
             if (!PlayerisReloading)
             {

@@ -41,6 +41,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-5320102458645342806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Shots/ShotgunShot
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Shots/ShotgunShot
+  guid: 38ec56678615c44d923a9a876d0c8d79
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 8.549999
+  Length: 1992
 --- !u!114 &-4651665653931959077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +128,26 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3753627281536106910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637104786094303904
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1028
+  Exists: 1
 --- !u!114 &-2907827274661226305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +189,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &-830150022980774280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Shots/ColtShot
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Shots/ColtShot
+  guid: a40b06516ba3d04cababa29101b7b712
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1703
 --- !u!114 &-457511708256491474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,22 +243,22 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3612592817936282641}
-  - {fileID: 5993040016764728901}
+  - {fileID: -3753627281536106910}
+  - {fileID: 7337069696739367248}
   EditorEvents:
-  - {fileID: -7723304661962014055}
-  - {fileID: 7226155635019862839}
-  - {fileID: 3248565473415581204}
-  - {fileID: -4603507914258650615}
-  - {fileID: -1304757657524332531}
-  - {fileID: -4651665653931959077}
-  - {fileID: 800553534243533476}
+  - {fileID: 8255104413535532886}
+  - {fileID: 3588773615581697633}
+  - {fileID: -5320102458645342806}
+  - {fileID: 7252055945292269986}
+  - {fileID: -830150022980774280}
+  - {fileID: 3399715058996927235}
+  - {fileID: 1392271187463044586}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 7337069696739367248}
   StringsBanks:
-  - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637104739377959981
+  - {fileID: -3753627281536106910}
+  stringsBankWriteTime: 637104786094303904
   cacheVersion: 3
 --- !u!114 &800553534243533476
 MonoBehaviour:
@@ -210,6 +276,29 @@ MonoBehaviour:
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
   - {fileID: 5993040016764728901}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1200
+--- !u!114 &1392271187463044586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reloads/ColtReload
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reloads/ColtReload
+  guid: e03e62e27a987a45af107bcb6dbde8f6
+  Banks:
+  - {fileID: 7337069696739367248}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -258,6 +347,52 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 8.549999
   Length: 1992
+--- !u!114 &3399715058996927235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Shots/TommyShot
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Shots/TommyShot
+  guid: a67863ca8a555844873145e05d82a4cc
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 8.549999
+  Length: 1560
+--- !u!114 &3588773615581697633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Shots/RevolverShot
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Shots/RevolverShot
+  guid: 0e72423984dce54eb899208c66233cdd
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1703
 --- !u!114 &3612592817936282641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +490,47 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &7252055945292269986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Shots/MP40Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Shots/MP40Shot
+  guid: 65649dcbca169d478828b212a62395e3
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 755
+--- !u!114 &7337069696739367248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104786094226927
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &8158345966318302112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,3 +554,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &8255104413535532886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Test
+  m_EditorClassIdentifier: 
+  Path: event:/Test
+  guid: 0568fd6d660f4844ba678722eb778842
+  Banks:
+  - {fileID: 7337069696739367248}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 720

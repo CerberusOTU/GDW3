@@ -33,7 +33,7 @@ public class PlayerStatus : MonoBehaviour
         if (tookDamage == true && PlayerHealth > 10)
         {
             //PlayerHealth -= 10;
-            tempColor2.a = 0.8f;
+            tempColor2.a = 0.5f;
             tookDamage = false;
         }
         if (Input.GetKey(KeyCode.B) && PlayerHealth < 100)

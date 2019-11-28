@@ -101,7 +101,6 @@ public class Weapon : MonoBehaviour
 
     Score score;
 
-
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
@@ -222,13 +221,13 @@ public class Weapon : MonoBehaviour
         }
 
         //if (Input.GetButton("Grenade"))
-        if(controller.state.Buttons.RightShoulder == ButtonState.Pressed) 
+        if (controller.state.Buttons.RightShoulder == ButtonState.Pressed)
         {
             isCookingNade = true;
             throwGrenade();
         }
         //else if (Input.GetButtonUp("Grenade"))
-        else if(controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
+        else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
         {
             isCookingNade = false;
             throwGrenade();
@@ -278,8 +277,11 @@ public class Weapon : MonoBehaviour
             }
             reloadCancel = false;
             PlayerisReloading = true;
-            PlaySound(loadout[currentIndex].ReloadPath);
-
+            
+            if (loadout[currentIndex].maxAmmo > 0)
+            {
+                PlaySound(loadout[currentIndex].ReloadPath);
+            }
         }
 
         if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
@@ -390,7 +392,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-   
+
     void PlaySound(string ShotPath)
     {
         //FMODUnity.RuntimeManager.AttachInstanceToGameObject(path, GetComponent<Transform>().position);
@@ -603,7 +605,8 @@ public class Weapon : MonoBehaviour
                     {
                         loadout[currentIndex].maxAmmo = tempReloadAmmo;
                         loadout[currentIndex].currentAmmo += tempAmmoNeeded;
-                    }else
+                    }
+                    else
                     {
                         loadout[currentIndex].currentAmmo += loadout[currentIndex].maxAmmo;
                         loadout[currentIndex].maxAmmo = 0;
