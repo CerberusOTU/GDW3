@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
+
 public class Target : MonoBehaviour
 {
     public GameObject defaultSpawn;
@@ -9,12 +12,22 @@ public class Target : MonoBehaviour
     PlayerStatus healthUI;
     PlayerStatus2 healthUI2;
 
-    public float distanceToSpawnPoint1, distanceToSpawnPoint2, distanceToSpawnPoint3, distanceToSpawnPoint4;
+    public Image Grenade1;
+    public Image Grenade2;
+    public Image Player2Grenade1;
+    public Image Player2Grenade2;
+
+    private Weapon weaponScript;
+    private Weapon2 weaponScript2;
+
+    private float distanceToSpawnPoint1, distanceToSpawnPoint2, distanceToSpawnPoint3, distanceToSpawnPoint4;
 
     Score score;
     Score2 score2;
     void Start()
     {
+        weaponScript = GetComponent<Weapon>();
+        //weaponScript2 = GetComponent<Weapon2>();
 
         healthUI = GameObject.FindObjectOfType<PlayerStatus>();
         healthUI2 = GameObject.FindObjectOfType<PlayerStatus2>();
@@ -116,7 +129,13 @@ public class Target : MonoBehaviour
             this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
         }
             healthUI.PlayerHealth = 100;
+            Grenade1.enabled = true;
+            Grenade2.enabled = true;
+            weaponScript.grenadeAmount = 2;
+            Debug.Log("Grenades: " + weaponScript.grenadeAmount);
         }
+
+
         else
         {
             
@@ -150,7 +169,11 @@ public class Target : MonoBehaviour
             this.gameObject.transform.position = SpawnPos[3].position;
             this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
         }
-            healthUI2.PlayerHealth = 100;
+            healthUI2.PlayerHealth = 100;            
+            Player2Grenade1.enabled = true;
+            Player2Grenade2.enabled = true;
+            weaponScript2.grenadeAmount = 2;
+            Debug.Log("Grenades2: " + weaponScript2.grenadeAmount);
         }
     }
 }

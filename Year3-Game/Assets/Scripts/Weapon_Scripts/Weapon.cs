@@ -72,6 +72,9 @@ public class Weapon : MonoBehaviour
     public Image MainWeapon;
     public Image SideWeapon;
 
+    public Image Grenade1;
+    public Image Grenade2;    
+
     Vector3 temp;
     Vector3 temp2;
 
@@ -99,7 +102,7 @@ public class Weapon : MonoBehaviour
     public float throwForce = 40f;
     public GameObject grenadePrefab;
 
-    int grenadeAmount = 2;
+    public int grenadeAmount = 2;
 
 
     //**************TUTORIAL VARIABLES**************/
@@ -233,9 +236,20 @@ public class Weapon : MonoBehaviour
                 //else if (Input.GetButtonUp("Grenade"))
                 else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
                 {
-                    isCookingNade = false;
-                    throwGrenade();
-                    grenadeAmount--;
+                    if (grenadeAmount == 2)
+                    {
+                        Grenade1.enabled = false;
+                        isCookingNade = false;
+                        throwGrenade();
+                        grenadeAmount--;
+                    }
+                    else if (grenadeAmount == 1)
+                    {
+                        Grenade2.enabled = false;
+                        isCookingNade = false;
+                        throwGrenade();
+                        grenadeAmount--;
+                    }
                 }
             }
         }

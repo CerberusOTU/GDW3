@@ -4210,7 +4210,7 @@ GameObject:
   - component: {fileID: 266180517}
   - component: {fileID: 266180516}
   m_Layer: 5
-  m_Name: Grenade
+  m_Name: Grenade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4598,6 +4598,8 @@ MonoBehaviour:
   WeaponSlot2: {fileID: 876211190}
   MainWeapon: {fileID: 1945100882}
   SideWeapon: {fileID: 968440528}
+  Grenade1: {fileID: 1220231731}
+  Grenade2: {fileID: 1963530112}
   muzzleFlash: {fileID: 1994450960}
   M1911: {fileID: 11400000, guid: a72fca0ec53058c419125abf909126bc, type: 2}
   Tommy: {fileID: 11400000, guid: 36b2d035283fa40438325263850b714f, type: 2}
@@ -4606,6 +4608,7 @@ MonoBehaviour:
   throwForce: 40
   grenadePrefab: {fileID: 5474407304477632719, guid: b029acee6ddf3e242aee45adfc4855cc,
     type: 3}
+  grenadeAmount: 2
   _metricsLogger: {fileID: 0}
 --- !u!114 &275475524
 MonoBehaviour:
@@ -4621,10 +4624,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpawn: {fileID: 298256112}
   health: 100
-  distanceToSpawnPoint1: 0
-  distanceToSpawnPoint2: 0
-  distanceToSpawnPoint3: 0
-  distanceToSpawnPoint4: 0
+  Grenade1: {fileID: 266180516}
+  Grenade2: {fileID: 308402779}
+  Player2Grenade1: {fileID: 1220231731}
+  Player2Grenade2: {fileID: 1963530112}
 --- !u!114 &275475525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5085,7 +5088,7 @@ GameObject:
   - component: {fileID: 308402780}
   - component: {fileID: 308402779}
   m_Layer: 5
-  m_Name: Grenade (1)
+  m_Name: Grenade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14686,10 +14689,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpawn: {fileID: 298256112}
   health: 100
-  distanceToSpawnPoint1: 0
-  distanceToSpawnPoint2: 0
-  distanceToSpawnPoint3: 0
-  distanceToSpawnPoint4: 0
+  Grenade1: {fileID: 266180516}
+  Grenade2: {fileID: 308402779}
+  Player2Grenade1: {fileID: 1220231731}
+  Player2Grenade2: {fileID: 1963530112}
 --- !u!114 &897305085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20112,7 +20115,7 @@ GameObject:
   - component: {fileID: 1220231732}
   - component: {fileID: 1220231731}
   m_Layer: 5
-  m_Name: Grenade
+  m_Name: Player2Grenade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29594,7 +29597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.4000244, y: -0.3999939}
+  m_AnchoredPosition: {x: 0.4000244, y: -0.39996338}
   m_SizeDelta: {x: 8.82, y: 8.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1810149033
@@ -31496,7 +31499,7 @@ GameObject:
   - component: {fileID: 1963530113}
   - component: {fileID: 1963530112}
   m_Layer: 5
-  m_Name: Grenade (1)
+  m_Name: Player2Grenade2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34015,6 +34018,14 @@ PrefabInstance:
       propertyPath: maxAngle
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: Grenade1
+      value: 
+      objectReference: {fileID: 266180516}
+    - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: Grenade2
+      value: 
+      objectReference: {fileID: 308402779}
     - target: {fileID: 1834482321, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: partner
       value: 
