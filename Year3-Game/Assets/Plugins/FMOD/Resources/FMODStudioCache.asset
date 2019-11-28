@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/TommyShot
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/MP40Shot
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -181,7 +181,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/ColtShot
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -189,7 +189,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
---- !u!114 &-830150022980774280
+--- !u!114 &-1265041307202477000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,19 +199,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Gun Shots/ColtShot
+  m_Name: event:/Gun Effects/Dry Clip
   m_EditorClassIdentifier: 
-  Path: event:/Gun Shots/ColtShot
-  guid: a40b06516ba3d04cababa29101b7b712
+  Path: event:/Gun Effects/Dry Clip
+  guid: 0b3924e8fd41c443ade29417f4fcaabe
   Banks:
-  - {fileID: 7337069696739367248}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1703
+  Length: 500
 --- !u!114 &-457511708256491474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,22 +243,23 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -3753627281536106910}
-  - {fileID: 7337069696739367248}
+  - {fileID: 3612592817936282641}
+  - {fileID: 8642007781733243954}
   EditorEvents:
-  - {fileID: 8255104413535532886}
-  - {fileID: 3588773615581697633}
-  - {fileID: -5320102458645342806}
-  - {fileID: 7252055945292269986}
-  - {fileID: -830150022980774280}
-  - {fileID: 3399715058996927235}
-  - {fileID: 1392271187463044586}
+  - {fileID: -7723304661962014055}
+  - {fileID: 7226155635019862839}
+  - {fileID: 3248565473415581204}
+  - {fileID: -4603507914258650615}
+  - {fileID: -1304757657524332531}
+  - {fileID: -4651665653931959077}
+  - {fileID: 800553534243533476}
+  - {fileID: -1265041307202477000}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 7337069696739367248}
+  - {fileID: 8642007781733243954}
   StringsBanks:
-  - {fileID: -3753627281536106910}
-  stringsBankWriteTime: 637104786094303904
+  - {fileID: 3612592817936282641}
+  stringsBankWriteTime: 637104792219695080
   cacheVersion: 3
 --- !u!114 &800553534243533476
 MonoBehaviour:
@@ -275,7 +276,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ColtReload
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -339,7 +340,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/ShotgunShot
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -407,11 +408,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637104739377959981
+  lastModified: 637104792219695080
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1028
+    Value: 1074
   Exists: 1
 --- !u!114 &5263156647008262442
 MonoBehaviour:
@@ -482,7 +483,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/RevolverShot
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
-  - {fileID: 5993040016764728901}
+  - {fileID: 8642007781733243954}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -554,7 +555,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
---- !u!114 &8255104413535532886
+--- !u!114 &8642007781733243954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -563,17 +564,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Test
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: event:/Test
-  guid: 0568fd6d660f4844ba678722eb778842
-  Banks:
-  - {fileID: 7337069696739367248}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 720
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104792219655121
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1

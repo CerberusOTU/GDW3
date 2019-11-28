@@ -269,7 +269,7 @@ public class Weapon : MonoBehaviour
         }
 
 
-        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
+        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading && loadout[currentIndex].maxAmmo != 0)
         {
             if (!PlayerisReloading)
             {
@@ -283,6 +283,8 @@ public class Weapon : MonoBehaviour
                 PlaySound(loadout[currentIndex].ReloadPath);
             }
         }
+
+        
 
         if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
@@ -790,11 +792,16 @@ public class Weapon : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+                if (loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
+                }
                 if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
                     Shoot();
+                   
                 }
                 m_isAxisInUseDown = true;
             }
