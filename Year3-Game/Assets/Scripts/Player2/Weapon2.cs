@@ -479,6 +479,12 @@ public class Weapon2 : MonoBehaviour
                         _tutManager.Notify("SHOOTING_COMPLETE");
                 }
 
+                 if (hitInfo.collider.tag == "Wall")
+                {
+                    GameObject temp = _pool.GetBulletHole();
+                    temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                    temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                }
             }
         }
         else if (loadout[currentIndex].className != "Shotgun")
@@ -492,7 +498,13 @@ public class Weapon2 : MonoBehaviour
 
             }
 
-
+            
+        if (hitInfo.collider.tag == "Wall")
+        {
+            GameObject temp = _pool.GetBulletHole();
+            temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+            temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+        }
 
         }
 
@@ -517,12 +529,6 @@ public class Weapon2 : MonoBehaviour
                 _tutManager.Notify("SHOOTING_COMPLETE");
         }
 
-        if (hitInfo.collider.tag == "Wall")
-        {
-            GameObject temp = _pool.GetBulletHole();
-            temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-            temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-        }
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
