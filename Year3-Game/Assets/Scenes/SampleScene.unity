@@ -14727,25 +14727,6 @@ MonoBehaviour:
   player2: {fileID: 532474007}
   crossHair1: {fileID: 1838100414}
   crossHair2: {fileID: 663313123}
---- !u!95 &897305088
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897305075}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ff404694dd2d2d84b99fad83e97dc93d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &897305089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34157,7 +34138,8 @@ PrefabInstance:
       propertyPath: ySens
       value: 200
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7314245837929477656, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
 --- !u!4 &5006512735972138625 stripped
 Transform:
