@@ -297,13 +297,19 @@ public class Weapon2 : MonoBehaviour
             }
             reloadCancel = false;
             PlayerisReloading = true;
+            if (loadout[currentIndex].maxAmmo > 0)
+            {
+                PlaySound(loadout[currentIndex].ReloadPath);
+            }
         }
 
-        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize)
+        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
             reloadDelay = 0.0f;
+            PlaySound(loadout[currentIndex].ReloadPath);
+
         }
 
         //d > 0f is scrolling up
@@ -406,8 +412,18 @@ public class Weapon2 : MonoBehaviour
 
     }
 
+
+    void PlaySound(string ShotPath)
+    {
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(path, GetComponent<Transform>().position);
+        FMODUnity.RuntimeManager.PlayOneShotAttached(ShotPath, currentWeapon);
+
+        //FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
+    }
+
     void Shoot()
     {
+        PlaySound(loadout[currentIndex].ShotPath);
         muzzleFlash.Play();
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
@@ -549,6 +565,8 @@ public class Weapon2 : MonoBehaviour
         currentCool = loadout[currentIndex].firerate;
 
         _metricsLogger.shotsTaken++;
+        if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].ShotType == "Auto")
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
     }
 
     IEnumerator displayHitmark()
@@ -606,6 +624,7 @@ public class Weapon2 : MonoBehaviour
                     else
                     {
                         loadout[currentIndex].currentAmmo += loadout[currentIndex].maxAmmo;
+                        loadout[currentIndex].maxAmmo = 0;
                     }
                     PlayerisReloading = false;
                     Reloading.text = " ";
@@ -783,6 +802,8 @@ public class Weapon2 : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+                if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
                 if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
