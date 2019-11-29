@@ -7094,6 +7094,11 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6954534519188871642, guid: df0039fd95f43114a882e2612e46c5ca,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5a7bcce6f3822354d92826d0eefb8d5d, type: 2}
     m_RemovedComponents:
     - {fileID: 1834482315, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
     - {fileID: 1834482316, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
@@ -34202,6 +34207,11 @@ PrefabInstance:
       propertyPath: ySens
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 6954534519188871642, guid: df0039fd95f43114a882e2612e46c5ca,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5a7bcce6f3822354d92826d0eefb8d5d, type: 2}
     m_RemovedComponents:
     - {fileID: 7314245837929477656, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
