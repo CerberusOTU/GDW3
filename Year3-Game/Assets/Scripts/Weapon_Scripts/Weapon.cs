@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using XInputDotNetPure;
-
+using UnityEngine.SceneManagement;
 public class Weapon : MonoBehaviour
 {
     //Controller Variables//
@@ -138,6 +138,8 @@ public class Weapon : MonoBehaviour
         }
         Equip(0);
 
+        if(SceneManager.GetActiveScene().name == "SampleScene")
+        {
         //generate spawn transforms
         for (int i = 0; i < 4; i++)
         {
@@ -174,6 +176,7 @@ public class Weapon : MonoBehaviour
         {
             inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
             inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
+        }
         }
     }
 
