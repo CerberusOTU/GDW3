@@ -104,11 +104,19 @@ public class Weapon2 : MonoBehaviour
 
     public int grenadeAmount = 2;
 
+    public GameObject RobertoTommy;
+    public GameObject RobertoM1911;
+    public GameObject RobertoRevolver;
+    public GameObject RobertoMP40;
+    public GameObject RobertoShotgun;
+
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
     //Metrics Manager
     public MetricsLogger _metricsLogger;
+
+    
 
     void Start()
     {
@@ -203,6 +211,7 @@ public class Weapon2 : MonoBehaviour
         PickUp.enabled = false;
         SwitchWeapon();
         Reload();
+        MeshSwitch();
 
 
         float d = Input.GetAxis("Mouse ScrollWheel");
@@ -674,6 +683,8 @@ public class Weapon2 : MonoBehaviour
                         else if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
+                            scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
+                            scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -739,6 +750,9 @@ public class Weapon2 : MonoBehaviour
                         else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
+                            
+                            scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
+                            scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -774,6 +788,9 @@ public class Weapon2 : MonoBehaviour
                         else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
+                            
+                            scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
+                            scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
                         }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
@@ -872,6 +889,60 @@ public class Weapon2 : MonoBehaviour
                 rb_Grenade.freezeRotation = false;
                 rb_Grenade.AddForce(cam.transform.forward * throwForce, ForceMode.VelocityChange);
             }
+        }
+    }
+
+     void MeshSwitch()
+    {
+        if (loadout[currentIndex].name == "M1911")
+        {
+            RobertoM1911.transform.position = this.transform.position;
+            RobertoM1911.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Tommy")
+        {
+            RobertoTommy.transform.position = this.transform.position;
+            RobertoTommy.transform.rotation = this.transform.rotation;
+
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Revolver")
+        {
+            RobertoRevolver.transform.position = this.transform.position;
+            RobertoRevolver.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "MP40")
+        {
+            RobertoMP40.transform.position = this.transform.position;
+            RobertoMP40.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Shotgun")
+        {
+            RobertoShotgun.transform.position = this.transform.position;
+            RobertoShotgun.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
         }
     }
 }

@@ -73,7 +73,7 @@ public class Weapon : MonoBehaviour
     public Image SideWeapon;
 
     public Image Grenade1;
-    public Image Grenade2;    
+    public Image Grenade2;
 
     Vector3 temp;
     Vector3 temp2;
@@ -103,6 +103,16 @@ public class Weapon : MonoBehaviour
     public GameObject grenadePrefab;
 
     public int grenadeAmount = 2;
+
+    //Mesh Model Switch
+    public GameObject RobertoTommy;
+    public GameObject RobertoM1911;
+    public GameObject RobertoRevolver;
+    public GameObject RobertoMP40;
+    public GameObject RobertoShotgun;
+
+
+    //
 
 
     //**************TUTORIAL VARIABLES**************/
@@ -138,45 +148,45 @@ public class Weapon : MonoBehaviour
         }
         Equip(0);
 
-        if(SceneManager.GetActiveScene().name == "SampleScene")
+        if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-        //generate spawn transforms
-        for (int i = 0; i < 4; i++)
-        {
-            Transform temp = Instantiate(defaultSpawn.transform);
-            weaponSpawnPos.Add(temp);
-            //temp.transform.parent = this.transform;
-        }
+            //generate spawn transforms
+            for (int i = 0; i < 4; i++)
+            {
+                Transform temp = Instantiate(defaultSpawn.transform);
+                weaponSpawnPos.Add(temp);
+                //temp.transform.parent = this.transform;
+            }
 
-        //set weapon spawn locations
+            //set weapon spawn locations
 
-        weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
-        weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+            weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
+            weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-        weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
-        weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+            weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
+            weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
 
-        weaponSpawnPos[2].position = new Vector3(15.123f, 3.348f, 9.866f);
-        weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
+            weaponSpawnPos[2].position = new Vector3(15.123f, 4.75f, 9.866f);
+            weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
 
-        weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
-        weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
+            weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
+            weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
 
-        //random index number for spawn locations
-        var numList = new List<int>();
-        for (int k = 0; k < weaponSpawnPos.Count; k++)
-        {
-            numList.Add(k);
-        }
+            //random index number for spawn locations
+            var numList = new List<int>();
+            for (int k = 0; k < weaponSpawnPos.Count; k++)
+            {
+                numList.Add(k);
+            }
 
-        numList = numList.OrderBy(i => Random.value).ToList();
+            numList = numList.OrderBy(i => Random.value).ToList();
 
-        //set the in scene guns to the random transforms
-        for (int i = 0; i < inSceneGuns.Length; i++)
-        {
-            inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
-            inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
-        }
+            //set the in scene guns to the random transforms
+            for (int i = 0; i < inSceneGuns.Length; i++)
+            {
+                inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
+                inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
+            }
         }
     }
 
@@ -204,7 +214,7 @@ public class Weapon : MonoBehaviour
         PickUp.enabled = false;
         SwitchWeapon();
         Reload();
-
+        MeshSwitch();
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
@@ -413,19 +423,19 @@ public class Weapon : MonoBehaviour
         }
         //else if (!isAiming && player.isSprinting)
         //{ 
-            //Quaternion tempRot = Quaternion.Euler(0f,-10f,0f);
-            //Hip
-            //anchor.position = Vector3.Lerp(anchor.position, Sprint.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
+        //Quaternion tempRot = Quaternion.Euler(0f,-10f,0f);
+        //Hip
+        //anchor.position = Vector3.Lerp(anchor.position, Sprint.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
 
-            //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);
+        //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);
 
-           // anchor.rotation = Vector3.Lerp(anchor.rotation, SprintR.rotation, Time.deltaTime * loadout[currentIndex].aimSpeed);
-           // crossHair.enabled = true;
+        // anchor.rotation = Vector3.Lerp(anchor.rotation, SprintR.rotation, Time.deltaTime * loadout[currentIndex].aimSpeed);
+        // crossHair.enabled = true;
         //}
         else
-        { 
+        {
             //Hip
-             //Quaternion tempRot = Quaternion.Euler(0f,0f,0f);
+            //Quaternion tempRot = Quaternion.Euler(0f,0f,0f);
             //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);
             anchor.position = Vector3.Lerp(anchor.position, Hip.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
             crossHair.enabled = true;
@@ -701,6 +711,8 @@ public class Weapon : MonoBehaviour
                         else if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
+                            scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
+                            scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -766,6 +778,8 @@ public class Weapon : MonoBehaviour
                         else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
+                            scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
+                            scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
@@ -801,6 +815,8 @@ public class Weapon : MonoBehaviour
                         else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
+                            scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
+                            scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
                         }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
@@ -829,15 +845,15 @@ public class Weapon : MonoBehaviour
             {
                 tempTime = Time.time;
                 saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
-                if(loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
-                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
+                if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
 
                 if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
                 {
                     // Call your event function here.
                     origPosReset = false;
                     Shoot();
-                    
+
 
                 }
                 m_isAxisInUseDown = true;
@@ -903,4 +919,59 @@ public class Weapon : MonoBehaviour
             }
         }
     }
+    void MeshSwitch()
+    {
+        if (loadout[currentIndex].name == "M1911")
+        {
+            RobertoM1911.transform.position = this.transform.position;
+            RobertoM1911.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Tommy")
+        {
+            RobertoTommy.transform.position = this.transform.position;
+            RobertoTommy.transform.rotation = this.transform.rotation;
+
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Revolver")
+        {
+            RobertoRevolver.transform.position = this.transform.position;
+            RobertoRevolver.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "MP40")
+        {
+            RobertoMP40.transform.position = this.transform.position;
+            RobertoMP40.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+        else if (loadout[currentIndex].name == "Shotgun")
+        {
+            RobertoShotgun.transform.position = this.transform.position;
+            RobertoShotgun.transform.rotation = this.transform.rotation;
+
+            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
+            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
+        }
+    }
+
 }
+
