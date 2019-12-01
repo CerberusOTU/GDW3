@@ -509,7 +509,6 @@ public class Weapon : MonoBehaviour
             Target target;
             for (int j = 0; j < 8; j++)
             {
-
                 Physics.Raycast(spawn.position, bloomShotty[j], out hitInfo, 100f);
 
                 target = hitInfo.transform.GetComponent<Target>();

@@ -72,7 +72,6 @@ public class Tutorial_Manager2 : MonoBehaviour
             b_tutorialComplete = true;
         }else if(!b_tutorialComplete){
         
-
             tutorialGUI = GameObject.FindObjectOfType<Ingame_GUI2>();
             playerRB = this.GetComponent<Rigidbody>();
             playerCC = this.GetComponent<CapsuleCollider>();

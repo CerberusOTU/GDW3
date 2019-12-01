@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using UnityEngine.SceneManagement;
 public class Movement2 : MonoBehaviour
 {
     Controller controller;
@@ -42,12 +43,19 @@ public class Movement2 : MonoBehaviour
     private bool crouchInUse;
 
     private Vector3 targetVelocity;
+
+    //**************TUTORIAL VARIABLES**************/
+    [System.NonSerialized]
+    private Tutorial_Manager2 _tutManager;
+
+
     /////////////////
     void Start()
     {
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
         col = this.gameObject.GetComponent<BoxCollider>();
+        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager2>();
 
         distToGround = col.bounds.extents.y;
 
@@ -76,6 +84,12 @@ public class Movement2 : MonoBehaviour
             {
                 isCrouching = false;
             }
+            if (SceneManager.GetActiveScene().name == "TutorialLobby")
+            {
+            //Tutorial completion check
+            if (!_tutManager.b_crouchComplete)
+                _tutManager.Notify("CROUCH_COMPLETE");
+            }
         }
 
         if (isCrouching == false)
@@ -87,6 +101,8 @@ public class Movement2 : MonoBehaviour
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, baseCamTrans, Time.deltaTime * 5f);
 
         }
+
+        
 
     }
 

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using XInputDotNetPure;
+using UnityEngine.SceneManagement;
 
 public class Weapon2 : MonoBehaviour
 {
@@ -35,8 +36,6 @@ public class Weapon2 : MonoBehaviour
     public GameObject defaultSpawn;
     private List<Transform> weaponSpawnPos = new List<Transform>();
     public Transform weaponParent;
-
-
     private int currentIndex;
 
     private GameObject currentWeapon;
@@ -73,7 +72,7 @@ public class Weapon2 : MonoBehaviour
     public Image SideWeapon;
 
     public Image Grenade1;
-    public Image Grenade2;  
+    public Image Grenade2;
 
     Vector3 temp;
     Vector3 temp2;
@@ -114,7 +113,7 @@ public class Weapon2 : MonoBehaviour
     //Metrics Manager
     public MetricsLogger _metricsLogger;
 
-    
+
 
     void Start()
     {
@@ -240,8 +239,11 @@ public class Weapon2 : MonoBehaviour
                 {
                     isCookingNade = true;
                     throwGrenade();
-                    if (!_tutManager.b_grenadeComplete)
-                        _tutManager.Notify("GRENADE_COMPLETE");
+                    if (SceneManager.GetActiveScene().name == "TutorialLobby")
+                    {
+                        if (!_tutManager.b_grenadeComplete)
+                            _tutManager.Notify("GRENADE_COMPLETE");
+                    }
                 }
                 else if (controller.state2.Buttons.RightShoulder == ButtonState.Released && controller.prevState2.Buttons.RightShoulder == ButtonState.Pressed)
                 {
@@ -312,7 +314,7 @@ public class Weapon2 : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.G) ||controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if (Input.GetKeyDown(KeyCode.G) || controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -495,7 +497,7 @@ public class Weapon2 : MonoBehaviour
                     target.takeDamage(loadout[currentIndex].damage);
                 }
 
-                 if (hitInfo.collider.tag == "Wall")
+                if (hitInfo.collider.tag == "Wall")
                 {
                     GameObject temp = _pool.GetBulletHole();
                     temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
@@ -514,37 +516,38 @@ public class Weapon2 : MonoBehaviour
 
             }
 
-            
-        if (hitInfo.collider.tag == "Wall")
-        {
-            GameObject temp = _pool.GetBulletHole();
-            temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-            temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-        }
+
+            if (hitInfo.collider.tag == "Wall")
+            {
+                GameObject temp = _pool.GetBulletHole();
+                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            }
 
         }
 
+        if (SceneManager.GetActiveScene().name == "TutorialLobby")
+        {
+            //Shooting tasklist///////////
+            if (hitInfo.collider.name == "Cube (11)" && _tutManager.Target1 == false)
+            {
+                _tutManager.Target1 = true;
+            }
+            else if (hitInfo.collider.name == "Cube (10)" && _tutManager.Target2 == false)
+            {
+                _tutManager.Target2 = true;
+            }
+            else if (hitInfo.collider.name == "Cube (9)" && _tutManager.Target3 == false)
+            {
+                _tutManager.Target3 = true;
+            }
 
-        //Shooting tasklist///////////
-        if (hitInfo.collider.name == "Cube (11)" && _tutManager.Target1 == false)
-        {
-            _tutManager.Target1 = true;
+            if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
+            {
+                if (!_tutManager.b_shootingComplete)
+                    _tutManager.Notify("SHOOTING_COMPLETE");
+            }
         }
-        else if (hitInfo.collider.name == "Cube (10)" && _tutManager.Target2 == false)
-        {
-            _tutManager.Target2 = true;
-        }
-        else if (hitInfo.collider.name == "Cube (9)" && _tutManager.Target3 == false)
-        {
-            _tutManager.Target3 = true;
-        }
-    
-        if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-        {
-            if (!_tutManager.b_shootingComplete)
-                _tutManager.Notify("SHOOTING_COMPLETE");
-        }
-
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
@@ -617,9 +620,12 @@ public class Weapon2 : MonoBehaviour
 
                     tempTime = Time.time;
 
-                    // Tutorial completion check
-                    if (!_tutManager.b_reloadComplete)
-                        _tutManager.Notify("RELOAD_COMPLETE");
+                    if (SceneManager.GetActiveScene().name == "TutorialLobby")
+                    {
+                        // Tutorial completion check
+                        if (!_tutManager.b_reloadComplete)
+                            _tutManager.Notify("RELOAD_COMPLETE");
+                    }
                 }
             }
         }
@@ -727,7 +733,7 @@ public class Weapon2 : MonoBehaviour
                         else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
-                            
+
                             scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
                             scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
                         }
@@ -765,7 +771,7 @@ public class Weapon2 : MonoBehaviour
                         else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
-                            
+
                             scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
                             scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
                         }
@@ -778,10 +784,12 @@ public class Weapon2 : MonoBehaviour
                         loadout[0] = scriptOBJ[3];
                         Equip(0);
 
-                        // Tutorial completion check
-                        if (!_tutManager.b_swapComplete)
-                            _tutManager.Notify("SWAP_COMPLETE");
-
+                        if (SceneManager.GetActiveScene().name == "TutorialLobby")
+                        {
+                            // Tutorial completion check
+                            if (!_tutManager.b_swapComplete)
+                                _tutManager.Notify("SWAP_COMPLETE");
+                        }
                     }
                 }
             }
@@ -869,7 +877,7 @@ public class Weapon2 : MonoBehaviour
         }
     }
 
-     void MeshSwitch()
+    void MeshSwitch()
     {
         if (loadout[currentIndex].name == "M1911")
         {
