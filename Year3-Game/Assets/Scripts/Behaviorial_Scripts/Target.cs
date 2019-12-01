@@ -27,7 +27,7 @@ public class Target : MonoBehaviour
     void Start()
     {
         weaponScript = GetComponent<Weapon>();
-        //weaponScript2 = GetComponent<Weapon2>();
+        weaponScript2 = GetComponent<Weapon2>();
 
         healthUI = GameObject.FindObjectOfType<PlayerStatus>();
         healthUI2 = GameObject.FindObjectOfType<PlayerStatus2>();

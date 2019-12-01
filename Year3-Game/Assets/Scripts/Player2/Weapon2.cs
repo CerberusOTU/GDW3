@@ -96,8 +96,6 @@ public class Weapon2 : MonoBehaviour
     RaycastHit checkWeapon;
 
     //Throwing Grenade
-
-    //Throwing Grenade
     private bool isCookingNade = false;
     public float throwForce = 40f;
     public GameObject grenadePrefab;
@@ -112,7 +110,7 @@ public class Weapon2 : MonoBehaviour
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
-    public Tutorial_Manager _tutManager;
+    public Tutorial_Manager2 _tutManager;
     //Metrics Manager
     public MetricsLogger _metricsLogger;
 
@@ -122,7 +120,7 @@ public class Weapon2 : MonoBehaviour
     {
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
-        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
+        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager2>();
         _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
@@ -242,6 +240,8 @@ public class Weapon2 : MonoBehaviour
                 {
                     isCookingNade = true;
                     throwGrenade();
+                    if (!_tutManager.b_grenadeComplete)
+                        _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 else if (controller.state2.Buttons.RightShoulder == ButtonState.Released && controller.prevState2.Buttons.RightShoulder == ButtonState.Pressed)
                 {
@@ -312,7 +312,7 @@ public class Weapon2 : MonoBehaviour
             }
         }
 
-        if (controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if (Input.GetKeyDown(KeyCode.G) ||controller.state2.Buttons.X == ButtonState.Pressed && controller.prevState2.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -493,29 +493,6 @@ public class Weapon2 : MonoBehaviour
                 {
                     StartCoroutine(displayHitmark());
                     target.takeDamage(loadout[currentIndex].damage);
-
-
-
-                }
-
-                //Shooting tasklist///////////
-                if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-                {
-                    _tutManager.Target1 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-                {
-                    _tutManager.Target2 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-                {
-                    _tutManager.Target3 = true;
-                }
-
-                if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-                {
-                    if (!_tutManager.b_shootingComplete)
-                        _tutManager.Notify("SHOOTING_COMPLETE");
                 }
 
                  if (hitInfo.collider.tag == "Wall")
@@ -549,19 +526,19 @@ public class Weapon2 : MonoBehaviour
 
 
         //Shooting tasklist///////////
-        if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
+        if (hitInfo.collider.name == "Cube (11)" && _tutManager.Target1 == false)
         {
             _tutManager.Target1 = true;
         }
-        else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
+        else if (hitInfo.collider.name == "Cube (10)" && _tutManager.Target2 == false)
         {
             _tutManager.Target2 = true;
         }
-        else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
+        else if (hitInfo.collider.name == "Cube (9)" && _tutManager.Target3 == false)
         {
             _tutManager.Target3 = true;
         }
-
+    
         if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
         {
             if (!_tutManager.b_shootingComplete)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XRayToggle : MonoBehaviour
 {
-    private Camera cam;
+    public Camera cam;
     public GameObject partner;
     public Material baseMat;
     public Material xrayMat;
@@ -15,7 +15,6 @@ public class XRayToggle : MonoBehaviour
 
      void Start()
     {
-        cam = Camera.main;
         //Fetch the Material from the Renderer of the GameObject
         partner.GetComponent<MeshRenderer> ().material = baseMat;
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();

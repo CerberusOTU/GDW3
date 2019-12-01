@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TargetTut : MonoBehaviour
 {
-    
     public float health = 50f;
 
     public void takeDamage(float amount)

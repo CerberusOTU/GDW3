@@ -237,7 +237,7 @@ public class Weapon : MonoBehaviour
         }
 
         //if (Input.GetButton("Grenade"))
-        if (controller.state.IsConnected == true)
+        if (controller.state.IsConnected)
         {
             if (grenadeAmount > 0)
             {
@@ -245,6 +245,8 @@ public class Weapon : MonoBehaviour
                 {
                     isCookingNade = true;
                     throwGrenade();
+                     if (!_tutManager.b_grenadeComplete)
+                        _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 //else if (Input.GetButtonUp("Grenade"))
                 else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
@@ -317,7 +319,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if (Input.GetKeyDown(KeyCode.F) || controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
