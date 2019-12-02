@@ -9,6 +9,8 @@ public class Loading : MonoBehaviour
     [SerializeField]
     private Image progressBar;
 
+    public string sceneName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class Loading : MonoBehaviour
 
     IEnumerator LoadOperation()
     {
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync("SampleScene");
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(sceneName);
         
         while (gameLevel.progress < 1)
         {
