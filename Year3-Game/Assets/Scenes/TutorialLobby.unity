@@ -5842,6 +5842,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 8503
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8265784587154712445, guid: df0039fd95f43114a882e2612e46c5ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5896,14 +5904,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 8503
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[0]
@@ -6575,7 +6575,7 @@ MonoBehaviour:
     type: 3}
   RobertoShotgun: {fileID: -927199367670048503, guid: 8833be4dd2ef7dd4797b8de313a7dc8f,
     type: 3}
-  _metricsLogger: {fileID: 650330473}
+  _metricsLogger: {fileID: 0}
 --- !u!114 &650330470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6642,18 +6642,6 @@ MonoBehaviour:
   HintText: {fileID: 1889618659}
   CompleteText: {fileID: 398250054}
   cam: {fileID: 650330466}
---- !u!114 &650330473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650330465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bccadc84f08f46c4fb91ece9a72f4279, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &650330477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8265784587154712445, guid: df0039fd95f43114a882e2612e46c5ca,
@@ -8801,7 +8789,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966511100}
-  m_Material: {fileID: 13400000, guid: 7ff0ba6fee43c394a85382f2f5cc6374, type: 2}
+  m_Material: {fileID: 13400000, guid: b2adb05b12fd6014888f4db76ed5bcfd, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -14777,7 +14765,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712148254}
-  m_Material: {fileID: 13400000, guid: 7ff0ba6fee43c394a85382f2f5cc6374, type: 2}
+  m_Material: {fileID: 13400000, guid: b2adb05b12fd6014888f4db76ed5bcfd, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -17434,6 +17422,49 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6d2d13fa86e064245b1903aa9a79e63c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a602bc8946e9ae146ad5d78d837a156c, type: 3}
+--- !u!1 &2009786116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009786118}
+  - component: {fileID: 2009786117}
+  m_Layer: 0
+  m_Name: Countdown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2009786117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009786116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c8832d3ce460346b9e64633e43f71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2009786118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009786116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.168422, y: 5.050516, z: 21.116104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2015004729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18657,6 +18688,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4407
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8265784587154712445, guid: df0039fd95f43114a882e2612e46c5ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18711,18 +18754,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4407
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.size
