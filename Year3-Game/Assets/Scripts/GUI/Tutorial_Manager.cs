@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Tutorial_Manager : MonoBehaviour
@@ -14,6 +15,8 @@ public class Tutorial_Manager : MonoBehaviour
     public bool Target1 = false;
     public bool Target2 = false;
     public bool Target3 = false;
+
+    public int tutorialComplete = 0;
 
     // Game Achievement Triggers //
     public GameObject MovementTrigger; //WASD
@@ -90,6 +93,11 @@ public class Tutorial_Manager : MonoBehaviour
             HintText.enabled = false;
             //Give Hint
             GiveHint();
+        }
+
+        if (tutorialComplete == 2)
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 
@@ -194,6 +202,7 @@ public class Tutorial_Manager : MonoBehaviour
         {
             b_tutorialComplete = true;
             CompleteText.enabled = true;
+            tutorialComplete += 1;
         }
     }
 

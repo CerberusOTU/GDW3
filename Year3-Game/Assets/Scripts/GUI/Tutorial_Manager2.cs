@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Tutorial_Manager2 : MonoBehaviour
@@ -14,6 +15,8 @@ public class Tutorial_Manager2 : MonoBehaviour
     public bool Target1 = false;
     public bool Target2 = false;
     public bool Target3 = false;
+
+    private Tutorial_Manager TutManagerScript;
 
     // Game Achievement Triggers //
     public GameObject MovementTrigger; //WASD
@@ -57,6 +60,8 @@ public class Tutorial_Manager2 : MonoBehaviour
     void Start()
     {
         
+        TutManagerScript = GameObject.FindObjectOfType<Tutorial_Manager>();
+
         ///////////////COMPLETE/////////////// IGNORE TUTORIAL
         // Completion Bools
         if (b_tutorialComplete)
@@ -192,7 +197,13 @@ public class Tutorial_Manager2 : MonoBehaviour
         if (count == tasksCount)
         {
             b_tutorialComplete = true;
+            TutManagerScript.tutorialComplete += 1;
             CompleteText.enabled = true;
+        }
+
+        if (TutManagerScript.tutorialComplete == 2)
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 
