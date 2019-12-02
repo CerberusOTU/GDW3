@@ -26,6 +26,7 @@ public class Grenade : MonoBehaviour
         {
             Explode();
             hasExploded = true;
+
         }
     }
 
@@ -33,8 +34,11 @@ public class Grenade : MonoBehaviour
     {
         GameObject tempEffect = Instantiate(explosionEffect, transform.position, transform.rotation);
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
         foreach (Collider nearbyObj in colliders)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Throwables Effects/Grenade Explode", GetComponent<Transform>().position);
+
             Rigidbody rb = nearbyObj.GetComponent<Rigidbody>();
             if (rb != null)
             {
