@@ -15,7 +15,7 @@ MonoBehaviour:
   name: MP40
   className: SMG
   ShotType: Auto
-  damage: 6
+  damage: 7
   firerate: 0.1
   bloom: 15
   recoil: 1
@@ -26,9 +26,9 @@ MonoBehaviour:
   aimSpeed: 15
   reloadTime: 1
   alwaysMax: 120
-  maxAmmo: 9
+  maxAmmo: 120
   clipSize: 30
-  currentAmmo: 13
+  currentAmmo: 30
   ShotPath: event:/Gun Shots/MP40Shot
   ReloadPath: event:/Gun Reloads/ColtReload
   isReloading: 0

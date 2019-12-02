@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Revolver
   className: Pistol
   ShotType: Single
-  damage: 30
+  damage: 40
   firerate: 0.25
   bloom: 10
   recoil: 500
@@ -26,9 +26,9 @@ MonoBehaviour:
   aimSpeed: 15
   reloadTime: 1
   alwaysMax: 36
-  maxAmmo: 0
+  maxAmmo: 36
   clipSize: 6
-  currentAmmo: 0
+  currentAmmo: 6
   ShotPath: event:/Gun Shots/RevolverShot
   ReloadPath: event:/Gun Reloads/RevolverReload
   isReloading: 0

@@ -9,6 +9,14 @@ public class MenuControl : MonoBehaviour
     public Animator transitionsAnim;
     public string sceneName;
 
+    void Start()
+    {    
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+
+
     // Update is called once per frame
     public void PlayGame()
     {

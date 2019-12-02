@@ -6461,6 +6461,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 303765474, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476119516, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1834482315, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
     - {fileID: 1834482316, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
@@ -6522,7 +6530,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650330465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 080db11bc57a09f4d8a52d3d288b0095, type: 3}
   m_Name: 
@@ -19355,6 +19363,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 303765474, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476119516, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1099574784712521724, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
