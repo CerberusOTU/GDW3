@@ -3850,7 +3850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -80}
+  m_AnchoredPosition: {x: -0.000061035156, y: -52.35}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398250054
@@ -5177,7 +5177,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553274489}
-  m_Material: {fileID: 13400000, guid: 7ff0ba6fee43c394a85382f2f5cc6374, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5841,6 +5841,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 8503
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8265784587154712445, guid: df0039fd95f43114a882e2612e46c5ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5895,14 +5903,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 8503
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.data[0]
@@ -6454,6 +6454,11 @@ PrefabInstance:
     - target: {fileID: 1717178607, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: m_SizeDelta.y
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061224317707974530, guid: df0039fd95f43114a882e2612e46c5ca,
+        type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1834482315, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
@@ -16969,7 +16974,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968480975}
-  m_Material: {fileID: 13400000, guid: 7ff0ba6fee43c394a85382f2f5cc6374, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -18651,6 +18656,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4407
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8265784587154712445, guid: df0039fd95f43114a882e2612e46c5ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18705,18 +18722,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4407
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1834482320, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: inSceneGuns.Array.size
@@ -19313,6 +19318,11 @@ PrefabInstance:
     - target: {fileID: 1717178607, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
       propertyPath: m_SizeDelta.y
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061224317707974530, guid: df0039fd95f43114a882e2612e46c5ca,
+        type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -1099574784712521724, guid: df0039fd95f43114a882e2612e46c5ca, type: 3}
