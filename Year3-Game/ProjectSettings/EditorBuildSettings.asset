@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/_Scenes/Menu Scenes/Menu.unity
     guid: f39f0f8fb9e30734daeeabbbf568f3b2
   - enabled: 1
-    path: Assets/Scenes/TutorialLobby.unity
+    path: Assets/_Scenes/Tutorial Scenes/TutorialLobby.unity
     guid: f61033bb9b0f90e48aee77fa0f0b93d1
   - enabled: 1
-    path: Assets/Scenes/TutorialLoading.unity
+    path: Assets/_Scenes/Tutorial Scenes/TutorialLoading.unity
     guid: 0b20b839e58567d4fadaaf28d542f241
   - enabled: 1
-    path: Assets/Scenes/MainGameLoading.unity
+    path: Assets/_Scenes/Main Game Scenes/MainGameLoading.unity
     guid: 98b1ea83c4e7aa444ad42ce7872c4ad2
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/_Scenes/Main Game Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/afterGame.unity
+    path: Assets/_Scenes/Menu Scenes/afterGame.unity
     guid: 65926b2b4451387408498fa6dc13d804
   - enabled: 0
     path: Assets/Scenes/DelayStartMenu.unity
@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/DelayStartWaitingRoom.unity
     guid: d48a56b341d8b08478343d601a10fb78
   - enabled: 0
-    path: Assets/Scenes/MultiplayerScene.unity
+    path: Assets/_Scenes/Multiplayer Scenes/MultiplayerScene.unity
     guid: 33a8ec6552d4c4f4ea48d1e48f4a1f48
   m_configObjects: {}
