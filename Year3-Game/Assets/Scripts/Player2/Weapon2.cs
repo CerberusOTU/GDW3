@@ -111,7 +111,6 @@ public class Weapon2 : MonoBehaviour
     [System.NonSerialized]
     public Tutorial_Manager2 _tutManager;
     //Metrics Manager
-    public MetricsLogger _metricsLogger;
 
 
 
@@ -120,7 +119,6 @@ public class Weapon2 : MonoBehaviour
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager2>();
-        _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
@@ -553,15 +551,14 @@ public class Weapon2 : MonoBehaviour
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
 
-        _metricsLogger.shotsTaken++;
+        
         if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].ShotType == "Auto")
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
     }
 
     IEnumerator displayHitmark()
     {
-        _metricsLogger.shotsHit++;
-        Debug.Log(_metricsLogger.shotsHit);
+        
         hitMark.enabled = true;
 
         yield return new WaitForSeconds(0.05f);
