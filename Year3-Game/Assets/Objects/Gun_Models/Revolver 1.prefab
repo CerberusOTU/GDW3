@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8040136872058096676}
-  - component: {fileID: -7706435494981182079}
+  - component: {fileID: 8686937699828681950}
   m_Layer: 0
   m_Name: Revolver 1
   m_TagString: Weapon
@@ -110,8 +110,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-7706435494981182079
-MeshCollider:
+--- !u!65 &8686937699828681950
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,7 +120,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2432090755550338912, guid: 9ca75d12d2292cd46a40135e9e8e29e8, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.04044353, y: 0.13528357, z: 0.28033304}
+  m_Center: {x: -0.00000039108136, y: -0.11436564, z: 0.0055785067}
