@@ -112,8 +112,10 @@ public class Weapon : MonoBehaviour
     public GameObject RobertoShotgun;
 
 
-    //
-
+    public Image up_crosshair;
+    public Image down_crosshair;
+    public Image left_crosshair;
+    public Image right_crosshair;
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -215,6 +217,14 @@ public class Weapon : MonoBehaviour
         SwitchWeapon();
         Reload();
         MeshSwitch();
+
+        if(player.isSprinting)
+        {
+            up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 130.7f, up_crosshair.transform.localPosition.z);
+            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, 80.1f, down_crosshair.transform.localPosition.z);
+            left_crosshair.transform.localPosition = new Vector3(-27.3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
+            right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z); 
+        }
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
@@ -346,6 +356,7 @@ public class Weapon : MonoBehaviour
 
             getShootDown();
             getShootUp();
+
             /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
             {
                 origPosReset = false;
@@ -369,6 +380,11 @@ public class Weapon : MonoBehaviour
             }
 
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
+            up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, new Vector3(0.6f, 114.7f, 0f), Time.deltaTime * 4f);
+            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, 96.1f, 0.0f), Time.deltaTime * 4f);
+            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, 107f, 0.0f), Time.deltaTime * 4f);
+            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, 107f, 0.0f), Time.deltaTime * 4f);
+        
         }
 
 
@@ -502,6 +518,10 @@ public class Weapon : MonoBehaviour
 
         RaycastHit hitInfo = new RaycastHit();
 
+        up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, up_crosshair.transform.localPosition.y + 2, up_crosshair.transform.localPosition.z);
+        down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, down_crosshair.transform.localPosition.y - 2, down_crosshair.transform.localPosition.z);
+        left_crosshair.transform.localPosition = new Vector3(left_crosshair.transform.localPosition.x - 2, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
+        right_crosshair.transform.localPosition = new Vector3(right_crosshair.transform.localPosition.x + 2, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
 
         //bloom
         if (loadout[currentIndex].className == "Shotgun")
@@ -689,10 +709,16 @@ public class Weapon : MonoBehaviour
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
-                PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
-
+                if(controller.state.IsConnected)
+                {
+                    PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
+                }
+                else
+                {
+                    PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
+                }
                 //if the user presses E
-                if (controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && currentIndex == 0)
+                if ((controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released) || Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -840,6 +866,15 @@ public class Weapon : MonoBehaviour
 
     void getShootDown()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
+                {
+                    // Call your event function here.
+                    origPosReset = false;
+                    Shoot();
+                }
+        }
         if (controller.state.Triggers.Right == 1)
         {
             if (m_isAxisInUseDown == false)
@@ -854,12 +889,9 @@ public class Weapon : MonoBehaviour
                     // Call your event function here.
                     origPosReset = false;
                     Shoot();
-
-
                 }
                 m_isAxisInUseDown = true;
             }
-
         }
         if (controller.state.Triggers.Right < 1)
         {

@@ -43,7 +43,7 @@ public class Motion : MonoBehaviour
     private bool crouchLerp;
     private bool crouchInUse;
 
-
+    private float gravity;
     private Weapon _weapon; // Link Weapon Script
 
     //**************TUTORIAL VARIABLES**************/
@@ -200,6 +200,16 @@ public class Motion : MonoBehaviour
 
     void getJumpDown()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (jumpInUse == false && isGrounded())
+            {
+                // Call your event function here.
+                rb.AddForce(Vector3.up * (jumpForce * 10f), ForceMode.Impulse);
+                jumpInUse = true;
+            }
+        }
+
         if (controller.state.Buttons.A == ButtonState.Pressed)
         {
             if (jumpInUse == false && isGrounded())
@@ -277,11 +287,9 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
-        if (isGrounded())
-        {
-            targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-            rb.AddForce(targetVelocity, ForceMode.VelocityChange);
-        }
+        Vector3 dir = new Vector3(horizontalMove, 0, verticalMove);
+        dir.Normalize();
+        rb.velocity = transform.TransformDirection(dir) * adjustedSpeed * Time.deltaTime;
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity)
