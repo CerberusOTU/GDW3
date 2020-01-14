@@ -82,6 +82,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-7980158870466025421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Throwables Effects/Grenade Explode
+  m_EditorClassIdentifier: 
+  Path: event:/Throwables Effects/Grenade Explode
+  guid: afd67d4f13d3d44c98378ead58e1a579
+  Banks:
+  - {fileID: 240885355357866014}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0.6999999
+  MaxDistance: 4
+  Length: 2537
 --- !u!114 &-7855707139359441981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +166,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -197,6 +220,29 @@ MonoBehaviour:
   MinDistance: 0.6999999
   MaxDistance: 4
   Length: 2537
+--- !u!114 &-7076456094580690619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reloads/RevolverReload
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reloads/RevolverReload
+  guid: 9438b4985c34c342afa4772757f63535
+  Banks:
+  - {fileID: 240885355357866014}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1454
 --- !u!114 &-6563760465950259172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +478,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -483,7 +529,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -757,7 +803,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -907,7 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 3612592817936282641}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   EditorEvents:
   - {fileID: -7723304661962014055}
   - {fileID: 7226155635019862839}
@@ -917,12 +963,15 @@ MonoBehaviour:
   - {fileID: -4651665653931959077}
   - {fileID: 800553534243533476}
   - {fileID: 8274468749140000505}
+  - {fileID: 8356724863767302264}
+  - {fileID: -7076456094580690619}
+  - {fileID: -7980158870466025421}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   StringsBanks:
   - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637104786094303904
+  stringsBankWriteTime: 637145250638142444
   cacheVersion: 3
 --- !u!114 &168255402361263245
 MonoBehaviour:
@@ -947,6 +996,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &240885355357866014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637145250638122498
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &462968501647733033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,7 +1057,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1136,7 +1203,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1227,11 +1294,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637104786094303904
+  lastModified: 637145250638142444
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1028
+    Value: 1252
   Exists: 1
 --- !u!114 &4082514955449980104
 MonoBehaviour:
@@ -1450,7 +1517,7 @@ MonoBehaviour:
   - {fileID: -8019118921724566454}
   - {fileID: -5415242639226240937}
   - {fileID: 4756235572282203950}
-  - {fileID: -1895446717279745243}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1598,6 +1665,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -7830523699038832345}
   - {fileID: -5415242639226240937}
+  - {fileID: 240885355357866014}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1605,6 +1673,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &8356724863767302264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reloads/ShotgunReload
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reloads/ShotgunReload
+  guid: 36f891b3c431b34b900d5faf71adbf35
+  Banks:
+  - {fileID: 240885355357866014}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2460
 --- !u!114 &8562603649185769479
 MonoBehaviour:
   m_ObjectHideFlags: 0
