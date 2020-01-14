@@ -14,6 +14,8 @@ public class Motion : MonoBehaviour
     public float sprintModifier;
 
     public bool isSprinting;
+
+    private bool moving;
     private Rigidbody rb;
     private BoxCollider col;
     private float distToGround;
@@ -233,19 +235,28 @@ public class Motion : MonoBehaviour
             if (controller.state.IsConnected)
             {
                 horizontalMove = controller.state.ThumbSticks.Left.X;
+                moving = true;
             }
             else
             {
                 horizontalMove = Input.GetAxisRaw("Horizontal");
+                moving = true;
             }
             if (controller.state.IsConnected)
             {
                 verticalMove = controller.state.ThumbSticks.Left.Y;
+                moving = true;
             }
             else
             {
                 verticalMove = Input.GetAxisRaw("Vertical");
+                moving = true;
             }
+        }
+
+        if(horizontalMove == 0 && verticalMove == 0)
+        {
+            moving = false;
         }
 
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state.Buttons.LeftStick == ButtonState.Pressed;
@@ -287,9 +298,14 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
-        Vector3 dir = new Vector3(horizontalMove, 0, verticalMove);
-        dir.Normalize();
-        rb.velocity = transform.TransformDirection(dir) * adjustedSpeed * Time.deltaTime;
+         if(moving)
+          {
+              Vector3 movementSide = transform.right * horizontalMove;
+              Vector3 movementForward = transform.forward * verticalMove;
+  
+              rb.AddForce(movementSide * adjustedSpeed);
+              rb.AddForce(movementForward * adjustedSpeed);
+           } else {rb.velocity = Vector3.zero;}    
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity)
