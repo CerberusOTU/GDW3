@@ -125,9 +125,17 @@ public class Motion : MonoBehaviour
         }
     }
 
-
     void Update()
     {
+        if(!isGrounded())
+        {
+            rb.drag = 5f;
+        }
+        else
+        {
+            rb.drag = 2f;
+        }
+        
         //check crouch state
         //getCrouchDown();
         Crouch();
@@ -230,8 +238,8 @@ public class Motion : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isGrounded())
-        {
+        //if (isGrounded())
+        //{
             if (controller.state.IsConnected)
             {
                 horizontalMove = controller.state.ThumbSticks.Left.X;
@@ -252,7 +260,7 @@ public class Motion : MonoBehaviour
                 verticalMove = Input.GetAxisRaw("Vertical");
                 moving = true;
             }
-        }
+        //}
 
         if(horizontalMove == 0 && verticalMove == 0)
         {
@@ -297,15 +305,27 @@ public class Motion : MonoBehaviour
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
-
-         if(moving)
+          
+          if(moving)
           {
               Vector3 movementSide = transform.right * horizontalMove;
               Vector3 movementForward = transform.forward * verticalMove;
-  
+
+             if((Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) ) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+             {
+                rb.AddForce((movementSide * adjustedSpeed) / 1.5f);
+                rb.AddForce((movementForward * adjustedSpeed) / 1.5f);
+             }
+             else
+             {
               rb.AddForce(movementSide * adjustedSpeed);
               rb.AddForce(movementForward * adjustedSpeed);
-           } else {rb.velocity = Vector3.zero;}    
+             }
+           } 
+           else if(!moving && isGrounded())
+            {
+                rb.velocity = Vector3.zero;
+            }    
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity)
