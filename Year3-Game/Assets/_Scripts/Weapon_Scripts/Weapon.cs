@@ -220,8 +220,8 @@ public class Weapon : MonoBehaviour
 
         if(player.isSprinting)
         {
-            up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 130.7f, up_crosshair.transform.localPosition.z);
-            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, 80.1f, down_crosshair.transform.localPosition.z);
+            up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 20f, up_crosshair.transform.localPosition.z);
+            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, -31.1f, down_crosshair.transform.localPosition.z);
             left_crosshair.transform.localPosition = new Vector3(-27.3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
             right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z); 
         }
@@ -246,12 +246,9 @@ public class Weapon : MonoBehaviour
             AmmoText2.text = "0 / 0";
         }
 
-        //if (Input.GetButton("Grenade"))
-        if (controller.state.IsConnected)
-        {
-            if (grenadeAmount > 0)
+        if (grenadeAmount > 0)
             {
-                if (controller.state.Buttons.RightShoulder == ButtonState.Pressed)
+                if (Input.GetKey(KeyCode.G))
                 {
                     isCookingNade = true;
                     throwGrenade();
@@ -259,7 +256,38 @@ public class Weapon : MonoBehaviour
                         _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 //else if (Input.GetButtonUp("Grenade"))
-                else if (controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed)
+                else if (Input.GetKeyUp(KeyCode.G))
+                {
+                    if (grenadeAmount == 2)
+                    {
+                        Grenade1.enabled = false;
+                        isCookingNade = false;
+                        throwGrenade();
+                        grenadeAmount--;
+                    }
+                    else if (grenadeAmount == 1)
+                    {
+                        Grenade2.enabled = false;
+                        isCookingNade = false;
+                        throwGrenade();
+                        grenadeAmount--;
+                    }
+                }
+            }
+        //if (Input.GetButton("Grenade"))
+        if (controller.state.IsConnected)
+        {
+            if (grenadeAmount > 0)
+            {
+                if ((controller.state.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKey(KeyCode.G))
+                {
+                    isCookingNade = true;
+                    throwGrenade();
+                     if (!_tutManager.b_grenadeComplete)
+                        _tutManager.Notify("GRENADE_COMPLETE");
+                }
+                //else if (Input.GetButtonUp("Grenade"))
+                else if ((controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKeyUp(KeyCode.G))
                 {
                     if (grenadeAmount == 2)
                     {
@@ -329,7 +357,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F) || controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if (Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -380,10 +408,10 @@ public class Weapon : MonoBehaviour
             }
 
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
-            up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, new Vector3(0.6f, 114.7f, 0f), Time.deltaTime * 4f);
-            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, 96.1f, 0.0f), Time.deltaTime * 4f);
-            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, 107f, 0.0f), Time.deltaTime * 4f);
-            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, 107f, 0.0f), Time.deltaTime * 4f);
+            up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, new Vector3(0.6f, 4f, 0f), Time.deltaTime * 4f);
+            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, -15f, 0.0f), Time.deltaTime * 4f);
+            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, -4f, 0.0f), Time.deltaTime * 4f);
+            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, -4f, 0.0f), Time.deltaTime * 4f);
         
         }
 
@@ -573,11 +601,17 @@ public class Weapon : MonoBehaviour
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
             Target target = hitInfo.transform.GetComponent<Target>();
+            Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
+
             if (target != null)
             {
                 StartCoroutine(displayHitmark());
                 target.takeDamage(loadout[currentIndex].damage);
+            }
 
+            if (Monkey != null)
+            {
+                Monkey.shatterThis = true;
             }
 
             if (hitInfo.collider.tag == "Wall")
