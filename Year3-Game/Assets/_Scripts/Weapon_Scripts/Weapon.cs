@@ -45,6 +45,8 @@ public class Weapon : MonoBehaviour
     public Canvas hitMark;
 
     public Camera cam;
+    private float baseFOV;
+    private float FOVmod = 0.90f;
     //BulletHole Variables ////
     private PoolManager _pool;
     //////////////////////////
@@ -125,6 +127,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+          baseFOV = cam.fieldOfView;
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
@@ -464,6 +467,7 @@ public class Weapon : MonoBehaviour
         if (isAiming && !player.isSprinting)
         {
             //ADS
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
             anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
             crossHair.enabled = false;
         }
@@ -480,6 +484,7 @@ public class Weapon : MonoBehaviour
         //}
         else
         {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
             //Hip
             //Quaternion tempRot = Quaternion.Euler(0f,0f,0f);
             //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);

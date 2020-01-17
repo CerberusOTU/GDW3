@@ -291,15 +291,18 @@ public class Motion : MonoBehaviour
         //slow down character if walking and aiming down sights
         else if ((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == false)
         {
-            adjustedSpeed = speed / 1.5f;
+            //adjustedSpeed = speed / 1.5f;
+            adjustedSpeed = speed / 1.10f;
         }
         else if (isCrouching == true && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
         {
-            adjustedSpeed = speed / 1.85f;
+            //adjustedSpeed = speed / 1.85f;
+            adjustedSpeed = speed / 1.20f;
         }
         else if (isCrouching == true && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
         {
-            adjustedSpeed = speed / 1.75f;
+            //adjustedSpeed = speed / 1.75f;
+            adjustedSpeed = speed / 1.15f;
         }
         else
         {
@@ -313,8 +316,8 @@ public class Motion : MonoBehaviour
 
              if((Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) ) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
              {
-                rb.AddForce((movementSide * adjustedSpeed) / 1.5f);
-                rb.AddForce((movementForward * adjustedSpeed) / 1.5f);
+                rb.AddForce((movementSide * adjustedSpeed) / 1.375f);
+                rb.AddForce((movementForward * adjustedSpeed) / 1.375f);
              }
              else
              {
