@@ -568,9 +568,11 @@ public class Weapon : MonoBehaviour
 
                 if (target != null)
                 {
+                    if(hitInfo.collider.name == "Head")
+                    {
                     StartCoroutine(displayHitmark());
                     target.takeDamage(loadout[currentIndex].damage);
-
+                    }
                 }
 
                 //Shooting tasklist///////////
@@ -609,10 +611,18 @@ public class Weapon : MonoBehaviour
             Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
 
             if (target != null)
-            {
-                StartCoroutine(displayHitmark());
-                target.takeDamage(loadout[currentIndex].damage);
-            }
+                {
+                    if(hitInfo.collider.name == "Head")
+                    {
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage * 2);
+                    }
+                    else
+                    {
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage);
+                    }
+                }
 
             if (Monkey != null)
             {
