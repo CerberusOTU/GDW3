@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1229806699072517217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8460129327649420765}
+  m_Layer: 0
+  m_Name: CamHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8460129327649420765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229806699072517217}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6499999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1432445156551296838}
+  m_Father: {fileID: 7013483468840521039}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1432445155577208738
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,12 +185,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432445155899377196}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.004, y: 0.035, z: -0.012}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0040001892, y: 0.035000086, z: -0.012000086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7013483468840521039}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1432445156376011117
 GameObject:
@@ -220,7 +251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432445156551296835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1432445156997086674}
@@ -228,7 +259,7 @@ Transform:
   - {fileID: 1432445157037321192}
   - {fileID: 1432445156809318896}
   - {fileID: 2607112222651368506}
-  m_Father: {fileID: 7013483468840521039}
+  m_Father: {fileID: 8460129327649420765}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1432445156551296833
@@ -5631,7 +5662,6 @@ GameObject:
   - component: {fileID: 7013483468840521039}
   - component: {fileID: 1432445155675656383}
   - component: {fileID: 2115329130641513904}
-  - component: {fileID: 7159764396421079606}
   - component: {fileID: 1432445155675656377}
   - component: {fileID: 1432445155675656382}
   - component: {fileID: 1432445155675656354}
@@ -5659,9 +5689,9 @@ Transform:
   m_LocalPosition: {x: -10, y: 3.877, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1432445156551296838}
-  - {fileID: 1432445155899377197}
   - {fileID: 7013483468848038663}
+  - {fileID: 8460129327649420765}
+  - {fileID: 1432445155899377197}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -5694,28 +5724,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6672268, y: 1.8320873, z: 0.4402542}
   m_Center: {x: 0.010905266, y: 0.883144, z: -0.09808731}
---- !u!114 &7159764396421079606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273443734508453724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &1432445155675656377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5768,6 +5776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2e1611b297d50479df58ba517487e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
   loadout:
   - {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
   - {fileID: 11400000, guid: d6094e83348597041af0a56fd3dcb550, type: 2}
@@ -5815,6 +5824,10 @@ MonoBehaviour:
   RobertoRevolver: {fileID: 0}
   RobertoMP40: {fileID: 0}
   RobertoShotgun: {fileID: 0}
+  up_crosshair: {fileID: 0}
+  down_crosshair: {fileID: 0}
+  left_crosshair: {fileID: 0}
+  right_crosshair: {fileID: 0}
   _metricsLogger: {fileID: 0}
 --- !u!114 &1432445155675656355
 MonoBehaviour:
@@ -5980,7 +5993,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 3fb9f9a549c1d834cabf79c5dd2575d7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3fb9f9a549c1d834cabf79c5dd2575d7,
         type: 3}

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Grenade : MonoBehaviour
 {
+    //public CameraShake cameraShake;
     public GameObject explosionEffect;
     public float delay = 3f;
     public float radius = 5f;
@@ -38,6 +39,7 @@ public class Grenade : MonoBehaviour
         foreach (Collider nearbyObj in colliders)
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Throwables Effects/Grenade Explode", GetComponent<Transform>().position);
+         //   StartCoroutine(cameraShake.Shake(.15f,.4f));
 
             Rigidbody rb = nearbyObj.GetComponent<Rigidbody>();
             if (rb != null)

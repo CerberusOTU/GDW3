@@ -9706,6 +9706,18 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &464344920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464344914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607b136ed0e1b7047912616cc6ed2fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &479161039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a4f227a7b26c949818208e4953dcd1,
@@ -41962,6 +41974,11 @@ PrefabInstance:
       propertyPath: right_crosshair
       value: 
       objectReference: {fileID: 860969826}
+    - target: {fileID: 1432445155675656354, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 464344920}
     - target: {fileID: 1432445155675656355, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
       propertyPath: partner
@@ -42151,6 +42168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460129327649420765, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.65
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7159764396421079606, guid: a266bcd2f5fd2ef43a06b0f11bde65c4, type: 3}

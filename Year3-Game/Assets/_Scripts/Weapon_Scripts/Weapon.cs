@@ -7,6 +7,7 @@ using XInputDotNetPure;
 using UnityEngine.SceneManagement;
 public class Weapon : MonoBehaviour
 {
+    public CameraShake cameraShake;
     //Controller Variables//
     Controller controller;
 
@@ -36,6 +37,7 @@ public class Weapon : MonoBehaviour
     private List<Transform> weaponSpawnPos = new List<Transform>();
     public Transform weaponParent;
 
+    
 
     private int currentIndex;
 
@@ -397,6 +399,7 @@ public class Weapon : MonoBehaviour
             if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
+                StartCoroutine(cameraShake.Shake(.05f,.0001f));
                 Shoot();
             }
             // Return back to original left click position

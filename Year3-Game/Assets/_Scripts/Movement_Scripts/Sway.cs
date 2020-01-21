@@ -15,15 +15,17 @@ public class Sway : MonoBehaviour
 
     private void Update()
     {
-        UpdateSway();
+       UpdateSway();
     }
 
     private void UpdateSway()
     {
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
             intensity = 0;
         }
+        else
+            intensity = 1;
         //controls
         float xMouse = Input.GetAxis("Mouse X");
         float yMouse = Input.GetAxis("Mouse Y");
