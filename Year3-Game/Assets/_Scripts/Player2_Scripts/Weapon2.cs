@@ -508,6 +508,8 @@ public class Weapon2 : MonoBehaviour
         else if (loadout[currentIndex].className != "Shotgun")
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+            if(hitInfo.collider != null)
+            {
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
@@ -523,10 +525,10 @@ public class Weapon2 : MonoBehaviour
                 temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
                 temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
             }
-
+            }
         }
 
-        if (SceneManager.GetActiveScene().name == "TutorialLobby")
+        /* if (SceneManager.GetActiveScene().name == "TutorialLobby")
         {
             //Shooting tasklist///////////
             if (hitInfo.collider.name == "Cube (11)" && _tutManager.Target1 == false)
@@ -547,7 +549,7 @@ public class Weapon2 : MonoBehaviour
                 if (!_tutManager.b_shootingComplete)
                     _tutManager.Notify("SHOOTING_COMPLETE");
             }
-        }
+        } */
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;

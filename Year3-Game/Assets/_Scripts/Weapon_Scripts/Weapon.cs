@@ -7,7 +7,6 @@ using XInputDotNetPure;
 using UnityEngine.SceneManagement;
 public class Weapon : MonoBehaviour
 {
-    public CameraShake cameraShake;
     //Controller Variables//
     Controller controller;
 
@@ -37,7 +36,6 @@ public class Weapon : MonoBehaviour
     private List<Transform> weaponSpawnPos = new List<Transform>();
     public Transform weaponParent;
 
-    
 
     private int currentIndex;
 
@@ -399,7 +397,6 @@ public class Weapon : MonoBehaviour
             if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
-                StartCoroutine(cameraShake.Shake(.05f,.0001f));
                 Shoot();
             }
             // Return back to original left click position
@@ -610,6 +607,9 @@ public class Weapon : MonoBehaviour
         else if (loadout[currentIndex].className != "Shotgun")
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+
+            if(hitInfo.collider != null)
+            {
             Target target = hitInfo.transform.GetComponent<Target>();
             Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
 
@@ -638,11 +638,11 @@ public class Weapon : MonoBehaviour
                 temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
                 temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
             }
-
+            }
         }
 
 
-        //Shooting tasklist///////////
+        /* //Shooting tasklist///////////
         if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
         {
             _tutManager.Target1 = true;
@@ -662,7 +662,7 @@ public class Weapon : MonoBehaviour
                 _tutManager.Notify("SHOOTING_COMPLETE");
         }
 
-
+ */
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;

@@ -2434,6 +2434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 375d01a866fbdd64c92676378f9b21cc,
+        type: 3}
+      propertyPath: m_Name
+      value: OuterCasinoWall
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 375d01a866fbdd64c92676378f9b21cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2488,11 +2493,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 375d01a866fbdd64c92676378f9b21cc,
-        type: 3}
-      propertyPath: m_Name
-      value: OuterCasinoWall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 375d01a866fbdd64c92676378f9b21cc, type: 3}
@@ -8365,6 +8365,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 88f1547756553d34fbef2c25c9ec5727,
+        type: 3}
+      propertyPath: m_Name
+      value: StageRamp
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 88f1547756553d34fbef2c25c9ec5727,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8425,11 +8430,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1f97950411c2f1d42abb231bc25eaa5d, type: 2}
-    - target: {fileID: -927199367670048503, guid: 88f1547756553d34fbef2c25c9ec5727,
-        type: 3}
-      propertyPath: m_Name
-      value: StageRamp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88f1547756553d34fbef2c25c9ec5727, type: 3}
 --- !u!1001 &354591560
@@ -18134,6 +18134,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: e632d14a252d0354e97441e0068f3f9e,
+        type: 3}
+      propertyPath: m_Name
+      value: BallroomColumns
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e632d14a252d0354e97441e0068f3f9e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18194,11 +18199,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8f5e4c22ba876a0478db8ffdd3d34266, type: 2}
-    - target: {fileID: -927199367670048503, guid: e632d14a252d0354e97441e0068f3f9e,
-        type: 3}
-      propertyPath: m_Name
-      value: BallroomColumns
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e632d14a252d0354e97441e0068f3f9e, type: 3}
 --- !u!1001 &884515489
@@ -27388,6 +27388,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 8455a72ff4aee244fb686398ceb47438,
+        type: 3}
+      propertyPath: m_Name
+      value: BallroomWalls
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8455a72ff4aee244fb686398ceb47438,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27448,11 +27453,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1f97950411c2f1d42abb231bc25eaa5d, type: 2}
-    - target: {fileID: -927199367670048503, guid: 8455a72ff4aee244fb686398ceb47438,
-        type: 3}
-      propertyPath: m_Name
-      value: BallroomWalls
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8455a72ff4aee244fb686398ceb47438, type: 3}
 --- !u!1001 &1317607775
@@ -31613,6 +31613,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 35d46c62769d509428ee87563eb2dc95,
+        type: 3}
+      propertyPath: m_Name
+      value: Map3Walls
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 35d46c62769d509428ee87563eb2dc95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31673,11 +31678,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1f97950411c2f1d42abb231bc25eaa5d, type: 2}
-    - target: {fileID: -927199367670048503, guid: 35d46c62769d509428ee87563eb2dc95,
-        type: 3}
-      propertyPath: m_Name
-      value: Map3Walls
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35d46c62769d509428ee87563eb2dc95, type: 3}
 --- !u!1 &1567410470
@@ -40021,6 +40021,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 67093031aab154a49bc457053eab3007,
+        type: 3}
+      propertyPath: m_Name
+      value: BallroomRailings
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 67093031aab154a49bc457053eab3007,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40081,11 +40086,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fb3771ea3bdbb6941850076b7f370c0b, type: 2}
-    - target: {fileID: -927199367670048503, guid: 67093031aab154a49bc457053eab3007,
-        type: 3}
-      propertyPath: m_Name
-      value: BallroomRailings
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67093031aab154a49bc457053eab3007, type: 3}
 --- !u!4 &1963488468 stripped
@@ -42299,6 +42299,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 85bbc257b0d8d58458c67c2645c867a9,
+        type: 3}
+      propertyPath: m_Name
+      value: TommyAutoUnwrap
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 85bbc257b0d8d58458c67c2645c867a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42353,11 +42358,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 85bbc257b0d8d58458c67c2645c867a9,
-        type: 3}
-      propertyPath: m_Name
-      value: TommyAutoUnwrap
       objectReference: {fileID: 0}
     - target: {fileID: -5942217121317462581, guid: 85bbc257b0d8d58458c67c2645c867a9,
         type: 3}
@@ -44343,6 +44343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.103773594
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432445156551296833, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1432445155675656382, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
