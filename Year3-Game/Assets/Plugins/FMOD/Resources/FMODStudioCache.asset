@@ -211,8 +211,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -504,24 +503,6 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &-5406662101307760230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637145250638122498
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
 --- !u!114 &-5320102458645342806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,8 +573,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -648,8 +628,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -903,29 +882,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1454
---- !u!114 &-2922155957592260966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Gun Reloads/RevolverReload
-  m_EditorClassIdentifier: 
-  Path: event:/Gun Reloads/RevolverReload
-  guid: 9438b4985c34c342afa4772757f63535
-  Banks:
-  - {fileID: 8929055353854570136}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1454
 --- !u!114 &-2907827274661226305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,8 +1029,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1210,29 +1165,6 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &-158919530815690516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Throwables Effects/Grenade Explode
-  m_EditorClassIdentifier: 
-  Path: event:/Throwables Effects/Grenade Explode
-  guid: afd67d4f13d3d44c98378ead58e1a579
-  Banks:
-  - {fileID: 8929055353854570136}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0.6999999
-  MaxDistance: 4
-  Length: 2537
 --- !u!114 &-146178819580992488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,7 +1215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 3612592817936282641}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   EditorEvents:
   - {fileID: -7723304661962014055}
   - {fileID: 7226155635019862839}
@@ -1293,15 +1225,12 @@ MonoBehaviour:
   - {fileID: -4651665653931959077}
   - {fileID: 800553534243533476}
   - {fileID: 8274468749140000505}
-  - {fileID: 5465212442139634649}
-  - {fileID: -2922155957592260966}
-  - {fileID: -158919530815690516}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   StringsBanks:
   - {fileID: 3612592817936282641}
-  stringsBankWriteTime: 637145250638142444
+  stringsBankWriteTime: 637104786094303904
   cacheVersion: 3
 --- !u!114 &168255402361263245
 MonoBehaviour:
@@ -1391,8 +1320,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1400,29 +1328,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1200
---- !u!114 &1037565969312368400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Gun Reloads/RevolverReload
-  m_EditorClassIdentifier: 
-  Path: event:/Gun Reloads/RevolverReload
-  guid: 9438b4985c34c342afa4772757f63535
-  Banks:
-  - {fileID: -5406662101307760230}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1454
 --- !u!114 &1208309187628488711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,29 +1487,6 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &2467152036882167620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Gun Reloads/ShotgunReload
-  m_EditorClassIdentifier: 
-  Path: event:/Gun Reloads/ShotgunReload
-  guid: 36f891b3c431b34b900d5faf71adbf35
-  Banks:
-  - {fileID: -5406662101307760230}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2460
 --- !u!114 &2836827567460555134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,8 +1552,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1762,35 +1643,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637145250638142444
+  lastModified: 637104786094303904
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1252
+    Value: 1028
   Exists: 1
---- !u!114 &4007793042027926734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Throwables Effects/Grenade Explode
-  m_EditorClassIdentifier: 
-  Path: event:/Throwables Effects/Grenade Explode
-  guid: afd67d4f13d3d44c98378ead58e1a579
-  Banks:
-  - {fileID: -5406662101307760230}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0.6999999
-  MaxDistance: 4
-  Length: 2537
 --- !u!114 &4082514955449980104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1911,29 +1769,6 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &5465212442139634649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Gun Reloads/ShotgunReload
-  m_EditorClassIdentifier: 
-  Path: event:/Gun Reloads/ShotgunReload
-  guid: 36f891b3c431b34b900d5faf71adbf35
-  Banks:
-  - {fileID: 8929055353854570136}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2460
 --- !u!114 &5663106821046366349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2058,8 +1893,7 @@ MonoBehaviour:
   - {fileID: -8569071872090488115}
   - {fileID: 2443793283911247774}
   - {fileID: 7796915233535433547}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
+  - {fileID: 1869856461824281969}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2226,8 +2060,6 @@ MonoBehaviour:
   - {fileID: -7830523699038832345}
   - {fileID: -5415242639226240937}
   - {fileID: -8569071872090488115}
-  - {fileID: -5406662101307760230}
-  - {fileID: 8929055353854570136}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2295,24 +2127,6 @@ MonoBehaviour:
   Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637104792219655121
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &8929055353854570136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637145250638122498
   LoadResult: 0
   FileSizes: []
   Exists: 1
