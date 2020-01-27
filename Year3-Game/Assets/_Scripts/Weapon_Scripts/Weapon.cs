@@ -69,11 +69,11 @@ public class Weapon : MonoBehaviour
     public Text AmmoText2;
     public Text Reloading;
     public Text PickUp;
-    public Image WeaponSlot1;
-    public Image WeaponSlot2;
     public Image MainWeapon;
     public Image SideWeapon;
-
+    public Outline oln;
+    public Outline oln2;
+   
     public Image Grenade1;
     public Image Grenade2;
 
@@ -136,9 +136,24 @@ public class Weapon : MonoBehaviour
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
 
+        //MainWeapon = GetComponent<Outline>();
+        //SideWeapon = GetComponent<Outline>();
+
         temp2 = transform.localScale;
         temp2.x = 1f;
         temp2.y = 1f;
+
+        //Insantiate UI
+        oln.enabled = true;
+        oln2.enabled = false;
+
+        var tempColor = SideWeapon.color;
+        tempColor.a = 0.5f;
+        SideWeapon.color = tempColor;
+
+        var tempColor2 = MainWeapon.color;
+        tempColor2.a = 1f;
+        MainWeapon.color = tempColor2;
 
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].clipSize;
@@ -231,22 +246,22 @@ public class Weapon : MonoBehaviour
 
         float d = Input.GetAxis("Mouse ScrollWheel");
 
-        if (loadout[0].maxAmmo >= 0 && loadout[0].currentAmmo >= 0)
+        if (loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo >= 0)
         {
-            AmmoText.text = loadout[0].currentAmmo.ToString() + " / " + loadout[0].maxAmmo.ToString();
+            AmmoText.text = loadout[currentIndex].currentAmmo.ToString();
         }
         else
         {
-            AmmoText.text = "0 / 0";
+            AmmoText.text = "0";
         }
 
-        if (loadout[1].maxAmmo >= 0 && loadout[1].currentAmmo >= 0)
+        if (loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo >= 0)
         {
-            AmmoText2.text = loadout[1].currentAmmo.ToString() + " / " + loadout[1].maxAmmo.ToString();
+            AmmoText2.text =  loadout[currentIndex].maxAmmo.ToString();
         }
         else
         {
-            AmmoText2.text = "0 / 0";
+            AmmoText2.text = "0";
         }
 
         if (grenadeAmount > 0)
@@ -318,11 +333,11 @@ public class Weapon : MonoBehaviour
 
 
             //  AmmoText2.transform.localScale = temp;
-            WeaponSlot1.transform.localScale = temp;
+            //WeaponSlot1.transform.localScale = temp;
             //   SideWeapon.transform.localScale = temp;
             //////////
             //  AmmoText.transform.localScale = temp2;
-            WeaponSlot2.transform.localScale = temp2;
+            //WeaponSlot2.transform.localScale = temp2;
             //  MainWeapon.transform.localScale = temp2;
         }
 
@@ -335,17 +350,17 @@ public class Weapon : MonoBehaviour
 
 
             // AmmoText.transform.localScale = temp;
-            WeaponSlot2.transform.localScale = temp;
+            //WeaponSlot2.transform.localScale = temp;
             // MainWeapon.transform.localScale = temp;
-            //////
+           
             // AmmoText2.transform.localScale = temp2;
-            WeaponSlot1.transform.localScale = temp2;
+            //WeaponSlot1.transform.localScale = temp2;
             //SideWeapon.transform.localScale = temp2;
 
         }
 
 
-        if (loadout[currentIndex].currentAmmo == 0 && !PlayerisReloading)
+        if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo > 0 && !PlayerisReloading)
         {
             if (!PlayerisReloading)
             {
@@ -360,7 +375,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -374,11 +389,31 @@ public class Weapon : MonoBehaviour
         {
             reloadCancel = true;
             Equip(0);
+            oln.enabled = true;
+            oln2.enabled = false;
+
+            var tempColor = SideWeapon.color;
+            tempColor.a = 0.5f;
+            SideWeapon.color = tempColor;
+
+            var tempColor2 = MainWeapon.color;
+            tempColor2.a = 1f;
+            MainWeapon.color = tempColor2;
         }
         else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
         {
             reloadCancel = true;
             Equip(1);
+            oln.enabled = false;
+            oln2.enabled = true;
+
+            var tempColor = SideWeapon.color;
+            tempColor.a = 1f;
+            SideWeapon.color = tempColor;
+
+            var tempColor2 = MainWeapon.color;
+            tempColor2.a = 0.5f;
+            MainWeapon.color = tempColor2;
         }
 
         if (currentWeapon != null)
@@ -505,7 +540,7 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        PlaySound(loadout[currentIndex].ShotPath);
+       PlaySound(loadout[currentIndex].ShotPath);
         muzzleFlash.Play();
 
         Transform spawn = cam.transform;
