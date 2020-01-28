@@ -73,7 +73,12 @@ public class Weapon : MonoBehaviour
     public Image SideWeapon;
     public Outline oln;
     public Outline oln2;
-   
+
+    public Sprite TommySprite;
+    public Sprite MP40Sprite;
+    public Sprite ShotgunSprite;
+    public Sprite RevolverSprite;
+
     public Image Grenade1;
     public Image Grenade2;
 
@@ -119,6 +124,8 @@ public class Weapon : MonoBehaviour
     public Image left_crosshair;
     public Image right_crosshair;
 
+
+
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
@@ -127,7 +134,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-          baseFOV = cam.fieldOfView;
+        baseFOV = cam.fieldOfView;
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
@@ -136,7 +143,7 @@ public class Weapon : MonoBehaviour
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
 
-        //MainWeapon = GetComponent<Outline>();
+        //MainWeapon = GetComponent<Image>();
         //SideWeapon = GetComponent<Outline>();
 
         temp2 = transform.localScale;
@@ -155,10 +162,12 @@ public class Weapon : MonoBehaviour
         tempColor2.a = 1f;
         MainWeapon.color = tempColor2;
 
+
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].clipSize;
         loadout[1].maxAmmo = loadout[1].alwaysMax;
         loadout[1].isReloading = false;
+
         //primary guns reset ammo
         for (int i = 0; i < scriptOBJ.Length; i++)
         {
@@ -236,12 +245,12 @@ public class Weapon : MonoBehaviour
         Reload();
         MeshSwitch();
 
-        if(player.isSprinting)
+        if (player.isSprinting)
         {
             up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 20f, up_crosshair.transform.localPosition.z);
             down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, -31.1f, down_crosshair.transform.localPosition.z);
             left_crosshair.transform.localPosition = new Vector3(-27.3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
-            right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z); 
+            right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
         }
 
         float d = Input.GetAxis("Mouse ScrollWheel");
@@ -257,7 +266,7 @@ public class Weapon : MonoBehaviour
 
         if (loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo >= 0)
         {
-            AmmoText2.text =  loadout[currentIndex].maxAmmo.ToString();
+            AmmoText2.text = loadout[currentIndex].maxAmmo.ToString();
         }
         else
         {
@@ -265,33 +274,33 @@ public class Weapon : MonoBehaviour
         }
 
         if (grenadeAmount > 0)
+        {
+            if (Input.GetKey(KeyCode.G))
             {
-                if (Input.GetKey(KeyCode.G))
+                isCookingNade = true;
+                throwGrenade();
+                if (!_tutManager.b_grenadeComplete)
+                    _tutManager.Notify("GRENADE_COMPLETE");
+            }
+            //else if (Input.GetButtonUp("Grenade"))
+            else if (Input.GetKeyUp(KeyCode.G))
+            {
+                if (grenadeAmount == 2)
                 {
-                    isCookingNade = true;
+                    Grenade1.enabled = false;
+                    isCookingNade = false;
                     throwGrenade();
-                     if (!_tutManager.b_grenadeComplete)
-                        _tutManager.Notify("GRENADE_COMPLETE");
+                    grenadeAmount--;
                 }
-                //else if (Input.GetButtonUp("Grenade"))
-                else if (Input.GetKeyUp(KeyCode.G))
+                else if (grenadeAmount == 1)
                 {
-                    if (grenadeAmount == 2)
-                    {
-                        Grenade1.enabled = false;
-                        isCookingNade = false;
-                        throwGrenade();
-                        grenadeAmount--;
-                    }
-                    else if (grenadeAmount == 1)
-                    {
-                        Grenade2.enabled = false;
-                        isCookingNade = false;
-                        throwGrenade();
-                        grenadeAmount--;
-                    }
+                    Grenade2.enabled = false;
+                    isCookingNade = false;
+                    throwGrenade();
+                    grenadeAmount--;
                 }
             }
+        }
         //if (Input.GetButton("Grenade"))
         if (controller.state.IsConnected)
         {
@@ -301,7 +310,7 @@ public class Weapon : MonoBehaviour
                 {
                     isCookingNade = true;
                     throwGrenade();
-                     if (!_tutManager.b_grenadeComplete)
+                    if (!_tutManager.b_grenadeComplete)
                         _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 //else if (Input.GetButtonUp("Grenade"))
@@ -330,15 +339,7 @@ public class Weapon : MonoBehaviour
 
             temp.x = 0.75f;
             temp.y = 0.75f;
-
-
-            //  AmmoText2.transform.localScale = temp;
-            //WeaponSlot1.transform.localScale = temp;
-            //   SideWeapon.transform.localScale = temp;
-            //////////
-            //  AmmoText.transform.localScale = temp2;
-            //WeaponSlot2.transform.localScale = temp2;
-            //  MainWeapon.transform.localScale = temp2;
+                                   
         }
 
         if (loadout[currentIndex] == loadout[1])
@@ -347,15 +348,6 @@ public class Weapon : MonoBehaviour
 
             temp.x = 0.75f;
             temp.y = 0.75f;
-
-
-            // AmmoText.transform.localScale = temp;
-            //WeaponSlot2.transform.localScale = temp;
-            // MainWeapon.transform.localScale = temp;
-           
-            // AmmoText2.transform.localScale = temp2;
-            //WeaponSlot1.transform.localScale = temp2;
-            //SideWeapon.transform.localScale = temp2;
 
         }
 
@@ -415,6 +407,26 @@ public class Weapon : MonoBehaviour
             tempColor2.a = 0.5f;
             MainWeapon.color = tempColor2;
         }
+        
+        //UI weapon switch
+        if (loadout[0].name == "Tommy")
+        {
+            MainWeapon.sprite = TommySprite;
+        }
+        else if (loadout[0].name == "MP40")
+        {
+            MainWeapon.sprite = MP40Sprite;
+
+        }
+        else if (loadout[0].name == "Revolver")
+        {
+            MainWeapon.sprite = RevolverSprite;
+        }
+        else if (loadout[0].name == "Shotgun")
+        {
+            MainWeapon.sprite = ShotgunSprite;
+
+        }
 
         if (currentWeapon != null)
         {
@@ -450,7 +462,7 @@ public class Weapon : MonoBehaviour
             down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, -15f, 0.0f), Time.deltaTime * 4f);
             left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, -4f, 0.0f), Time.deltaTime * 4f);
             right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, -4f, 0.0f), Time.deltaTime * 4f);
-        
+
         }
 
 
@@ -540,7 +552,7 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-       PlaySound(loadout[currentIndex].ShotPath);
+        PlaySound(loadout[currentIndex].ShotPath);
         muzzleFlash.Play();
 
         Transform spawn = cam.transform;
@@ -603,10 +615,10 @@ public class Weapon : MonoBehaviour
 
                 if (target != null)
                 {
-                    if(hitInfo.collider.name == "Head")
+                    if (hitInfo.collider.name == "Head")
                     {
-                    StartCoroutine(displayHitmark());
-                    target.takeDamage(loadout[currentIndex].damage);
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage);
                     }
                 }
 
@@ -643,14 +655,14 @@ public class Weapon : MonoBehaviour
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
 
-            if(hitInfo.collider != null)
+            if (hitInfo.collider != null)
             {
-            Target target = hitInfo.transform.GetComponent<Target>();
-            Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
+                Target target = hitInfo.transform.GetComponent<Target>();
+                Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
 
-            if (target != null)
+                if (target != null)
                 {
-                    if(hitInfo.collider.name == "Head")
+                    if (hitInfo.collider.name == "Head")
                     {
                         StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage * 2);
@@ -662,17 +674,17 @@ public class Weapon : MonoBehaviour
                     }
                 }
 
-            if (Monkey != null)
-            {
-                Monkey.shatterThis = true;
-            }
+                if (Monkey != null)
+                {
+                    Monkey.shatterThis = true;
+                }
 
-            if (hitInfo.collider.tag == "Wall")
-            {
-                GameObject temp = _pool.GetBulletHole();
-                temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-            }
+                if (hitInfo.collider.tag == "Wall")
+                {
+                    GameObject temp = _pool.GetBulletHole();
+                    temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                    temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                }
             }
         }
 
@@ -796,7 +808,7 @@ public class Weapon : MonoBehaviour
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
-                if(controller.state.IsConnected)
+                if (controller.state.IsConnected)
                 {
                     PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
                 }
@@ -821,16 +833,19 @@ public class Weapon : MonoBehaviour
                         else if (loadout[0].name == "MP40")
                         {
                             tempMesh = gunMeshes[2];
+
                         }
                         else if (loadout[0].name == "Revolver")
                         {
                             tempMesh = gunMeshes[1];
+
                             scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
                             scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
                         }
                         else if (loadout[0].name == "Shotgun")
                         {
                             tempMesh = gunMeshes[3];
+
                         }
 
                         GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
@@ -953,14 +968,14 @@ public class Weapon : MonoBehaviour
 
     void getShootDown()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
-                {
-                    // Call your event function here.
-                    origPosReset = false;
-                    Shoot();
-                }
+            {
+                // Call your event function here.
+                origPosReset = false;
+                Shoot();
+            }
         }
         if (controller.state.Triggers.Right == 1)
         {
