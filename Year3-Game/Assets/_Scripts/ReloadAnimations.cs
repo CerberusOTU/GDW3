@@ -51,6 +51,7 @@ public class ReloadAnimations : MonoBehaviour
             {
                 if (m_Jump == false)
                 m_Animator.SetBool("tommyReload", false);
+                m_Animator.SetBool("MP40Reloading", false);
             }
         }
 
@@ -64,7 +65,10 @@ public class ReloadAnimations : MonoBehaviour
             if(m_Animator.runtimeAnimatorController!=null)
             {
                 if (m_Jump == true)
+                {
                 m_Animator.SetBool("tommyReload", true);
+                m_Animator.SetBool("MP40Reloading", true);
+                }
             }
         }
     }
