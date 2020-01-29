@@ -34,7 +34,7 @@ public class ReloadAnimations : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             m_Jump = true;
-            counter2 = counter1 + 55;
+            counter2 = counter1 + 100;
         }             
 
 
