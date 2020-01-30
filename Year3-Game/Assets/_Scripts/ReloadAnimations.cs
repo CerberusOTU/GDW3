@@ -34,7 +34,7 @@ public class ReloadAnimations : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             m_Jump = true;
-            counter2 = counter1 + 100;
+            counter2 = counter1 + 120;
         }             
 
 
@@ -52,6 +52,7 @@ public class ReloadAnimations : MonoBehaviour
                 if (m_Jump == false)
                 m_Animator.SetBool("tommyReload", false);
                 m_Animator.SetBool("MP40Reloading", false);
+                m_Animator.SetBool("M1911Reload", false);
             }
         }
 
@@ -68,6 +69,7 @@ public class ReloadAnimations : MonoBehaviour
                 {
                 m_Animator.SetBool("tommyReload", true);
                 m_Animator.SetBool("MP40Reloading", true);
+                m_Animator.SetBool("M1911Reload", true);                
                 }
             }
         }
