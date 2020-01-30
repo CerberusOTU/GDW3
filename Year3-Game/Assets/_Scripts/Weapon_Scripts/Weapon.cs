@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour
     public Transform weaponParent;
 
 
-    private int currentIndex;
+    public int currentIndex;
 
     private GameObject currentWeapon;
 
@@ -176,12 +176,12 @@ public class Weapon : MonoBehaviour
             scriptOBJ[i].maxAmmo = scriptOBJ[i].alwaysMax;
             scriptOBJ[i].isReloading = false;
         }
-       
+
         loadout[0] = null;
 
         Equip(1);
 
- 
+
 
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
@@ -347,7 +347,7 @@ public class Weapon : MonoBehaviour
 
             temp.x = 0.75f;
             temp.y = 0.75f;
-                                   
+
         }
 
         if (loadout[currentIndex] == loadout[1])
@@ -391,16 +391,16 @@ public class Weapon : MonoBehaviour
             {
                 reloadCancel = true;
                 Equip(0);
-                oln.enabled = true;
-                oln2.enabled = false;
+                //oln.enabled = true;
+                //oln2.enabled = false;
 
-                var tempColor = SideWeapon.color;
-                tempColor.a = 0.5f;
-                SideWeapon.color = tempColor;
+                //var tempColor = SideWeapon.color;
+                //tempColor.a = 0.5f;
+                //SideWeapon.color = tempColor;
 
-                var tempColor2 = MainWeapon.color;
-                tempColor2.a = 1f;
-                MainWeapon.color = tempColor2;
+                //var tempColor2 = MainWeapon.color;
+                //tempColor2.a = 1f;
+                //MainWeapon.color = tempColor2;
             }
             else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
             {
@@ -417,6 +417,35 @@ public class Weapon : MonoBehaviour
                 tempColor2.a = 0.5f;
                 MainWeapon.color = tempColor2;
             }
+        }
+
+
+        if (currentIndex == 0)
+        {
+            oln.enabled = true;
+            oln2.enabled = false;
+
+            var tempColor = SideWeapon.color;
+            tempColor.a = 0.5f;
+            SideWeapon.color = tempColor;
+
+            var tempColor2 = MainWeapon.color;
+            tempColor2.a = 1f;
+            MainWeapon.color = tempColor2;
+        }
+        else if (currentIndex == 1)
+        {
+            oln.enabled = false;
+            oln2.enabled = true;
+
+            var tempColor = SideWeapon.color;
+            tempColor.a = 1f;
+            SideWeapon.color = tempColor;
+
+            var tempColor2 = MainWeapon.color;
+            tempColor2.a = 0.5f;
+            MainWeapon.color = tempColor2;
+
         }
 
         //UI weapon switch
@@ -443,8 +472,10 @@ public class Weapon : MonoBehaviour
             }
         }
         else
+        {
             MainWeapon.enabled = false;
-   
+        }
+
 
         if (currentWeapon != null)
         {
@@ -503,7 +534,7 @@ public class Weapon : MonoBehaviour
 
     }
 
-    void Equip(int _ind)
+    public void Equip(int _ind)
     {
         if (currentWeapon != null)
         {
@@ -865,7 +896,7 @@ public class Weapon : MonoBehaviour
                             else if (loadout[0].name == "Shotgun")
                             {
                                 tempMesh = gunMeshes[3];
-                                
+
                             }
                         }
                         else
@@ -876,7 +907,10 @@ public class Weapon : MonoBehaviour
                             scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
                             scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
 
+
                             Destroy(checkWeapon.collider.gameObject);
+                            Equip(0);
+
 
                         }
 
@@ -885,7 +919,7 @@ public class Weapon : MonoBehaviour
                             GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                             switched.name = loadout[0].name;
                         }
-               
+
                         Destroy(checkWeapon.collider.gameObject);
 
 
@@ -928,6 +962,7 @@ public class Weapon : MonoBehaviour
                             scriptOBJ[0].currentAmmo = scriptOBJ[0].clipSize;
 
                             Destroy(checkWeapon.collider.gameObject);
+                            Equip(0);
 
                         }
 
@@ -936,7 +971,7 @@ public class Weapon : MonoBehaviour
                             GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                             switched.name = loadout[0].name;
                         }
-                
+
                         Destroy(checkWeapon.collider.gameObject);
 
 
@@ -979,6 +1014,7 @@ public class Weapon : MonoBehaviour
                             scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
 
                             Destroy(checkWeapon.collider.gameObject);
+                            Equip(0);
 
                         }
 
@@ -988,7 +1024,7 @@ public class Weapon : MonoBehaviour
                             switched.name = loadout[0].name;
 
                         }
-                      
+
 
                         Destroy(checkWeapon.collider.gameObject);
 
@@ -1025,7 +1061,7 @@ public class Weapon : MonoBehaviour
                             }
                         }
                         else
-                        {                            
+                        {
                             loadout[0] = Shotgun;
                             loadout[0].name = "Shotgun";
 
@@ -1033,6 +1069,7 @@ public class Weapon : MonoBehaviour
                             scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
 
                             Destroy(checkWeapon.collider.gameObject);
+                            Equip(0);
 
                         }
 
@@ -1040,9 +1077,9 @@ public class Weapon : MonoBehaviour
                         {
                             GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                             switched.name = loadout[0].name;
-                       
+
                         }
-                     
+
 
                         Destroy(checkWeapon.collider.gameObject);
 

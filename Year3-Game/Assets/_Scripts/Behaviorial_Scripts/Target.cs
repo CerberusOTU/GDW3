@@ -131,6 +131,10 @@ public class Target : MonoBehaviour
             healthUI.PlayerHealth = 100;
             Grenade1.enabled = true;
             Grenade2.enabled = true;
+
+            weaponScript.Equip(1);            
+            weaponScript.loadout[0] = null;
+
             weaponScript.grenadeAmount = 2;
             Debug.Log("Grenades: " + weaponScript.grenadeAmount);
         }

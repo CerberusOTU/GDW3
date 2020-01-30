@@ -40,7 +40,8 @@ public class PlayerStatus : MonoBehaviour
         {   
             PlayerHealth += 1;
         }
-        HealthText.text = (PlayerHealth).ToString();
+      
+            HealthText.text = (PlayerHealth).ToString();
         //Health Bar Transform
         temp = transform.localScale;
         temp.x = 1f;
