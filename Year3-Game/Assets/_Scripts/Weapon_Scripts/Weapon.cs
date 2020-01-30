@@ -95,6 +95,7 @@ public class Weapon : MonoBehaviour
     public _Gun Tommy;
     public _Gun MP40;
     public _Gun Shotgun;
+    public _Gun Revolver;
 
     /////////////////////////
 
@@ -151,8 +152,8 @@ public class Weapon : MonoBehaviour
         temp2.y = 1f;
 
         //Insantiate UI
-        oln.enabled = true;
-        oln2.enabled = false;
+        oln.enabled = false;
+        oln2.enabled = true;
 
         var tempColor = SideWeapon.color;
         tempColor.a = 0.5f;
@@ -175,7 +176,12 @@ public class Weapon : MonoBehaviour
             scriptOBJ[i].maxAmmo = scriptOBJ[i].alwaysMax;
             scriptOBJ[i].isReloading = false;
         }
-        Equip(0);
+       
+        loadout[0] = null;
+
+        Equip(1);
+
+ 
 
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
@@ -241,9 +247,11 @@ public class Weapon : MonoBehaviour
         ///////////////////////////////////
 
         PickUp.enabled = false;
+
         SwitchWeapon();
         Reload();
         MeshSwitch();
+
 
         if (player.isSprinting)
         {
@@ -377,56 +385,66 @@ public class Weapon : MonoBehaviour
         }
 
         //d > 0f is scrolling up
-        if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+        if (loadout[0] != null)
         {
-            reloadCancel = true;
-            Equip(0);
-            oln.enabled = true;
-            oln2.enabled = false;
+            if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+            {
+                reloadCancel = true;
+                Equip(0);
+                oln.enabled = true;
+                oln2.enabled = false;
 
-            var tempColor = SideWeapon.color;
-            tempColor.a = 0.5f;
-            SideWeapon.color = tempColor;
+                var tempColor = SideWeapon.color;
+                tempColor.a = 0.5f;
+                SideWeapon.color = tempColor;
 
-            var tempColor2 = MainWeapon.color;
-            tempColor2.a = 1f;
-            MainWeapon.color = tempColor2;
+                var tempColor2 = MainWeapon.color;
+                tempColor2.a = 1f;
+                MainWeapon.color = tempColor2;
+            }
+            else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
+            {
+                reloadCancel = true;
+                Equip(1);
+                oln.enabled = false;
+                oln2.enabled = true;
+
+                var tempColor = SideWeapon.color;
+                tempColor.a = 1f;
+                SideWeapon.color = tempColor;
+
+                var tempColor2 = MainWeapon.color;
+                tempColor2.a = 0.5f;
+                MainWeapon.color = tempColor2;
+            }
         }
-        else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
-        {
-            reloadCancel = true;
-            Equip(1);
-            oln.enabled = false;
-            oln2.enabled = true;
 
-            var tempColor = SideWeapon.color;
-            tempColor.a = 1f;
-            SideWeapon.color = tempColor;
-
-            var tempColor2 = MainWeapon.color;
-            tempColor2.a = 0.5f;
-            MainWeapon.color = tempColor2;
-        }
-        
         //UI weapon switch
-        if (loadout[0].name == "Tommy")
+        if (loadout[0] != null)
         {
-            MainWeapon.sprite = TommySprite;
-        }
-        else if (loadout[0].name == "MP40")
-        {
-            MainWeapon.sprite = MP40Sprite;
+            MainWeapon.enabled = true;
+            if (loadout[0].name == "Tommy")
+            {
+                MainWeapon.sprite = TommySprite;
+            }
+            else if (loadout[0].name == "MP40")
+            {
+                MainWeapon.sprite = MP40Sprite;
 
-        }
-        else if (loadout[0].name == "Revolver")
-        {
-            MainWeapon.sprite = RevolverSprite;
-        }
-        else if (loadout[0].name == "Shotgun")
-        {
-            MainWeapon.sprite = ShotgunSprite;
+            }
+            else if (loadout[0].name == "Revolver")
+            {
+                MainWeapon.sprite = RevolverSprite;
+            }
+            else if (loadout[0].name == "Shotgun")
+            {
+                MainWeapon.sprite = ShotgunSprite;
 
+            }
         }
+        else
+            MainWeapon.enabled = false;
+   
 
         if (currentWeapon != null)
         {
@@ -817,7 +835,7 @@ public class Weapon : MonoBehaviour
                     PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
                 }
                 //if the user presses E
-                if ((controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released) || Input.GetKeyDown(KeyCode.E) && currentIndex == 0)
+                if ((controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released) || Input.GetKeyDown(KeyCode.E))
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -826,37 +844,53 @@ public class Weapon : MonoBehaviour
 
                         GameObject tempMesh = null;
 
-                        if (loadout[0].name == "Tommy")
+                        if (loadout[0] != null)
                         {
-                            tempMesh = gunMeshes[0];
-                        }
-                        else if (loadout[0].name == "MP40")
-                        {
-                            tempMesh = gunMeshes[2];
+                            if (loadout[0].name == "Tommy")
+                            {
+                                tempMesh = gunMeshes[0];
+                            }
+                            else if (loadout[0].name == "MP40")
+                            {
+                                tempMesh = gunMeshes[2];
 
+                            }
+                            else if (loadout[0].name == "Revolver")
+                            {
+                                tempMesh = gunMeshes[1];
+
+                                scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
+                                scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
+                            }
+                            else if (loadout[0].name == "Shotgun")
+                            {
+                                tempMesh = gunMeshes[3];
+                                
+                            }
                         }
-                        else if (loadout[0].name == "Revolver")
+                        else
                         {
-                            tempMesh = gunMeshes[1];
+                            loadout[0] = Revolver;
+                            loadout[0].name = "Revolver";
 
                             scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
                             scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
+
+                            Destroy(checkWeapon.collider.gameObject);
+
                         }
-                        else if (loadout[0].name == "Shotgun")
+
+                        if (loadout[0] != null)
                         {
-                            tempMesh = gunMeshes[3];
-
+                            GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
+                            switched.name = loadout[0].name;
                         }
-
-                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
-                        switched.name = loadout[0].name;
+               
                         Destroy(checkWeapon.collider.gameObject);
 
 
                         loadout[0] = scriptOBJ[1];
                         Equip(0);
-
-
                     }
                     else if (checkWeapon.collider.name == "Tommy")
                     {
@@ -864,27 +898,45 @@ public class Weapon : MonoBehaviour
                         Transform temp = checkWeapon.collider.GetComponent<Transform>();
 
                         GameObject tempMesh = null;
-                        if (loadout[0].name == "Revolver")
+                        if (loadout[0] != null)
                         {
-                            tempMesh = gunMeshes[1];
+                            if (loadout[0].name == "Revolver")
+                            {
+                                tempMesh = gunMeshes[1];
+                            }
+                            else if (loadout[0].name == "MP40")
+                            {
+                                tempMesh = gunMeshes[2];
+                            }
+                            else if (loadout[0].name == "Tommy")
+                            {
+                                tempMesh = gunMeshes[0];
+                                scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
+                                scriptOBJ[0].currentAmmo = scriptOBJ[0].clipSize;
+                            }
+                            else if (loadout[0].name == "Shotgun")
+                            {
+                                tempMesh = gunMeshes[3];
+                            }
                         }
-                        else if (loadout[0].name == "MP40")
+                        else
                         {
-                            tempMesh = gunMeshes[2];
-                        }
-                        else if (loadout[0].name == "Tommy")
-                        {
-                            tempMesh = gunMeshes[0];
+                            loadout[0] = Tommy;
+                            loadout[0].name = "Tommy";
+
                             scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
                             scriptOBJ[0].currentAmmo = scriptOBJ[0].clipSize;
-                        }
-                        else if (loadout[0].name == "Shotgun")
-                        {
-                            tempMesh = gunMeshes[3];
+
+                            Destroy(checkWeapon.collider.gameObject);
+
                         }
 
-                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
-                        switched.name = loadout[0].name;
+                        if (loadout[0] != null)
+                        {
+                            GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
+                            switched.name = loadout[0].name;
+                        }
+                
                         Destroy(checkWeapon.collider.gameObject);
 
 
@@ -896,26 +948,48 @@ public class Weapon : MonoBehaviour
                         Transform temp = checkWeapon.collider.GetComponent<Transform>();
 
                         GameObject tempMesh = null;
-                        if (loadout[0].name == "Tommy")
+                        if (loadout[0] != null)
                         {
-                            tempMesh = gunMeshes[0];
+
+                            if (loadout[0].name == "Tommy")
+                            {
+                                tempMesh = gunMeshes[0];
+                            }
+                            else if (loadout[0].name == "Revolver")
+                            {
+                                tempMesh = gunMeshes[1];
+                            }
+                            else if (loadout[0].name == "MP40")
+                            {
+                                tempMesh = gunMeshes[2];
+                                scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
+                                scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
+                            }
+                            else if (loadout[0].name == "Shotgun")
+                            {
+                                tempMesh = gunMeshes[3];
+                            }
                         }
-                        else if (loadout[0].name == "Revolver")
+                        else
                         {
-                            tempMesh = gunMeshes[1];
-                        }
-                        else if (loadout[0].name == "MP40")
-                        {
-                            tempMesh = gunMeshes[2];
+                            loadout[0] = MP40;
+                            loadout[0].name = "MP40";
+
                             scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
                             scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
+
+                            Destroy(checkWeapon.collider.gameObject);
+
                         }
-                        else if (loadout[0].name == "Shotgun")
+
+                        if (loadout[0] != null)
                         {
-                            tempMesh = gunMeshes[3];
+                            GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
+                            switched.name = loadout[0].name;
+
                         }
-                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
-                        switched.name = loadout[0].name;
+                      
+
                         Destroy(checkWeapon.collider.gameObject);
 
                         loadout[0] = scriptOBJ[2];
@@ -928,28 +1002,48 @@ public class Weapon : MonoBehaviour
 
                         GameObject tempMesh = null;
 
+                        if (loadout[0] != null)
+                        {
+                            if (loadout[0].name == "MP40")
+                            {
+                                tempMesh = gunMeshes[2];
+                            }
+                            else if (loadout[0].name == "Revolver")
+                            {
+                                tempMesh = gunMeshes[1];
+                            }
+                            else if (loadout[0].name == "Tommy")
+                            {
+                                tempMesh = gunMeshes[0];
+                            }
+                            else if (loadout[0].name == "Shotgun")
+                            {
+                                tempMesh = gunMeshes[3];
+                                scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
+                                scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
 
-                        if (loadout[0].name == "MP40")
-                        {
-                            tempMesh = gunMeshes[2];
+                            }
                         }
-                        else if (loadout[0].name == "Revolver")
-                        {
-                            tempMesh = gunMeshes[1];
-                        }
-                        else if (loadout[0].name == "Tommy")
-                        {
-                            tempMesh = gunMeshes[0];
-                        }
-                        else if (loadout[0].name == "Shotgun")
-                        {
-                            tempMesh = gunMeshes[3];
+                        else
+                        {                            
+                            loadout[0] = Shotgun;
+                            loadout[0].name = "Shotgun";
+
                             scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
                             scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
+
+                            Destroy(checkWeapon.collider.gameObject);
+
                         }
 
-                        GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
-                        switched.name = loadout[0].name;
+                        if (loadout[0] != null)
+                        {
+                            GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
+                            switched.name = loadout[0].name;
+                       
+                        }
+                     
+
                         Destroy(checkWeapon.collider.gameObject);
 
 
