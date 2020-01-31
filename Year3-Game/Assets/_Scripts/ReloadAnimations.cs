@@ -8,7 +8,9 @@ public class ReloadAnimations : MonoBehaviour
     public Animator m_Animator;
     private Weapon weaponScript;
     // Use this for deciding if the GameObject can jump or not
-    bool m_Jump;
+    bool M1911Reload;
+    bool TommyReload;
+    bool m_reload;
     public GameObject Player;
     int counter1 = 0;
     int counter2 = 0;
@@ -17,66 +19,114 @@ public class ReloadAnimations : MonoBehaviour
     {
         //This gets the Animator, which should be attached to the GameObject you are intending to animate.
         m_Animator = gameObject.GetComponent<Animator>();
-        weaponScript= Player.GetComponent<Weapon>();
+        weaponScript = Player.GetComponent<Weapon>();
         // The GameObject cannot jump
-        m_Jump = false;
+        M1911Reload = false;
+        TommyReload = false;
+        m_reload = false;
     }
 
     void Update()
     {
-        if (m_Jump)
-        Debug.Log("Playing Anim");
-        if (!m_Jump)
-        Debug.Log("Not Playing Anim");
 
-        if (Player.GetComponent<Weapon>().PlayerisReloading == false && Input.GetKey(KeyCode.R) 
-        && (Player.GetComponent<Weapon>().loadout[1].currentAmmo != 
-        Player.GetComponent<Weapon>().loadout[1].clipSize))   
+        Debug.Log(Player.GetComponent<Weapon>().currentIndex);
+
+        if (Input.GetKey(KeyCode.R) && Player.GetComponent<Weapon>().loadout[1].currentAmmo != Player.GetComponent<Weapon>().loadout[1].clipSize)
         {
-            m_Jump = true;
-            //Debug.Log("PLEASE");
+            m_reload = true;
+            Debug.Log("XXReloadPistol");
         }
-
-
-
-        if ((Player.GetComponent<Weapon>().loadout[1].currentAmmo == 
-        Player.GetComponent<Weapon>().loadout[1].clipSize))
-        {
-            m_Jump = false;
-            //Debug.Log("No thank you");
         
+
+        if (Player.GetComponent<Weapon>().loadout[0] != null && Input.GetKey(KeyCode.R) && Player.GetComponent<Weapon>().loadout[0].currentAmmo != Player.GetComponent<Weapon>().loadout[0].clipSize)
+        {
+            m_reload = true;
+            Debug.Log("XXReloadMain");
         }
 
-        if (m_Animator != null)// animator is of type "Animator"
+
+
+
+
+
+
+
+
+        if ((Player.GetComponent<Weapon>().loadout[1].currentAmmo == Player.GetComponent<Weapon>().loadout[1].clipSize) && (m_Animator.GetBool("M1911Reload") == true))
         {
-            
-            if(m_Animator.runtimeAnimatorController!=null)
-            {
-                if (m_Jump == false)
-                {
-                    //m_Animator.SetBool("tommyReload", false);
-                    //m_Animator.SetBool("MP40Reloading", false);
-                    m_Animator.SetBool("M1911Reload", false);
-                }
-            }
+            m_reload = false;
+            Debug.Log("XXReloadPistolFinish");
         }
+
+
+
+        if (Player.GetComponent<Weapon>().loadout[0] != null && (Player.GetComponent<Weapon>().loadout[0].currentAmmo == Player.GetComponent<Weapon>().loadout[0].clipSize)
+            && (m_Animator.GetBool("tommyReload") == true) || (m_Animator.GetBool("MP40Reloading") == true))
+        {
+            m_reload = false;
+            Debug.Log("XXReloadMainFinish");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (Player.GetComponent<Weapon>().loadout[1].currentAmmo == 0 && Player.GetComponent<Weapon>().loadout[1].maxAmmo > 0)
+        {
+            m_reload = true;
+            Debug.Log("XXAutoReloadPistol");
+        }
+
+        if (Player.GetComponent<Weapon>().loadout[0] != null && (Player.GetComponent<Weapon>().loadout[0].currentAmmo == 0 && Player.GetComponent<Weapon>().loadout[0].maxAmmo > 0))
+        {
+            m_reload = true;
+            Debug.Log("XXAutoReloadMain");
+        }
+
+
+
+
+        ///////////////////////////////Reloads//////////////////////////////////////
 
         //The GameObject is jumping, so send the Boolean as enabled to the Animator. The jump animation plays.
         if (m_Animator != null)// animator is of type "Animator"
         {
-            
-            if(m_Animator.runtimeAnimatorController!=null)
+
+            if (m_Animator.runtimeAnimatorController != null)
             {
-                if (m_Jump == true)
+                if (m_reload == true)
                 {
-                    //m_Animator.SetBool("tommyReload", true);
-                    //m_Animator.SetBool("MP40Reloading", true);
-                    m_Animator.SetBool("M1911Reload", true);                
+                    Debug.Log("animationran");
+                    m_Animator.SetBool("M1911Reload", true);
+                    m_Animator.SetBool("tommyReload", true);
+                    m_Animator.SetBool("MP40Reloading", true);
                 }
             }
         }
 
+        if (m_Animator != null)// animator is of type "Animator"
+        {
+
+            if (m_Animator.runtimeAnimatorController != null)
+            {
+                if (m_reload == false)
+                {
+                    m_Animator.SetBool("M1911Reload", false);
+                    m_Animator.SetBool("tommyReload", false);
+                    m_Animator.SetBool("MP40Reloading", false);
+                }
+            }
+        }
 
     }
-    
+
 }
+

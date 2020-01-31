@@ -364,7 +364,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6629797300637803691, guid: 7c5f87a1fcec66747a715b96f39d02a8, type: 3}
+  - {fileID: 2100000, guid: 8d855606693047149a3bf459c46ff60a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1064,7 +1064,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6629797300637803691, guid: 7c5f87a1fcec66747a715b96f39d02a8, type: 3}
+  - {fileID: 2100000, guid: 8d855606693047149a3bf459c46ff60a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1631,7 +1631,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6629797300637803691, guid: 7c5f87a1fcec66747a715b96f39d02a8, type: 3}
+  - {fileID: 2100000, guid: 81dd16c80ada1df46a42ccee3a3e1c10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2453,6 +2453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6896061973004037759}
   - component: {fileID: 3547068570991624965}
+  - component: {fileID: 2093044477633341823}
   m_Layer: 0
   m_Name: MP40-Reload
   m_TagString: Untagged
@@ -2497,6 +2498,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2093044477633341823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631598106364796012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb70a0e558eb764aa583a40e3b5f48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 3547068570991624965}
+  Player: {fileID: 6273443734508453724, guid: a266bcd2f5fd2ef43a06b0f11bde65c4, type: 3}
 --- !u!1 &7661877391060624494
 GameObject:
   m_ObjectHideFlags: 0
