@@ -56,8 +56,8 @@ public class Weapon : MonoBehaviour
     private bool origPosReset = true;
     Quaternion saveInitShot;
     private float timeFiringHeld;
-    private bool reloadCancel = false;
-    private float reloadDelay = 0.0f;
+    public bool reloadCancel = false;
+    public float reloadDelay = 0.0f;
 
     private float adjustedBloom;
 
@@ -780,13 +780,14 @@ public class Weapon : MonoBehaviour
     }
 
 
-    private bool PlayerisReloading = false;
+    public bool PlayerisReloading = false;
     void Reload()
     {
 
-        Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
+        //Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
+            Debug.Log("Weapon Script Reloading");
 
             if (!origPosReset)
             {

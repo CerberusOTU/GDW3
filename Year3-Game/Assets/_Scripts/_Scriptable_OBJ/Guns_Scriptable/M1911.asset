@@ -24,11 +24,11 @@ MonoBehaviour:
   recoilDampen: 0
   kickBack: 0.04
   aimSpeed: 15
-  reloadTime: 1
+  reloadTime: 1.95
   alwaysMax: 60
-  maxAmmo: 19
+  maxAmmo: 55
   clipSize: 15
-  currentAmmo: 0
+  currentAmmo: 15
   ShotPath: event:/Gun Shots/ColtShot
   ReloadPath: event:/Gun Reloads/ColtReload
   isReloading: 0

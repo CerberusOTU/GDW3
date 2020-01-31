@@ -574,7 +574,7 @@ public class Weapon2 : MonoBehaviour
     private bool PlayerisReloading = false;
     void Reload()
     {
-        Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
+       // Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
             if (!origPosReset)
