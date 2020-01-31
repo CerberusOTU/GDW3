@@ -1077,7 +1077,7 @@ public class Weapon : MonoBehaviour
                         {
                             GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                             switched.name = loadout[0].name;
-
+                            
                         }
 
 

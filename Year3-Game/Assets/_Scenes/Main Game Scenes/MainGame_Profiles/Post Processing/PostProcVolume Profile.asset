@@ -104,15 +104,15 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   spectralLut:
-    overrideState: 0
-    value: {fileID: 0}
+    overrideState: 1
+    value: {fileID: 2800000, guid: 4a5908ed130722d468838da1d04a6427, type: 3}
     defaultState: 1
   intensity:
     overrideState: 1
     value: 1
   fastMode:
     overrideState: 0
-    value: 0
+    value: 1
 --- !u!114 &-2933532638762528047
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -232,10 +232,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 44
+    value: -78.6
   intensityX:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.015
   intensityY:
     overrideState: 0
     value: 1
@@ -246,8 +246,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   scale:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 1.09
 --- !u!114 &5924343679140614507
 MonoBehaviour:
   m_ObjectHideFlags: 3

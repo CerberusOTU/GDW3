@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    
     public GameObject bulletHole;
     public int spawnCount;
     public Queue<GameObject> holeList = new Queue<GameObject>();
-
     private void Start()
     {
-       makeList();
+       makeList();    
+
     }
 
     void makeList()
@@ -26,7 +27,8 @@ public class PoolManager : MonoBehaviour
     }
 
     public GameObject GetBulletHole()
-    {
+    {        
+      
         GameObject objectToSpawn = holeList.Dequeue();
         objectToSpawn.SetActive(true);
         
