@@ -5719,7 +5719,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6273443734508453724}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6672268, y: 1.8320873, z: 0.4402542}
@@ -5776,7 +5776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2e1611b297d50479df58ba517487e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraShake: {fileID: 0}
   loadout:
   - {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
   - {fileID: 11400000, guid: d6094e83348597041af0a56fd3dcb550, type: 2}
@@ -5797,6 +5796,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6ff3623d93a08924db6cfb9d525384a6, type: 2}
   defaultSpawn: {fileID: 0}
   weaponParent: {fileID: 1432445155866290829}
+  currentIndex: 0
   crossHair: {fileID: 1432445156997086673}
   hitMark: {fileID: 1432445157037321199}
   cam: {fileID: 1432445156551296833}
@@ -5804,10 +5804,14 @@ MonoBehaviour:
   AmmoText2: {fileID: 0}
   Reloading: {fileID: 0}
   PickUp: {fileID: 0}
-  WeaponSlot1: {fileID: 0}
-  WeaponSlot2: {fileID: 0}
   MainWeapon: {fileID: 0}
   SideWeapon: {fileID: 0}
+  oln: {fileID: 0}
+  oln2: {fileID: 0}
+  TommySprite: {fileID: 0}
+  MP40Sprite: {fileID: 0}
+  ShotgunSprite: {fileID: 0}
+  RevolverSprite: {fileID: 0}
   Grenade1: {fileID: 0}
   Grenade2: {fileID: 0}
   muzzleFlash: {fileID: 1432445156809318902}
@@ -5815,6 +5819,7 @@ MonoBehaviour:
   Tommy: {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
   MP40: {fileID: 11400000, guid: 8b43f48134c82cb43bbaefb4f73f5215, type: 2}
   Shotgun: {fileID: 11400000, guid: 6ff3623d93a08924db6cfb9d525384a6, type: 2}
+  Revolver: {fileID: 0}
   throwForce: 20
   grenadePrefab: {fileID: 5474407304477632719, guid: b029acee6ddf3e242aee45adfc4855cc,
     type: 3}

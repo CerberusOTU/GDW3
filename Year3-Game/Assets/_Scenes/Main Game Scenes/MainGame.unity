@@ -21154,11 +21154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BathroomSignage (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -8220233206958717388, guid: 194c8f208d75bb642b869e361f96691c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d21e99090294b3440a5fbcd11b7d9d15, type: 2}
     - target: {fileID: -4216859302048453862, guid: 194c8f208d75bb642b869e361f96691c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21229,6 +21224,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.7228
       objectReference: {fileID: 0}
+    - target: {fileID: -8220233206958717388, guid: 194c8f208d75bb642b869e361f96691c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d21e99090294b3440a5fbcd11b7d9d15, type: 2}
     - target: {fileID: 4850344189180705003, guid: 194c8f208d75bb642b869e361f96691c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -33775,11 +33775,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BathroomSignage
       objectReference: {fileID: 0}
-    - target: {fileID: -8220233206958717388, guid: 194c8f208d75bb642b869e361f96691c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d21e99090294b3440a5fbcd11b7d9d15, type: 2}
     - target: {fileID: -4216859302048453862, guid: 194c8f208d75bb642b869e361f96691c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33850,6 +33845,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.7228
       objectReference: {fileID: 0}
+    - target: {fileID: -8220233206958717388, guid: 194c8f208d75bb642b869e361f96691c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d21e99090294b3440a5fbcd11b7d9d15, type: 2}
     - target: {fileID: 4850344189180705003, guid: 194c8f208d75bb642b869e361f96691c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -57010,11 +57010,6 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 42.87
       objectReference: {fileID: 0}
-    - target: {fileID: 5396120075238223871, guid: f261cca90f891a7499ffa5697834ff2c,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 14674ad6b50bb6849b55af6130fcf80c, type: 2}
     - target: {fileID: 5927589172785799505, guid: f261cca90f891a7499ffa5697834ff2c,
         type: 3}
       propertyPath: m_Color.g
@@ -57025,6 +57020,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.85882354
       objectReference: {fileID: 0}
+    - target: {fileID: 5396120075238223871, guid: f261cca90f891a7499ffa5697834ff2c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 14674ad6b50bb6849b55af6130fcf80c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f261cca90f891a7499ffa5697834ff2c, type: 3}
 --- !u!4 &1841866126654537951 stripped
@@ -57667,6 +57667,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115329130641513904, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2607112222651368506, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
