@@ -10135,6 +10135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SteelDoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 21fc94e4009fa1b488645ecb16c5cbc9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 21fc94e4009fa1b488645ecb16c5cbc9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27233,6 +27238,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrel (25)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a4f227a7b26c949818208e4953dcd1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a4f227a7b26c949818208e4953dcd1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28166,7 +28176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletHole: {fileID: 6196387529030921172, guid: f5aea8e1c2555d743b7fae0080d4fcf0,
     type: 3}
-  spawnCount: 30
+  spawnCount: 100
 --- !u!4 &1063147922
 Transform:
   m_ObjectHideFlags: 0
@@ -39865,6 +39875,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480751431}
   m_CullTransparentMesh: 0
+--- !u!1 &1481555525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 21fc94e4009fa1b488645ecb16c5cbc9,
+    type: 3}
+  m_PrefabInstance: {fileID: 332253478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1481555526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481555525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12549631, y: 2.6997836, z: 1}
+  m_Center: {x: -0.10384259, y: 0.8498918, z: 0.000000021288905}
 --- !u!1001 &1482469997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46079,6 +46108,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e6ce78f6036d2364abe092fba94abc7c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 2534866581884222612, guid: e6ce78f6036d2364abe092fba94abc7c,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -51417,7 +51451,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: b93968ca1cdb1d74fad9ed7c25450ec3,
         type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Concrete
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: b93968ca1cdb1d74fad9ed7c25450ec3,
         type: 3}

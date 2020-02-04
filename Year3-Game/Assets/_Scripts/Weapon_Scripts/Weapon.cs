@@ -125,6 +125,9 @@ public class Weapon : MonoBehaviour
     public Image left_crosshair;
     public Image right_crosshair;
 
+    public RaycastHit hitInfo;
+
+    public int Type;
 
 
     //**************TUTORIAL VARIABLES**************/
@@ -631,7 +634,7 @@ public class Weapon : MonoBehaviour
             bloomShotty[i] -= spawn.position;
             bloomShotty[i].Normalize();
         }
-
+        
         ///-----RECOIL-----/////
         if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1)
         {
@@ -644,8 +647,7 @@ public class Weapon : MonoBehaviour
         Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
         cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1, loadout[currentIndex].recoilDampen, timeFiringHeld));
 
-
-        RaycastHit hitInfo = new RaycastHit();
+        hitInfo = new RaycastHit();
 
         up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, up_crosshair.transform.localPosition.y + 2, up_crosshair.transform.localPosition.z);
         down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, down_crosshair.transform.localPosition.y - 2, down_crosshair.transform.localPosition.z);
@@ -691,7 +693,7 @@ public class Weapon : MonoBehaviour
                         _tutManager.Notify("SHOOTING_COMPLETE");
                 }
 
-                if (hitInfo.collider.tag == "Wall")
+                if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
                 {
                     GameObject temp = _pool.GetBulletHole();
                     temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
@@ -728,7 +730,20 @@ public class Weapon : MonoBehaviour
                     Monkey.shatterThis = true;
                 }
 
-                if (hitInfo.collider.tag == "Wall")
+                if (hitInfo.collider.tag == "Wood")
+                {
+                    Type = 1;
+                }
+                else if (hitInfo.collider.tag == "Metal")
+                {
+                    Type = 2;
+                }
+                else if (hitInfo.collider.tag == "Concrete")
+                {
+                    Type = 3;
+                }
+
+                if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
                 {
                     GameObject temp = _pool.GetBulletHole();
                     temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
