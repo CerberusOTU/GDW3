@@ -10,9 +10,10 @@ public class playerCharController : MonoBehaviour
     Camera fpsCamera;
 
     [Header("Movement")]
-    [SerializeField] private float speed = 10f;
+    public float speed = 10f;
     private float desiredSpeed = 0f;
-    private float currentSpeed = 0f;
+    //[System.NonSerialized]
+    [System.NonSerialized] public float currentSpeed = 0f;
     [SerializeField] private float sprintModifier = 1.5f;
     [SerializeField] private float crouchModifier = 0.5f;
     [SerializeField] private float gravity = -39.2f;

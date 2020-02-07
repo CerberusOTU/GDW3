@@ -344,7 +344,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 26.991467
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1263,55 +1263,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1936216550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f2e1611b297d50479df58ba517487e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 35d250cfa7802d24da9e03fa259f7763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadout: []
-  gunMeshes: []
-  inSceneGuns: []
-  scriptOBJ: []
-  defaultSpawn: {fileID: 0}
-  weaponParent: {fileID: 0}
-  currentIndex: 0
-  crossHair: {fileID: 0}
-  hitMark: {fileID: 0}
-  cam: {fileID: 0}
-  reloadCancel: 0
-  reloadDelay: 0
-  AmmoText: {fileID: 0}
-  AmmoText2: {fileID: 0}
-  Reloading: {fileID: 0}
-  PickUp: {fileID: 0}
-  MainWeapon: {fileID: 0}
-  SideWeapon: {fileID: 0}
-  oln: {fileID: 0}
-  oln2: {fileID: 0}
-  TommySprite: {fileID: 0}
-  MP40Sprite: {fileID: 0}
-  ShotgunSprite: {fileID: 0}
-  RevolverSprite: {fileID: 0}
-  Grenade1: {fileID: 0}
-  Grenade2: {fileID: 0}
-  muzzleFlash: {fileID: 0}
-  M1911: {fileID: 0}
-  Tommy: {fileID: 0}
-  MP40: {fileID: 0}
-  Shotgun: {fileID: 0}
-  Revolver: {fileID: 0}
-  throwForce: 40
-  grenadePrefab: {fileID: 0}
-  grenadeAmount: 2
-  RobertoTommy: {fileID: 0}
-  RobertoM1911: {fileID: 0}
-  RobertoRevolver: {fileID: 0}
-  RobertoMP40: {fileID: 0}
-  RobertoShotgun: {fileID: 0}
-  up_crosshair: {fileID: 0}
-  down_crosshair: {fileID: 0}
-  left_crosshair: {fileID: 0}
-  right_crosshair: {fileID: 0}
-  _metricsLogger: {fileID: 0}
-  PlayerisReloading: 0
+  height: 20
+  width: 4
+  defaultSpread: 30
+  color: {r: 1, g: 0, b: 0, a: 1}
+  resizeable: 1
+  resizedSpread: 90
+  resizeSpeed: 30
 --- !u!1 &2103379092
 GameObject:
   m_ObjectHideFlags: 0
