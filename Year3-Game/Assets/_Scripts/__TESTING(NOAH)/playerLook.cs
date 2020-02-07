@@ -6,7 +6,7 @@ public class playerLook : MonoBehaviour
 {
 
     [Header("Mouse Options")]
-    [Range(1.0f, 15.0f)] [SerializeField] private float mouseSensitivity = 5.0f;
+    [Range(1.0f, 50.0f)] [SerializeField] private float mouseSensitivity = 5.0f;
     [SerializeField] private bool InvertYAxis = false;
 
     /*=====Private Variables=====*/
