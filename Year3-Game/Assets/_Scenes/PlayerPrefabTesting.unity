@@ -1108,9 +1108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3598c2b5dd26f9046aa9ab61065c9a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSensitivity: 1
-  invertYAxis: 0
-  invertXAxis: 0
+  mouseSensitivity: 25
+  InvertYAxis: 0
 --- !u!23 &1936216553
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1208,8 +1207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71397e4a443458c4ca831d18edb9e773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 10
-  InvertYAxis: 0
 --- !u!1 &2092944947
 GameObject:
   m_ObjectHideFlags: 0

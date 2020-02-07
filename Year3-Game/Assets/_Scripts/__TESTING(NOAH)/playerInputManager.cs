@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class playerInputManager : MonoBehaviour
 {
-
-    [Tooltip("Sensitivity multiplier for moving the camera around")]
-    public float lookSensitivity = 1f;
-    [Tooltip("Used to flip the vertical input axis")]
-    public bool invertYAxis = false;
-    [Tooltip("Used to flip the horizontal input axis")]
-    public bool invertXAxis = false;
+    [Header("Mouse Options")]
+    [Range(1.0f, 50.0f)] public float mouseSensitivity = 5.0f;
+    public bool InvertYAxis = false;
 
     bool v_FireInputWasHeld;
     bool v_GrenadeInputWasHeld;
@@ -74,17 +70,31 @@ public class playerInputManager : MonoBehaviour
             float i = Input.GetAxisRaw(mouseInputName);
 
             // handle inverting vertical input
-            if (invertYAxis)
+            if (InvertYAxis)
                 i *= -1f;
 
             // apply sensitivity multiplier
-            i *= lookSensitivity * 0.01f;
+            i *= mouseSensitivity * 10f;
 
             return i;
         }
         return 0f;
     }
 
+    public float GetMouseSensitivity()
+    {
+        return mouseSensitivity;
+    }
+
+    public void SetMouseSensitivity(float sensitivity)
+    {
+        mouseSensitivity = sensitivity;
+    }
+
+    public bool GetInvertYAxis()
+    {
+        return InvertYAxis;
+    }
 #endregion
 
 #region JUMP
@@ -94,6 +104,15 @@ public class playerInputManager : MonoBehaviour
         if (CanProcessInput())
         {
             return Input.GetButtonDown(inputConstants.c_ButtonNameJump);
+        }
+        return false;
+    }
+
+    public bool GetJumpInputHeld()
+    {
+        if (CanProcessInput())
+        {
+            return Input.GetButton(inputConstants.c_ButtonNameJump);
         }
         return false;
     }

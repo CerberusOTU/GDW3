@@ -5,9 +5,7 @@ using UnityEngine;
 public class playerLook : MonoBehaviour
 {
 
-    [Header("Mouse Options")]
-    [Range(1.0f, 50.0f)] [SerializeField] private float mouseSensitivity = 5.0f;
-    [SerializeField] private bool InvertYAxis = false;
+    playerInputManager inputManager;
 
     /*=====Private Variables=====*/
     //Float
@@ -19,6 +17,7 @@ public class playerLook : MonoBehaviour
     void Start()
     {
         fpsCamera = GetComponentInChildren<Camera>();
+        inputManager = GetComponent<playerInputManager>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -30,21 +29,23 @@ public class playerLook : MonoBehaviour
 
     void mouseMovement()
     {
-        float mouseX = Input.GetAxisRaw(inputConstants.c_MouseAxisNameHorizontal) * mouseSensitivity * 10f * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw(inputConstants.c_MouseAxisNameVertical) * mouseSensitivity * 10f * Time.deltaTime;
+        float mouseX = inputManager.GetLookInputsHorizontal() * Time.deltaTime;
+        float mouseY = inputManager.GetLookInputsVertical() * Time.deltaTime;
 
-        if (InvertYAxis)
+        if (inputManager.GetInvertYAxis())
         {
-            xRotation += mouseY;
+            xRotation += mouseY; //Vertical
         }
         else
         {
-            xRotation -= mouseY;
+            xRotation -= mouseY; //Vertical
         }
 
-        xRotation = Mathf.Clamp(xRotation, -89f, 89f);
+        xRotation = Mathf.Clamp(xRotation, -89f, 89f); //Clamp Vertical
 
         fpsCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        //Rotate Left/Right
         transform.Rotate(Vector3.up * mouseX);
     }
 }

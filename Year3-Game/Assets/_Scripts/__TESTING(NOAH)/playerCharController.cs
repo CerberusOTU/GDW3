@@ -6,6 +6,7 @@ public class playerCharController : MonoBehaviour
 {
 
     CharacterController characterController;
+    playerInputManager inputManager;
 
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
@@ -14,7 +15,7 @@ public class playerCharController : MonoBehaviour
     [SerializeField] private float sprintModifier = 1.5f;
     [SerializeField] private float crouchModifier = 0.5f;
     [SerializeField] private float gravity = -39.2f;
-    [SerializeField] private float acceleration = 0.1f;
+    [SerializeField] private float acceleration = 0.5f;
     [SerializeField] private float deceleration = 0.1f;
 
 
@@ -38,6 +39,7 @@ public class playerCharController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        inputManager = GetComponent<playerInputManager>();
         groundCheck = gameObject.transform.Find("GroundCheck");
     }
 
@@ -56,8 +58,8 @@ public class playerCharController : MonoBehaviour
         GroundCheck();
 
         //Movement input (x,z) plane
-        float x = Input.GetAxisRaw(inputConstants.c_AxisNameHorizontal);
-        float z = Input.GetAxisRaw(inputConstants.c_AxisNameVertical);
+        float x = inputManager.GetMoveInput().x;
+        float z = inputManager.GetMoveInput().z;
         Vector3 move = transform.right * x *  0.5f + transform.forward * z;
 
         if (x != 0 || z != 0)
@@ -71,11 +73,11 @@ public class playerCharController : MonoBehaviour
             currentSpeed -= speed * deceleration;
         }
         //Handle Sprint and Crouch
-        if (Input.GetButton(inputConstants.c_ButtonNameSprint))
+        if (inputManager.GetSprintInputHeld())
         {
             desiredSpeed *= sprintModifier;
         }
-        else if (Input.GetButton(inputConstants.c_ButtonNameCrouch) && isGrounded)
+        else if (inputManager.GetCrouchInputHeld() && isGrounded)
         {
             desiredSpeed *= crouchModifier;
         }
@@ -85,7 +87,7 @@ public class playerCharController : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.fixedDeltaTime);
 
         //Allow Jump
-        if (Input.GetButton(inputConstants.c_ButtonNameJump) && isGrounded)
+        if (inputManager.GetJumpInputHeld() && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
