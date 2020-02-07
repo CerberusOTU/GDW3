@@ -108,6 +108,15 @@ public class playerInputManager : MonoBehaviour
         return false;
     }
 
+    public bool GetJumpInputUp()
+    {
+        if (CanProcessInput())
+        {
+            return Input.GetButtonUp(inputConstants.c_ButtonNameJump);
+        }
+        return false;
+    }
+
     public bool GetJumpInputHeld()
     {
         if (CanProcessInput())

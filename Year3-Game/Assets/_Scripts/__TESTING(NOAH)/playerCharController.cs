@@ -17,21 +17,23 @@ public class playerCharController : MonoBehaviour
     [SerializeField] private float gravity = -39.2f;
     [SerializeField] private float acceleration = 0.5f;
     [SerializeField] private float deceleration = 0.1f;
+    private Vector3 velocity = new Vector3(0f, 0f, 0f);
 
 
     [Header("Jumping")]
     [SerializeField] private float jumpHeight = 1.5f;
+    private float timeSinceLastJump = 0f;
+    [SerializeField] private float timeInAirBuffer = 0.0f;
     private bool canJump = true;
 
     [Header("Ground Check")]
     private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.1f;
     [SerializeField] private LayerMask groundMask;
+    private bool isGrounded = true;
 
 
 
-    private Vector3 velocity = new Vector3(0f, 0f, 0f);
-    private bool isGrounded;
 
 
 
@@ -60,7 +62,7 @@ public class playerCharController : MonoBehaviour
         //Movement input (x,z) plane
         float x = inputManager.GetMoveInput().x;
         float z = inputManager.GetMoveInput().z;
-        Vector3 move = transform.right * x *  0.5f + transform.forward * z;
+        Vector3 move = transform.right * x * 0.75f + transform.forward * z;
 
         if (x != 0 || z != 0)
         {
@@ -86,11 +88,15 @@ public class playerCharController : MonoBehaviour
         //Apply movement to character controller
         characterController.Move(move * currentSpeed * Time.fixedDeltaTime);
 
-        //Allow Jump
-        if (inputManager.GetJumpInputHeld() && isGrounded)
+
+        timeSinceLastJump += Time.fixedDeltaTime;
+        if (inputManager.GetJumpInputHeld() && isGrounded && canJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        //Make sure you have to lift space - Avoid bunny hopping
+
+
 
         //Add Gravity (y) plane
         velocity.y += gravity * Time.fixedDeltaTime;
@@ -104,10 +110,20 @@ public class playerCharController : MonoBehaviour
     {
         //Check if hit ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        //Check if the button is released and the player is on the ground.
+        if (!isGrounded)
+        {
+            canJump = false;
+        }
+        else if (isGrounded && !inputManager.GetJumpInputHeld())
+        {
+            canJump = true;
+        }
         //If on ground, stop downward velocity
         if (isGrounded && velocity.y < 0f)
         {
-            velocity.y = groundDistance;
+            velocity.y = -0f;
         }
     }
 }
