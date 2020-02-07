@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Sway : MonoBehaviour
 {
-    public float intensity;
-    public float smooth;
+    playerInputManager inputManager;
+
+    [Header("Sway Properties")]
+    [SerializeField]private float intensity;
+    [SerializeField]private float smooth;
 
     private Quaternion origRot;
+
     private void Start()
     {
+        inputManager = GetComponent<playerInputManager>();
         origRot = transform.localRotation;
     }
 
@@ -20,15 +25,16 @@ public class Sway : MonoBehaviour
 
     private void UpdateSway()
     {
-        if (Input.GetMouseButton(1))
+        if (inputManager.GetAimInputHeld())
         {
             intensity = 0;
         }
         else
             intensity = 1;
+
         //controls
-        float xMouse = Input.GetAxis("Mouse X");
-        float yMouse = Input.GetAxis("Mouse Y");
+        float xMouse = inputManager.GetLookInputsHorizontal();
+        float yMouse = inputManager.GetLookInputsVertical();
 
         //calculate target Rotation
         Quaternion xAdjustRot = Quaternion.AngleAxis(-intensity * xMouse, Vector3.up);

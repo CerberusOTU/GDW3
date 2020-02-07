@@ -7,6 +7,7 @@ public class playerCharController : MonoBehaviour
 
     CharacterController characterController;
     playerInputManager inputManager;
+    Camera fpsCamera;
 
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
@@ -36,12 +37,13 @@ public class playerCharController : MonoBehaviour
 
 
 
-
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         inputManager = GetComponent<playerInputManager>();
+        fpsCamera = GetComponentInChildren<Camera>();
+
         groundCheck = gameObject.transform.Find("GroundCheck");
     }
 
@@ -101,8 +103,6 @@ public class playerCharController : MonoBehaviour
         //Add Gravity (y) plane
         velocity.y += gravity * Time.fixedDeltaTime;
         characterController.Move(velocity * Time.fixedDeltaTime);
-
-
     }
 
 
