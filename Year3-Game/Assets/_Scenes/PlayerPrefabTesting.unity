@@ -1186,13 +1186,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  sprintModifier: 2
+  sprintModifier: 1.5
   crouchModifier: 0.5
   gravity: -39.2
   acceleration: 0.5
   deceleration: 0.1
   jumpHeight: 1.5
-  groundDistance: 0.5
+  groundDistance: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 256

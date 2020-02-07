@@ -8,23 +8,23 @@ public class playerCharController : MonoBehaviour
     CharacterController characterController;
 
     [Header("Movement")]
-    [SerializeField] private float speed = 15f;
+    [SerializeField] private float speed = 10f;
     private float desiredSpeed = 0f;
     private float currentSpeed = 0f;
-    [SerializeField] private float sprintModifier = 2f;
+    [SerializeField] private float sprintModifier = 1.5f;
     [SerializeField] private float crouchModifier = 0.5f;
-    [SerializeField] private float gravity = -9.8f;
+    [SerializeField] private float gravity = -39.2f;
     [SerializeField] private float acceleration = 0.1f;
     [SerializeField] private float deceleration = 0.1f;
 
 
     [Header("Jumping")]
-    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 1.5f;
     private bool canJump = true;
 
     [Header("Ground Check")]
     private Transform groundCheck;
-    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private float groundDistance = 0.1f;
     [SerializeField] private LayerMask groundMask;
 
 
@@ -58,7 +58,7 @@ public class playerCharController : MonoBehaviour
         //Movement input (x,z) plane
         float x = Input.GetAxisRaw(inputConstants.c_AxisNameHorizontal);
         float z = Input.GetAxisRaw(inputConstants.c_AxisNameVertical);
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * x *  0.5f + transform.forward * z;
 
         if (x != 0 || z != 0)
         {
@@ -81,7 +81,6 @@ public class playerCharController : MonoBehaviour
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, desiredSpeed);
-        Debug.Log(desiredSpeed);
         //Apply movement to character controller
         characterController.Move(move * currentSpeed * Time.fixedDeltaTime);
 
