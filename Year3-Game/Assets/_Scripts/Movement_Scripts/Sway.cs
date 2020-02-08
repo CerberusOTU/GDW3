@@ -14,7 +14,7 @@ public class Sway : MonoBehaviour
 
     private void Start()
     {
-        inputManager = GetComponent<playerInputManager>();
+        inputManager = GetComponentInParent<playerInputManager>();
         origRot = transform.localRotation;
     }
 
