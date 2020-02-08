@@ -2,7 +2,7 @@
 
 int PluginClass::Test()
 {
-	return 1;
+	return 100;
 };
 
 void PluginClass::LogMetrics(vec3 _position, float _accuracy, float _time)

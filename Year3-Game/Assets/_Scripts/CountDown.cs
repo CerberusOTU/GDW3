@@ -29,7 +29,6 @@ public class CountDown : MonoBehaviour
             GameObject.Find("Player2").GetComponent<Movement2>().enabled = false;
 
             GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
-            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
             if(timer >= 1 && timer < 2)
             {
                 txt.text = "2";
@@ -55,7 +54,6 @@ public class CountDown : MonoBehaviour
                 GameObject.Find("Player2").GetComponent<Movement2>().enabled = true;
 
                 GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
-                GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
             } 
 
         }

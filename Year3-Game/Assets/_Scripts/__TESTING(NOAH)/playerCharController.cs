@@ -12,7 +12,6 @@ public class playerCharController : MonoBehaviour
     [Header("Movement")]
     public float speed = 10f;
     private float desiredSpeed = 0f;
-    //[System.NonSerialized]
     [System.NonSerialized] public float currentSpeed = 0f;
     [SerializeField] private float sprintModifier = 1.5f;
     [SerializeField] private float crouchModifier = 0.5f;

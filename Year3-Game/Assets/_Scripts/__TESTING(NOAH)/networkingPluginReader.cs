@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 
-public class MetricsLogger : MonoBehaviour
+public class networkingPluginReader : MonoBehaviour
 {
    const string DLL_NAME = "Plugin";
    [DllImport(DLL_NAME)]

@@ -131,7 +131,7 @@ public class Weapon : MonoBehaviour
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
     //Metrics Manager
-    public MetricsLogger _metricsLogger;
+    public networkingPluginReader _metricsLogger;
 
     void Start()
     {
@@ -139,7 +139,7 @@ public class Weapon : MonoBehaviour
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
-        _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
+        _metricsLogger = GameObject.FindObjectOfType<networkingPluginReader>();
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
