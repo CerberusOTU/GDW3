@@ -25,34 +25,16 @@ public class BulletBehave : MonoBehaviour
             stoneHit.Emit(1);
         StartCoroutine(autostart());
 
-        //Disable();
     }
 
-    //void farDist()
-    //{
-    //    dist = Vector3.Distance
-    //    (player.transform.position, this.transform.position);
-    //    Debug.Log("DISTANCE   " + dist);
-    //}
     IEnumerator autostart()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         this.transform.gameObject.SetActive(false);
     }
-    void OnBecameInvisible()
-    {
-        Disable();
+   
 
-    }
-    //void Update()
-    //{
-    //     farDist();
-    //}
-    void Disable()
-    {
-        this.transform.gameObject.SetActive(false);
-
-    }
+    
 
 }
 
