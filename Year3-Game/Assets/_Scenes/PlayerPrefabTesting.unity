@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 22551696}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Spawn_TommyGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 22551695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.96, y: -3.51, z: -53.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 60594780}
@@ -210,8 +210,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22551696}
-  - {fileID: 876454109}
   - {fileID: 406628107}
+  - {fileID: 876454109}
   - {fileID: 1022283689}
   - {fileID: 383334243}
   - {fileID: 841720735}
@@ -234,7 +234,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1264dc2a9bf569b4b9bc819ae43678b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sphere: {fileID: 876099757685324195, guid: 9e890b85125088242a5080c2994677c2, type: 3}
+  tommyGun: {fileID: -927199367670048503, guid: 99713c87443f8734f8d4c84871f0edb8,
+    type: 3}
+  mp40: {fileID: -927199367670048503, guid: 9fb26f6b4a1b0b943812e705272337f8, type: 3}
+  revolver: {fileID: 6471413429216083511, guid: 555b3837dafe6b8489e24183b67fff3f,
+    type: 3}
+  shotgun: {fileID: -927199367670048503, guid: a8a40374b06ecfc43830a44be71bb789, type: 3}
   spawnlocations: []
   sceneWeapons: []
 --- !u!1 &92839637
@@ -437,7 +442,7 @@ GameObject:
   - component: {fileID: 406628107}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Untagged
+  m_TagString: Spawn_Revolver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,11 +455,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406628106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: -26.21, y: -4.29, z: -53.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 60594780}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504752922
 GameObject:
@@ -745,7 +750,7 @@ GameObject:
   - component: {fileID: 876454109}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_TagString: Spawn_MP40
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -758,11 +763,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876454108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -26.9}
+  m_LocalPosition: {x: -35.83, y: -4.78, z: -53.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 60594780}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913077135
 GameObject:
@@ -806,7 +811,7 @@ GameObject:
   - component: {fileID: 1022283689}
   m_Layer: 0
   m_Name: GameObject (3)
-  m_TagString: Untagged
+  m_TagString: Spawn_Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -819,7 +824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022283688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5, y: 0, z: 0}
+  m_LocalPosition: {x: -45.64, y: -5.24, z: -53.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 60594780}
