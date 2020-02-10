@@ -664,34 +664,37 @@ public class Weapon : MonoBehaviour
 
                 target = hitInfo.transform.GetComponent<Target>();
 
+               float dist = Vector3.Distance(this.transform.position, hitInfo.transform.position);
+
                 if (target != null)
                 {
-                    if (hitInfo.collider.name == "Head")
+                    if(dist < 25f)
                     {
+                        if (hitInfo.collider.name == "Head")
+                        {
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage * 1.5f);
+                        } 
+                        else
+                        {
                         StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage);
+                        }
                     }
-                }
+                    else if (dist > 25f && dist < 35f)
+                    {
 
-                //Shooting tasklist///////////
-                if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-                {
-                    _tutManager.Target1 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-                {
-                    _tutManager.Target2 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-                {
-                    _tutManager.Target3 = true;
-                }
-
-                if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-                {
-                    if (!_tutManager.b_shootingComplete)
-                        _tutManager.Notify("SHOOTING_COMPLETE");
-                }
+                        if (hitInfo.collider.name == "Head")
+                        {
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage * 0.75f);
+                        } 
+                        else
+                        {
+                        StartCoroutine(displayHitmark());
+                        target.takeDamage(loadout[currentIndex].damage * 0.5f);
+                        }
+                    }
 
                 if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
                 {

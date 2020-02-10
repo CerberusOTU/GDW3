@@ -2453,7 +2453,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6896061973004037759}
   - component: {fileID: 3547068570991624965}
-  - component: {fileID: 2093044477633341823}
   m_Layer: 0
   m_Name: MP40-Reload
   m_TagString: Untagged
@@ -2498,20 +2497,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2093044477633341823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7631598106364796012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb70a0e558eb764aa583a40e3b5f48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 3547068570991624965}
-  Player: {fileID: 6273443734508453724, guid: a266bcd2f5fd2ef43a06b0f11bde65c4, type: 3}
 --- !u!1 &7661877391060624494
 GameObject:
   m_ObjectHideFlags: 0
