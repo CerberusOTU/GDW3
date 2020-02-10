@@ -37,22 +37,22 @@ public class weaponRandomizer : MonoBehaviour
 
             if (spawnlocations[index].gameObject.tag == "Spawn_TommyGun")
             {
-                GameObject temp = Instantiate(tommyGun, spawnlocations[index].position, Quaternion.identity);
+                GameObject temp = Instantiate(tommyGun, spawnlocations[index].position, spawnlocations[index].localRotation);
                 sceneWeapons.Add(temp);
             }
             else if (spawnlocations[index].gameObject.tag == "Spawn_MP40")
             {
-                GameObject temp = Instantiate(mp40, spawnlocations[index].position, Quaternion.identity);
+                GameObject temp = Instantiate(mp40, spawnlocations[index].position, spawnlocations[index].localRotation);
                 sceneWeapons.Add(temp);
             }
             else if (spawnlocations[index].gameObject.tag == "Spawn_Shotgun")
             {
-                GameObject temp = Instantiate(shotgun, spawnlocations[index].position, Quaternion.identity);
+                GameObject temp = Instantiate(shotgun, spawnlocations[index].position, spawnlocations[index].localRotation);
                 sceneWeapons.Add(temp);
             }
             else if (spawnlocations[index].gameObject.tag == "Spawn_Revolver")
             {
-                GameObject temp = Instantiate(revolver, spawnlocations[index].position, Quaternion.identity);
+                GameObject temp = Instantiate(revolver, spawnlocations[index].position, spawnlocations[index].localRotation);
                 sceneWeapons.Add(temp);
             }
             else
@@ -61,25 +61,25 @@ public class weaponRandomizer : MonoBehaviour
                 if (randGun >= 0 && randGun < 20) //20%
                 {
                     //Instantiate temp obj tommy
-                    GameObject temp = Instantiate(tommyGun, spawnlocations[index].position, Quaternion.identity);
+                    GameObject temp = Instantiate(tommyGun, spawnlocations[index].position, spawnlocations[index].localRotation);
                     sceneWeapons.Add(temp);
                 }
                 else if (randGun >= 20 && randGun < 50) //30%
                 {
                     //Instantiate temp obj mp40
-                    GameObject temp = Instantiate(mp40, spawnlocations[index].position, Quaternion.identity);
+                    GameObject temp = Instantiate(mp40, spawnlocations[index].position, spawnlocations[index].localRotation);
                     sceneWeapons.Add(temp);
                 }
                 else if (randGun >= 50 && randGun < 70) //20%
                 {
                     //Instantiate temp obj shotgun
-                    GameObject temp = Instantiate(shotgun, spawnlocations[index].position, Quaternion.identity);
+                    GameObject temp = Instantiate(shotgun, spawnlocations[index].position, spawnlocations[index].localRotation);
                     sceneWeapons.Add(temp);
                 }
                 else if (randGun >= 70 && randGun <= 100) //30%
                 {
                     //Instantiate temp obj revolver
-                    GameObject temp = Instantiate(revolver, spawnlocations[index].position, Quaternion.identity);
+                    GameObject temp = Instantiate(revolver, spawnlocations[index].position, spawnlocations[index].localRotation);
                     sceneWeapons.Add(temp);
                 }
             }
