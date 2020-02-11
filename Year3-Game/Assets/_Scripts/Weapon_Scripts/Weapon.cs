@@ -664,21 +664,21 @@ public class Weapon : MonoBehaviour
 
                 target = hitInfo.transform.GetComponent<Target>();
 
-               float dist = Vector3.Distance(this.transform.position, hitInfo.transform.position);
+                float dist = Vector3.Distance(this.transform.position, hitInfo.transform.position);
 
                 if (target != null)
                 {
-                    if(dist < 25f)
+                    if (dist < 25f)
                     {
                         if (hitInfo.collider.name == "Head")
                         {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage * 1.5f);
-                        } 
+                            StartCoroutine(displayHitmark());
+                            target.takeDamage(loadout[currentIndex].damage * 1.5f);
+                        }
                         else
                         {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage);
+                            StartCoroutine(displayHitmark());
+                            target.takeDamage(loadout[currentIndex].damage);
                         }
                     }
                     else if (dist > 25f && dist < 35f)
@@ -686,22 +686,22 @@ public class Weapon : MonoBehaviour
 
                         if (hitInfo.collider.name == "Head")
                         {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage * 0.75f);
-                        } 
+                            StartCoroutine(displayHitmark());
+                            target.takeDamage(loadout[currentIndex].damage * 0.75f);
+                        }
                         else
                         {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage * 0.5f);
+                            StartCoroutine(displayHitmark());
+                            target.takeDamage(loadout[currentIndex].damage * 0.5f);
                         }
                     }
-
-                if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
-                {
-                    GameObject temp = _pool.GetBulletHole();
-                    temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                    temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
                 }
+                    if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
+                    {
+                        GameObject temp = _pool.GetBulletHole();
+                        temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                        temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                    }
 
             }
         }
@@ -734,18 +734,7 @@ public class Weapon : MonoBehaviour
                     Monkey.shatterThis = true;
                 }
 
-                if (hitInfo.collider.tag == "Wood")
-                {
-                    Type = 1;
-                }
-                else if (hitInfo.collider.tag == "Metal")
-                {
-                    Type = 2;
-                }
-                else if (hitInfo.collider.tag == "Concrete")
-                {
-                    Type = 3;
-                }
+               
 
                 if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
                 {

@@ -16,7 +16,7 @@ public class Target : MonoBehaviour
     public Image Grenade2;
     public Image Player2Grenade1;
     public Image Player2Grenade2;
-
+    public Text kill;
     private Weapon weaponScript;
     private Weapon2 weaponScript2;
 
@@ -75,7 +75,9 @@ public class Target : MonoBehaviour
         if (health <= 0f && this.gameObject.name == "Player2")
         {
             score.Kills += 1;
-            Die();
+            Die();            
+            kill.text = "You killed Adam!";
+
         }
         else if(health <= 0f && this.gameObject.name == "Player")
         {
