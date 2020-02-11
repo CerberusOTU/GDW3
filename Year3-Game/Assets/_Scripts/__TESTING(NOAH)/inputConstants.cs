@@ -13,6 +13,7 @@
     public const string c_ButtonNameSwitchWeapon            = "Mouse ScrollWheel";
     public const string c_ButtonNameGrenade                 = "Grenade";
     public const string c_ButtonNameReload                  = "Reload";
+    public const string c_ButtonNameInteract                = "Interact";
     public const string c_ButtonNameXray                    = "Xray";
     public const string c_ButtonNameSubmit                  = "Submit";
     public const string c_ButtonNameCancel                  = "Cancel";

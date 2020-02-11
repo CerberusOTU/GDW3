@@ -34,5 +34,6 @@ public class _Gun : ScriptableObject
    [SerializeField]
    public bool isReloading;
    //////////////
-   public GameObject obj;
+   public GameObject weaponObj;
+   public GameObject weaponObj_Arms;
 }

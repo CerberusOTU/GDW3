@@ -32,4 +32,7 @@ MonoBehaviour:
   ShotPath: event:/Gun Shots/RevolverShot
   ReloadPath: event:/Gun Reloads/RevolverReload
   isReloading: 0
-  obj: {fileID: 7118696067085070988, guid: 414b475a7d9fca74f8dc426f3fd49338, type: 3}
+  weaponObj: {fileID: 6471413429216083511, guid: 555b3837dafe6b8489e24183b67fff3f,
+    type: 3}
+  weaponObj_Arms: {fileID: 7118696067085070988, guid: 414b475a7d9fca74f8dc426f3fd49338,
+    type: 3}

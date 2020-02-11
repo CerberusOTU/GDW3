@@ -3,166 +3,88 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
-using XInputDotNetPure;
 using UnityEngine.SceneManagement;
 public class Weapon : MonoBehaviour
 {
-    //Controller Variables//
-    Controller controller;
+    //Imported Scripts
+    private PoolManager _pool;
+    private playerInputManager inputManager;
+    private dynamicCrosshair crosshair;
 
-    bool m_isAxisInUseDown = false;
-    bool m_isAxisInUseUp = false;
-    bool buttonInUse = false;
-    bool vibrate = false;
-    bool shootDown = false;
-    //////////////////////
+    [Header("Gun Parameters")]
+    private Transform anchor;
+    private Transform ADS;
+    private Transform Hip;
     public _Gun[] loadout;
-
-    public GameObject[] gunMeshes;
-    //0 = Tommy
-    //1 = Revolver
-    //2 = MP40
-    //3 = Shotgun
-
-    public GameObject[] inSceneGuns;
 
     public _Gun[] scriptOBJ;
     //0 = Tommy
     //1 = Revolver
     //2 = MP40
     //3 = Shotgun
-
-    public GameObject defaultSpawn;
-    private List<Transform> weaponSpawnPos = new List<Transform>();
-    public Transform weaponParent;
+    private Transform weaponParent;
 
 
     public int currentIndex;
 
     private GameObject currentWeapon;
 
-    public Canvas crossHair;
-    public Canvas hitMark;
+    //public Canvas hitMark;
 
-    public Camera cam;
+    private Camera cam;
     private float baseFOV;
     private float FOVmod = 0.90f;
-    //BulletHole Variables ////
-    private PoolManager _pool;
-    //////////////////////////
 
+
+    //-----Recoil-----//
+    [Header("Recoil")]
     private float currentRecoil;
     private float tempTime;
     private bool origPosReset = true;
     Quaternion saveInitShot;
     private float timeFiringHeld;
-    public bool reloadCancel = false;
-    public float reloadDelay = 0.0f;
+
+    //-----Reload-----//
+    [Header("Reload")]
+    private bool PlayerisReloading = false;
+    private bool reloadCancel = false;
+    private float reloadDelay = 0.0f;
+
 
     private float adjustedBloom;
 
     private float currentCool;
 
     private Motion player;
-    //Ammo UI///
-    public Text AmmoText;
-    public Text AmmoText2;
-    public Text Reloading;
-    public Text PickUp;
-    public Image MainWeapon;
-    public Image SideWeapon;
-    public Outline oln;
-    public Outline oln2;
-
-    public Sprite TommySprite;
-    public Sprite MP40Sprite;
-    public Sprite ShotgunSprite;
-    public Sprite RevolverSprite;
-
-    public Image Grenade1;
-    public Image Grenade2;
 
     Vector3 temp;
     Vector3 temp2;
 
     public ParticleSystem muzzleFlash;
-    Transform tempMuzzle;
-    ///////////////////
-    Rigidbody rigid;
-
-    //GUNS//
-    public _Gun M1911;
-    public _Gun Tommy;
-    public _Gun MP40;
-    public _Gun Shotgun;
-    public _Gun Revolver;
-
-    /////////////////////////
-
     //to switch our gun meshes in scene
     bool isSwitched = false;
     RaycastHit checkWeapon;
 
     //Throwing Grenade
-
-    //Throwing Grenade
     private bool isCookingNade = false;
     public float throwForce = 40f;
     public GameObject grenadePrefab;
-
     public int grenadeAmount = 2;
-
-    //Mesh Model Switch
-    public GameObject RobertoTommy;
-    public GameObject RobertoM1911;
-    public GameObject RobertoRevolver;
-    public GameObject RobertoMP40;
-    public GameObject RobertoShotgun;
-
-
-    public Image up_crosshair;
-    public Image down_crosshair;
-    public Image left_crosshair;
-    public Image right_crosshair;
-
-
-
-    //**************TUTORIAL VARIABLES**************/
-    [System.NonSerialized]
-    public Tutorial_Manager _tutManager;
-    //Metrics Manager
-    public networkingPluginReader _metricsLogger;
 
     void Start()
     {
-        baseFOV = cam.fieldOfView;
-        rigid = this.gameObject.GetComponent<Rigidbody>();
-        _pool = GameObject.FindObjectOfType<PoolManager>();
-        _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
-        _metricsLogger = GameObject.FindObjectOfType<networkingPluginReader>();
-        player = GameObject.FindObjectOfType<Motion>();
-        hitMark.enabled = false;
-        controller = GameObject.FindObjectOfType<Controller>();
 
-        //MainWeapon = GetComponent<Image>();
-        //SideWeapon = GetComponent<Outline>();
+        _pool = GameObject.FindObjectOfType<PoolManager>();
+        inputManager = GetComponent<playerInputManager>();
+        cam = GetComponentInChildren<Camera>();
+        weaponParent = cam.gameObject.GetComponentInChildren<Transform>();
+        crosshair = GetComponent<dynamicCrosshair>();
+        //hitMark.enabled = false;
+        baseFOV = cam.fieldOfView;
 
         temp2 = transform.localScale;
         temp2.x = 1f;
         temp2.y = 1f;
-
-        //Insantiate UI
-        oln.enabled = false;
-        oln2.enabled = true;
-
-        var tempColor = SideWeapon.color;
-        tempColor.a = 0.5f;
-        SideWeapon.color = tempColor;
-
-        var tempColor2 = MainWeapon.color;
-        tempColor2.a = 1f;
-        MainWeapon.color = tempColor2;
-
 
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].clipSize;
@@ -180,106 +102,14 @@ public class Weapon : MonoBehaviour
         loadout[0] = null;
 
         Equip(1);
-
-
-
-        if (SceneManager.GetActiveScene().name == "SampleScene")
-        {
-            //generate spawn transforms
-            for (int i = 0; i < 4; i++)
-            {
-                Transform temp = Instantiate(defaultSpawn.transform);
-                weaponSpawnPos.Add(temp);
-                //temp.transform.parent = this.transform;
-            }
-
-            //set weapon spawn locations
-
-            weaponSpawnPos[0].position = new Vector3(15.02f, 5f, -16.07f);
-            weaponSpawnPos[0].localRotation *= Quaternion.Euler(0f, 90f, 0f);
-
-            weaponSpawnPos[1].position = new Vector3(-15.779f, 4.92f, 10.895f);
-            weaponSpawnPos[1].localRotation *= Quaternion.Euler(0f, 90f, 0f);
-
-            weaponSpawnPos[2].position = new Vector3(15.123f, 4.75f, 9.866f);
-            weaponSpawnPos[2].localRotation *= Quaternion.Euler(0f, -75f, 90f);
-
-            weaponSpawnPos[3].position = new Vector3(24.451f, 5f, 29.07f);
-            weaponSpawnPos[3].localRotation *= Quaternion.Euler(0f, -90f, 0f);
-
-            //random index number for spawn locations
-            var numList = new List<int>();
-            for (int k = 0; k < weaponSpawnPos.Count; k++)
-            {
-                numList.Add(k);
-            }
-
-            numList = numList.OrderBy(i => Random.value).ToList();
-
-            //set the in scene guns to the random transforms
-            for (int i = 0; i < inSceneGuns.Length; i++)
-            {
-                inSceneGuns[i].transform.position = weaponSpawnPos[numList[i]].position;
-                inSceneGuns[i].transform.localRotation = weaponSpawnPos[numList[i]].localRotation;
-            }
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if ((controller.state.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
-        {
-            GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
-        }
-        else
-        {
-            GamePad.SetVibration((PlayerIndex)0, 0, 0);
-        }
     }
 
     void Update()
     {
-        //for when game ends
-        if (Time.timeScale != 1f)
-        {
-            crossHair.enabled = false;
-        }
-        ///////////////////////////////////
-
-        PickUp.enabled = false;
-
         SwitchWeapon();
         Reload();
-        MeshSwitch();
-
-
-        if (player.isSprinting)
-        {
-            up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 20f, up_crosshair.transform.localPosition.z);
-            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, -31.1f, down_crosshair.transform.localPosition.z);
-            left_crosshair.transform.localPosition = new Vector3(-27.3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
-            right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
-        }
 
         float d = Input.GetAxis("Mouse ScrollWheel");
-
-        if (loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo >= 0)
-        {
-            AmmoText.text = loadout[currentIndex].currentAmmo.ToString();
-        }
-        else
-        {
-            AmmoText.text = "0";
-        }
-
-        if (loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo >= 0)
-        {
-            AmmoText2.text = loadout[currentIndex].maxAmmo.ToString();
-        }
-        else
-        {
-            AmmoText2.text = "0";
-        }
 
         if (grenadeAmount > 0)
         {
@@ -287,60 +117,25 @@ public class Weapon : MonoBehaviour
             {
                 isCookingNade = true;
                 throwGrenade();
-                if (!_tutManager.b_grenadeComplete)
-                    _tutManager.Notify("GRENADE_COMPLETE");
             }
             //else if (Input.GetButtonUp("Grenade"))
             else if (Input.GetKeyUp(KeyCode.G))
             {
                 if (grenadeAmount == 2)
                 {
-                    Grenade1.enabled = false;
                     isCookingNade = false;
                     throwGrenade();
                     grenadeAmount--;
                 }
                 else if (grenadeAmount == 1)
                 {
-                    Grenade2.enabled = false;
                     isCookingNade = false;
                     throwGrenade();
                     grenadeAmount--;
                 }
             }
         }
-        //if (Input.GetButton("Grenade"))
-        if (controller.state.IsConnected)
-        {
-            if (grenadeAmount > 0)
-            {
-                if ((controller.state.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKey(KeyCode.G))
-                {
-                    isCookingNade = true;
-                    throwGrenade();
-                    if (!_tutManager.b_grenadeComplete)
-                        _tutManager.Notify("GRENADE_COMPLETE");
-                }
-                //else if (Input.GetButtonUp("Grenade"))
-                else if ((controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKeyUp(KeyCode.G))
-                {
-                    if (grenadeAmount == 2)
-                    {
-                        Grenade1.enabled = false;
-                        isCookingNade = false;
-                        throwGrenade();
-                        grenadeAmount--;
-                    }
-                    else if (grenadeAmount == 1)
-                    {
-                        Grenade2.enabled = false;
-                        isCookingNade = false;
-                        throwGrenade();
-                        grenadeAmount--;
-                    }
-                }
-            }
-        }
+
         if (loadout[currentIndex] == loadout[0])
         {
             temp = transform.localScale;
@@ -375,7 +170,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.R) && !PlayerisReloading))
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -387,151 +182,46 @@ public class Weapon : MonoBehaviour
         //d > 0f is scrolling up
         if (loadout[0] != null)
         {
-            if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+            if ((d > 0f && currentIndex != 0))
             {
                 reloadCancel = true;
                 Equip(0);
-                //oln.enabled = true;
-                //oln2.enabled = false;
-
-                //var tempColor = SideWeapon.color;
-                //tempColor.a = 0.5f;
-                //SideWeapon.color = tempColor;
-
-                //var tempColor2 = MainWeapon.color;
-                //tempColor2.a = 1f;
-                //MainWeapon.color = tempColor2;
             }
-            else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
+            else if ((d < 0f && currentIndex != 1))
             {
                 reloadCancel = true;
                 Equip(1);
-                oln.enabled = false;
-                oln2.enabled = true;
-
-                var tempColor = SideWeapon.color;
-                tempColor.a = 1f;
-                SideWeapon.color = tempColor;
-
-                var tempColor2 = MainWeapon.color;
-                tempColor2.a = 0.5f;
-                MainWeapon.color = tempColor2;
             }
-        }
-
-
-        if (currentIndex == 0)
-        {
-            oln.enabled = true;
-            oln2.enabled = false;
-
-            var tempColor = SideWeapon.color;
-            tempColor.a = 0.5f;
-            SideWeapon.color = tempColor;
-
-            var tempColor2 = MainWeapon.color;
-            tempColor2.a = 1f;
-            MainWeapon.color = tempColor2;
-        }
-        else if (currentIndex == 1)
-        {
-            oln.enabled = false;
-            oln2.enabled = true;
-
-            var tempColor = SideWeapon.color;
-            tempColor.a = 1f;
-            SideWeapon.color = tempColor;
-
-            var tempColor2 = MainWeapon.color;
-            tempColor2.a = 0.5f;
-            MainWeapon.color = tempColor2;
-
-        }
-
-        //UI weapon switch
-        if (loadout[0] != null)
-        {
-            MainWeapon.enabled = true;
-            if (loadout[0].name == "Tommy")
-            {
-                MainWeapon.sprite = TommySprite;
-            }
-            else if (loadout[0].name == "MP40")
-            {
-                MainWeapon.sprite = MP40Sprite;
-
-            }
-            else if (loadout[0].name == "Revolver")
-            {
-                MainWeapon.sprite = RevolverSprite;
-            }
-            else if (loadout[0].name == "Shotgun")
-            {
-                MainWeapon.sprite = ShotgunSprite;
-
-            }
-        }
-        else
-        {
-            MainWeapon.enabled = false;
         }
 
 
         if (currentWeapon != null)
         {
-            Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
+            Aim(Input.GetMouseButton(1));
 
             getShootDown();
-            getShootUp();
 
-            /* if((Input.GetMouseButtonDown(0) || shootDown == true) && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
-            {
-                origPosReset = false;
-                Shoot();
-            }
-            else  */
-            if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
+            if (!PlayerisReloading && (Input.GetMouseButton(0)) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
             }
             // Return back to original left click position
-            if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0) && origPosReset == false)
+            if (!Input.GetMouseButton(0) && origPosReset == false)
             {
-                //cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-                //if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
-                //{
-                //Debug.Log(origPosReset);
-                //origPosReset = true;
-                //}
+                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+                {
+                    Debug.Log(origPosReset);
+                    origPosReset = true;
+                }
             }
-
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
-            up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, new Vector3(0.6f, 4f, 0f), Time.deltaTime * 4f);
-            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, -15f, 0.0f), Time.deltaTime * 4f);
-            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, -4f, 0.0f), Time.deltaTime * 4f);
-            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, -4f, 0.0f), Time.deltaTime * 4f);
-
         }
-
-
 
         if (currentCool > 0)
         {
             currentCool -= Time.deltaTime;
         }
-
-        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
-        {
-            tempMuzzle = currentWeapon.transform.Find("States/ADS/MuzzlePos");
-            muzzleFlash.transform.position = tempMuzzle.position;
-        }
-        else
-        {
-            tempMuzzle = currentWeapon.transform.Find("States/Hip/MuzzlePos");
-            muzzleFlash.transform.position = tempMuzzle.position;
-        }
-
     }
 
     public void Equip(int _ind)
@@ -542,7 +232,7 @@ public class Weapon : MonoBehaviour
         }
 
         currentIndex = _ind;
-        GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
+        GameObject newWeapon = Instantiate(loadout[_ind].weaponObj_Arms, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = Vector3.zero;
 
@@ -551,52 +241,28 @@ public class Weapon : MonoBehaviour
 
     void Aim(bool isAiming)
     {
-        Transform anchor = currentWeapon.transform.Find("Anchor");
-        //Transform anchorR = currentWeapon.transform.Find("Anchor");
-
-        Transform ADS = currentWeapon.transform.Find("States/ADS");
-        Transform Hip = currentWeapon.transform.Find("States/Hip");
-        //Transform Sprint = currentWeapon.transform.Find("States/Sprint");
-        //Transform SprintR = currentWeapon.transform.Find("States/Sprint");
-
-
-        if (isAiming && !player.isSprinting)
+        anchor = currentWeapon.transform.Find("Anchor");
+        ADS = currentWeapon.transform.Find("States/ADS");
+        Hip = currentWeapon.transform.Find("States/Hip");
+        if (isAiming && !inputManager.GetSprintInputHeld())
         {
             //ADS
+            crosshair.enabled = false;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
             anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
-            crossHair.enabled = false;
         }
-        //else if (!isAiming && player.isSprinting)
-        //{ 
-        //Quaternion tempRot = Quaternion.Euler(0f,-10f,0f);
-        //Hip
-        //anchor.position = Vector3.Lerp(anchor.position, Sprint.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
-
-        //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);
-
-        // anchor.rotation = Vector3.Lerp(anchor.rotation, SprintR.rotation, Time.deltaTime * loadout[currentIndex].aimSpeed);
-        // crossHair.enabled = true;
-        //}
         else
         {
+            crosshair.enabled = true;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
-            //Hip
-            //Quaternion tempRot = Quaternion.Euler(0f,0f,0f);
-            //anchor.localRotation = Quaternion.Slerp(anchor.localRotation, tempRot, Time.deltaTime * loadout[currentIndex].aimSpeed);
             anchor.position = Vector3.Lerp(anchor.position, Hip.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
-            crossHair.enabled = true;
         }
 
     }
 
-
     void PlaySound(string ShotPath)
     {
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(path, GetComponent<Transform>().position);
         FMODUnity.RuntimeManager.PlayOneShotAttached(ShotPath, currentWeapon);
-
-        //FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
     }
 
     void Shoot()
@@ -607,7 +273,7 @@ public class Weapon : MonoBehaviour
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
 
-        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if (Input.GetMouseButton(1))
         {
             adjustedBloom = loadout[currentIndex].bloom / 3;
         }
@@ -633,10 +299,10 @@ public class Weapon : MonoBehaviour
         }
 
         ///-----RECOIL-----/////
-        if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1)
+        if (Input.GetMouseButtonDown(0))
         {
-            //tempTime = Time.time;
-            //saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
+            tempTime = Time.time;
+            saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
         }
 
         //Recoil Dampen
@@ -644,13 +310,7 @@ public class Weapon : MonoBehaviour
         Quaternion maxRecoil = Quaternion.Euler(cam.transform.localEulerAngles.x + loadout[currentIndex].maxRecoil_x, 0f, 0f);
         cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[currentIndex].recoilSpeed * Mathf.Lerp(1, loadout[currentIndex].recoilDampen, timeFiringHeld));
 
-
         RaycastHit hitInfo = new RaycastHit();
-
-        up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, up_crosshair.transform.localPosition.y + 2, up_crosshair.transform.localPosition.z);
-        down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, down_crosshair.transform.localPosition.y - 2, down_crosshair.transform.localPosition.z);
-        left_crosshair.transform.localPosition = new Vector3(left_crosshair.transform.localPosition.x - 2, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
-        right_crosshair.transform.localPosition = new Vector3(right_crosshair.transform.localPosition.x + 2, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
 
         //bloom
         if (loadout[currentIndex].className == "Shotgun")
@@ -666,29 +326,9 @@ public class Weapon : MonoBehaviour
                 {
                     if (hitInfo.collider.name == "Head")
                     {
-                        StartCoroutine(displayHitmark());
+                        //StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage);
                     }
-                }
-
-                //Shooting tasklist///////////
-                if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-                {
-                    _tutManager.Target1 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-                {
-                    _tutManager.Target2 = true;
-                }
-                else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-                {
-                    _tutManager.Target3 = true;
-                }
-
-                if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-                {
-                    if (!_tutManager.b_shootingComplete)
-                        _tutManager.Notify("SHOOTING_COMPLETE");
                 }
 
                 if (hitInfo.collider.tag == "Wall")
@@ -713,12 +353,12 @@ public class Weapon : MonoBehaviour
                 {
                     if (hitInfo.collider.name == "Head")
                     {
-                        StartCoroutine(displayHitmark());
+                        //StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage * 2);
                     }
                     else
                     {
-                        StartCoroutine(displayHitmark());
+                        //StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage);
                     }
                 }
@@ -737,65 +377,33 @@ public class Weapon : MonoBehaviour
             }
         }
 
-
-        /* //Shooting tasklist///////////
-        if (hitInfo.collider.name == "Cube (8)" && _tutManager.Target1 == false)
-        {
-            _tutManager.Target1 = true;
-        }
-        else if (hitInfo.collider.name == "Cube (6)" && _tutManager.Target2 == false)
-        {
-            _tutManager.Target2 = true;
-        }
-        else if (hitInfo.collider.name == "Cube (4)" && _tutManager.Target3 == false)
-        {
-            _tutManager.Target3 = true;
-        }
-
-        if (_tutManager.Target1 == true && _tutManager.Target2 == true && _tutManager.Target3 == true)
-        {
-            if (!_tutManager.b_shootingComplete)
-                _tutManager.Notify("SHOOTING_COMPLETE");
-        }
-
- */
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
         currentCool = loadout[currentIndex].firerate;
 
-        _metricsLogger.shotsTaken++;
         if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].ShotType == "Auto")
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
     }
 
     IEnumerator displayHitmark()
     {
-        _metricsLogger.shotsHit++;
-        //Debug.Log(_metricsLogger.shotsHit);
-        hitMark.enabled = true;
-
+        //hitMark.enabled = true;
         yield return new WaitForSeconds(0.05f);
-        hitMark.enabled = false;
+        //hitMark.enabled = false;
     }
 
 
-    public bool PlayerisReloading = false;
+
     void Reload()
     {
-
-        //Debug.Log(cam.transform.localRotation.eulerAngles.x + "||" + (saveInitShot.eulerAngles.x - 360));
         if (PlayerisReloading)
         {
-            Debug.Log("Weapon Script Reloading");
-
             if (!origPosReset)
             {
                 cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
                 {
-                    //Debug.Log(origPosReset);
-
                     origPosReset = true;
                 }
             }
@@ -803,21 +411,16 @@ public class Weapon : MonoBehaviour
             {
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
                 reloadDelay += Time.deltaTime;
-                Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
-                //Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
                 if (reloadCancel)
                 {
-                    Debug.Log("Reload Cancelled");
                     reloadDelay = 0.0f;
                     reloadCancel = false;
                     PlayerisReloading = false;
-                    Reloading.text = " ";
                     tempTime = Time.time;
                     return;
                 }
                 if (reloadDelay >= loadout[currentIndex].reloadTime)
                 {
-                    Debug.Log("Reload Finished");
                     int tempAmmoNeeded = (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
                     int tempReloadAmmo = loadout[currentIndex].maxAmmo - (loadout[currentIndex].clipSize - loadout[currentIndex].currentAmmo);
                     if (loadout[currentIndex].maxAmmo >= tempAmmoNeeded)
@@ -831,13 +434,8 @@ public class Weapon : MonoBehaviour
                         loadout[currentIndex].maxAmmo = 0;
                     }
                     PlayerisReloading = false;
-                    Reloading.text = " ";
 
                     tempTime = Time.time;
-
-                    // Tutorial completion check
-                    if (!_tutManager.b_reloadComplete)
-                        _tutManager.Notify("RELOAD_COMPLETE");
                 }
             }
             else
@@ -857,17 +455,8 @@ public class Weapon : MonoBehaviour
             //if it is tagged as a weapon
             if (checkWeapon.collider.tag == "Weapon")
             {
-                PickUp.enabled = true;
-                if (controller.state.IsConnected)
-                {
-                    PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
-                }
-                else
-                {
-                    PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
-                }
                 //if the user presses E
-                if ((controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released) || Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -880,29 +469,28 @@ public class Weapon : MonoBehaviour
                         {
                             if (loadout[0].name == "Tommy")
                             {
-                                tempMesh = gunMeshes[0];
+                                tempMesh = scriptOBJ[0].weaponObj;
                             }
                             else if (loadout[0].name == "MP40")
                             {
-                                tempMesh = gunMeshes[2];
+                                tempMesh = scriptOBJ[2].weaponObj;
 
                             }
                             else if (loadout[0].name == "Revolver")
                             {
-                                tempMesh = gunMeshes[1];
+                                tempMesh = scriptOBJ[1].weaponObj;
 
                                 scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
                                 scriptOBJ[1].currentAmmo = scriptOBJ[1].clipSize;
                             }
                             else if (loadout[0].name == "Shotgun")
                             {
-                                tempMesh = gunMeshes[3];
+                                tempMesh = scriptOBJ[3].weaponObj;
 
                             }
                         }
                         else
                         {
-                            loadout[0] = Revolver;
                             loadout[0].name = "Revolver";
 
                             scriptOBJ[1].maxAmmo = scriptOBJ[1].alwaysMax;
@@ -911,8 +499,6 @@ public class Weapon : MonoBehaviour
 
                             Destroy(checkWeapon.collider.gameObject);
                             Equip(0);
-
-
                         }
 
                         if (loadout[0] != null)
@@ -937,26 +523,25 @@ public class Weapon : MonoBehaviour
                         {
                             if (loadout[0].name == "Revolver")
                             {
-                                tempMesh = gunMeshes[1];
+                                tempMesh = scriptOBJ[1].weaponObj;
                             }
                             else if (loadout[0].name == "MP40")
                             {
-                                tempMesh = gunMeshes[2];
+                                tempMesh = scriptOBJ[2].weaponObj;
                             }
                             else if (loadout[0].name == "Tommy")
                             {
-                                tempMesh = gunMeshes[0];
+                                tempMesh = scriptOBJ[0].weaponObj;
                                 scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
                                 scriptOBJ[0].currentAmmo = scriptOBJ[0].clipSize;
                             }
                             else if (loadout[0].name == "Shotgun")
                             {
-                                tempMesh = gunMeshes[3];
+                                tempMesh = scriptOBJ[3].weaponObj;
                             }
                         }
                         else
                         {
-                            loadout[0] = Tommy;
                             loadout[0].name = "Tommy";
 
                             scriptOBJ[0].maxAmmo = scriptOBJ[0].alwaysMax;
@@ -989,26 +574,25 @@ public class Weapon : MonoBehaviour
 
                             if (loadout[0].name == "Tommy")
                             {
-                                tempMesh = gunMeshes[0];
+                                tempMesh = scriptOBJ[0].weaponObj;
                             }
                             else if (loadout[0].name == "Revolver")
                             {
-                                tempMesh = gunMeshes[1];
+                                tempMesh = scriptOBJ[1].weaponObj;
                             }
                             else if (loadout[0].name == "MP40")
                             {
-                                tempMesh = gunMeshes[2];
+                                tempMesh = scriptOBJ[2].weaponObj;
                                 scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
                                 scriptOBJ[2].currentAmmo = scriptOBJ[2].clipSize;
                             }
                             else if (loadout[0].name == "Shotgun")
                             {
-                                tempMesh = gunMeshes[3];
+                                tempMesh = scriptOBJ[3].weaponObj;
                             }
                         }
                         else
                         {
-                            loadout[0] = MP40;
                             loadout[0].name = "MP40";
 
                             scriptOBJ[2].maxAmmo = scriptOBJ[2].alwaysMax;
@@ -1025,10 +609,7 @@ public class Weapon : MonoBehaviour
                             switched.name = loadout[0].name;
 
                         }
-
-
                         Destroy(checkWeapon.collider.gameObject);
-
                         loadout[0] = scriptOBJ[2];
                         Equip(0);
 
@@ -1043,19 +624,19 @@ public class Weapon : MonoBehaviour
                         {
                             if (loadout[0].name == "MP40")
                             {
-                                tempMesh = gunMeshes[2];
+                                tempMesh = scriptOBJ[2].weaponObj;
                             }
                             else if (loadout[0].name == "Revolver")
                             {
-                                tempMesh = gunMeshes[1];
+                                tempMesh = scriptOBJ[1].weaponObj;
                             }
                             else if (loadout[0].name == "Tommy")
                             {
-                                tempMesh = gunMeshes[0];
+                                tempMesh = scriptOBJ[0].weaponObj;
                             }
                             else if (loadout[0].name == "Shotgun")
                             {
-                                tempMesh = gunMeshes[3];
+                                tempMesh = scriptOBJ[3].weaponObj;
                                 scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
                                 scriptOBJ[3].currentAmmo = scriptOBJ[3].clipSize;
 
@@ -1063,7 +644,6 @@ public class Weapon : MonoBehaviour
                         }
                         else
                         {
-                            loadout[0] = Shotgun;
                             loadout[0].name = "Shotgun";
 
                             scriptOBJ[3].maxAmmo = scriptOBJ[3].alwaysMax;
@@ -1078,20 +658,11 @@ public class Weapon : MonoBehaviour
                         {
                             GameObject switched = Instantiate(tempMesh, temp.position, temp.rotation) as GameObject;
                             switched.name = loadout[0].name;
-                            
+
                         }
-
-
                         Destroy(checkWeapon.collider.gameObject);
-
-
                         loadout[0] = scriptOBJ[3];
                         Equip(0);
-
-                        // Tutorial completion check
-                        if (!_tutManager.b_swapComplete)
-                            _tutManager.Notify("SWAP_COMPLETE");
-
                     }
                 }
             }
@@ -1109,55 +680,9 @@ public class Weapon : MonoBehaviour
                 Shoot();
             }
         }
-        if (controller.state.Triggers.Right == 1)
-        {
-            if (m_isAxisInUseDown == false)
-            {
-                tempTime = Time.time;
-                saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
-                if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
-                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
-
-                if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
-                {
-                    // Call your event function here.
-                    origPosReset = false;
-                    Shoot();
-                }
-                m_isAxisInUseDown = true;
-            }
-        }
-        if (controller.state.Triggers.Right < 1)
-        {
-            m_isAxisInUseDown = false;
-        }
     }
 
-    void getShootUp()
-    {
-        if (controller.state.Triggers.Right == 0)
-        {
-            if (!m_isAxisInUseUp)
-            {
-                m_isAxisInUseUp = true;
-            }
-            if (!origPosReset)
-            {
-                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
-                {
-                    //Debug.Log(origPosReset);
-                    origPosReset = true;
-                    return;
-                }
-                cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-            }
-        }
-        if (controller.state.Triggers.Right > 0)
-        {
-            m_isAxisInUseUp = false;
-        }
-    }
-
+    //Grenade Variables
     Rigidbody rb_Grenade;
     bool isNewNade = true;
     void throwGrenade()
@@ -1186,59 +711,5 @@ public class Weapon : MonoBehaviour
             }
         }
     }
-    void MeshSwitch()
-    {
-        if (loadout[currentIndex].name == "M1911")
-        {
-            RobertoM1911.transform.position = this.transform.position;
-            RobertoM1911.transform.rotation = this.transform.rotation;
-
-            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
-        }
-        else if (loadout[currentIndex].name == "Tommy")
-        {
-            RobertoTommy.transform.position = this.transform.position;
-            RobertoTommy.transform.rotation = this.transform.rotation;
-
-            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
-        }
-        else if (loadout[currentIndex].name == "Revolver")
-        {
-            RobertoRevolver.transform.position = this.transform.position;
-            RobertoRevolver.transform.rotation = this.transform.rotation;
-
-            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
-        }
-        else if (loadout[currentIndex].name == "MP40")
-        {
-            RobertoMP40.transform.position = this.transform.position;
-            RobertoMP40.transform.rotation = this.transform.rotation;
-
-            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoShotgun.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
-        }
-        else if (loadout[currentIndex].name == "Shotgun")
-        {
-            RobertoShotgun.transform.position = this.transform.position;
-            RobertoShotgun.transform.rotation = this.transform.rotation;
-
-            RobertoTommy.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoM1911.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoMP40.transform.position = new Vector3(45f, -2f, 0f);
-            RobertoRevolver.transform.position = new Vector3(45f, -2f, 0f);
-        }
-    }
-
 }
 

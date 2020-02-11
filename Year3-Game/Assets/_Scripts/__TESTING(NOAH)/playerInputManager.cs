@@ -30,7 +30,7 @@ public class playerInputManager : MonoBehaviour
         return Cursor.lockState == CursorLockMode.Locked;
     }
 
-#region MOVEMENT
+    #region MOVEMENT
     //Get the input of movement (Horizontal/Vertical)
     public Vector3 GetMoveInput()
     {
@@ -46,9 +46,10 @@ public class playerInputManager : MonoBehaviour
 
         return Vector3.zero;
     }
-#endregion
+    #endregion
 
-#region LOOK
+    #region LOOK
+
     //Look - Mouse X
     public float GetLookInputsHorizontal()
     {
@@ -95,9 +96,9 @@ public class playerInputManager : MonoBehaviour
     {
         return InvertYAxis;
     }
-#endregion
+    #endregion
 
-#region JUMP
+    #region JUMP
     //Space pressed down
     public bool GetJumpInputDown()
     {
@@ -125,9 +126,9 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
-    
-#region FIRE
+    #endregion
+
+    #region FIRE
     //Left Click
     public bool GetFireInputDown()
     {
@@ -145,13 +146,13 @@ public class playerInputManager : MonoBehaviour
     {
         if (CanProcessInput())
         {
-                return Input.GetButton(inputConstants.c_ButtonNameFire);
+            return Input.GetButton(inputConstants.c_ButtonNameFire);
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region AIM
+    #region AIM
     //Right Click Held
     public bool GetAimInputHeld()
     {
@@ -162,9 +163,9 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region SPRINT
+    #region SPRINT
     //Shift being held
     public bool GetSprintInputHeld()
     {
@@ -174,9 +175,9 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region CROUCH
+    #region CROUCH
     //Left Ctrl down
     public bool GetCrouchInputDown()
     {
@@ -206,9 +207,9 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region GRENADE
+    #region GRENADE
     //Key 'G' down
     public bool GetGrenadeInputDown()
     {
@@ -238,9 +239,9 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region RELOAD
+    #region RELOAD
     //Key 'R' down
     public bool GetReloadInputDown()
     {
@@ -250,9 +251,21 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
-#endregion
+    #endregion
 
-#region SWITCH WEAPON
+    #region INTERACT
+    //Key 'E' down
+    public bool GetInteractInputDown()
+    {
+        if (CanProcessInput())
+        {
+            return Input.GetButtonDown(inputConstants.c_ButtonNameInteract);
+        }
+        return false;
+    }
+    #endregion
+
+    #region SWITCH WEAPON
     //Check Scroll Wheel value
     public int GetSwitchWeaponInput()
     {
@@ -260,9 +273,9 @@ public class playerInputManager : MonoBehaviour
         {
             string axisName = inputConstants.c_ButtonNameSwitchWeapon;
 
-            if (Input.GetAxis(axisName) > 0f)
+            if (Input.GetAxis(axisName) > 0f) //Forward
                 return -1;
-            else if (Input.GetAxis(axisName) < 0f)
+            else if (Input.GetAxis(axisName) < 0f) // Backwards
                 return 1;
         }
 
@@ -291,6 +304,6 @@ public class playerInputManager : MonoBehaviour
         }
         return 0;
     }
-#endregion
+    #endregion
 
 }
