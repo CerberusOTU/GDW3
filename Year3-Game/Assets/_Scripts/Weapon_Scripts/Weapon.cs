@@ -705,7 +705,7 @@ public class Weapon : MonoBehaviour
 
             }
         }
-        }
+        
         else if (loadout[currentIndex].className != "Shotgun")
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
