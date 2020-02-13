@@ -197,7 +197,7 @@ public class Weapon : MonoBehaviour
 
         if (currentWeapon != null)
         {
-            Aim(Input.GetMouseButton(1));
+            Aim();
 
             getShootDown();
 
@@ -239,12 +239,12 @@ public class Weapon : MonoBehaviour
         currentWeapon = newWeapon;
     }
 
-    void Aim(bool isAiming)
+    void Aim()
     {
         anchor = currentWeapon.transform.Find("Anchor");
         ADS = currentWeapon.transform.Find("States/ADS");
         Hip = currentWeapon.transform.Find("States/Hip");
-        if (isAiming && !inputManager.GetSprintInputHeld())
+        if (inputManager.GetAimInputHeld())
         {
             //ADS
             crosshair.enabled = false;

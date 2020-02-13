@@ -77,7 +77,7 @@ public class playerCharController : MonoBehaviour
             currentSpeed -= speed * deceleration;
         }
         //Handle Sprint and Crouch
-        if (inputManager.GetSprintInputHeld())
+        if (inputManager.GetSprintInputHeld() && !inputManager.GetAimInputHeld())
         {
             desiredSpeed *= sprintModifier;
         }

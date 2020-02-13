@@ -175,6 +175,24 @@ public class playerInputManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool GetSprintInputDown()
+    {
+        if (CanProcessInput())
+        {
+            return Input.GetButtonDown(inputConstants.c_ButtonNameSprint);
+        }
+        return false;
+    }
+
+    public bool GetSprintInputUp()
+    {
+        if (CanProcessInput())
+        {
+            return Input.GetButtonUp(inputConstants.c_ButtonNameSprint);
+        }
+        return false;
+    }
     #endregion
 
     #region CROUCH
