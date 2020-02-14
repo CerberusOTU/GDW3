@@ -715,12 +715,19 @@ public class Weapon : MonoBehaviour
         
         else if (loadout[currentIndex].className != "Shotgun")
         {
-            Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+           Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+            
+                
 
             if (hitInfo.collider != null)
             {
                 Target target = hitInfo.transform.GetComponent<Target>();
                 Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
+
+                if(hitInfo.collider.name == "SpeakeasyLight")
+                {
+                    hitInfo.rigidbody.AddForce(-hitInfo.normal * 100f);
+                }
 
                 if (target != null)
                 {
