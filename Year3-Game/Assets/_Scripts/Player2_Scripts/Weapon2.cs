@@ -43,6 +43,8 @@ public class Weapon2 : MonoBehaviour
     public Canvas crossHair;
     public Canvas hitMark;
 
+    public string PlayerName;
+
     public Camera cam;
     //BulletHole Variables ////
     private PoolManager _pool;

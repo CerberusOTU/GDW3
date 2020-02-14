@@ -45,6 +45,8 @@ public class Weapon : MonoBehaviour
     public Canvas hitMark;
 
     public Camera cam;
+    public Camera deathcam;
+
     private float baseFOV;
     private float FOVmod = 0.90f;
     //BulletHole Variables ////
@@ -82,8 +84,12 @@ public class Weapon : MonoBehaviour
     public Image Grenade1;
     public Image Grenade2;
 
+    
+
     Vector3 temp;
     Vector3 temp2;
+
+    public string PlayerName;
 
     public ParticleSystem muzzleFlash;
     Transform tempMuzzle;
@@ -131,7 +137,11 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        cam.enabled = true;
+        deathcam.enabled = false;
+
         baseFOV = cam.fieldOfView;
+
         rigid = this.gameObject.GetComponent<Rigidbody>();
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
@@ -247,6 +257,11 @@ public class Weapon : MonoBehaviour
         SwitchWeapon();
         Reload();
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            cam.enabled = !cam.enabled;
+            deathcam.enabled = !deathcam.enabled;
+        }
 
         if (player.isSprinting)
         {

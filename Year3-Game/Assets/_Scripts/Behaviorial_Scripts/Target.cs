@@ -16,7 +16,14 @@ public class Target : MonoBehaviour
     public Image Grenade2;
     public Image Player2Grenade1;
     public Image Player2Grenade2;
-    public Text kill;
+
+    public Text KilledEnemy;
+    public Image KilledIcon;
+    Vector3 lerpPos = new Vector3(0f, 2f, 0f);
+    Vector3 startPos;
+    Vector3 startPos2;
+    //Vector3 endPos = new Vector3(-77.02f, 0.14f, 44.21f);
+
     private Weapon weaponScript;
     private Weapon2 weaponScript2;
 
@@ -26,6 +33,9 @@ public class Target : MonoBehaviour
     Score2 score2;
     void Start()
     {
+        Vector3 startPos = KilledEnemy.transform.localPosition;
+        Vector3 startPos2 = KilledIcon.transform.localPosition;
+
         weaponScript = GetComponent<Weapon>();
         weaponScript2 = GetComponent<Weapon2>();
 
@@ -36,33 +46,36 @@ public class Target : MonoBehaviour
         score2 = GameObject.FindObjectOfType<Score2>();
 
         //generate respawn transforms
-         for(int i = 0; i < 4; i++)
-         {
-             Transform temp = Instantiate(defaultSpawn.transform); 
-             SpawnPos.Add(temp);
-             //temp.transform.parent = this.transform;
-         }
+        for (int i = 0; i < 4; i++)
+        {
+            Transform temp = Instantiate(defaultSpawn.transform);
+            SpawnPos.Add(temp);
+            //temp.transform.parent = this.transform;
+        }
 
-         //set weapon spawn locations
+        //set weapon spawn locations
 
-    SpawnPos[0].position = new Vector3(27f, 3.2f, 34f);
-    SpawnPos[0].localRotation *= Quaternion.Euler(0f,180f,0f);
+        SpawnPos[0].position = new Vector3(27f, 3.2f, 34f);
+        SpawnPos[0].localRotation *= Quaternion.Euler(0f, 180f, 0f);
 
-    SpawnPos[1].position = new Vector3(45f, 3.2f, 6f);
-    SpawnPos[1].localRotation *= Quaternion.Euler(0f,270f,0f);
-    
-    SpawnPos[2].position = new Vector3(10f, 3.2f, -19.5f);
-    SpawnPos[2].localRotation *= Quaternion.Euler(0f,90,0f);
+        SpawnPos[1].position = new Vector3(45f, 3.2f, 6f);
+        SpawnPos[1].localRotation *= Quaternion.Euler(0f, 270f, 0f);
 
-    SpawnPos[3].position = new Vector3(-10f, 3.2f, 5.5f);
-    SpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
-    
+        SpawnPos[2].position = new Vector3(10f, 3.2f, -19.5f);
+        SpawnPos[2].localRotation *= Quaternion.Euler(0f, 90, 0f);
+
+        SpawnPos[3].position = new Vector3(-10f, 3.2f, 5.5f);
+        SpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+
+        KilledEnemy.canvasRenderer.SetAlpha(0f);
+        KilledIcon.canvasRenderer.SetAlpha(0f);
+
     }
 
     public void takeDamage(float amount)
     {
         health -= amount;
-        if(this.gameObject.name == "Player")
+        if (this.gameObject.name == "Player")
         {
             healthUI.tookDamage = true;
             healthUI.PlayerHealth -= amount;
@@ -75,66 +88,87 @@ public class Target : MonoBehaviour
         if (health <= 0f && this.gameObject.name == "Player2")
         {
             score.Kills += 1;
-            Die();            
-            kill.text = "You killed Adam!";
+            Die();
+            StartCoroutine(UIElements());
 
         }
-        else if(health <= 0f && this.gameObject.name == "Player")
+        else if (health <= 0f && this.gameObject.name == "Player")
         {
             score2.Kills += 1;
             Die();
         }
     }
 
+    IEnumerator UIElements()
+    {
+        KilledEnemy.text = "Eashvar99";
+        //KilledEnemy.text = weaponScript.PlayerName.ToString();
+
+        //while (KilledEnemy.transform.localPosition != (startPos + lerpPos))
+        //{
+        //    KilledEnemy.transform.localPosition = Vector3.MoveTowards(startPos, startPos + lerpPos, 0.000001f * Time.deltaTime);
+        //    KilledIcon.transform.localPosition = Vector3.Lerp(KilledIcon.transform.localPosition, startPos + lerpPos, Time.deltaTime);
+        //    yield return null;
+        //}
+
+
+        KilledEnemy.CrossFadeAlpha(1f, 0.2f, false);
+        KilledIcon.CrossFadeAlpha(1f, 0.2f, false);
+
+        yield return new WaitForSeconds(1f);
+
+        KilledEnemy.CrossFadeAlpha(0f, 0.5f, false);
+        KilledIcon.CrossFadeAlpha(0f, 0.5f, false);
+
+    }
+
     void Die()
     {
         //Destroy(gameObject);
-        int index = Random.Range(0,3);
+        int index = Random.Range(0, 3);
         Debug.Log(index);
-
-
 
         Debug.Log(SpawnPos[index].position);
 
         health = 100f;
-        if(this.gameObject.name == "Player")
+        if (this.gameObject.name == "Player")
         {
 
-           distanceToSpawnPoint1 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
-           distanceToSpawnPoint2 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
-           distanceToSpawnPoint3 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
-           distanceToSpawnPoint4 =  Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
+            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
+            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
+            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
 
-        //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
-        //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
-        //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
-        //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+            //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
+            //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
+            //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
+            //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
 
-        if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[0].position;
-            this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
-        }
-        else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[1].position;
-            this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-        }
-        else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[2].position;
-            this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-        }
-        else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-        {
-            this.gameObject.transform.position = SpawnPos[3].position;
-            this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-        }
+            if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[0].position;
+                this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+            }
+            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[1].position;
+                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+            }
+            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[2].position;
+                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+            }
+            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+            {
+                this.gameObject.transform.position = SpawnPos[3].position;
+                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
+            }
             healthUI.PlayerHealth = 100;
             Grenade1.enabled = true;
             Grenade2.enabled = true;
 
-            weaponScript.Equip(1);            
+            weaponScript.Equip(1);
             weaponScript.loadout[0] = null;
 
             weaponScript.grenadeAmount = 2;
@@ -144,38 +178,38 @@ public class Target : MonoBehaviour
 
         else
         {
-            
-           distanceToSpawnPoint1 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
-           distanceToSpawnPoint2 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
-           distanceToSpawnPoint3 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
-           distanceToSpawnPoint4 =  Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
 
-        //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
-        //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
-        //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
-        //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
+            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
+            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
 
-        if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[0].position;
-            this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
-        }
-        else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[1].position;
-            this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-        }
-        else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-        {
-            this.gameObject.transform.position = SpawnPos[2].position;
-            this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-        }
-        else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-        {
-            this.gameObject.transform.position = SpawnPos[3].position;
-            this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-        }
-            healthUI2.PlayerHealth = 100;            
+            //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
+            //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
+            //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
+            //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+
+            if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[0].position;
+                this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+            }
+            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[1].position;
+                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+            }
+            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[2].position;
+                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+            }
+            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+            {
+                this.gameObject.transform.position = SpawnPos[3].position;
+                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
+            }
+            healthUI2.PlayerHealth = 100;
             Player2Grenade1.enabled = true;
             Player2Grenade2.enabled = true;
             weaponScript2.grenadeAmount = 2;
