@@ -55,17 +55,18 @@ public class Target : MonoBehaviour
 
         //set weapon spawn locations
 
-        SpawnPos[0].position = new Vector3(27f, 3.2f, 34f);
+        SpawnPos[0].position = new Vector3(-85.4f, 1f, 45f);
         SpawnPos[0].localRotation *= Quaternion.Euler(0f, 180f, 0f);
 
-        SpawnPos[1].position = new Vector3(45f, 3.2f, 6f);
+        SpawnPos[1].position = new Vector3(-50.7f, 1f, -1.1f);
         SpawnPos[1].localRotation *= Quaternion.Euler(0f, 270f, 0f);
 
-        SpawnPos[2].position = new Vector3(10f, 3.2f, -19.5f);
+        SpawnPos[2].position = new Vector3(-110.3f, 1f, 22.6f);
         SpawnPos[2].localRotation *= Quaternion.Euler(0f, 90, 0f);
 
-        SpawnPos[3].position = new Vector3(-10f, 3.2f, 5.5f);
+        SpawnPos[3].position = new Vector3(-102.6f, 1f, -15.3f);
         SpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
+
 
         KilledEnemy.canvasRenderer.SetAlpha(0f);
         KilledIcon.canvasRenderer.SetAlpha(0f);
@@ -134,10 +135,10 @@ public class Target : MonoBehaviour
         if (this.gameObject.name == "Player")
         {
 
-            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
-            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
-            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
-            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
+            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[0].position);
+            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[1].position);
+            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[2].position);
+            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[3].position);
 
             //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
             //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
@@ -179,10 +180,10 @@ public class Target : MonoBehaviour
         else
         {
 
-            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
-            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
-            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
-            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
+            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
+            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[1].position);
+            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[2].position);
+            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[3].position);
 
             //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
             //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);

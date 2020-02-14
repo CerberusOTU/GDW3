@@ -59,7 +59,12 @@ public class ReloadAnimations : MonoBehaviour
             m_reload = false;
             Debug.Log("XXReloadPistolFinish");
             m_Animator.SetBool("M1911Reload", false);
+        }
 
+        if ((Player.GetComponent<Weapon>().loadout[0].currentAmmo == Player.GetComponent<Weapon>().loadout[0].clipSize) && (m_Animator.GetBool("tommyReload") == true))
+        {
+            m_reload = false;
+            m_Animator.SetBool("tommyReload", false);
         }
 
 
