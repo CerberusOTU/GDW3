@@ -24,6 +24,16 @@ public class Target : MonoBehaviour
     public Text KilledEnemy;
     public Image KilledIcon;
     public RawImage Fade;
+
+    public RawImage Banner;
+    public Text KilledBy;
+    public Text Respawn;
+
+    public Image whiteBanner;
+    public float maxTime = 3f;
+    float timeLeft;
+    bool timeStart;
+
     Vector3 lerpPos = new Vector3(0f, 2f, 0f);
     Vector3 startPos;
     Vector3 startPos2;
@@ -41,6 +51,8 @@ public class Target : MonoBehaviour
     Score2 score2;
     void Start()
     {
+        timeLeft = maxTime;
+
         Vector3 startPos = KilledEnemy.transform.localPosition;
         Vector3 startPos2 = KilledIcon.transform.localPosition;
 
@@ -79,7 +91,25 @@ public class Target : MonoBehaviour
         KilledEnemy.canvasRenderer.SetAlpha(0f);
         KilledIcon.canvasRenderer.SetAlpha(0f);
         Fade.canvasRenderer.SetAlpha(0f);
+        Banner.canvasRenderer.SetAlpha(0f);
+        KilledBy.canvasRenderer.SetAlpha(0f);
+        Respawn.canvasRenderer.SetAlpha(0f);
+        whiteBanner.canvasRenderer.SetAlpha(0f);
 
+    }
+
+    void Update()
+    {
+        Debug.Log("lol " + timeLeft);
+
+        if (timeStart == true)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                whiteBanner.fillAmount = timeLeft / maxTime;
+            }
+        }
     }
 
     public void takeDamage(float amount)
@@ -98,6 +128,7 @@ public class Target : MonoBehaviour
         if (health <= 0f && this.gameObject.name == "Player2")
         {
             score.Kills += 1;
+            KilledEnemy.text = weaponScript2.PlayerName;
 
             StartCoroutine(Die());
             StartCoroutine(UIElements());
@@ -106,13 +137,16 @@ public class Target : MonoBehaviour
         else if (health <= 0f && this.gameObject.name == "Player")
         {
             score2.Kills += 1;
+            KilledBy.text = "You were killed by " + weaponScript.PlayerName;
+
             StartCoroutine(Die());
+            StartCoroutine(UIElements());
+
         }
     }
 
     IEnumerator UIElements()
     {
-        KilledEnemy.text = "Eashvar99";
         //KilledEnemy.text = weaponScript.PlayerName.ToString();
 
         //while (KilledEnemy.transform.localPosition != (startPos + lerpPos))
@@ -155,8 +189,20 @@ public class Target : MonoBehaviour
             GameObject.Find("Player").GetComponent<Motion>().enabled = false;
             weapon1.SetActive(false);
 
+            Banner.canvasRenderer.SetAlpha(1f);
+            KilledBy.canvasRenderer.SetAlpha(1f);
+            Respawn.canvasRenderer.SetAlpha(1f);
+            whiteBanner.canvasRenderer.SetAlpha(1f);
+
+            timeStart = true;
+           
+
             Fade.CrossFadeAlpha(1f, 2f, false);
+
             yield return new WaitForSeconds(3f);
+
+            timeStart = false;
+            timeLeft = 3f;
 
             Fade.canvasRenderer.SetAlpha(0f);
             weapon1.SetActive(true);
@@ -166,6 +212,11 @@ public class Target : MonoBehaviour
             weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
             weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
             weaponScript.crossHair.enabled = true;
+
+            Banner.canvasRenderer.SetAlpha(0f);
+            KilledBy.canvasRenderer.SetAlpha(0f);
+            Respawn.canvasRenderer.SetAlpha(0f);
+            whiteBanner.canvasRenderer.SetAlpha(0f);
 
 
             distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
