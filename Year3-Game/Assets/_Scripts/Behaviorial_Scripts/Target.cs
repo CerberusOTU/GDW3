@@ -17,8 +17,13 @@ public class Target : MonoBehaviour
     public Image Player2Grenade1;
     public Image Player2Grenade2;
 
+    //public Camera cam;
+    //public Camera deathcam;
+    //public GameObject HUD;
+
     public Text KilledEnemy;
     public Image KilledIcon;
+    public RawImage Fade;
     Vector3 lerpPos = new Vector3(0f, 2f, 0f);
     Vector3 startPos;
     Vector3 startPos2;
@@ -26,6 +31,9 @@ public class Target : MonoBehaviour
 
     private Weapon weaponScript;
     private Weapon2 weaponScript2;
+
+    public GameObject weapon1;
+    public GameObject weapon2;
 
     private float distanceToSpawnPoint1, distanceToSpawnPoint2, distanceToSpawnPoint3, distanceToSpawnPoint4;
 
@@ -70,6 +78,7 @@ public class Target : MonoBehaviour
 
         KilledEnemy.canvasRenderer.SetAlpha(0f);
         KilledIcon.canvasRenderer.SetAlpha(0f);
+        Fade.canvasRenderer.SetAlpha(0f);
 
     }
 
@@ -89,14 +98,15 @@ public class Target : MonoBehaviour
         if (health <= 0f && this.gameObject.name == "Player2")
         {
             score.Kills += 1;
-            Die();
+
+            StartCoroutine(Die());
             StartCoroutine(UIElements());
 
         }
         else if (health <= 0f && this.gameObject.name == "Player")
         {
             score2.Kills += 1;
-            Die();
+            StartCoroutine(Die());
         }
     }
 
@@ -123,8 +133,10 @@ public class Target : MonoBehaviour
 
     }
 
-    void Die()
+    IEnumerator Die()
     {
+
+
         //Destroy(gameObject);
         int index = Random.Range(0, 3);
         Debug.Log(index);
@@ -134,11 +146,32 @@ public class Target : MonoBehaviour
         health = 100f;
         if (this.gameObject.name == "Player")
         {
+            weaponScript.loadout[0] = null;
+            weaponScript.cam.enabled = !weaponScript.cam.enabled;
+            weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
+            weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
+            weaponScript.crossHair.enabled = false;
+            GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
+            GameObject.Find("Player").GetComponent<Motion>().enabled = false;
+            weapon1.SetActive(false);
 
-            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[0].position);
-            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[1].position);
-            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[2].position);
-            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, SpawnPos[3].position);
+            Fade.CrossFadeAlpha(1f, 2f, false);
+            yield return new WaitForSeconds(3f);
+
+            Fade.canvasRenderer.SetAlpha(0f);
+            weapon1.SetActive(true);
+            GameObject.Find("Player").GetComponent<Motion>().enabled = true;
+            GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
+            weaponScript.cam.enabled = !weaponScript.cam.enabled;
+            weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
+            weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
+            weaponScript.crossHair.enabled = true;
+
+
+            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
+            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
+            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
 
             //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
             //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
@@ -149,6 +182,21 @@ public class Target : MonoBehaviour
             {
                 this.gameObject.transform.position = SpawnPos[0].position;
                 this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+            }
+            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[1].position;
+                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+            }
+            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+            {
+                this.gameObject.transform.position = SpawnPos[2].position;
+                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+            }
+            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+            {
+                this.gameObject.transform.position = SpawnPos[3].position;
+                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
             }
             else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
             {

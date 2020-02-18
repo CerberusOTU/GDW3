@@ -84,7 +84,6 @@ public class Weapon : MonoBehaviour
     public Image Grenade1;
     public Image Grenade2;
 
-    
 
     Vector3 temp;
     Vector3 temp2;
@@ -126,8 +125,8 @@ public class Weapon : MonoBehaviour
 
     public RaycastHit hitInfo;
 
-    public int Type;
-
+    public GameObject HUD;
+    
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -149,6 +148,7 @@ public class Weapon : MonoBehaviour
         player = GameObject.FindObjectOfType<Motion>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
+        HUD.GetComponent<Canvas>().enabled = true;
 
         //MainWeapon = GetComponent<Image>();
         //SideWeapon = GetComponent<Outline>();
@@ -259,8 +259,12 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            cam.enabled = !cam.enabled;
-            deathcam.enabled = !deathcam.enabled;
+            Equip(0);
+
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Equip(1);
         }
 
         if (player.isSprinting)

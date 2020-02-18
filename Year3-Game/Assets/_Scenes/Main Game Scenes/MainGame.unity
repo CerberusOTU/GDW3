@@ -27393,6 +27393,7 @@ RectTransform:
   - {fileID: 512422987}
   - {fileID: 813461493}
   - {fileID: 1810149032}
+  - {fileID: 808255611}
   m_Father: {fileID: 1222368524}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -71340,6 +71341,11 @@ PrefabInstance:
       propertyPath: ySens
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1432445155675656382, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1432445155675656354, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
       propertyPath: inSceneGuns.Array.data[0]
@@ -71527,6 +71533,16 @@ PrefabInstance:
       propertyPath: deathcam
       value: 
       objectReference: {fileID: 160418039}
+    - target: {fileID: 1432445155675656354, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: HUD
+      value: 
+      objectReference: {fileID: 174714322}
+    - target: {fileID: 1432445155675656354, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1432445155675656355, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
       propertyPath: partner
@@ -71592,6 +71608,16 @@ PrefabInstance:
       propertyPath: KilledIcon
       value: 
       objectReference: {fileID: 1785980234}
+    - target: {fileID: 2607112222224663906, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: weapon1
+      value: 
+      objectReference: {fileID: 655817790}
+    - target: {fileID: 2607112222224663906, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
+        type: 3}
+      propertyPath: Fade
+      value: 
+      objectReference: {fileID: 808255612}
     - target: {fileID: 2607112222224663913, guid: a266bcd2f5fd2ef43a06b0f11bde65c4,
         type: 3}
       propertyPath: killScore
