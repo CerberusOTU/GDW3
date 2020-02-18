@@ -49,6 +49,10 @@ public class Target : MonoBehaviour
 
     Score score;
     Score2 score2;
+
+    public GameObject BaseModel;
+    public GameObject Ragdoll;
+    GameObject go;
     void Start()
     {
         timeLeft = maxTime;
@@ -155,22 +159,20 @@ public class Target : MonoBehaviour
         //    KilledIcon.transform.localPosition = Vector3.Lerp(KilledIcon.transform.localPosition, startPos + lerpPos, Time.deltaTime);
         //    yield return null;
         //}
-
-
         KilledEnemy.CrossFadeAlpha(1f, 0.2f, false);
         KilledIcon.CrossFadeAlpha(1f, 0.2f, false);
 
         yield return new WaitForSeconds(1f);
 
         KilledEnemy.CrossFadeAlpha(0f, 0.5f, false);
-        KilledIcon.CrossFadeAlpha(0f, 0.5f, false);
-
+        KilledIcon.CrossFadeAlpha(0f, 0.5f, false);      
     }
 
     IEnumerator Die()
-    {
-
-
+    {   
+        BaseModel.SetActive(false);
+        GameObject go = Instantiate(Ragdoll, this.transform.position, this.transform.rotation);
+        Destroy(go, 3f);
         //Destroy(gameObject);
         int index = Random.Range(0, 3);
         Debug.Log(index);
@@ -273,9 +275,9 @@ public class Target : MonoBehaviour
 
             weaponScript.grenadeAmount = 2;
             Debug.Log("Grenades: " + weaponScript.grenadeAmount);
+
+            BaseModel.SetActive(true);  
         }
-
-
         else
         {
 
@@ -315,5 +317,6 @@ public class Target : MonoBehaviour
             weaponScript2.grenadeAmount = 2;
             Debug.Log("Grenades2: " + weaponScript2.grenadeAmount);
         }
+
     }
 }
