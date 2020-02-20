@@ -29,8 +29,6 @@ public class ReloadAnimations : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(Player.GetComponent<Weapon>().currentIndex);
-
         if (Input.GetKey(KeyCode.R) && Player.GetComponent<Weapon>().loadout[1].currentAmmo != Player.GetComponent<Weapon>().loadout[1].clipSize)
         {
             m_reload = true;
