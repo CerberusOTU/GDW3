@@ -49,11 +49,11 @@ public class Weapon : MonoBehaviour
     private bool PlayerisReloading = false;
     private bool reloadCancel = false;
     private float reloadDelay = 0.0f;
+    private float currentCool;
 
 
     private float adjustedBloom;
 
-    private float currentCool;
 
     private Motion player;
 
@@ -157,10 +157,7 @@ public class Weapon : MonoBehaviour
 
         if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo > 0 && !PlayerisReloading)
         {
-            if (!PlayerisReloading)
-            {
-                reloadDelay = 0.0f;
-            }
+            reloadDelay = 0.0f;
             reloadCancel = false;
             PlayerisReloading = true;
 
@@ -176,7 +173,6 @@ public class Weapon : MonoBehaviour
             PlayerisReloading = true;
             reloadDelay = 0.0f;
             PlaySound(loadout[currentIndex].ReloadPath);
-
         }
 
         //d > 0f is scrolling up
@@ -217,7 +213,6 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
-
         if (currentCool > 0)
         {
             currentCool -= Time.deltaTime;

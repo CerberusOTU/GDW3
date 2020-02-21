@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cad8cfb182fe44bbb8b32aeddfa656, type: 3}
   m_Name: Tommy
   m_EditorClassIdentifier: 
+  weaponID: 0
   name: Tommy
   className: Assault
   ShotType: Auto
@@ -26,12 +27,12 @@ MonoBehaviour:
   aimSpeed: 15
   reloadTime: 1.8
   alwaysMax: 60
-  maxAmmo: 60
+  maxAmmo: 2702
   clipSize: 30
-  currentAmmo: 30
+  currentAmmo: 0
+  isReloading: 0
   ShotPath: event:/Gun Shots/TommyShot
   ReloadPath: event:/Gun Reloads/ColtReload
-  isReloading: 0
   weaponObj: {fileID: 2571426827672897269, guid: 85bcf67fabef6fd4793cc4cff80d461a,
     type: 3}
   weaponObj_Arms: {fileID: 7244827515920905702, guid: 2cf8dfec482951344868086159d70896,

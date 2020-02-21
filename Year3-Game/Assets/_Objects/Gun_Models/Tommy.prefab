@@ -2163,6 +2163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967715793614800885}
+  - component: {fileID: 485850300689332053}
   m_Layer: 12
   m_Name: Tommy
   m_TagString: Untagged
@@ -2186,6 +2187,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &485850300689332053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244827515920905702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eede8935eb5b8a949b03248cb4105af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
 --- !u!1 &7334930368270555942
 GameObject:
   m_ObjectHideFlags: 0

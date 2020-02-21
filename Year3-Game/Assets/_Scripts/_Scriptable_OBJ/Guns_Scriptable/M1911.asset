@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cad8cfb182fe44bbb8b32aeddfa656, type: 3}
   m_Name: M1911
   m_EditorClassIdentifier: 
+  weaponID: 0
   name: M1911
   className: Pistol
   ShotType: Single
@@ -25,13 +26,13 @@ MonoBehaviour:
   kickBack: 0.04
   aimSpeed: 15
   reloadTime: 1.95
-  alwaysMax: 60
+  alwaysMax: 55
   maxAmmo: 55
   clipSize: 15
   currentAmmo: 15
+  isReloading: 0
   ShotPath: event:/Gun Shots/ColtShot
   ReloadPath: event:/Gun Reloads/ColtReload
-  isReloading: 0
   weaponObj: {fileID: -927199367670048503, guid: f03d680af24a0504fb8041c0b989a56b,
     type: 3}
   weaponObj_Arms: {fileID: 8082366030619503984, guid: 62800c2e78125e6489c058d984164ea8,
