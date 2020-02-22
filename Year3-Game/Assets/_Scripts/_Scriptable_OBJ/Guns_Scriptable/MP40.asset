@@ -21,12 +21,12 @@ MonoBehaviour:
   recoil: 1
   maxRecoil_x: -10
   recoilSpeed: 9
-  recoilDampen: 0
+  recoilDampen: 0.1
   kickBack: 0.02
   aimSpeed: 15
-  reloadTime: 1
-  alwaysMax: 90
-  maxAmmo: 90
+  reloadTime: 1.8
+  alwaysMax: 60
+  maxAmmo: 60
   clipSize: 30
   currentAmmo: 30
   ShotPath: event:/Gun Shots/MP40Shot
