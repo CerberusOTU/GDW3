@@ -41,7 +41,7 @@ public class playerWeaponManager : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private int selectedWeapon = 0;    // 0-Primary    // 1-Secondary
     [SerializeField] private int previousWeapon = 0;
-    [SerializeField] private List<_Gun> loadout;
+    [SerializeField] private List<weaponInfo> loadout;
     [SerializeField] private GameObject currentWeapon;
 
     [Header("Camera")]
@@ -69,11 +69,12 @@ public class playerWeaponManager : MonoBehaviour
         checkWeaponGrab();
         Reload();
 
+
         if (currentWeapon != null)
         {
             Aim();
-            //getShootDown();
-            if (!PlayerisReloading && inputManager.GetFireInputHeld() && currentCool <= 0 && loadout[selectedWeapon].ShotType == "Auto" && loadout[selectedWeapon].currentAmmo > 0)
+            getShootDown();
+            if (!PlayerisReloading && inputManager.GetFireInputHeld() && currentCool <= 0 && loadout[selectedWeapon].gun.ShotType == "Auto" && loadout[selectedWeapon].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
@@ -81,8 +82,8 @@ public class playerWeaponManager : MonoBehaviour
             // Return back to original left click position
             if (!inputManager.GetFireInputHeld() && origPosReset == false)
             {
-                fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[selectedWeapon].recoilSpeed);
-                if (Mathf.Abs(fpsCam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+                fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[selectedWeapon].gun.recoilSpeed);
+                if (Mathf.Abs(fpsCam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || inputManager.GetLookInputsHorizontal() != 0 || inputManager.GetLookInputsVertical() != 0)
                 {
                     origPosReset = true;
                 }
@@ -99,10 +100,10 @@ public class playerWeaponManager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            loadout.Add(transform.GetChild(i).GetComponent<weaponInfo>().gun);
-            loadout[i].currentAmmo = loadout[i].clipSize;
-            loadout[i].maxAmmo = loadout[i].alwaysMax;
-            loadout[i].isReloading = false;
+            loadout.Add(transform.GetChild(i).GetComponent<weaponInfo>());
+            loadout[i].currentAmmo = loadout[i].gun.clipSize;
+            loadout[i].maxAmmo = loadout[i].gun.alwaysMax;
+            loadout[i].gun.isReloading = false;
         }
         currentWeapon = transform.GetChild(0).gameObject;
     }
@@ -118,15 +119,29 @@ public class playerWeaponManager : MonoBehaviour
             //ADS
             crosshair.enabled = false;
             fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
-            anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[selectedWeapon].aimSpeed);
+            anchor.position = Vector3.Lerp(anchor.position, ADS.position, Time.deltaTime * loadout[selectedWeapon].gun.aimSpeed);
         }
         else
         {
             crosshair.enabled = true;
             fpsCam.fieldOfView = Mathf.Lerp(fpsCam.fieldOfView, baseFOV, Time.deltaTime * 8f);
-            anchor.position = Vector3.Lerp(anchor.position, Hip.position, Time.deltaTime * loadout[selectedWeapon].aimSpeed);
+            anchor.position = Vector3.Lerp(anchor.position, Hip.position, Time.deltaTime * loadout[selectedWeapon].gun.aimSpeed);
         }
 
+    }
+
+
+    void getShootDown()
+    {
+        if (inputManager.GetFireInputDown())
+        {
+            if (!PlayerisReloading && currentCool <= 0 && loadout[selectedWeapon].gun.ShotType == "Single" && loadout[selectedWeapon].gun.currentAmmo > 0)
+            {
+                // Call your event function here.
+                origPosReset = false;
+                Shoot();
+            }
+        }
     }
 
     void Shoot()
@@ -137,11 +152,11 @@ public class playerWeaponManager : MonoBehaviour
 
         if (inputManager.GetAimInputHeld())
         {
-            adjustedBloom = loadout[selectedWeapon].bloom / 3;
+            adjustedBloom = loadout[selectedWeapon].gun.bloom / 3;
         }
         else
         {
-            adjustedBloom = loadout[selectedWeapon].bloom;
+            adjustedBloom = loadout[selectedWeapon].gun.bloom;
         }
         //bloom
         Vector3 bloom = spawn.position + spawn.forward * 1000f;
@@ -169,12 +184,12 @@ public class playerWeaponManager : MonoBehaviour
 
         //Recoil Dampen
         timeFiringHeld = Time.time - tempTime;
-        Quaternion maxRecoil = Quaternion.Euler(fpsCam.transform.localEulerAngles.x + loadout[selectedWeapon].maxRecoil_x, 0f, 0f);
-        fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[selectedWeapon].recoilSpeed * Mathf.Lerp(1, loadout[selectedWeapon].recoilDampen, timeFiringHeld));
+        Quaternion maxRecoil = Quaternion.Euler(fpsCam.transform.localEulerAngles.x + loadout[selectedWeapon].gun.maxRecoil_x, 0f, 0f);
+        fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[selectedWeapon].gun.recoilSpeed * Mathf.Lerp(1, loadout[selectedWeapon].gun.recoilDampen, timeFiringHeld));
 
         RaycastHit hitInfo = new RaycastHit();
         //bloom
-        if (loadout[selectedWeapon].className == "Shotgun")
+        if (loadout[selectedWeapon].gun.className == "Shotgun")
         {
             Target target;
             for (int j = 0; j < 8; j++)
@@ -188,7 +203,7 @@ public class playerWeaponManager : MonoBehaviour
                     if (hitInfo.collider.name == "Head")
                     {
                         //StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[selectedWeapon].damage);
+                        target.takeDamage(loadout[selectedWeapon].gun.damage);
                     }
                 }
 
@@ -201,7 +216,7 @@ public class playerWeaponManager : MonoBehaviour
 
             }
         }
-        else if (loadout[selectedWeapon].className != "Shotgun")
+        else if (loadout[selectedWeapon].gun.className != "Shotgun")
         {
             Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
 
@@ -215,12 +230,12 @@ public class playerWeaponManager : MonoBehaviour
                     if (hitInfo.collider.name == "Head")
                     {
                         //StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[selectedWeapon].damage * 2);
+                        target.takeDamage(loadout[selectedWeapon].gun.damage * 2);
                     }
                     else
                     {
                         //StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[selectedWeapon].damage);
+                        target.takeDamage(loadout[selectedWeapon].gun.damage);
                     }
                 }
 
@@ -237,8 +252,8 @@ public class playerWeaponManager : MonoBehaviour
                 }
             }
         }
-        currentWeapon.transform.position -= currentWeapon.transform.forward * loadout[selectedWeapon].kickBack;
-        currentCool = loadout[selectedWeapon].firerate;
+        currentWeapon.transform.position -= currentWeapon.transform.forward * loadout[selectedWeapon].gun.kickBack;
+        currentCool = loadout[selectedWeapon].gun.firerate;
     }
 
     void Reload()
@@ -247,7 +262,7 @@ public class playerWeaponManager : MonoBehaviour
         {
             if (!origPosReset)
             {
-                fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[selectedWeapon].recoilSpeed);
+                fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[selectedWeapon].gun.recoilSpeed);
                 if (Mathf.Abs(fpsCam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || inputManager.GetLookInputsVertical() != 0 || inputManager.GetLookInputsHorizontal() != 0)
                 {
                     origPosReset = true;
@@ -265,10 +280,10 @@ public class playerWeaponManager : MonoBehaviour
                     tempTime = Time.time;
                     return;
                 }
-                if (reloadDelay >= loadout[selectedWeapon].reloadTime)
+                if (reloadDelay >= loadout[selectedWeapon].gun.reloadTime)
                 {
-                    int tempAmmoNeeded = (loadout[selectedWeapon].clipSize - loadout[selectedWeapon].currentAmmo);
-                    int tempReloadAmmo = loadout[selectedWeapon].maxAmmo - (loadout[selectedWeapon].clipSize - loadout[selectedWeapon].currentAmmo);
+                    int tempAmmoNeeded = (loadout[selectedWeapon].gun.clipSize - loadout[selectedWeapon].currentAmmo);
+                    int tempReloadAmmo = loadout[selectedWeapon].maxAmmo - (loadout[selectedWeapon].gun.clipSize - loadout[selectedWeapon].currentAmmo);
                     if (loadout[selectedWeapon].maxAmmo >= tempAmmoNeeded)
                     {
                         loadout[selectedWeapon].maxAmmo = tempReloadAmmo;
@@ -296,7 +311,7 @@ public class playerWeaponManager : MonoBehaviour
                 reloadDelay = 0.0f;
                 reloadCancel = false;
                 PlayerisReloading = true;
-                PlaySound(loadout[selectedWeapon].ReloadPath);
+                PlaySound(loadout[selectedWeapon].gun.ReloadPath);
             }
 
             if (inputManager.GetReloadInputDown())
@@ -304,7 +319,7 @@ public class playerWeaponManager : MonoBehaviour
                 reloadCancel = false;
                 PlayerisReloading = true;
                 reloadDelay = 0.0f;
-                PlaySound(loadout[selectedWeapon].ReloadPath);
+                PlaySound(loadout[selectedWeapon].gun.ReloadPath);
             }
         }
     }
@@ -337,24 +352,27 @@ public class playerWeaponManager : MonoBehaviour
             {
                 if (transform.childCount < 2)
                 {
-                    loadout.Add(scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun);
-                    Instantiate(loadout[1].weaponObj_Arms, transform.position, transform.rotation, transform);
+
+                    Instantiate(scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponObj_Arms, transform.position, transform.rotation, transform);
+                    loadout.Add(transform.GetChild(1).GetComponent<weaponInfo>());
+                    Destroy(scanWeapon.collider.gameObject);
                     selectedWeapon++;
                     weaponSwap();
                 }
                 else
                 {
-                    if (loadout[1].weaponID != scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponID)
+                    if (loadout[1].gun.weaponID != scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponID)
                     {
-                        GameObject temp = Instantiate(loadout[1].weaponObj, scanWeapon.collider.transform);
-                        temp.GetComponent<weaponInfo>().gun = loadout[1];
-                        loadout[1] = scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun;
+                        GameObject temp = Instantiate(loadout[1].gun.weaponObj, scanWeapon.collider.transform);
+                        temp.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo;
+                        temp.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;
+                        loadout[1] = scanWeapon.collider.gameObject.GetComponent<weaponInfo>();
                         Destroy(transform.GetChild(1));
-                        Instantiate(loadout[1].weaponObj_Arms, transform.position, transform.rotation, transform);
+                        Instantiate(loadout[1].gun.weaponObj_Arms, transform.position, transform.rotation, transform);
                     }
                     else
                     {
-                        loadout[1].currentAmmo = loadout[1].maxAmmo;
+                        loadout[1].maxAmmo = loadout[1].gun.alwaysMax + loadout[1].gun.clipSize - loadout[1].currentAmmo;
                     }
                 }
             }

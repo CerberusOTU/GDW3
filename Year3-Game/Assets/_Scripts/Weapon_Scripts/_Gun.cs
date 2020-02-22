@@ -28,10 +28,10 @@ public class _Gun : ScriptableObject
     //Ammo & reloading
     public float reloadTime;
     public int alwaysMax;
-    public int maxAmmo;
     public int clipSize;
-    public int currentAmmo;
     public bool isReloading;
+    public int currentAmmo;
+    public int maxAmmo;
 
     //Sound
     public string ShotPath;
