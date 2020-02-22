@@ -30,6 +30,7 @@ public class ReloadAnimations : MonoBehaviour
     {
 
         Debug.Log("xx " + weaponScript.currentIndex);
+        Debug.Log("Current Gun = " + weaponScript.loadout[0].name);
 
         if (Input.GetKeyDown(KeyCode.R) && weaponScript.loadout[1].currentAmmo != weaponScript.loadout[1].clipSize
             && weaponScript.currentIndex == 1)
@@ -41,46 +42,57 @@ public class ReloadAnimations : MonoBehaviour
         }
 
 
-        if (Player.GetComponent<Weapon>().loadout[0] != null && Input.GetKeyDown(KeyCode.R) && Player.GetComponent<Weapon>().loadout[0].currentAmmo != Player.GetComponent<Weapon>().loadout[0].clipSize
-             && weaponScript.currentIndex == 0)
+        if (weaponScript.loadout[0] != null && Input.GetKeyDown(KeyCode.R) && (weaponScript.loadout[0].currentAmmo != weaponScript.loadout[0].clipSize) && weaponScript.currentIndex == 0)
         {
             m_reload = true;
             if (weaponScript.loadout[0].name == "Tommy")
+            {
                 m_Animator.SetBool("tommyReload", true);
+                Debug.Log("Tommy Reloading");
+            }
             if (weaponScript.loadout[0].name == "MP40")
+            {
                 m_Animator.SetBool("MP40Reloading", true);
+                Debug.Log("MP40 Reloading");
+            }
 
             Debug.Log("XXReloadMain");
         }
 
 
-        if ((Player.GetComponent<Weapon>().loadout[1].currentAmmo == Player.GetComponent<Weapon>().loadout[1].clipSize) && (m_Animator.GetBool("M1911Reload") == true))
+        if ((weaponScript.loadout[1].currentAmmo == weaponScript.loadout[1].clipSize) && (m_Animator.GetBool("M1911Reload") == true))
         {
             m_reload = false;
             Debug.Log("XXReloadPistolFinish");
             m_Animator.SetBool("M1911Reload", false);
         }
 
-        if ((Player.GetComponent<Weapon>().loadout[0].currentAmmo == Player.GetComponent<Weapon>().loadout[0].clipSize) && (m_Animator.GetBool("tommyReload") == true))
-        {
-            m_reload = false;
-            m_Animator.SetBool("tommyReload", false);
-        }
+        //if ((weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize) && (m_Animator.GetBool("tommyReload") == true))
+        //{
+        //    m_reload = false;
+        //    m_Animator.SetBool("tommyReload", false);         
+        //}
+
+        //if ((weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize) && (m_Animator.GetBool("MP40Reloading") == true))
+        //{
+        //    m_reload = false;
+        //    m_Animator.SetBool("MP40Reloading", false); 
+        //    Debug.Log("MP40 Reloading = fALSE");           
+        //}
 
 
-
-        if (Player.GetComponent<Weapon>().loadout[0] != null && (Player.GetComponent<Weapon>().loadout[0].currentAmmo == Player.GetComponent<Weapon>().loadout[0].clipSize)
+        if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize)
             && (m_Animator.GetBool("tommyReload") == true) || (m_Animator.GetBool("MP40Reloading") == true))
         {
             m_reload = false;
             Debug.Log("XXReloadMainFinish");
-            if (Player.GetComponent<Weapon>().name == "Tommy")
+            if (weaponScript.loadout[0].name == "Tommy")
                 m_Animator.SetBool("tommyReload", false);
-            if (Player.GetComponent<Weapon>().name == "MP40")
+            if (weaponScript.loadout[0].name == "MP40")
                 m_Animator.SetBool("MP40Reloading", false);
         }
 
-        if (Player.GetComponent<Weapon>().loadout[1].currentAmmo == 0 && Player.GetComponent<Weapon>().loadout[1].maxAmmo > 0)
+        if (weaponScript.loadout[1].currentAmmo == 0 && weaponScript.loadout[1].maxAmmo > 0)
         {
             m_reload = true;
             Debug.Log("XXAutoReloadPistol");
@@ -88,13 +100,13 @@ public class ReloadAnimations : MonoBehaviour
 
         }
 
-        if (Player.GetComponent<Weapon>().loadout[0] != null && (Player.GetComponent<Weapon>().loadout[0].currentAmmo == 0 && Player.GetComponent<Weapon>().loadout[0].maxAmmo > 0))
+        if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == 0 && weaponScript.loadout[0].maxAmmo > 0))
         {
             m_reload = true;
             Debug.Log("XXAutoReloadMain");
-            if (Player.GetComponent<Weapon>().name == "Tommy")
+            if (weaponScript.loadout[0].name == "Tommy")
                 m_Animator.SetBool("tommyReload", true);
-            if (Player.GetComponent<Weapon>().name == "MP40")
+            if (weaponScript.loadout[0].name == "MP40")
                 m_Animator.SetBool("MP40Reloading", true);
         }
 
@@ -111,7 +123,7 @@ public class ReloadAnimations : MonoBehaviour
             {
                 if (m_reload == true)
                 {
-                    Debug.Log("animationran");
+                    Debug.Log("animationRan");
                     //m_Animator.SetBool("M1911Reload", true);
                     //m_Animator.SetBool("tommyReload", true);
                     //m_Animator.SetBool("MP40Reloading", true);
