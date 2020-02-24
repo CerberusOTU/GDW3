@@ -84,6 +84,7 @@ public class Weapon : MonoBehaviour
     public Image Grenade1;
     public Image Grenade2;
 
+    public Text NOAMMO;
 
     Vector3 temp;
     Vector3 temp2;
@@ -169,6 +170,7 @@ public class Weapon : MonoBehaviour
         tempColor2.a = 1f;
         MainWeapon.color = tempColor2;
 
+        NOAMMO.canvasRenderer.SetAlpha(0);
 
         //M1911 reset ammo
         loadout[1].currentAmmo = loadout[1].clipSize;
@@ -433,7 +435,10 @@ public class Weapon : MonoBehaviour
             }
         }
 
-
+        if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+            NOAMMO.canvasRenderer.SetAlpha(1.0f);
+        else
+            NOAMMO.canvasRenderer.SetAlpha(0);
         if (currentIndex == 0)
         {
             oln.enabled = true;
