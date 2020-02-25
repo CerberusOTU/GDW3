@@ -1718,8 +1718,9 @@ GameObject:
   - component: {fileID: 1257894661664638716}
   - component: {fileID: 4007252828225691130}
   - component: {fileID: 8817598052190487111}
+  - component: {fileID: 5390471074041841884}
   m_Layer: 12
-  m_Name: MP40
+  m_Name: mp40
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1769,6 +1770,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 0}
+--- !u!114 &5390471074041841884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823661718330635503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eede8935eb5b8a949b03248cb4105af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: 8b43f48134c82cb43bbaefb4f73f5215, type: 2}
+  maxAmmo: 0
+  currentAmmo: 0
 --- !u!1 &2931611363901753844
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,22 +5342,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d81ab40d0fc1a8d4182404ce13874160, type: 2}
+    - target: {fileID: 6817027817389620063, guid: 7c5f87a1fcec66747a715b96f39d02a8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0285fee8858aa6d448e83868968f9979, type: 2}
     - target: {fileID: 4060825886788870107, guid: 7c5f87a1fcec66747a715b96f39d02a8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6d2d13fa86e064245b1903aa9a79e63c, type: 2}
-    - target: {fileID: 1711277887553122256, guid: 7c5f87a1fcec66747a715b96f39d02a8,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0285fee8858aa6d448e83868968f9979, type: 2}
     - target: {fileID: -8583038089070189156, guid: 7c5f87a1fcec66747a715b96f39d02a8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0285fee8858aa6d448e83868968f9979, type: 2}
-    - target: {fileID: 6817027817389620063, guid: 7c5f87a1fcec66747a715b96f39d02a8,
+    - target: {fileID: 1711277887553122256, guid: 7c5f87a1fcec66747a715b96f39d02a8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5453,17 +5469,17 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d81ab40d0fc1a8d4182404ce13874160, type: 2}
+    - target: {fileID: 6817027817389620063, guid: 7c5f87a1fcec66747a715b96f39d02a8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0285fee8858aa6d448e83868968f9979, type: 2}
     - target: {fileID: 4060825886788870107, guid: 7c5f87a1fcec66747a715b96f39d02a8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9ee1450c7f4777346a02d70c35bbdf20, type: 2}
     - target: {fileID: -8583038089070189156, guid: 7c5f87a1fcec66747a715b96f39d02a8,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0285fee8858aa6d448e83868968f9979, type: 2}
-    - target: {fileID: 6817027817389620063, guid: 7c5f87a1fcec66747a715b96f39d02a8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
