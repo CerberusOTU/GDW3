@@ -9,19 +9,19 @@ public class BulletBehave : MonoBehaviour
     public ParticleSystem woodHit;
     public ParticleSystem stoneHit;
     public ParticleSystem metalHit;
-    Weapon weapon;
+    playerWeaponManager weapon;
     void Start()
     {
-        weapon = GameObject.FindObjectOfType<Weapon>();
+        weapon = GameObject.FindObjectOfType<playerWeaponManager>();
     }
     void OnEnable()
     {
         
-        if (GameObject.Find("Player").GetComponent<Weapon>().hitInfo.collider.tag == "Metal")
+        if (GameObject.Find("Player").GetComponent<playerWeaponManager>().hitInfo.collider.tag == "Metal")
             metalHit.Emit(1);
-        else if (GameObject.Find("Player").GetComponent<Weapon>().hitInfo.collider.tag == "Wood")
+        else if (GameObject.Find("Player").GetComponent<playerWeaponManager>().hitInfo.collider.tag == "Wood")
             woodHit.Emit(1);
-        else if (GameObject.Find("Player").GetComponent<Weapon>().hitInfo.collider.tag == "Concrete")
+        else if (GameObject.Find("Player").GetComponent<playerWeaponManager>().hitInfo.collider.tag == "Concrete")
             stoneHit.Emit(1);
         StartCoroutine(autostart());
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
  private Animator animator;
-    private Weapon weapon;
+    private playerWeaponManager weapon;
     public GameObject M1911;
     public GameObject Tommy;
     public GameObject Revolver;
@@ -15,7 +15,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        weapon = GameObject.FindObjectOfType<Weapon>();
+        weapon = GameObject.FindObjectOfType<playerWeaponManager>();
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class Move : MonoBehaviour
     {
         if (animator == null) return;
 
-        if (weapon.currentIndex == 1)
+        if (weapon.selectedWeapon == 0)
         {
             animator.SetInteger("Switch", 1);
             M1911.SetActive(true);
@@ -31,9 +31,9 @@ public class Move : MonoBehaviour
             Revolver.SetActive(false);
             MP40.SetActive(false);
         }
-        else if (weapon.currentIndex == 0)
+        if (weapon.selectedWeapon == 1)
         {
-            if(weapon.loadout[0].name == "Tommy")
+            if(weapon.loadout[1].name == "Tommy")
             {
             animator.SetInteger("Switch", 2);
             M1911.SetActive(false);
@@ -42,7 +42,8 @@ public class Move : MonoBehaviour
             MP40.SetActive(false);
             }
         
-            if(weapon.loadout[0].name == "Revolver")
+        
+            if(weapon.loadout[1].name == "Revolver")
             {
             animator.SetInteger("Switch", 3);
             M1911.SetActive(false);

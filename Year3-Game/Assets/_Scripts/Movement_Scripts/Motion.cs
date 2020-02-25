@@ -46,7 +46,7 @@ public class Motion : MonoBehaviour
     private bool crouchInUse;
 
     private float gravity;
-    private Weapon _weapon; // Link Weapon Script
+    private playerWeaponManager _weapon; // Link Weapon Script
 
     //**************TUTORIAL VARIABLES**************/
     [System.NonSerialized]
@@ -58,7 +58,7 @@ public class Motion : MonoBehaviour
         baseFOV = cam.fieldOfView;
         rb = this.gameObject.GetComponent<Rigidbody>();
         col = this.gameObject.GetComponent<BoxCollider>();
-        _weapon = gameObject.GetComponent<Weapon>();
+        _weapon = gameObject.GetComponent<playerWeaponManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
 
         distToGround = col.bounds.extents.y;
