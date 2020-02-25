@@ -7,30 +7,33 @@ public class ReloadAnimations : MonoBehaviour
     //Fetch the Animator
     public Animator m_Animator;
     private Weapon weaponScript;
-    // Use this for deciding if the GameObject can jump or not
-    bool M1911Reload;
-    bool TommyReload;
     bool m_reload;
-    public GameObject Player;
-    int counter1 = 0;
-    int counter2 = 0;
+    int ammoMissing;
+
 
     void Start()
     {
         //This gets the Animator, which should be attached to the GameObject you are intending to animate.
         m_Animator = gameObject.GetComponent<Animator>();
         weaponScript = GameObject.FindObjectOfType<Weapon>();
-        // The GameObject cannot jump
-        M1911Reload = false;
-        TommyReload = false;
+        
         m_reload = false;
     }
 
     void Update()
     {
+        ammoMissing = weaponScript.loadout[0].clipSize - weaponScript.loadout[0].currentAmmo;
+        m_Animator.SetInteger("MissingAmmo", ammoMissing);
 
-        Debug.Log("xx " + weaponScript.currentIndex);
-        Debug.Log("Current Gun = " + weaponScript.loadout[0].name);
+        Debug.Log("Missing Ammo: " + ammoMissing);    
+
+
+
+
+
+
+
+
 
         if (Input.GetKeyDown(KeyCode.R) && weaponScript.loadout[1].currentAmmo != weaponScript.loadout[1].clipSize
             && weaponScript.currentIndex == 1)
@@ -48,17 +51,40 @@ public class ReloadAnimations : MonoBehaviour
             if (weaponScript.loadout[0].name == "Tommy")
             {
                 m_Animator.SetBool("tommyReload", true);
-                Debug.Log("Tommy Reloading");
+                //Debug.Log("Tommy Reloading");
             }
             if (weaponScript.loadout[0].name == "MP40")
             {
                 m_Animator.SetBool("MP40Reloading", true);
-                Debug.Log("MP40 Reloading");
+                //Debug.Log("MP40 Reloading");
+            }
+            if (weaponScript.loadout[0].name == "Shotgun")
+            {
+                weaponScript.loadout[0].reloadTime += ammoMissing*0.583f;
+                //m_Animator.SetBool("ShotgunEndReload", false);
+                m_Animator.SetBool("ShotgunStartReload", true);
+                //Debug.Log("Shotgun Start Reload");
             }
 
-            Debug.Log("XXReloadMain");
+            //Debug.Log("XXReloadMain");
         }
 
+        if (ammoMissing == 0)
+        {
+            Debug.Log("Shotgun End Reload");
+
+                m_Animator.SetBool("ShotgunStartReload", false);
+                m_Animator.SetBool("ShotgunReloading", false);
+                m_Animator.SetBool("ShotgunEndReload", true);
+                weaponScript.loadout[0].reloadTime = 1.833f;
+                
+        }
+
+
+        //if (weaponScript.currentIndex[0].currentAmmo < weaponScript.currentIndex[0].maxAmmo);
+       // {
+            
+        //}
 
         if ((weaponScript.loadout[1].currentAmmo == weaponScript.loadout[1].clipSize) && (m_Animator.GetBool("M1911Reload") == true))
         {
@@ -82,7 +108,7 @@ public class ReloadAnimations : MonoBehaviour
 
 
         if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize)
-            && (m_Animator.GetBool("tommyReload") == true) || (m_Animator.GetBool("MP40Reloading") == true))
+            && (m_Animator.GetBool("tommyReload") == true) || (m_Animator.GetBool("MP40Reloading") == true) || (m_Animator.GetBool("ShotgunReloading") == true))
         {
             m_reload = false;
             Debug.Log("XXReloadMainFinish");
@@ -90,6 +116,14 @@ public class ReloadAnimations : MonoBehaviour
                 m_Animator.SetBool("tommyReload", false);
             if (weaponScript.loadout[0].name == "MP40")
                 m_Animator.SetBool("MP40Reloading", false);
+            /*if (weaponScript.loadout[0].name == "Shotgun")
+            {
+                 Debug.Log("Shotgun End Reload");
+
+                m_Animator.SetBool("ShotgunStartReload", false);
+                m_Animator.SetBool("ShotgunReloading", false);
+                //m_Animator.SetBool("ShotgunEndReload", true);
+            }   */             
         }
 
         if (weaponScript.loadout[1].currentAmmo == 0 && weaponScript.loadout[1].maxAmmo > 0)
@@ -108,43 +142,20 @@ public class ReloadAnimations : MonoBehaviour
                 m_Animator.SetBool("tommyReload", true);
             if (weaponScript.loadout[0].name == "MP40")
                 m_Animator.SetBool("MP40Reloading", true);
-        }
-
-
-
-
-        ///////////////////////////////Reloads//////////////////////////////////////
-
-        //The GameObject is jumping, so send the Boolean as enabled to the Animator. The jump animation plays.
-        if (m_Animator != null)// animator is of type "Animator"
-        {
-
-            if (m_Animator.runtimeAnimatorController != null)
+            if (weaponScript.loadout[0].name == "Shotgun")
             {
-                if (m_reload == true)
-                {
-                    Debug.Log("animationRan");
-                    //m_Animator.SetBool("M1911Reload", true);
-                    //m_Animator.SetBool("tommyReload", true);
-                    //m_Animator.SetBool("MP40Reloading", true);
-                }
-            }
+                m_Animator.SetBool("ShotgunStartReload", true);  
+                weaponScript.loadout[0].reloadTime += ammoMissing*0.583f;
+            }                  
         }
 
-        if (m_Animator != null)// animator is of type "Animator"
-        {
+    }
 
-            if (m_Animator.runtimeAnimatorController != null)
-            {
-                if (m_reload == false)
-                {
-                    //m_Animator.SetBool("M1911Reload", false);
-                    //m_Animator.SetBool("tommyReload", false);
-                    //m_Animator.SetBool("MP40Reloading", false);
-                }
-            }
-        }
-
+    public void ShellIn()
+    {
+    Debug.Log("Shotgun ShellIn");
+    if(weaponScript.loadout[0].currentAmmo < weaponScript.loadout[0].clipSize)
+    weaponScript.loadout[0].currentAmmo += 1;
     }
 
 }
