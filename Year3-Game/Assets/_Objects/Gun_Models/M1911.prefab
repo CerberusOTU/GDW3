@@ -2459,6 +2459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5075852332992077667}
   - component: {fileID: -6330473147622699823}
+  - component: {fileID: 3977596691899338081}
   m_Layer: 12
   m_Name: M1911
   m_TagString: Untagged
@@ -2496,6 +2497,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 1
   smooth: 10
+--- !u!114 &3977596691899338081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8082366030619503984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eede8935eb5b8a949b03248cb4105af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: d6094e83348597041af0a56fd3dcb550, type: 2}
+  maxAmmo: 0
+  currentAmmo: 0
 --- !u!1 &8134042189138034833
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,28 +8,19 @@ public class CountDown : MonoBehaviour
     public Text txt;
     public Text txt2;
 
-    public Canvas player1;
-    public Canvas player2;
-
-    public Canvas crossHair1;
-    public Canvas crossHair2;
-
-
     float timer = 0;
     void Update()
     {  
         if (timer <= 3)
         {
             timer += Time.deltaTime;
-            player1.enabled = false;
-            player2.enabled = false;
-            crossHair1.enabled = false;
-            crossHair2.enabled = false;
-            GameObject.Find("Player").GetComponent<Motion>().enabled = false;
-            GameObject.Find("Player2").GetComponent<Movement2>().enabled = false;
+            //player1.enabled = false;
+            //player2.enabled = false;
+            //crossHair1.enabled = false;
+            //crossHair2.enabled = false;
+            GameObject.Find("Player").GetComponent<playerCharController>().enabled = false;
 
-            GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
-            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
+            GameObject.Find("Player").GetComponentInChildren<playerWeaponManager>().enabled = false;
             if(timer >= 1 && timer < 2)
             {
                 txt.text = "2";
@@ -45,17 +36,16 @@ public class CountDown : MonoBehaviour
                 txt.enabled = false;
                 txt2.enabled = false;
 
-                player1.enabled = true;
-                player2.enabled = true;
+               // player1.enabled = true;
+                //player2.enabled = true;
 
-                crossHair1.enabled = true;
-                crossHair2.enabled = true;
+                //crossHair1.enabled = true;
+                //crossHair2.enabled = true;
 
-                GameObject.Find("Player").GetComponent<Motion>().enabled = true;
-                GameObject.Find("Player2").GetComponent<Movement2>().enabled = true;
+                GameObject.Find("Player").GetComponent<playerCharController>().enabled = true;
 
-                GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
-                GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
+                GameObject.Find("Player").GetComponentInChildren<playerWeaponManager>().enabled = true;
+        
             } 
 
         }

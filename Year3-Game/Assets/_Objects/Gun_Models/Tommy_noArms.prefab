@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1582121140762752230}
   - component: {fileID: 5727669699197545062}
+  - component: {fileID: 38931988039438043}
   m_Layer: 0
   m_Name: Tommy_noArms
   m_TagString: Weapon
@@ -45,6 +46,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21960306, y: 0.25182956, z: 0.8331826}
   m_Center: {x: 0.0126261115, y: -0.056948632, z: 0.057069004}
+--- !u!114 &38931988039438043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571426827672897269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eede8935eb5b8a949b03248cb4105af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
+  maxAmmo: 0
+  currentAmmo: 0
 --- !u!1001 &8523656484175342691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52,11 +68,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1582121140762752230}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 85bbc257b0d8d58458c67c2645c867a9,
-        type: 3}
-      propertyPath: m_Name
-      value: TommyAutoUnwrap
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 85bbc257b0d8d58458c67c2645c867a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -111,6 +122,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 85bbc257b0d8d58458c67c2645c867a9,
+        type: 3}
+      propertyPath: m_Name
+      value: TommyAutoUnwrap
       objectReference: {fileID: 0}
     - target: {fileID: 9190630039696097637, guid: 85bbc257b0d8d58458c67c2645c867a9,
         type: 3}

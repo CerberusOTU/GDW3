@@ -396,7 +396,7 @@ public class Weapon2 : MonoBehaviour
         }
 
         currentIndex = _ind;
-        GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
+        GameObject newWeapon = Instantiate(loadout[_ind].weaponObj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = Vector3.zero;
 
