@@ -18,13 +18,11 @@ public class QuickCountdown : MonoBehaviour
         if(timer < 0.1f)
         {
             timer += Time.deltaTime;
-            GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
-            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
+            GameObject.Find("Player").GetComponent<playerWeaponManager>().enabled = false;
         }
         else
         {
-            GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
-            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
+            GameObject.Find("Player").GetComponent<playerWeaponManager>().enabled = true;
             Destroy(this);
         }
     }

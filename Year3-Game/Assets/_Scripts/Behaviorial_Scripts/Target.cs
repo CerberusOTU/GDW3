@@ -10,7 +10,6 @@ public class Target : MonoBehaviour
 
     public float health = 50f;
     PlayerStatus healthUI;
-    PlayerStatus2 healthUI2;
 
     public Image Grenade1;
     public Image Grenade2;
@@ -39,8 +38,7 @@ public class Target : MonoBehaviour
     Vector3 startPos2;
     //Vector3 endPos = new Vector3(-77.02f, 0.14f, 44.21f);
 
-    private Weapon weaponScript;
-    private Weapon2 weaponScript2;
+    private playerWeaponManager weaponScript;
 
     public GameObject weapon1;
     public GameObject weapon2;
@@ -60,11 +58,9 @@ public class Target : MonoBehaviour
         Vector3 startPos = KilledEnemy.transform.localPosition;
         Vector3 startPos2 = KilledIcon.transform.localPosition;
 
-        weaponScript = GetComponent<Weapon>();
-        weaponScript2 = GetComponent<Weapon2>();
+        weaponScript = GetComponent<playerWeaponManager>();
 
         healthUI = GameObject.FindObjectOfType<PlayerStatus>();
-        healthUI2 = GameObject.FindObjectOfType<PlayerStatus2>();
 
         score = GameObject.FindObjectOfType<Score>();
         score2 = GameObject.FindObjectOfType<Score2>();
@@ -124,15 +120,9 @@ public class Target : MonoBehaviour
             healthUI.tookDamage = true;
             healthUI.PlayerHealth -= amount;
         }
-        else if (this.gameObject.name == "Player2")
-        {
-            healthUI2.tookDamage = true;
-            healthUI2.PlayerHealth -= amount;
-        }
         if (health <= 0f && this.gameObject.name == "Player2")
         {
             score.Kills += 1;
-            KilledEnemy.text = weaponScript2.PlayerName;
 
             StartCoroutine(Die());
             StartCoroutine(UIElements());
@@ -141,7 +131,7 @@ public class Target : MonoBehaviour
         else if (health <= 0f && this.gameObject.name == "Player")
         {
             score2.Kills += 1;
-            KilledBy.text = "You were killed by " + weaponScript.PlayerName;
+            KilledBy.text = "You were killed by Ricky";
 
             StartCoroutine(Die());
             StartCoroutine(UIElements());
@@ -183,12 +173,12 @@ public class Target : MonoBehaviour
         if (this.gameObject.name == "Player")
         {
             weaponScript.loadout[0] = null;
-            weaponScript.cam.enabled = !weaponScript.cam.enabled;
-            weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
-            weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
-            weaponScript.crossHair.enabled = false;
-            GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
-            GameObject.Find("Player").GetComponent<Motion>().enabled = false;
+            //weaponScript.fps.enabled = !weaponScript.cam.enabled;
+            //weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
+            //weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
+            //weaponScript.crossHair.enabled = false;
+            GameObject.Find("Player").GetComponent<playerWeaponManager>().enabled = false;
+            GameObject.Find("Player").GetComponent<playerCharController>().enabled = false;
             weapon1.SetActive(false);
 
             Banner.canvasRenderer.SetAlpha(1f);
@@ -208,12 +198,12 @@ public class Target : MonoBehaviour
 
             Fade.canvasRenderer.SetAlpha(0f);
             weapon1.SetActive(true);
-            GameObject.Find("Player").GetComponent<Motion>().enabled = true;
-            GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
-            weaponScript.cam.enabled = !weaponScript.cam.enabled;
-            weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
-            weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
-            weaponScript.crossHair.enabled = true;
+            GameObject.Find("Player").GetComponent<playerCharController>().enabled = true;
+            GameObject.Find("Player").GetComponent<playerWeaponManager>().enabled = true;
+            //weaponScript.cam.enabled = !weaponScript.cam.enabled;
+            //weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
+            //weaponScript.HUD.GetComponent<Canvas>().enabled = !weaponScript.HUD.GetComponent<Canvas>().enabled;
+            //weaponScript.crossHair.enabled = true;
 
             Banner.canvasRenderer.SetAlpha(0f);
             KilledBy.canvasRenderer.SetAlpha(0f);
@@ -270,11 +260,11 @@ public class Target : MonoBehaviour
             Grenade1.enabled = true;
             Grenade2.enabled = true;
 
-            weaponScript.Equip(1);
+            weaponScript.selectedWeapon = 0;
+            weaponScript.weaponSwap();
             weaponScript.loadout[0] = null;
 
-            weaponScript.grenadeAmount = 2;
-            Debug.Log("Grenades: " + weaponScript.grenadeAmount);
+            //weaponScript.grenadeAmount = 2;;
 
             BaseModel.SetActive(true);  
         }
@@ -311,11 +301,8 @@ public class Target : MonoBehaviour
                 this.gameObject.transform.position = SpawnPos[3].position;
                 this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
             }
-            healthUI2.PlayerHealth = 100;
             Player2Grenade1.enabled = true;
             Player2Grenade2.enabled = true;
-            weaponScript2.grenadeAmount = 2;
-            Debug.Log("Grenades2: " + weaponScript2.grenadeAmount);
         }
 
     }

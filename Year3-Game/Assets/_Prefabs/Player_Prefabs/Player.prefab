@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 1432445156551296832}
   - component: {fileID: 2607112222802645261}
   - component: {fileID: 2857898716605925471}
-  - component: {fileID: 6527719722034911552}
   m_Layer: 11
   m_Name: Player1 Cam
   m_TagString: MainCamera
@@ -132,7 +131,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6676264123750125856}
+  - {fileID: 84423773278028983}
   m_Father: {fileID: 7013483468840521039}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -346,24 +345,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
---- !u!114 &6527719722034911552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432445156551296835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049efcd14d3634745a060a9ac0d81ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedWeapon: 0
-  previousWeapon: 0
-  loadout: []
-  currentWeapon: {fileID: 0}
-  fpsCam: {fileID: 0}
-  FOVmod: 0.9
 --- !u!1 &1432445157037321195
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,12 +652,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71397e4a443458c4ca831d18edb9e773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1934249950302637635
+--- !u!1 &8238595718367330966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84423773278028983}
+  - component: {fileID: 8524439607576175987}
+  m_Layer: 11
+  m_Name: Loadout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &84423773278028983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238595718367330966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3897147846666893396}
+  m_Father: {fileID: 1432445156551296838}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8524439607576175987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238595718367330966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049efcd14d3634745a060a9ac0d81ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedWeapon: 0
+  previousWeapon: 0
+  loadout: []
+  currentWeapon: {fileID: 0}
+  fpsCam: {fileID: 1432445156551296833}
+  FOVmod: 0.9
+--- !u!1001 &8098738339078121271
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1432445156551296838}
+    m_TransformParent: {fileID: 84423773278028983}
     m_Modifications:
     - target: {fileID: 8082366030619503984, guid: 62800c2e78125e6489c058d984164ea8,
         type: 3}
@@ -745,9 +776,9 @@ PrefabInstance:
       objectReference: {fileID: 6273443734508453724}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62800c2e78125e6489c058d984164ea8, type: 3}
---- !u!4 &6676264123750125856 stripped
+--- !u!4 &3897147846666893396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5075852332992077667, guid: 62800c2e78125e6489c058d984164ea8,
     type: 3}
-  m_PrefabInstance: {fileID: 1934249950302637635}
+  m_PrefabInstance: {fileID: 8098738339078121271}
   m_PrefabAsset: {fileID: 0}

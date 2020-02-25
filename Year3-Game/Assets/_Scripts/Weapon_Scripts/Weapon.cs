@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/* using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -127,9 +127,8 @@ public class Weapon : MonoBehaviour
     public RaycastHit hitInfo;
 
     public GameObject HUD;
-    
 
-    //**************TUTORIAL VARIABLES**************/
+
     [System.NonSerialized]
     public Tutorial_Manager _tutManager;
     //Metrics Manager
@@ -508,7 +507,7 @@ public class Weapon : MonoBehaviour
                 origPosReset = false;
                 Shoot();
             }
-            else  */
+            else  
             if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
@@ -789,7 +788,7 @@ public class Weapon : MonoBehaviour
                 _tutManager.Notify("SHOOTING_COMPLETE");
         }
 
- */
+
         //GUN FX
         // currentWeapon.transform.Rotate(loadout[currentIndex].recoil, 0, 0);
         currentWeapon.transform.position -= -currentWeapon.transform.forward * loadout[currentIndex].kickBack;
@@ -1219,4 +1218,4 @@ public class Weapon : MonoBehaviour
     }
 
 }
-
+ */

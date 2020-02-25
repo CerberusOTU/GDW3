@@ -24,6 +24,7 @@ public class playerWeaponManager : MonoBehaviour
     private Transform ADS;
     private Transform Hip;
     private float adjustedBloom;
+    [SerializeField] public RaycastHit hitInfo;
 
     [Header("Reload")]
     private bool PlayerisReloading = false;
@@ -39,9 +40,9 @@ public class playerWeaponManager : MonoBehaviour
     private float timeFiringHeld;
 
     [Header("Weapon")]
-    [SerializeField] private int selectedWeapon = 0;    // 0-Primary    // 1-Secondary
+    [SerializeField] public int selectedWeapon = 0;    // 0-Primary    // 1-Secondary
     [SerializeField] private int previousWeapon = 0;
-    [SerializeField] private List<weaponInfo> loadout;
+    [SerializeField] public List<weaponInfo> loadout;
     [SerializeField] private GameObject currentWeapon;
 
     [Header("Camera")]
@@ -56,7 +57,6 @@ public class playerWeaponManager : MonoBehaviour
     {
         inputManager = GetComponentInParent<playerInputManager>();
         crosshair = GetComponentInParent<dynamicCrosshair>();
-        fpsCam = transform.GetComponent<Camera>();
         baseFOV = fpsCam.fieldOfView;
         initLoadout();
         checkWeaponChange();
@@ -135,7 +135,7 @@ public class playerWeaponManager : MonoBehaviour
     {
         if (inputManager.GetFireInputDown())
         {
-            if (!PlayerisReloading && currentCool <= 0 && loadout[selectedWeapon].gun.ShotType == "Single" && loadout[selectedWeapon].gun.currentAmmo > 0)
+            if (!PlayerisReloading && currentCool <= 0 && loadout[selectedWeapon].gun.ShotType == "Single" && loadout[selectedWeapon].currentAmmo > 0)
             {
                 // Call your event function here.
                 origPosReset = false;
@@ -187,7 +187,7 @@ public class playerWeaponManager : MonoBehaviour
         Quaternion maxRecoil = Quaternion.Euler(fpsCam.transform.localEulerAngles.x + loadout[selectedWeapon].gun.maxRecoil_x, 0f, 0f);
         fpsCam.transform.localRotation = Quaternion.Slerp(fpsCam.transform.localRotation, maxRecoil, Time.deltaTime * loadout[selectedWeapon].gun.recoilSpeed * Mathf.Lerp(1, loadout[selectedWeapon].gun.recoilDampen, timeFiringHeld));
 
-        RaycastHit hitInfo = new RaycastHit();
+        hitInfo = new RaycastHit();
         //bloom
         if (loadout[selectedWeapon].gun.className == "Shotgun")
         {
@@ -367,7 +367,7 @@ public class playerWeaponManager : MonoBehaviour
                         temp.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo;
                         temp.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;
                         loadout[1] = scanWeapon.collider.gameObject.GetComponent<weaponInfo>();
-                        Destroy(transform.GetChild(1));
+                        Destroy(transform.GetChild(1).gameObject);
                         Instantiate(loadout[1].gun.weaponObj_Arms, transform.position, transform.rotation, transform);
                     }
                     else
@@ -409,7 +409,7 @@ public class playerWeaponManager : MonoBehaviour
         }
     }
 
-    void weaponSwap()
+    public void weaponSwap()
     {
         int i = 0;
         //Set selected weapon to active :: disable all others
