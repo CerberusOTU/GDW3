@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1878687860915866103}
-  Player: {fileID: 4810735825182054046}
 --- !u!1 &5535580160138574775
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,16 +332,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1147697758880258017}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 2f35cdf12079664488d868844864ecc7,
-        type: 3}
-      propertyPath: m_Name
-      value: Shotgun-Reload
-      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 2f35cdf12079664488d868844864ecc7,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: dffcc334d926e0e4e83986821acb3a91, type: 2}
+    - target: {fileID: -927199367670048503, guid: 2f35cdf12079664488d868844864ecc7,
+        type: 3}
+      propertyPath: m_Name
+      value: Shotgun-Reload
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2f35cdf12079664488d868844864ecc7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,6 +412,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.19508366
       objectReference: {fileID: 0}
+    - target: {fileID: 4060825886788870107, guid: 2f35cdf12079664488d868844864ecc7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ee1450c7f4777346a02d70c35bbdf20, type: 2}
+    - target: {fileID: 2367717886017192154, guid: 2f35cdf12079664488d868844864ecc7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7664287658871f242a4b5b98ff1690b8, type: 2}
+    - target: {fileID: 4164647552175411910, guid: 2f35cdf12079664488d868844864ecc7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7664287658871f242a4b5b98ff1690b8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f35cdf12079664488d868844864ecc7, type: 3}
 --- !u!1 &4810735825182054046 stripped
