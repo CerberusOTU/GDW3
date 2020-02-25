@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     private Weapon weapon;
     public GameObject M1911;
     public GameObject Tommy;
+    public GameObject Revolver;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class Move : MonoBehaviour
             animator.SetInteger("Switch", 1);
             M1911.SetActive(true);
             Tommy.SetActive(false);
+            Revolver.SetActive(false);
         }
         if (weapon.currentIndex == 0)
         {
@@ -34,8 +36,19 @@ public class Move : MonoBehaviour
             animator.SetInteger("Switch", 2);
             M1911.SetActive(false);
             Tommy.SetActive(true);
+            Revolver.SetActive(false);
+            }
+        
+        
+            if(weapon.loadout[0].name == "Revolver")
+            {
+            animator.SetInteger("Switch", 3);
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(true);
             }
         }
+
         var x = Input.GetAxis("Horizontal");
         var y = Input.GetAxis("Vertical");
 
