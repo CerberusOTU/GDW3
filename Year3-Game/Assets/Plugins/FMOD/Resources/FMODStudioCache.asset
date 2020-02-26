@@ -176,7 +176,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/MP40Shot
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -332,7 +333,8 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunReload
   guid: 36f891b3c431b34b900d5faf71adbf35
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -638,7 +640,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/RevolverShot
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -715,6 +718,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 8.549999
   Length: 1992
+--- !u!114 &-1260061106624530122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637164092520000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1224946406724147676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +866,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/ShotgunShot
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -867,7 +889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 4214850295932031459}
-  - {fileID: 1395054624170541350}
+  - {fileID: -1260061106624530122}
   EditorEvents:
   - {fileID: 164190049373858271}
   - {fileID: 2661274793227920304}
@@ -882,10 +904,10 @@ MonoBehaviour:
   - {fileID: 2462551901385056809}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 1395054624170541350}
+  - {fileID: -1260061106624530122}
   StringsBanks:
   - {fileID: 4214850295932031459}
-  stringsBankWriteTime: 637145250638142444
+  stringsBankWriteTime: 637164092520000000
   cacheVersion: 3
 --- !u!114 &164190049373858271
 MonoBehaviour:
@@ -902,7 +924,8 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -925,7 +948,8 @@ MonoBehaviour:
   Path: event:/Throwables Effects/Grenade Explode
   guid: afd67d4f13d3d44c98378ead58e1a579
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -986,7 +1010,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/TommyShot
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1124,7 +1149,8 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ColtReload
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1170,7 +1196,8 @@ MonoBehaviour:
   Path: event:/Gun Effects/Dry Clip
   guid: 0b3924e8fd41c443ade29417f4fcaabe
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1219,6 +1246,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1703
+--- !u!114 &2753565533637223483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637164092520000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &2869838533513718412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,7 +1302,8 @@ MonoBehaviour:
   Path: event:/Gun Shots/ColtShot
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1348,7 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637145250638142444
+  lastModified: 637164092520000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1588,7 +1634,8 @@ MonoBehaviour:
   Path: event:/Gun Reloads/RevolverReload
   guid: 9438b4985c34c342afa4772757f63535
   Banks:
-  - {fileID: 1395054624170541350}
+  - {fileID: 2753565533637223483}
+  - {fileID: -1260061106624530122}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1

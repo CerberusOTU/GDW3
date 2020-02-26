@@ -553,7 +553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 6333570157499887957}
-  Player: {fileID: 6273443734508453724, guid: a266bcd2f5fd2ef43a06b0f11bde65c4, type: 3}
 --- !u!1 &1267752617517976399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8082366030619503984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.136, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 474627595923341621}
