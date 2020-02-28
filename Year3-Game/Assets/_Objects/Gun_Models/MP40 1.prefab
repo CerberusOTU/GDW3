@@ -89,7 +89,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7472669210658294094}
   - component: {fileID: 2856427594128614914}
-  - component: {fileID: 9164382173575967364}
   m_Layer: 0
   m_Name: MP40 1
   m_TagString: Weapon
@@ -125,18 +124,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08434078, y: 0.28135502, z: 0.7244051}
   m_Center: {x: -0.0043769926, y: -0.08581537, z: 0.027141899}
---- !u!114 &9164382173575967364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5903964947378846557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eede8935eb5b8a949b03248cb4105af0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 8b43f48134c82cb43bbaefb4f73f5215, type: 2}
-  maxAmmo: 0
-  currentAmmo: 0
