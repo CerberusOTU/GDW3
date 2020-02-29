@@ -10,7 +10,7 @@ public class playerCharController : MonoBehaviour
     Camera fpsCamera;
 
     [Header("Movement")]
-    public float speed = 10f;
+    public float speed = 5f;
     private float desiredSpeed = 0f;
     [System.NonSerialized] public float currentSpeed = 0f;
     [SerializeField] private float sprintModifier = 1.5f;
@@ -87,6 +87,7 @@ public class playerCharController : MonoBehaviour
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, desiredSpeed);
+
         //Apply movement to character controller
         characterController.Move(move * currentSpeed * Time.fixedDeltaTime);
 

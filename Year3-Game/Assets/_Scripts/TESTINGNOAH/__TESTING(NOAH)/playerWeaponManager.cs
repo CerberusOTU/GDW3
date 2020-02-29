@@ -350,34 +350,34 @@ public class playerWeaponManager : MonoBehaviour
         {
             if (inputManager.GetInteractInputDown() && scanWeapon.collider.tag == "Weapon")
             {
-                if (transform.childCount < 2)
+                GameObject tempGrab = scanWeapon.collider.gameObject;
+                if (transform.childCount < 2) //If only holding one weapon
                 {
-                    Instantiate(scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponObj_Arms, transform.position, transform.rotation, transform);
+                    Instantiate(tempGrab.GetComponent<weaponInfo>().gun.weaponObj_Arms, transform.position, transform.rotation, transform);
                     loadout.Add(transform.GetChild(1).GetComponent<weaponInfo>());
-                    Destroy(scanWeapon.collider.gameObject);
+                    Destroy(tempGrab); //destroy weapon 
                     selectedWeapon++;
-                    weaponSwap();
+                    weaponSwap(); //Update active weapon
                 }
                 else
                 {
                     if (loadout[1].gun.weaponID != scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponID)
                     {
-                        GameObject tempGrab = scanWeapon.collider.gameObject;
-                        GameObject tempWall = Instantiate(loadout[1].gun.weaponObj, tempGrab.transform.position, tempGrab.transform.rotation);
-                        tempWall.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo;
-                        tempWall.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;
-                        loadout[1] = tempGrab.GetComponent<weaponInfo>();
-                        Destroy(tempGrab);
+                        GameObject tempWall = Instantiate(loadout[1].gun.weaponObj, tempGrab.transform.position, tempGrab.transform.rotation); //Create gun to place on wall
+                        tempWall.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo; //Save current ammo to weapon on wall
+                        tempWall.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;   //Save clip ammo to weapon on wall
+                        loadout[1] = tempGrab.GetComponent<weaponInfo>();   //Get info of weapon being picked up
+                        Destroy(tempGrab);  //Destroy being picked up
                         GameObject tempDestroy = transform.GetChild(1).gameObject;
                         tempDestroy.transform.SetParent(null);
-                        Destroy(tempDestroy);
+                        Destroy(tempDestroy);  //Destroy current weapon being held
 
-                        Instantiate(loadout[1].gun.weaponObj_Arms, transform.position, transform.rotation, transform);
-                        weaponSwap();
+                        Instantiate(loadout[1].gun.weaponObj_Arms, transform.position, transform.rotation, transform); //Create new gun in primary slot based on wall info
+                        weaponSwap(); //Update active weapon
                     }
                     else
                     {
-                        loadout[1].maxAmmo = loadout[1].gun.alwaysMax + loadout[1].gun.clipSize - loadout[1].currentAmmo;
+                        loadout[1].maxAmmo = loadout[1].gun.alwaysMax + loadout[1].gun.clipSize - loadout[1].currentAmmo; //Refill Ammo.
                     }
                 }
             }

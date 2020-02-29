@@ -12,7 +12,7 @@ public class dynamicCrosshair : MonoBehaviour
     public float width = 4f;
     public float defaultSpread = 30f;
     public Color color = Color.white;
-    public bool resizeable = false;
+    public bool resizeable = true;
     public float resizedSpread = 90f;
     public float resizeSpeed = 30f;
 
@@ -37,7 +37,7 @@ public class dynamicCrosshair : MonoBehaviour
     {
         //for demonstration purposes
         if (charController.currentSpeed > charController.speed) { resizing = true; } else { resizing = false; }
-        
+
         if (resizeable)
         {
             if (resizing)
