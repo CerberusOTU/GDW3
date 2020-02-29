@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 6069964972212616191}
   - component: {fileID: 8144148186743147544}
   - component: {fileID: 4890155951704983762}
-  - component: {fileID: 4688605869559907237}
+  - component: {fileID: 4705900055734926413}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -577,11 +577,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d250cfa7802d24da9e03fa259f7763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 20
+  height: 15
   width: 4
-  defaultSpread: 30
+  defaultSpread: 25
   color: {r: 1, g: 1, b: 1, a: 1}
-  resizeable: 0
+  resizeable: 1
   resizedSpread: 90
   resizeSpeed: 30
 --- !u!114 &6069964972212616191
@@ -640,7 +640,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4688605869559907237
+--- !u!114 &4705900055734926413
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -649,9 +649,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6273443734508453724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71397e4a443458c4ca831d18edb9e773, type: 3}
+  m_Script: {fileID: 11500000, guid: 459bc7bd1d3f01046a39648c07d49fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xSens: 1
+  ySens: 1
+  maxAngle: 89
 --- !u!1 &8238595718367330966
 GameObject:
   m_ObjectHideFlags: 0
