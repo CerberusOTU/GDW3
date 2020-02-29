@@ -88,12 +88,12 @@ public class playerWeaponManager : MonoBehaviour
                     origPosReset = true;
                 }
             }
+            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4);
         }
         if (currentCool > 0)
         {
             currentCool -= Time.deltaTime;
         }
-        currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4);
     }
 
     void initLoadout()
@@ -352,7 +352,6 @@ public class playerWeaponManager : MonoBehaviour
             {
                 if (transform.childCount < 2)
                 {
-
                     Instantiate(scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponObj_Arms, transform.position, transform.rotation, transform);
                     loadout.Add(transform.GetChild(1).GetComponent<weaponInfo>());
                     Destroy(scanWeapon.collider.gameObject);
@@ -363,12 +362,18 @@ public class playerWeaponManager : MonoBehaviour
                 {
                     if (loadout[1].gun.weaponID != scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponID)
                     {
-                        GameObject temp = Instantiate(loadout[1].gun.weaponObj, scanWeapon.collider.transform);
-                        temp.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo;
-                        temp.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;
-                        loadout[1] = scanWeapon.collider.gameObject.GetComponent<weaponInfo>();
-                        Destroy(transform.GetChild(1).gameObject);
+                        GameObject tempGrab = scanWeapon.collider.gameObject;
+                        GameObject tempWall = Instantiate(loadout[1].gun.weaponObj, tempGrab.transform.position, tempGrab.transform.rotation);
+                        tempWall.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo;
+                        tempWall.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;
+                        loadout[1] = tempGrab.GetComponent<weaponInfo>();
+                        Destroy(tempGrab);
+                        GameObject tempDestroy = transform.GetChild(1).gameObject;
+                        tempDestroy.transform.SetParent(null);
+                        Destroy(tempDestroy);
+
                         Instantiate(loadout[1].gun.weaponObj_Arms, transform.position, transform.rotation, transform);
+                        weaponSwap();
                     }
                     else
                     {
