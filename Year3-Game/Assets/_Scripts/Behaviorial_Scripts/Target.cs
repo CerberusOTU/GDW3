@@ -104,7 +104,6 @@ public class Target : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("lol " + timeLeft);
 
         if (timeStart == true)
         {
