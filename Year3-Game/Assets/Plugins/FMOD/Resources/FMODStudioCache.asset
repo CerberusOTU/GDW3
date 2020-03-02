@@ -1484,6 +1484,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-6306826487391755260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-6289217270784629178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3166,6 +3184,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-2884733442522274071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: 6422542225027166573}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &-2811235220032207885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3545,6 +3586,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-1810990311904791505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1773272255020143070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3682,6 +3741,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-1193661442266658101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: -1810990311904791505}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &-1052576680427913985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3782,6 +3864,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1200
+--- !u!114 &-870253724294621110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-820971032793599054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,6 +4162,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-112498512517323677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-62291534703513968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4107,6 +4225,7 @@ MonoBehaviour:
   - {fileID: -6394233224949332465}
   - {fileID: 7489127091112121128}
   - {fileID: 1513038040736769164}
+  - {fileID: 7091640456300068559}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7448730632770012998}
@@ -5409,6 +5528,29 @@ MonoBehaviour:
   MinDistance: 0.6999999
   MaxDistance: 4
   Length: 2537
+--- !u!114 &2273348945446072336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: -112498512517323677}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &2392369321105089272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5460,6 +5602,24 @@ MonoBehaviour:
   Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637164092520000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &2622475973541785622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -6612,6 +6772,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &5308539594968795047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: 2622475973541785622}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &5435454070763129854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7011,6 +7194,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &5965149039008409285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &5993040016764728901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7116,6 +7317,24 @@ MonoBehaviour:
   Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637164092520000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6422542225027166573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -7268,6 +7487,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6872195177511516454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637181635873423324
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6915015689512270769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7286,6 +7523,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6921647718826649411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: 6872195177511516454}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &6927768400487308752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7358,6 +7618,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &7091640456300068559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps/ConcreteStep
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps/ConcreteStep
+  guid: 80c19a347cee5745b3685cc63e1280b4
+  Banks:
+  - {fileID: 5965149039008409285}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 687
 --- !u!114 &7128574277304139458
 MonoBehaviour:
   m_ObjectHideFlags: 0
