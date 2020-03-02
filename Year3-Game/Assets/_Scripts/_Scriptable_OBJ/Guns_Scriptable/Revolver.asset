@@ -24,11 +24,11 @@ MonoBehaviour:
   recoilDampen: 0
   kickBack: 0.1
   aimSpeed: 15
-  reloadTime: 1
+  reloadTime: 1.833
   alwaysMax: 24
-  maxAmmo: 24
+  maxAmmo: 22
   clipSize: 6
-  currentAmmo: 6
+  currentAmmo: 5
   ShotPath: event:/Gun Shots/RevolverShot
   ReloadPath: event:/Gun Reloads/RevolverReload
   isReloading: 0

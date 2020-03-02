@@ -28,13 +28,6 @@ public class ReloadAnimations : MonoBehaviour
         Debug.Log("Missing Ammo: " + ammoMissing);    
 
 
-
-
-
-
-
-
-
         if (Input.GetKeyDown(KeyCode.R) && weaponScript.loadout[1].currentAmmo != weaponScript.loadout[1].clipSize
             && weaponScript.currentIndex == 1)
         {
@@ -52,6 +45,11 @@ public class ReloadAnimations : MonoBehaviour
             {
                 m_Animator.SetBool("tommyReload", true);
                 //Debug.Log("Tommy Reloading");
+            }
+            if (weaponScript.loadout[0].name == "Revolver")
+            {
+                m_Animator.SetBool("RevolverReload", true);
+                Debug.Log("Revolver Reloading");
             }
             if (weaponScript.loadout[0].name == "MP40")
             {
@@ -75,7 +73,7 @@ public class ReloadAnimations : MonoBehaviour
 
                 m_Animator.SetBool("ShotgunStartReload", false);
                 m_Animator.SetBool("ShotgunReloading", false);
-                m_Animator.SetBool("ShotgunEndReload", true);
+                m_Animator.SetBool("ShotgunEndReload", true);             
                 weaponScript.loadout[0].reloadTime = 1.833f;
                 
         }
@@ -106,26 +104,41 @@ public class ReloadAnimations : MonoBehaviour
         //    Debug.Log("MP40 Reloading = fALSE");           
         //}
 
-
+        //Setting Back too false
         if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize)
-            && (m_Animator.GetBool("tommyReload") == true) || (m_Animator.GetBool("MP40Reloading") == true) || (m_Animator.GetBool("ShotgunReloading") == true))
+            && (m_Animator.GetBool("tommyReload") == true))
         {
             m_reload = false;
             Debug.Log("XXReloadMainFinish");
             if (weaponScript.loadout[0].name == "Tommy")
-                m_Animator.SetBool("tommyReload", false);
-            if (weaponScript.loadout[0].name == "MP40")
-                m_Animator.SetBool("MP40Reloading", false);
-            /*if (weaponScript.loadout[0].name == "Shotgun")
-            {
-                 Debug.Log("Shotgun End Reload");
-
-                m_Animator.SetBool("ShotgunStartReload", false);
-                m_Animator.SetBool("ShotgunReloading", false);
-                //m_Animator.SetBool("ShotgunEndReload", true);
-            }   */             
+                m_Animator.SetBool("tommyReload", false);                
         }
 
+        if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize)
+            && (m_Animator.GetBool("MP40Reloading") == true))
+        {
+            m_reload = false;
+            Debug.Log("XXReloadMainFinish");
+
+            if (weaponScript.loadout[0].name == "MP40")
+                m_Animator.SetBool("MP40Reloading", false);
+                
+        }
+
+        if (weaponScript.loadout[0] != null && (weaponScript.loadout[0].currentAmmo == weaponScript.loadout[0].clipSize)
+            && (m_Animator.GetBool("RevolverReload") == true))
+        {
+            m_reload = false;
+            Debug.Log("XXReloadMainFinish");
+
+            if (weaponScript.loadout[0].name == "Revolver")
+            {
+                m_Animator.SetBool("RevolverReload", false);
+                Debug.Log("Revolver Reload Finished");  
+            }                 
+        }
+
+        ////
         if (weaponScript.loadout[1].currentAmmo == 0 && weaponScript.loadout[1].maxAmmo > 0)
         {
             m_reload = true;
@@ -142,6 +155,8 @@ public class ReloadAnimations : MonoBehaviour
                 m_Animator.SetBool("tommyReload", true);
             if (weaponScript.loadout[0].name == "MP40")
                 m_Animator.SetBool("MP40Reloading", true);
+            if (weaponScript.loadout[0].name == "Revolver")
+                m_Animator.SetBool("RevolverReload", true);                
             if (weaponScript.loadout[0].name == "Shotgun")
             {
                 m_Animator.SetBool("ShotgunStartReload", true);  
