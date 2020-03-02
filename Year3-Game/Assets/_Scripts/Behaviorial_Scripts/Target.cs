@@ -6,6 +6,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public GameObject defaultSpawn;
+    public GameObject[] playerSpawn;
     private List<Transform> SpawnPos = new List<Transform>();
 
     public float health = 50f;
@@ -218,7 +219,6 @@ public class Target : MonoBehaviour
             KilledBy.canvasRenderer.SetAlpha(0f);
             Respawn.canvasRenderer.SetAlpha(0f);
             whiteBanner.canvasRenderer.SetAlpha(0f);
-
 
             distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
             distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
