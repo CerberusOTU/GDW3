@@ -6,7 +6,8 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public GameObject defaultSpawn;
-    public GameObject[] playerSpawn;
+    public Transform[] playerSpawn;
+    private float[] dist = new float[18];
     private List<Transform> SpawnPos = new List<Transform>();
 
     public float health = 50f;
@@ -21,7 +22,7 @@ public class Target : MonoBehaviour
     //public Camera cam;
     //public Camera deathcam;
     //public GameObject HUD;
-
+    
     public Text KilledEnemy;
     public Image KilledIcon;
     public RawImage Fade;
@@ -54,6 +55,50 @@ public class Target : MonoBehaviour
     public GameObject BaseModel;
     public GameObject Ragdoll;
     GameObject go;
+
+
+int Max(float[] arr)
+{
+     var max = arr[0];
+     int location = 0;
+     for (int i = 1; i < arr.Length; i++) 
+     {
+         if (arr[i] > max) {
+             max = arr[i];
+             location = i;
+         }
+     }
+     return (location);
+ 
+}
+    void Spawn()
+    {
+        if(this.name == "Player")
+        {
+        for(int i = 0; i < playerSpawn.Length; i++)
+        {
+            dist[i] = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, playerSpawn[i].position);
+        }
+          int index = Max(dist);
+
+          this.gameObject.transform.position = playerSpawn[index].position;
+          this.gameObject.transform.rotation = playerSpawn[index].rotation;
+        }
+
+        if(this.name == "Player2")
+        {
+        for(int i = 0; i < playerSpawn.Length; i++)
+        {
+            dist[i] = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, playerSpawn[i].position);
+        }
+            int index = Max(dist);
+          
+          this.gameObject.transform.position = playerSpawn[index].position;
+          this.gameObject.transform.rotation = playerSpawn[index].rotation;
+        }
+
+    }
+
     void Start()
     {
         timeLeft = maxTime;
@@ -145,7 +190,6 @@ public class Target : MonoBehaviour
 
             StartCoroutine(Die());
             StartCoroutine(UIElements());
-
         }
     }
 
@@ -171,7 +215,7 @@ public class Target : MonoBehaviour
     IEnumerator Die()
     {   
         BaseModel.SetActive(false);
-        GameObject go = Instantiate(Ragdoll, this.transform.position, this.transform.rotation);
+        GameObject go = Instantiate(Ragdoll, this.transform.position, this.transform.rotation); 
         Destroy(go, 3f);
         //Destroy(gameObject);
         int index = Random.Range(0, 3);
@@ -220,7 +264,7 @@ public class Target : MonoBehaviour
             Respawn.canvasRenderer.SetAlpha(0f);
             whiteBanner.canvasRenderer.SetAlpha(0f);
 
-            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
+           /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
             distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
             distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
             distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
@@ -264,7 +308,9 @@ public class Target : MonoBehaviour
             {
                 this.gameObject.transform.position = SpawnPos[3].position;
                 this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-            }
+            } */
+
+            Spawn();
             healthUI.PlayerHealth = 100;
             Grenade1.enabled = true;
             Grenade2.enabled = true;
@@ -280,7 +326,7 @@ public class Target : MonoBehaviour
         else
         {
 
-            distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
+           /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
             distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[1].position);
             distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[2].position);
             distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[3].position);
@@ -309,7 +355,8 @@ public class Target : MonoBehaviour
             {
                 this.gameObject.transform.position = SpawnPos[3].position;
                 this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-            }
+            } */
+            Spawn();
             healthUI2.PlayerHealth = 100;
             Player2Grenade1.enabled = true;
             Player2Grenade2.enabled = true;

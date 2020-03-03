@@ -28,7 +28,7 @@ public class ReloadAnimations : MonoBehaviour
         Debug.Log("Missing Ammo: " + ammoMissing);    
 
 
-        if (Input.GetKeyDown(KeyCode.R) && weaponScript.loadout[1].currentAmmo != weaponScript.loadout[1].clipSize
+        if (weaponScript.PlayerisReloading == true && weaponScript.loadout[1].currentAmmo != weaponScript.loadout[1].clipSize
             && weaponScript.currentIndex == 1)
         {
             m_reload = true;
@@ -38,7 +38,7 @@ public class ReloadAnimations : MonoBehaviour
         }
 
 
-        if (weaponScript.loadout[0] != null && Input.GetKeyDown(KeyCode.R) && (weaponScript.loadout[0].currentAmmo != weaponScript.loadout[0].clipSize) && weaponScript.currentIndex == 0)
+        if (weaponScript.loadout[0] != null && weaponScript.PlayerisReloading == true && (weaponScript.loadout[0].currentAmmo != weaponScript.loadout[0].clipSize) && weaponScript.currentIndex == 0)
         {
             m_reload = true;
             if (weaponScript.loadout[0].name == "Tommy")

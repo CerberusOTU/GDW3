@@ -243,6 +243,15 @@ public class Weapon : MonoBehaviour
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
         }
+
+        if (controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1 && !PlayerisReloading && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
+        {
+            GamePad.SetVibration((PlayerIndex)0, 1600f, 0);
+        }
+        else
+        {
+            GamePad.SetVibration((PlayerIndex)0, 0, 0);
+        }
     }
 
     void Update()

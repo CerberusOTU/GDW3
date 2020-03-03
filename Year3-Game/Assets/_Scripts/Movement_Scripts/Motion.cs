@@ -210,7 +210,7 @@ public class Motion : MonoBehaviour
 
     void getJumpDown()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || (controller.state.Buttons.A == ButtonState.Pressed && controller.prevState.Buttons.A == ButtonState.Released))
         {
             if (jumpInUse == false && isGrounded())
             {
@@ -284,6 +284,7 @@ public class Motion : MonoBehaviour
         //allow the player to sprint        
         if (isSprinting)
         {
+            isCrouching = false;
             adjustedSpeed *= sprintModifier;
             //weaponParent.localRotation = Quaternion.Euler(0f, 270f, 0f);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
