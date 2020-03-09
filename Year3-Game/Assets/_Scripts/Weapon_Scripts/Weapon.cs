@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
 
     public int currentIndex;
 
-    private GameObject currentWeapon;
+    public GameObject currentWeapon;
 
     public Canvas crossHair;
     public Canvas hitMark;
@@ -69,7 +69,6 @@ public class Weapon : MonoBehaviour
     //Ammo UI///
     public Text AmmoText;
     public Text AmmoText2;
-    public Text Reloading;
     public Text PickUp;
     public Image MainWeapon;
     public Image SideWeapon;
@@ -394,18 +393,23 @@ public class Weapon : MonoBehaviour
             reloadCancel = false;
             PlayerisReloading = true;
 
-            if (loadout[currentIndex].maxAmmo > 0)
-            {
-                PlaySound(loadout[currentIndex].ReloadPath);
-            }
+            //if (loadout[currentIndex].maxAmmo > 0)
+            //{
+            //    PlaySound(loadout[currentIndex].ReloadPath);
+            //}
         }
 
-        if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && 
+            controller.prevState.Buttons.X == ButtonState.Released && 
+            loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && 
+            loadout[currentIndex].maxAmmo != 0 &&
+            !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
             reloadDelay = 0.0f;
-            PlaySound(loadout[currentIndex].ReloadPath);
+            if (loadout[currentIndex].name != "Shotgun")
+           PlaySound(loadout[currentIndex].ReloadPath);
 
         }
 
@@ -805,8 +809,7 @@ public class Weapon : MonoBehaviour
         currentCool = loadout[currentIndex].firerate;
 
         _metricsLogger.shotsTaken++;
-        if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0 && loadout[currentIndex].ShotType == "Auto")
-            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
+
     }
 
     IEnumerator displayHitmark()
@@ -843,7 +846,7 @@ public class Weapon : MonoBehaviour
             {
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
                 reloadDelay += Time.deltaTime;
-                Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
+                //Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
                 //Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
                 if (reloadCancel)
                 {
@@ -851,7 +854,7 @@ public class Weapon : MonoBehaviour
                     reloadDelay = 0.0f;
                     reloadCancel = false;
                     PlayerisReloading = false;
-                    Reloading.text = " ";
+                    //Reloading.text = " ";
                     tempTime = Time.time;
                     return;
                 }
@@ -871,7 +874,7 @@ public class Weapon : MonoBehaviour
                         loadout[currentIndex].maxAmmo = 0;
                     }
                     PlayerisReloading = false;
-                    Reloading.text = " ";
+                    //Reloading.text = " ";
 
                     tempTime = Time.time;
 
@@ -1148,6 +1151,8 @@ public class Weapon : MonoBehaviour
                 origPosReset = false;
                 Shoot();
             }
+            if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
         }
         if (controller.state.Triggers.Right == 1)
         {

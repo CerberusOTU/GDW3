@@ -268,6 +268,8 @@ public class Motion : MonoBehaviour
         }
 
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state.Buttons.LeftStick == ButtonState.Pressed;
+        
+        //if (_weapon.PlayerisReloading == false)
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove);
