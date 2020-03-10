@@ -52,7 +52,7 @@ public class playerCharController : MonoBehaviour
     {
         HandleMovement();
     }
-    
+
     void HandleMovement()
     {
         //Reset Speed
@@ -95,6 +95,7 @@ public class playerCharController : MonoBehaviour
         if (inputManager.GetJumpInputHeld() && isGrounded && canJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Debug.Log("I Jumped");
         }
         //Make sure you have to lift space - Avoid bunny hopping
 
