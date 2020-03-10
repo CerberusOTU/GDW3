@@ -477,7 +477,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunCock
   guid: 4eb80ad3b0db134f945b9c4152f2f624
   Banks:
-  - {fileID: -1520586148872242354}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1292,7 +1292,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1587,7 +1588,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1878,7 +1880,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2735,7 +2738,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2997,7 +3001,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3005,6 +3010,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 755
+--- !u!114 &-3825043954239218107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637194417582544834
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-3753627281536106910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3806,7 +3829,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3832,6 +3856,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-2280996258850063716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reloads/ShotgunShellIn
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reloads/ShotgunShellIn
+  guid: 5fff7c2c4353004fbf7951406694cd5d
+  Banks:
+  - {fileID: -3825043954239218107}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 318
 --- !u!114 &-2251841258059006953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4354,6 +4401,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-629745425943630212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reloads/ShotgunCock
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reloads/ShotgunCock
+  guid: 4eb80ad3b0db134f945b9c4152f2f624
+  Banks:
+  - {fileID: -3825043954239218107}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 775
 --- !u!114 &-568074851548604531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4607,7 +4677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 8808711145614756022}
-  - {fileID: -1520586148872242354}
+  - {fileID: 6501931372439215456}
   EditorEvents:
   - {fileID: -4272944842405567896}
   - {fileID: -5963287806897522408}
@@ -4625,10 +4695,10 @@ MonoBehaviour:
   - {fileID: 3326437988457627506}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1520586148872242354}
+  - {fileID: 6501931372439215456}
   StringsBanks:
   - {fileID: 8808711145614756022}
-  stringsBankWriteTime: 637193773825485991
+  stringsBankWriteTime: 637194417582624598
   cacheVersion: 3
 --- !u!114 &101980944181591695
 MonoBehaviour:
@@ -5242,7 +5312,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5676,7 +5747,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6363,7 +6435,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunShellIn
   guid: 5fff7c2c4353004fbf7951406694cd5d
   Banks:
-  - {fileID: -1520586148872242354}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6745,7 +6817,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -7674,7 +7747,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -7916,6 +7990,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6501931372439215456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637194417582544834
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6585072565377229825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8083,6 +8175,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6907729723000205170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104786094226927
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &6915015689512270769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8585,7 +8695,8 @@ MonoBehaviour:
   - {fileID: 678710748295281965}
   - {fileID: -2877155469485886704}
   - {fileID: -7190831070272820777}
-  - {fileID: -1520586148872242354}
+  - {fileID: -3825043954239218107}
+  - {fileID: 6501931372439215456}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -9071,7 +9182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637193773825485991
+  lastModified: 637194417582624598
   LoadResult: 0
   FileSizes:
   - Name: Desktop
