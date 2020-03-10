@@ -111,7 +111,6 @@ public class playerCharController : MonoBehaviour
     {
         //Check if hit ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
         //Check if the button is released and the player is on the ground.
         if (!isGrounded)
         {

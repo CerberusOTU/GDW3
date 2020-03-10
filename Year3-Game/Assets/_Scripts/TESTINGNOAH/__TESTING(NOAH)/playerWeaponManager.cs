@@ -362,8 +362,10 @@ public class playerWeaponManager : MonoBehaviour
                 }
                 else
                 {
-                    if (loadout[1].gun.weaponID != scanWeapon.collider.gameObject.GetComponent<weaponInfo>().gun.weaponID)
+                    Debug.Log("Eash Is Gay: Swapping Second Weapon");
+                    if (loadout[1].gun.weaponID != tempGrab.GetComponent<weaponInfo>().gun.weaponID)
                     {
+                        Debug.Log("Swapping Primary!");
                         GameObject tempWall = Instantiate(loadout[1].gun.weaponObj, tempGrab.transform.position, tempGrab.transform.rotation); //Create gun to place on wall
                         tempWall.GetComponent<weaponInfo>().currentAmmo = loadout[1].currentAmmo; //Save current ammo to weapon on wall
                         tempWall.GetComponent<weaponInfo>().maxAmmo = loadout[1].maxAmmo;   //Save clip ammo to weapon on wall
