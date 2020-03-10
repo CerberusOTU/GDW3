@@ -106,6 +106,7 @@ public class playerWeaponManager : MonoBehaviour
             loadout[i].gun.isReloading = false;
         }
         currentWeapon = transform.GetChild(0).gameObject;
+        weaponSwap();
     }
 
     #region Weapon Actions

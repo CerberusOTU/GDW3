@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!20 &866076872 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8413095594144829919, guid: 9c850be0365eba94fa1a2026829def2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 975315410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &975315410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242,6 +248,11 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8160622118402339661, guid: 9c850be0365eba94fa1a2026829def2b,
+        type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 866076872}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c850be0365eba94fa1a2026829def2b, type: 3}
 --- !u!1 &1470351391
