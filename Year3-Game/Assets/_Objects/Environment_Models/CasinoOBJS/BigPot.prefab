@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b9ea3d96e6189e45ace99c19c04a325, type: 2}
+  - {fileID: -3033667219593020291, guid: 82a4329b8253cb04eaaa86d18357f0eb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5106995147135261058}
-  - component: {fileID: 8661492652779276228}
+  - component: {fileID: 6945631301985143027}
   m_Layer: 0
   m_Name: BigPot
   m_TagString: Untagged
@@ -103,15 +103,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8107861277158861713}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -103.9, y: 0, z: -6.46}
+  m_LocalPosition: {x: -103.9, y: 0.9, z: -6.46}
   m_LocalScale: {x: 0.43798462, y: 0.43798462, z: 0.43798462}
   m_Children:
   - {fileID: 3364592209078143674}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8661492652779276228
-BoxCollider:
+--- !u!64 &6945631301985143027
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,6 +120,7 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: b2adb05b12fd6014888f4db76ed5bcfd, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.8723419, y: 3.338204, z: 2.83333}
-  m_Center: {x: 0, y: 1.6367418, z: 0.019503651}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -2432090755550338912, guid: 82a4329b8253cb04eaaa86d18357f0eb, type: 3}
