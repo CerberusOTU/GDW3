@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Menu Scenes/Menu.unity
     guid: f39f0f8fb9e30734daeeabbbf568f3b2
   - enabled: 0
@@ -14,22 +14,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Tutorial Scenes/TutorialLoading.unity
     guid: 0b20b839e58567d4fadaaf28d542f241
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Main Game Scenes/MainGameLoading.unity
     guid: 98b1ea83c4e7aa444ad42ce7872c4ad2
   - enabled: 1
     path: Assets/_Scenes/Main Game Scenes/MainGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Menu Scenes/afterGame.unity
     guid: 65926b2b4451387408498fa6dc13d804
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Multiplayer Scenes/MultiplayerScene.unity
     guid: 33a8ec6552d4c4f4ea48d1e48f4a1f48
+  - enabled: 1
+    path: Assets/_Scenes/Menu Scenes/GunLocker.unity
+    guid: 96baea59f98f00849ade51af6bb72c48
   m_configObjects: {}
