@@ -12,6 +12,8 @@ public class Movement2 : MonoBehaviour
     public float sprintModifier;
 
     public bool isSprinting;
+    private bool moving;
+
     private Rigidbody rb;
     private BoxCollider col;
     private float distToGround;
@@ -150,6 +152,15 @@ public class Movement2 : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         } */
 
+        if(!isGrounded())
+        {
+            rb.drag = 5f;
+        }
+        else
+        {
+            rb.drag = 2f;
+        }
+        
         if (!isGrounded())
         {
             weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin, Time.deltaTime * 2f);
@@ -221,20 +232,31 @@ public class Movement2 : MonoBehaviour
             if (controller.state2.IsConnected)
             {
                 horizontalMove = controller.state2.ThumbSticks.Left.X;
+                moving = true;
             }
             else
             {
                 horizontalMove = Input.GetAxisRaw("Horizontal");
+                moving = true;
             }
             if (controller.state2.IsConnected)
             {
                 verticalMove = controller.state2.ThumbSticks.Left.Y;
+                moving = true;
             }
             else
             {
                 verticalMove = Input.GetAxisRaw("Vertical");
+                moving = true;
             }
         }
+
+        if(horizontalMove == 0 && verticalMove == 0)
+        {
+            moving = false;
+        }
+
+
         bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state2.Buttons.LeftStick == ButtonState.Pressed;
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
 
@@ -258,26 +280,41 @@ public class Movement2 : MonoBehaviour
         //slow down character if walking and aiming down sights
         else if ((Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1) && isCrouching == false)
         {
-            adjustedSpeed = speed / 1.5f;
+            adjustedSpeed = speed /  1.10f;
         }
         else if (isCrouching == true && (Input.GetMouseButton(1) || controller.state2.Triggers.Left == 1))
         {
-            adjustedSpeed = speed / 1.85f;
+            adjustedSpeed = speed / 1.20f;
         }
         else if (isCrouching == true && (!Input.GetMouseButton(1) || controller.state2.Triggers.Left == 0))
         {
-            adjustedSpeed = speed / 1.75f;
+            adjustedSpeed = speed / 1.15f;
         }
         else
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV, Time.deltaTime * 8f);
         }
 
-        if (isGrounded())
-        {
-            targetVelocity = transform.TransformDirection(direction) * adjustedSpeed * Time.fixedDeltaTime;
-            rb.AddForce(targetVelocity, ForceMode.VelocityChange);
-        }
+         if(moving)
+          {
+              Vector3 movementSide = transform.right * horizontalMove;
+              Vector3 movementForward = transform.forward * verticalMove;
+
+             /* if((Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) ) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+             {
+                rb.AddForce((movementSide * adjustedSpeed) / 1.375f);
+                rb.AddForce((movementForward * adjustedSpeed) / 1.375f);
+             }
+             else
+             { */
+              rb.AddForce(movementSide * adjustedSpeed);
+              rb.AddForce(movementForward * adjustedSpeed);
+             //}
+           } 
+           else if(!moving && isGrounded())
+            {
+                rb.velocity = Vector3.zero;
+            }    
     }
 
     void HeadBob(float _z, float xIntensity, float yIntensity)

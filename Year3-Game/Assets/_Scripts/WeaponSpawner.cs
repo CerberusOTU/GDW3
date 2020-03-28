@@ -14,7 +14,6 @@ public class WeaponSpawner : MonoBehaviour
         {
            GameObject GO;
            int id = Random.Range(0,4);
-           Debug.Log(id);
            if(id == 0)
            {
                GO = Instantiate(guns[0],locations[i].position, locations[i].rotation);

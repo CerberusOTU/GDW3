@@ -242,7 +242,7 @@ public class Weapon : MonoBehaviour
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
         }
-
+/* 
         if (controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1 && !PlayerisReloading && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].maxAmmo >= 0)
         {
             GamePad.SetVibration((PlayerIndex)0, 1600f, 0);
@@ -250,7 +250,7 @@ public class Weapon : MonoBehaviour
         else
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
-        }
+        } */
     }
 
     void Update()
@@ -304,7 +304,7 @@ public class Weapon : MonoBehaviour
         {
             AmmoText2.text = "0";
         }
-
+/* 
         if (grenadeAmount > 0)
         {
             if (Input.GetKey(KeyCode.G))
@@ -332,13 +332,13 @@ public class Weapon : MonoBehaviour
                     grenadeAmount--;
                 }
             }
-        }
+        } */
         //if (Input.GetButton("Grenade"))
-        if (controller.state.IsConnected)
+       /*  if (controller.state.IsConnected)
         {
             if (grenadeAmount > 0)
             {
-                if ((controller.state.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKey(KeyCode.G))
+                if ((controller.state.Buttons.RightShoulder == ButtonState.Pressed))
                 {
                     isCookingNade = true;
                     throwGrenade();
@@ -346,7 +346,7 @@ public class Weapon : MonoBehaviour
                         _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 //else if (Input.GetButtonUp("Grenade"))
-                else if ((controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKeyUp(KeyCode.G))
+                else if ((controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed))
                 {
                     if (grenadeAmount == 2)
                     {
@@ -364,7 +364,7 @@ public class Weapon : MonoBehaviour
                     }
                 }
             }
-        }
+        } */
         if (loadout[currentIndex] == loadout[0])
         {
             temp = transform.localScale;
