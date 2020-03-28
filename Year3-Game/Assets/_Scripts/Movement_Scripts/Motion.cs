@@ -151,7 +151,7 @@ public class Motion : MonoBehaviour
         }
         else if (horizontalMove == 0 && verticalMove == 0)
         {
-            if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+            if (controller.state.Triggers.Left == 1)
             {
                 //stop headbob && swaying
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, weaponParentOrigin, Time.deltaTime * 2f);
@@ -177,7 +177,7 @@ public class Motion : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+            if (controller.state.Triggers.Left == 1)
             {
                 if (isCrouching == true)
                 {
@@ -210,7 +210,7 @@ public class Motion : MonoBehaviour
 
     void getJumpDown()
     {
-        if(Input.GetKeyDown(KeyCode.Space) || (controller.state.Buttons.A == ButtonState.Pressed && controller.prevState.Buttons.A == ButtonState.Released))
+        if((controller.state.Buttons.A == ButtonState.Pressed && controller.prevState.Buttons.A == ButtonState.Released))
         {
             if (jumpInUse == false && isGrounded())
             {
@@ -245,19 +245,9 @@ public class Motion : MonoBehaviour
                 horizontalMove = controller.state.ThumbSticks.Left.X;
                 moving = true;
             }
-            else
-            {
-                horizontalMove = Input.GetAxisRaw("Horizontal");
-                moving = true;
-            }
             if (controller.state.IsConnected)
             {
                 verticalMove = controller.state.ThumbSticks.Left.Y;
-                moving = true;
-            }
-            else
-            {
-                verticalMove = Input.GetAxisRaw("Vertical");
                 moving = true;
             }
         //}
@@ -267,7 +257,7 @@ public class Motion : MonoBehaviour
             moving = false;
         }
 
-        bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || controller.state.Buttons.LeftStick == ButtonState.Pressed;
+        bool sprint = controller.state.Buttons.LeftStick == ButtonState.Pressed;
         
         //if (_weapon.PlayerisReloading == false)
         isSprinting = sprint && verticalMove > 0; //&& !isJumping;
@@ -277,7 +267,7 @@ public class Motion : MonoBehaviour
 
         float adjustedSpeed = speed;
 
-        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if (controller.state.Triggers.Left == 1)
         {
             isSprinting = false;
             adjustedSpeed = speed;
@@ -292,17 +282,17 @@ public class Motion : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV * FOVmod, Time.deltaTime * 8f);
         }
         //slow down character if walking and aiming down sights
-        else if ((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1) && isCrouching == false)
+        else if ((controller.state.Triggers.Left == 1) && isCrouching == false)
         {
             //adjustedSpeed = speed / 1.5f;
             adjustedSpeed = speed / 1.10f;
         }
-        else if (isCrouching == true && (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1))
+        else if (isCrouching == true && controller.state.Triggers.Left == 1)
         {
             //adjustedSpeed = speed / 1.85f;
             adjustedSpeed = speed / 1.20f;
         }
-        else if (isCrouching == true && (!Input.GetMouseButton(1) || controller.state.Triggers.Left == 0))
+        else if (isCrouching == true && controller.state.Triggers.Left == 0)
         {
             //adjustedSpeed = speed / 1.75f;
             adjustedSpeed = speed / 1.15f;
@@ -317,16 +307,16 @@ public class Motion : MonoBehaviour
               Vector3 movementSide = transform.right * horizontalMove;
               Vector3 movementForward = transform.forward * verticalMove;
 
-             if((Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) ) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+             /* if((Input.GetKey(KeyCode.W) ||Input.GetKey(KeyCode.S) ) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
              {
                 rb.AddForce((movementSide * adjustedSpeed) / 1.375f);
                 rb.AddForce((movementForward * adjustedSpeed) / 1.375f);
-             }
-             else
-             {
+             } */
+             //else
+            //{
               rb.AddForce(movementSide * adjustedSpeed);
               rb.AddForce(movementForward * adjustedSpeed);
-             }
+            // }
            } 
            else if(!moving && isGrounded())
             {

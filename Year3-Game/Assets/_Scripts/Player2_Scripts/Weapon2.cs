@@ -235,14 +235,14 @@ public class Weapon2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((controller.state.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+        /* if ((controller.state.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
         {
             GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
         }
         else
         {
             GamePad.SetVibration((PlayerIndex)0, 0, 0);
-        }
+        } */
     }
 
     void Update()
@@ -326,11 +326,11 @@ public class Weapon2 : MonoBehaviour
             }
         }
         //if (Input.GetButton("Grenade"))
-        if (controller.state.IsConnected)
-        {
+       // if (controller.state.IsConnected)
+       // {
             if (grenadeAmount > 0)
             {
-                if ((controller.state.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKey(KeyCode.G))
+                if ((Input.GetKey(KeyCode.G)))
                 {
                     isCookingNade = true;
                     throwGrenade();
@@ -338,7 +338,7 @@ public class Weapon2 : MonoBehaviour
                         _tutManager.Notify("GRENADE_COMPLETE");
                 }
                 //else if (Input.GetButtonUp("Grenade"))
-                else if ((controller.state.Buttons.RightShoulder == ButtonState.Released && controller.prevState.Buttons.RightShoulder == ButtonState.Pressed) || Input.GetKeyUp(KeyCode.G))
+                else if (Input.GetKeyUp(KeyCode.G))
                 {
                     if (grenadeAmount == 2)
                     {
@@ -356,7 +356,7 @@ public class Weapon2 : MonoBehaviour
                     }
                 }
             }
-        }
+        //}
         if (loadout[currentIndex] == loadout[0])
         {
             temp = transform.localScale;
@@ -391,7 +391,7 @@ public class Weapon2 : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && controller.prevState.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.R) && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading))
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -403,7 +403,7 @@ public class Weapon2 : MonoBehaviour
         //d > 0f is scrolling up
         if (loadout[0] != null)
         {
-            if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 0) || (d > 0f && currentIndex != 0))
+            if ((d > 0f && currentIndex != 0))
             {
                 reloadCancel = true;
                 Equip(0);
@@ -418,7 +418,7 @@ public class Weapon2 : MonoBehaviour
                 //tempColor2.a = 1f;
                 //MainWeapon.color = tempColor2;
             }
-            else if ((controller.state.Buttons.Y == ButtonState.Pressed && controller.prevState.Buttons.Y == ButtonState.Released && currentIndex != 1) || (d < 0f && currentIndex != 1))
+            else if ((d < 0f && currentIndex != 1))
             {
                 reloadCancel = true;
                 Equip(1);
@@ -498,7 +498,7 @@ public class Weapon2 : MonoBehaviour
 
         if (currentWeapon != null)
         {
-            Aim((Input.GetMouseButton(1) || controller.state.Triggers.Left == 1));
+            Aim((Input.GetMouseButton(1)));
 
             getShootDown();
             getShootUp();
@@ -509,13 +509,13 @@ public class Weapon2 : MonoBehaviour
                 Shoot();
             }
             else  */
-            if (!PlayerisReloading && (Input.GetMouseButton(0) || controller.state.Triggers.Right == 1) && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
+            if (!PlayerisReloading && (Input.GetMouseButton(0))  && currentCool <= 0 && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].currentAmmo > 0)
             {
                 origPosReset = false;
                 Shoot();
             }
             // Return back to original left click position
-            if ((!Input.GetMouseButton(0) || controller.state.Triggers.Right == 0) && origPosReset == false)
+            if ((!Input.GetMouseButton(0) && origPosReset == false))
             {
                 //cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
                 //if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
@@ -540,7 +540,7 @@ public class Weapon2 : MonoBehaviour
             currentCool -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if (Input.GetMouseButton(1))
         {
             tempMuzzle = currentWeapon.transform.Find("States/ADS/MuzzlePos");
             muzzleFlash.transform.position = tempMuzzle.position;
@@ -626,7 +626,7 @@ public class Weapon2 : MonoBehaviour
         Transform spawn = cam.transform;
         loadout[currentIndex].currentAmmo--;
 
-        if (Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if (Input.GetMouseButton(1))
         {
             adjustedBloom = loadout[currentIndex].bloom / 3;
         }
@@ -652,7 +652,7 @@ public class Weapon2 : MonoBehaviour
         }
 
         ///-----RECOIL-----/////
-        if (Input.GetMouseButtonDown(0) || controller.state.Triggers.Right == 1 && controller.prevState.Triggers.Right < 1)
+        if (Input.GetMouseButtonDown(0))
         {
             //tempTime = Time.time;
             //saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f);
@@ -823,7 +823,7 @@ public class Weapon2 : MonoBehaviour
             if (!origPosReset)
             {
                 cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, saveInitShot, Time.deltaTime * loadout[currentIndex].recoilSpeed);
-                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || controller.state.ThumbSticks.Right.Y != 0 || controller.state.ThumbSticks.Right.X != 0)
+                if (Mathf.Abs(cam.transform.localEulerAngles.x - saveInitShot.eulerAngles.x) <= 0.1f || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 )
                 {
                     //Debug.Log(origPosReset);
 
@@ -889,16 +889,11 @@ public class Weapon2 : MonoBehaviour
             if (checkWeapon.collider.tag == "Weapon")
             {
                 PickUp.enabled = true;
-                if (controller.state.IsConnected)
-                {
-                    PickUp.text = "Press X to pick up " + checkWeapon.collider.name;
-                }
-                else
-                {
+               
                     PickUp.text = "Press E to pick up " + checkWeapon.collider.name;
-                }
+                
                 //if the user presses E
-                if ((controller.state.Buttons.X == ButtonState.Pressed && controller.prevState.Buttons.X == ButtonState.Released) || Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     reloadCancel = true;
                     if (checkWeapon.collider.name == "Revolver")
@@ -1133,6 +1128,11 @@ public class Weapon2 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+           /*  tempTime = Time.time;
+                saveInitShot = Quaternion.Euler(cam.transform.localEulerAngles.x, 0f, 0f); */
+                if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
+
             if (!PlayerisReloading && currentCool <= 0 && loadout[currentIndex].ShotType == "Single" && loadout[currentIndex].currentAmmo > 0)
             {
                 // Call your event function here.
@@ -1140,7 +1140,7 @@ public class Weapon2 : MonoBehaviour
                 Shoot();
             }
         }
-        if (controller.state.Triggers.Right == 1)
+        /* if (controller.state.Triggers.Right == 1)
         {
             if (m_isAxisInUseDown == false)
             {
@@ -1161,12 +1161,12 @@ public class Weapon2 : MonoBehaviour
         if (controller.state.Triggers.Right < 1)
         {
             m_isAxisInUseDown = false;
-        }
+        } */
     }
 
     void getShootUp()
     {
-        if (controller.state.Triggers.Right == 0)
+        /* if (controller.state.Triggers.Right == 0)
         {
             if (!m_isAxisInUseUp)
             {
@@ -1186,7 +1186,7 @@ public class Weapon2 : MonoBehaviour
         if (controller.state.Triggers.Right > 0)
         {
             m_isAxisInUseUp = false;
-        }
+        } */
     }
 
     Rigidbody rb_Grenade;

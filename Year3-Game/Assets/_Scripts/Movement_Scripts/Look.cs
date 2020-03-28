@@ -37,7 +37,7 @@ public class Look : MonoBehaviour
     void SetY()
     {
         
-        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if(controller.state.Triggers.Left == 1)
         {
             adjustY = ySens / 1.5f;
         }
@@ -49,10 +49,6 @@ public class Look : MonoBehaviour
         if(controller.state.IsConnected)
         {
             inputY = controller.state.ThumbSticks.Right.Y * adjustY * Time.deltaTime;
-        }
-        else
-        {
-            inputY = Input.GetAxis("Mouse Y") * adjustY * Time.deltaTime;
         }
 
         Quaternion adj = Quaternion.AngleAxis(inputY, -Vector3.right);
@@ -70,7 +66,7 @@ public class Look : MonoBehaviour
 
      void SetX()
     {
-        if(Input.GetMouseButton(1) || controller.state.Triggers.Left == 1)
+        if(controller.state.Triggers.Left == 1)
         {
             adjustX = xSens / 1.5f;
         }
@@ -83,10 +79,6 @@ public class Look : MonoBehaviour
         if(controller.state.IsConnected)
         {
             inputX = controller.state.ThumbSticks.Right.X * adjustX * Time.deltaTime;
-        }
-        else
-        {
-            inputX = Input.GetAxis("Mouse X") * adjustX * Time.deltaTime;
         }
 
 
