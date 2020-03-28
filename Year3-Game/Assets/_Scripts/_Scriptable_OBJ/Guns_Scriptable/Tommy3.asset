@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35cad8cfb182fe44bbb8b32aeddfa656, type: 3}
-  m_Name: M19112
+  m_Name: Tommy3
   m_EditorClassIdentifier: 
-  name: M1911
-  className: Pistol
-  ShotType: Single
-  damage: 10
-  firerate: 0.05
-  bloom: 10
-  recoil: 2
-  maxRecoil_x: -10
+  name: Tommy
+  className: Assault
+  ShotType: Auto
+  damage: 8
+  firerate: 0.08
+  bloom: 20
+  recoil: 1
+  maxRecoil_x: -50
   recoilSpeed: 3
-  recoilDampen: 0
-  kickBack: 0.04
+  recoilDampen: 0.1
+  kickBack: 0.02
   aimSpeed: 15
-  reloadTime: 1
-  alwaysMax: 45
-  maxAmmo: 45
-  clipSize: 15
-  currentAmmo: 15
-  ShotPath: event:/Gun Shots/ColtShot
+  reloadTime: 1.8
+  alwaysMax: 60
+  maxAmmo: 60
+  clipSize: 30
+  currentAmmo: 30
+  ShotPath: event:/Gun Shots/TommyShot
   ReloadPath: event:/Gun Reloads/ColtReload
   isReloading: 0
-  obj: {fileID: 8082366030619503984, guid: 3536df3e9e8cdf745a7594839717dfd4, type: 3}
+  obj: {fileID: 7244827515920905702, guid: 89354153c375d0c459cdcd66cf67d305, type: 3}

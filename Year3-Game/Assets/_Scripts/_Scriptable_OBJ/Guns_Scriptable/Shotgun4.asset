@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35cad8cfb182fe44bbb8b32aeddfa656, type: 3}
-  m_Name: M19112
+  m_Name: Shotgun4
   m_EditorClassIdentifier: 
-  name: M1911
-  className: Pistol
+  name: Shotgun
+  className: Shotgun
   ShotType: Single
-  damage: 10
-  firerate: 0.05
-  bloom: 10
-  recoil: 2
-  maxRecoil_x: -10
+  damage: 7
+  firerate: 0.5
+  bloom: 40
+  recoil: 1
+  maxRecoil_x: -50
   recoilSpeed: 3
-  recoilDampen: 0
-  kickBack: 0.04
+  recoilDampen: 0.1
+  kickBack: 0.53
   aimSpeed: 15
-  reloadTime: 1
-  alwaysMax: 45
-  maxAmmo: 45
-  clipSize: 15
-  currentAmmo: 15
-  ShotPath: event:/Gun Shots/ColtShot
-  ReloadPath: event:/Gun Reloads/ColtReload
+  reloadTime: 2
+  alwaysMax: 18
+  maxAmmo: 18
+  clipSize: 6
+  currentAmmo: 6
+  ShotPath: event:/Gun Shots/ShotgunShot
+  ReloadPath: event:/Gun Reloads/ShotgunReload
   isReloading: 0
-  obj: {fileID: 8082366030619503984, guid: 3536df3e9e8cdf745a7594839717dfd4, type: 3}
+  obj: {fileID: 218970910587641325, guid: e329838bf38cb914db41f0802cb8b34a, type: 3}
