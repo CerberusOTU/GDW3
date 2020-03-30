@@ -212,7 +212,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -3017711064601678767, guid: de75e405663617342b4a3285dfa73c2b,
+    m_Motion: {fileID: -3017711064601678767, guid: eacccb3862a964741b0a067936256d9c,
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 1}
@@ -404,7 +404,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -3629604555682624379, guid: 2edc821ac1a708542ae02d26974a5ef7,
+    m_Motion: {fileID: -3629604555682624379, guid: 0579033a32a9a344cbb250beb17cb362,
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 1}
@@ -551,7 +551,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -4791504522942941401, guid: 7fcb821abae9f61488bb49f8a8db8d75,
+    m_Motion: {fileID: -2570741303971402170, guid: db3f72babbbbe784787a72e33edacbe5,
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 1}
@@ -931,7 +931,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 724810999556570430, guid: afb9f34a41a652044b17efd9dc22506c,
+    m_Motion: {fileID: -2570741303971402170, guid: db3f72babbbbe784787a72e33edacbe5,
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 1}
@@ -1309,31 +1309,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ValX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ValY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Switch
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 1
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isSprinting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1604,7 +1604,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -968107893505730431, guid: aace59bc88710d34a8a7af200bc9c6f3,
+    m_Motion: {fileID: -968107893505730431, guid: 8e4e99f7c0f136346b7a8d199a73880d,
       type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 1}
