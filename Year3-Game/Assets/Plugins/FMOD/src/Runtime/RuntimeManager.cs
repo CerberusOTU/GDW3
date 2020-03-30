@@ -21,8 +21,12 @@ namespace FMODUnity
         FMODPlatform fmodPlatform;
 
         [AOT.MonoPInvokeCallback(typeof(FMOD.DEBUG_CALLBACK))]
-        static FMOD.RESULT DEBUG_CALLBACK(FMOD.DEBUG_FLAGS flags, FMOD.StringWrapper file, int line, FMOD.StringWrapper func, FMOD.StringWrapper message)
+        static FMOD.RESULT DEBUG_CALLBACK(FMOD.DEBUG_FLAGS flags, IntPtr filePtr, int line, IntPtr funcPtr, IntPtr messagePtr)
         {
+            FMOD.StringWrapper file = new FMOD.StringWrapper(filePtr);
+            FMOD.StringWrapper func = new FMOD.StringWrapper(funcPtr);
+            FMOD.StringWrapper message = new FMOD.StringWrapper(messagePtr);
+            
             if (flags == FMOD.DEBUG_FLAGS.ERROR)
             {
                 Debug.LogError(string.Format(("[FMOD] {0} : {1}"), (string)func, (string)message));
@@ -100,6 +104,7 @@ namespace FMODUnity
                         }
                         #endif
 
+                        RuntimeUtils.VerifyPlatformLibsExist();
                         RuntimeUtils.EnforceLibraryOrder();
                         initResult = instance.Initialize();
                     }
@@ -246,6 +251,11 @@ retry:
                 CheckInitResult(result, "FMOD.Studio.System.setAdvancedSettings");
             }
 
+            if (Settings.Instance.EnableMemoryTracking)
+            {
+                studioInitFlags |= FMOD.Studio.INITFLAGS.MEMORY_TRACKING;
+            }
+
             result = studioSystem.initialize(virtualChannels, studioInitFlags, FMOD.INITFLAGS.NORMAL, IntPtr.Zero);
             if (result != FMOD.RESULT.OK && initResult == FMOD.RESULT.OK)
             {
@@ -277,6 +287,10 @@ retry:
 
             LoadPlugins(fmodSettings);
             LoadBanks(fmodSettings);
+
+            #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+            RegisterSuspendCallback(HandleInterrupt);
+            #endif
 
             return initResult;
         }
@@ -555,8 +569,8 @@ retry:
                     coreSystem.getChannelsPlaying(out channels, out realchannels);
                     debug.AppendFormat("CHANNELS: real = {0}, total = {1}\n", realchannels, channels);
 
-                    FMOD.DSP_METERING_INFO outputMetering;
-                    mixerHead.getMeteringInfo(IntPtr.Zero, out outputMetering);
+                    FMOD.DSP_METERING_INFO inputMetering, outputMetering;
+                    mixerHead.getMeteringInfo(out inputMetering, out outputMetering);
                     float rms = 0;
                     for (int i = 0; i < outputMetering.numchannels; i++)
                     {
@@ -625,28 +639,23 @@ retry:
         }
         #endif
 
-        #if UNITY_IOS && !UNITY_EDITOR
-        /* iOS alarm interruptions do not trigger OnApplicationPause
-         * Sending the app to the background does trigger OnApplicationFocus
-         * We don't want to use this on Android as other things (like the keyboard)
-         * can steal focus.
-         * https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationFocus.html */
-
-        void OnApplicationFocus(bool focus)
+        #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+        [AOT.MonoPInvokeCallback(typeof(Action<bool>))]
+        static void HandleInterrupt(bool began)
         {
-            if (studioSystem.isValid())
+            if (Instance.studioSystem.isValid())
             {
                 // Strings bank is always loaded
-                if (loadedBanks.Count > 1)
-                    PauseAllEvents(!focus);
+                if (Instance.loadedBanks.Count > 1)
+                    PauseAllEvents(began);
 
-                if (focus)
+                if (began)
                 {
-                    coreSystem.mixerResume();
+                    Instance.coreSystem.mixerSuspend();
                 }
                 else
                 {
-                    coreSystem.mixerSuspend();
+                    Instance.coreSystem.mixerResume();
                 }
             }
         }
@@ -1148,54 +1157,27 @@ retry:
 
         private void SetThreadAffinity()
         {
-            #if UNITY_PS4 && !UNITY_EDITOR
-            FMOD.PS4.THREADAFFINITY affinity = new FMOD.PS4.THREADAFFINITY
-            {
-                mixer = FMOD.PS4.THREAD.CORE2,
-                studioUpdate = FMOD.PS4.THREAD.CORE4,
-                studioLoadBank = FMOD.PS4.THREAD.CORE4,
-                studioLoadSample = FMOD.PS4.THREAD.CORE4
-            };
-            FMOD.RESULT result = FMOD.PS4.setThreadAffinity(ref affinity);
-            CheckInitResult(result, "FMOD.PS4.setThreadAffinity");
+            #if (UNITY_PS4 || UNITY_XBOXONE) && !UNITY_EDITOR
+            FMOD.RESULT result = FMOD.Thread.SetAttributes(FMOD.THREAD_TYPE.MIXER, FMOD.THREAD_AFFINITY.CORE_2);
+            CheckInitResult(result, "FMOD.Thread.SetAttributes(Mixer)");
 
-            #elif UNITY_XBOXONE && !UNITY_EDITOR
-            FMOD.XboxOne.THREADAFFINITY affinity = new FMOD.XboxOne.THREADAFFINITY
-            {
-                mixer = FMOD.XboxOne.THREAD.CORE2,
-                studioUpdate = FMOD.XboxOne.THREAD.CORE4,
-                studioLoadBank = FMOD.XboxOne.THREAD.CORE4,
-                studioLoadSample = FMOD.XboxOne.THREAD.CORE4
-            };
-            FMOD.RESULT result = FMOD.XboxOne.setThreadAffinity(ref affinity);
-            CheckInitResult(result, "FMOD.XboxOne.setThreadAffinity");
+            result = FMOD.Thread.SetAttributes(FMOD.THREAD_TYPE.STUDIO_UPDATE, FMOD.THREAD_AFFINITY.CORE_4);
+            CheckInitResult(result, "FMOD.Thread.SetAttributes(Update)");
 
-            #elif UNITY_SWITCH && !UNITY_EDITOR
-            FMOD.Switch.THREADAFFINITY affinity = new FMOD.Switch.THREADAFFINITY
-            {
-                mixer = FMOD.Switch.THREAD.DEFAULT,
-                studioUpdate = FMOD.Switch.THREAD.DEFAULT,
-                studioLoadBank = FMOD.Switch.THREAD.DEFAULT,
-                studioLoadSample = FMOD.Switch.THREAD.DEFAULT
-            };
-            FMOD.RESULT result = FMOD.Switch.setThreadAffinity(ref affinity);
-            CheckInitResult(result, "FMOD.Switch.setThreadAffinity");
-            #elif UNITY_ANDROID && !UNITY_EDITOR
-            FMOD.Android.THREADAFFINITY affinity = new FMOD.Android.THREADAFFINITY
-            {
-                mixer = FMOD.Android.THREAD.DEFAULT,
-                studioUpdate = FMOD.Android.THREAD.DEFAULT,
-                studioLoadBank = FMOD.Android.THREAD.DEFAULT,
-                studioLoadSample = FMOD.Android.THREAD.DEFAULT
-            };
-            FMOD.RESULT result = FMOD.Android.setThreadAffinity(ref affinity);
-            CheckInitResult(result, "FMOD.Android.setThreadAffinity");
+            result = FMOD.Thread.SetAttributes(FMOD.THREAD_TYPE.STUDIO_LOAD_BANK, FMOD.THREAD_AFFINITY.CORE_4);
+            CheckInitResult(result, "FMOD.Thread.SetAttributes(Load_Bank)");
+
+            result = FMOD.Thread.SetAttributes(FMOD.THREAD_TYPE.STUDIO_LOAD_SAMPLE, FMOD.THREAD_AFFINITY.CORE_4);
+            CheckInitResult(result, "FMOD.Thread.SetAttributes(Load_Sample)");
             #endif
         }
 
         #if (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern FMOD.RESULT FmodUnityNativePluginInit(IntPtr system);
+
+        [DllImport("__Internal")]
+        private static extern void RegisterSuspendCallback(Action<bool> func);
         #endif
     }
 }

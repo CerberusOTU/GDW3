@@ -15,7 +15,7 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: FMOD/FMOD_prep/FMOD_prep.fspro
+  sourceProjectPath: FMOD\FMOD_prep\FMOD_prep.fspro
   sourceBankPath: FMOD\FMOD_prep\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   AutomaticSampleLoading: 0
   EncryptionKey: 
   ImportType: 0
-  TargetAssetPath: 
+  TargetAssetPath: FMODBanks
   LoggingLevel: 2
   SpeakerModeSettings:
   - Platform: 2
@@ -46,7 +46,7 @@ MonoBehaviour:
     Value: 0
   OverlaySettings:
   - Platform: 1
-    Value: 0
+    Value: 1
   - Platform: 2
     Value: 0
   - Platform: 20
@@ -81,3 +81,4 @@ MonoBehaviour:
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
+  EnableMemoryTracking: 0
