@@ -420,6 +420,7 @@ public class Weapon : MonoBehaviour
             {
                 reloadCancel = true;
                 Equip(0);
+
                 //oln.enabled = true;
                 //oln2.enabled = false;
 
@@ -571,8 +572,11 @@ public class Weapon : MonoBehaviour
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
-        }
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Holster", currentWeapon);
 
+        }
+      
+        
         currentIndex = _ind;
         GameObject newWeapon = Instantiate(loadout[_ind].obj, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
         newWeapon.transform.localPosition = Vector3.zero;
@@ -623,7 +627,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    void PlaySound(string ShotPath)
+    public void PlaySound(string ShotPath)
     {
         //FMODUnity.RuntimeManager.AttachInstanceToGameObject(path, GetComponent<Transform>().position);
         FMODUnity.RuntimeManager.PlayOneShotAttached(ShotPath, currentWeapon);
@@ -818,7 +822,10 @@ public class Weapon : MonoBehaviour
         //Debug.Log(_metricsLogger.shotsHit);
         hitMark.enabled = true;
 
+
         yield return new WaitForSeconds(0.05f);
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player Effects/Hit", currentWeapon);
+
         hitMark.enabled = false;
     }
 

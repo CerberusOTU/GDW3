@@ -36,6 +36,8 @@ public class Target : MonoBehaviour
     float timeLeft;
     bool timeStart;
 
+    bool beatTrigger;
+
     Vector3 lerpPos = new Vector3(0f, 2f, 0f);
     Vector3 startPos;
     Vector3 startPos2;
@@ -102,7 +104,7 @@ int Max(float[] arr)
     void Start()
     {
         timeLeft = maxTime;
-
+        beatTrigger = false;
         Vector3 startPos = KilledEnemy.transform.localPosition;
         Vector3 startPos2 = KilledIcon.transform.localPosition;
 
@@ -163,7 +165,17 @@ int Max(float[] arr)
 
     public void takeDamage(float amount)
     {
+
         health -= amount;
+        if (health < 30 && beatTrigger == false)
+        {
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player Effects/Heartbeat", weaponScript.currentWeapon);
+            beatTrigger = true;
+        }
+        else if(health >= 30)
+        {
+            beatTrigger = false;
+        }
         if (this.gameObject.name == "Player")
         {
             healthUI.tookDamage = true;
@@ -176,12 +188,12 @@ int Max(float[] arr)
         }
         if (health <= 0f && this.gameObject.name == "Player2")
         {
+
             score.Kills += 1;
             KilledEnemy.text = weaponScript2.PlayerName;
 
             StartCoroutine(Die());
             StartCoroutine(UIElements());
-
         }
         else if (health <= 0f && this.gameObject.name == "Player")
         {
@@ -205,15 +217,16 @@ int Max(float[] arr)
         //}
         KilledEnemy.CrossFadeAlpha(1f, 0.2f, false);
         KilledIcon.CrossFadeAlpha(1f, 0.2f, false);
-
         yield return new WaitForSeconds(1f);
+
 
         KilledEnemy.CrossFadeAlpha(0f, 0.5f, false);
         KilledIcon.CrossFadeAlpha(0f, 0.5f, false);      
     }
 
     IEnumerator Die()
-    {   
+    {
+
         BaseModel.SetActive(false);
         GameObject go = Instantiate(Ragdoll, this.transform.position, this.transform.rotation); 
         Destroy(go, 3f);
@@ -226,6 +239,7 @@ int Max(float[] arr)
         health = 100f;
         if (this.gameObject.name == "Player")
         {
+
             weaponScript.loadout[0] = null;
             weaponScript.cam.enabled = !weaponScript.cam.enabled;
             weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
@@ -326,36 +340,36 @@ int Max(float[] arr)
         else
         {
 
-           /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
-            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[1].position);
-            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[2].position);
-            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[3].position);
+            /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
+             distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[1].position);
+             distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[2].position);
+             distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[3].position);
 
-            //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
-            //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
-            //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
-            //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+             //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
+             //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
+             //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
+             //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
 
-            if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[0].position;
-                this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
-            }
-            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[1].position;
-                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-            }
-            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[2].position;
-                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-            }
-            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-            {
-                this.gameObject.transform.position = SpawnPos[3].position;
-                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-            } */
+             if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
+             {
+                 this.gameObject.transform.position = SpawnPos[0].position;
+                 this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
+             }
+             else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
+             {
+                 this.gameObject.transform.position = SpawnPos[1].position;
+                 this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
+             }
+             else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
+             {
+                 this.gameObject.transform.position = SpawnPos[2].position;
+                 this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
+             }
+             else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
+             {
+                 this.gameObject.transform.position = SpawnPos[3].position;
+                 this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
+             } */
             Spawn();
             healthUI2.PlayerHealth = 100;
             Player2Grenade1.enabled = true;

@@ -136,9 +136,11 @@ public class Move : MonoBehaviour
         move(x, y);
 
     }
+
     private void move(float x, float y)
     {
         animator.SetFloat("ValX", x);
         animator.SetFloat("ValY", y);
     }
+
 }
