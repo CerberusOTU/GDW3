@@ -227,8 +227,8 @@ public class Movement2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isGrounded())
-        {
+        //if (isGrounded())
+        //{
             if (controller.state2.IsConnected)
             {
                 horizontalMove = controller.state2.ThumbSticks.Left.X;
@@ -249,7 +249,7 @@ public class Movement2 : MonoBehaviour
                 verticalMove = Input.GetAxisRaw("Vertical");
                 moving = true;
             }
-        }
+        //}
 
         if(horizontalMove == 0 && verticalMove == 0)
         {
