@@ -33,7 +33,7 @@ MonoBehaviour:
   Path: event:/Player Effects/Footstep1
   guid: c9fc4f7da25abe438f5f9241c8a36ff1
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -74,7 +74,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/RevolverReload
   guid: 9438b4985c34c342afa4772757f63535
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -97,11 +97,11 @@ MonoBehaviour:
   Path: event:/Environmental/Alleyway
   guid: f9ea0218744b604780a97525ca71c84e
   Banks:
-  - {fileID: 1749159184275311753}
+  - {fileID: 0}
   - {fileID: 8390907194837380258}
   - {fileID: -2855178843514214937}
   - {fileID: 5894588534477214824}
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -124,11 +124,11 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunShellIn
   guid: 5fff7c2c4353004fbf7951406694cd5d
   Banks:
-  - {fileID: 1749159184275311753}
+  - {fileID: 0}
   - {fileID: 8390907194837380258}
   - {fileID: -2855178843514214937}
   - {fileID: 5894588534477214824}
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
   Path: event:/Gun Effects/Holster
   guid: 567cb9728e7e8b4599b9e41a08a061f4
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -192,7 +192,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/MP40Shot
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -269,7 +269,7 @@ MonoBehaviour:
   Path: event:/Player Effects/Footstep2
   guid: 54fff94044783e4ea83f585f7a717b55
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ColtReload
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -318,6 +318,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-5343759154585602563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637168867118128529
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-4808638939657677912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +369,7 @@ MonoBehaviour:
   Path: event:/General/Ticking
   guid: 21af29f47a49d14882fff3d43728b1c6
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -374,7 +392,7 @@ MonoBehaviour:
   Path: event:/Player Effects/Exhale
   guid: 39be1f3d1c12964a9faf53a86c8f1a26
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -397,7 +415,7 @@ MonoBehaviour:
   Path: event:/Gun Effects/Dry Clip
   guid: 0b3924e8fd41c443ade29417f4fcaabe
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -438,7 +456,7 @@ MonoBehaviour:
   Path: event:/Player Effects/KillConfirmed
   guid: 442bf7cf69527e4aade4ad4513803768
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -555,7 +573,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/RevolverShot
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -632,7 +650,7 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunReload
   guid: 36f891b3c431b34b900d5faf71adbf35
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -655,11 +673,11 @@ MonoBehaviour:
   Path: event:/Environmental/Alleyway2D
   guid: e9f886a950f8a64bb36c4d4eab531544
   Banks:
-  - {fileID: 1749159184275311753}
+  - {fileID: 0}
   - {fileID: 8390907194837380258}
   - {fileID: -2855178843514214937}
   - {fileID: 5894588534477214824}
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -700,7 +718,7 @@ MonoBehaviour:
   Path: event:/Throwables Effects/Grenade Explode
   guid: afd67d4f13d3d44c98378ead58e1a579
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -740,7 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 5275308302079935596}
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   EditorEvents:
   - {fileID: 1922938130502623409}
   - {fileID: -3936897816548415706}
@@ -753,14 +771,12 @@ MonoBehaviour:
   - {fileID: 229800113102048291}
   - {fileID: -543118667509416573}
   - {fileID: -5914778285085419109}
-  - {fileID: 1982836871265728905}
-  - {fileID: 4117876743485654664}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   StringsBanks:
   - {fileID: 5275308302079935596}
-  stringsBankWriteTime: 637194417582624598
+  stringsBankWriteTime: 637168867118208536
   cacheVersion: 3
 --- !u!114 &229800113102048291
 MonoBehaviour:
@@ -777,7 +793,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/TommyShot
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -818,7 +834,7 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -864,7 +880,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/ShotgunShot
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -887,7 +903,7 @@ MonoBehaviour:
   Path: event:/Gun Shots/ColtShot
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
-  - {fileID: 1082426055091268542}
+  - {fileID: -5343759154585602563}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -950,11 +966,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637194417582624598
+  lastModified: 637168867118208536
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1336
+    Value: 1252
   Exists: 1
 --- !u!114 &5787376380352076951
 MonoBehaviour:
@@ -1007,11 +1023,11 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunCock
   guid: 4eb80ad3b0db134f945b9c4152f2f624
   Banks:
-  - {fileID: 1749159184275311753}
+  - {fileID: 0}
   - {fileID: 8390907194837380258}
   - {fileID: -2855178843514214937}
   - {fileID: 5894588534477214824}
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1128,7 +1144,7 @@ MonoBehaviour:
   Path: event:/Player Effects/Hit
   guid: a573d32e56ff8945a67299ef46f8b7aa
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1151,7 +1167,7 @@ MonoBehaviour:
   Path: event:/Player Effects/Heartbeat
   guid: 151e5883f1ad49468efb40016b975e37
   Banks:
-  - {fileID: 1296614840998927180}
+  - {fileID: 0}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
