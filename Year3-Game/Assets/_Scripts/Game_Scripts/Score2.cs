@@ -14,9 +14,18 @@ public class Score2 : MonoBehaviour
 
     public Canvas player1;
     public Canvas player2;
+    public Canvas player3;
+    public Canvas player4;
 
     public Canvas crossHair1;
     public Canvas crossHair2;
+    public Canvas crossHair3;
+    public Canvas crossHair4;
+
+    private Weapon weaponScript;
+    private Weapon2 weaponScript2;
+    private Weapon3 weaponScript3;
+    private Weapon4 weaponScript4;
 
     int safety;
     float timer;
@@ -24,43 +33,42 @@ public class Score2 : MonoBehaviour
     void Start()
     {
         condition.enabled = false;
+
+        weaponScript = GetComponent<Weapon>();
+        weaponScript2 = GetComponent<Weapon2>();
+        weaponScript3 = GetComponent<Weapon3>();
+        weaponScript4 = GetComponent<Weapon4>();
     }
     void Update()
     {
         killScore.text = Kills.ToString();
         killScore2.text = Kills.ToString();
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Kills += 1;
+        }
 
-        
-        if(Kills == 5 && safety < 1)
+        if (Kills == 5 && safety < 1)
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
         }
 
-        if(Time.timeScale != 1f && Kills < 5)
-        {
-            Destroy(GetComponent<Target>());
-            player1.enabled = false;
-            player2.enabled = false;
-
-            crossHair1.enabled = false;
-            crossHair2.enabled = false;
-
-            condition.enabled = true;
-            condition.text = "YOU LOSE";
-        }
-
         if(Kills == 5)
         {
             Destroy(GetComponent<Target>());
+
             player1.enabled = false;
             player2.enabled = false;
+            player3.enabled = false;
+            player4.enabled = false;
 
             crossHair1.enabled = false;
             crossHair2.enabled = false;
 
             condition.enabled = true;
-            condition.text = "YOU WIN";
+            //GameData.member1.text = weaponScript3.PlayerName.ToString();
+           // GameData.member2.text = weaponScript4.PlayerName.ToString();
             timer += Time.deltaTime;
 
             if(timer >= 1)
