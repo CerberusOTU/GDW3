@@ -74,7 +74,12 @@ MonoBehaviour:
   Path: event:/Player Effects/Footstep1
   guid: c9fc4f7da25abe438f5f9241c8a36ff1
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -97,7 +102,12 @@ MonoBehaviour:
   Path: event:/Gun Reloads/RevolverReload
   guid: 9438b4985c34c342afa4772757f63535
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -176,7 +186,7 @@ MonoBehaviour:
   lastModified: 637211986943431535
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7287007796130360163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +243,12 @@ MonoBehaviour:
   Path: event:/Gun Shots/MP40Shot
   guid: 65649dcbca169d478828b212a62395e3
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -333,7 +348,12 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ColtReload
   guid: e03e62e27a987a45af107bcb6dbde8f6
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -374,7 +394,12 @@ MonoBehaviour:
   Path: event:/Environmental/Alleyway
   guid: f9ea0218744b604780a97525ca71c84e
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -479,7 +504,12 @@ MonoBehaviour:
   Path: event:/Player Effects/Exhale
   guid: 39be1f3d1c12964a9faf53a86c8f1a26
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -502,7 +532,12 @@ MonoBehaviour:
   Path: event:/General/Click
   guid: 637aaac0bce7b747b28c9285cab9e893
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -525,7 +560,12 @@ MonoBehaviour:
   Path: event:/Gun Effects/Dry Clip
   guid: 0b3924e8fd41c443ade29417f4fcaabe
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -533,6 +573,42 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &-3928514540516547287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212892893038320
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3882294979820194440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212915450121260
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-3617273340103709840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,7 +624,12 @@ MonoBehaviour:
   Path: event:/Environmental/Alleyway2D
   guid: e9f886a950f8a64bb36c4d4eab531544
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -556,6 +637,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-3552787789990705023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212892893038320
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-3240697916761116302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +673,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3128918776263040934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212892893038320
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2976658920701945766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +823,12 @@ MonoBehaviour:
   Path: event:/Gun Shots/RevolverShot
   guid: 0e72423984dce54eb899208c66233cdd
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -750,6 +872,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-1314258789071537386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212892893038320
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1284102362205217786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +923,12 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunReload
   guid: 36f891b3c431b34b900d5faf71adbf35
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -806,7 +951,12 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunCock
   guid: 4eb80ad3b0db134f945b9c4152f2f624
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -874,7 +1024,12 @@ MonoBehaviour:
   Path: event:/Throwables Effects/Grenade Explode
   guid: afd67d4f13d3d44c98378ead58e1a579
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -897,7 +1052,12 @@ MonoBehaviour:
   Path: event:/Player Effects/Footstep2
   guid: 54fff94044783e4ea83f585f7a717b55
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -937,7 +1097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 5275308302079935596}
-  - {fileID: -7782137457643097656}
+  - {fileID: 8761272907296549262}
   EditorEvents:
   - {fileID: 1922938130502623409}
   - {fileID: -3936897816548415706}
@@ -965,10 +1125,10 @@ MonoBehaviour:
   - {fileID: -5571899952809167568}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -7782137457643097656}
+  - {fileID: 8761272907296549262}
   StringsBanks:
   - {fileID: 5275308302079935596}
-  stringsBankWriteTime: 637211986943461454
+  stringsBankWriteTime: 637212917393935102
   cacheVersion: 3
 --- !u!114 &229800113102048291
 MonoBehaviour:
@@ -985,7 +1145,12 @@ MonoBehaviour:
   Path: event:/Gun Shots/TommyShot
   guid: a67863ca8a555844873145e05d82a4cc
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1011,6 +1176,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &1454165103598796086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212915639039592
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &1810198555993557267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1209,12 @@ MonoBehaviour:
   Path: event:/Player Effects/Heartbeat
   guid: 151e5883f1ad49468efb40016b975e37
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1049,7 +1237,12 @@ MonoBehaviour:
   Path: event:/Test
   guid: 0568fd6d660f4844ba678722eb778842
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1095,7 +1288,12 @@ MonoBehaviour:
   Path: event:/Gun Reloads/ShotgunShellIn
   guid: 5fff7c2c4353004fbf7951406694cd5d
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1118,7 +1316,12 @@ MonoBehaviour:
   Path: event:/Gun Shots/ShotgunShot
   guid: 38ec56678615c44d923a9a876d0c8d79
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1141,7 +1344,12 @@ MonoBehaviour:
   Path: event:/Gun Shots/ColtShot
   guid: a40b06516ba3d04cababa29101b7b712
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1164,7 +1372,12 @@ MonoBehaviour:
   Path: event:/General/Ticking
   guid: 21af29f47a49d14882fff3d43728b1c6
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1187,7 +1400,12 @@ MonoBehaviour:
   Path: event:/Player Effects/Hit
   guid: a573d32e56ff8945a67299ef46f8b7aa
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1233,7 +1451,12 @@ MonoBehaviour:
   Path: event:/Player Effects/KillConfirmed
   guid: 442bf7cf69527e4aade4ad4513803768
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1274,7 +1497,12 @@ MonoBehaviour:
   Path: event:/Gun Effects/Holster
   guid: 567cb9728e7e8b4599b9e41a08a061f4
   Banks:
-  - {fileID: -7782137457643097656}
+  - {fileID: -3552787789990705023}
+  - {fileID: -3128918776263040934}
+  - {fileID: 7199867649810109442}
+  - {fileID: -1314258789071537386}
+  - {fileID: -3928514540516547287}
+  - {fileID: 8761272907296549262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1296,7 +1524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/FMOD_prep/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637211986943461454
+  lastModified: 637212917393935102
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1335,6 +1563,24 @@ MonoBehaviour:
   Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637211826985319858
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7199867649810109442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212892893038320
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1456,6 +1702,24 @@ MonoBehaviour:
   Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637211821113521269
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8761272907296549262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/FMOD_prep/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637212917393900113
   LoadResult: 0
   FileSizes: []
   Exists: 1

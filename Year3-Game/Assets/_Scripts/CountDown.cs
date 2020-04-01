@@ -13,7 +13,7 @@ public class CountDown : MonoBehaviour
 
     public Canvas crossHair1;
     public Canvas crossHair2;
-
+    bool check = true;
 
     float timer = 0;
     void Update()
@@ -27,10 +27,15 @@ public class CountDown : MonoBehaviour
             crossHair2.enabled = false;
             GameObject.Find("Player").GetComponent<Motion>().enabled = false;
             GameObject.Find("Player2").GetComponent<Movement2>().enabled = false;
-
             GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
             GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
-            if(timer >= 1 && timer < 2)
+            if (check == true)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/General/Ticking", GameObject.Find("Player").GetComponent<Weapon>().transform.position);
+                check = false;
+            }
+
+            if (timer >= 1 && timer < 2)
             {
                 txt.text = "2";
                 txt2.text = "2";
@@ -40,6 +45,7 @@ public class CountDown : MonoBehaviour
                 txt.text = "1";
                 txt2.text = "1";
             }
+            
             else if(timer >= 3 && timer <= 4)
             {
                 txt.enabled = false;

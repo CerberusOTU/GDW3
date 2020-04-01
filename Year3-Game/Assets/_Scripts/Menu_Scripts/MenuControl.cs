@@ -10,7 +10,7 @@ public class MenuControl : MonoBehaviour
     public string sceneName;
     public PlayableDirector Timeline;
     public PlayableDirector TimelineBack;
-
+    public Vector3 origin;
 
     void Start()
     {    
@@ -40,6 +40,11 @@ public class MenuControl : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void Click()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/General/Click", origin);
     }
 
     IEnumerator LoadScene()
