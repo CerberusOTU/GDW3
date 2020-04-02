@@ -380,7 +380,7 @@ public class Weapon3 : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.M) || controller.state3.Buttons.X == ButtonState.Pressed) && controller.prevState3.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.R) || controller.state3.Buttons.X == ButtonState.Pressed) && controller.prevState3.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
@@ -671,70 +671,55 @@ public class Weapon3 : MonoBehaviour
 
                 float dist = Vector3.Distance(this.transform.position, hitInfo.transform.position);
 
-                if (target != null)
+               if (target != null)
                 {
                     if (dist < 25f)
                     {
-                        if (hitInfo.collider.name == "Head")
+                        if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                         {
                             StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage * 1.5f);
-                        }
-                        else
-                        {
-                            StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage);
+                            target.takeDamage(loadout[currentIndex].damage * 1.25f);
                         }
                     }
                     else if (dist > 25f && dist < 35f)
                     {
 
-                        if (hitInfo.collider.name == "Head")
-                        {
-                            StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage * 0.75f);
-                        }
-                        else
+                        if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                         {
                             StartCoroutine(displayHitmark());
                             target.takeDamage(loadout[currentIndex].damage * 0.5f);
                         }
                     }
                 }
-                if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
-                {
-                    GameObject temp = _pool.GetBulletHole();
-                    temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
-                    temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
-                }
+                    if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
+                    {
+                        GameObject temp = _pool.GetBulletHole();
+                        temp.transform.position = hitInfo.point + (hitInfo.normal * 0.0001f);
+                        temp.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                    }
 
             }
         }
-
+        
         else if (loadout[currentIndex].className != "Shotgun")
         {
-            Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
-
-
+           Physics.Raycast(spawn.position, bloom, out hitInfo, 100f);
+            
+                
 
             if (hitInfo.collider != null)
             {
                 Target target = hitInfo.transform.GetComponent<Target>();
                 Shatter Monkey = hitInfo.transform.GetComponent<Shatter>();
 
-                if (hitInfo.collider.name == "SpeakeasyLight")
+                if(hitInfo.collider.name == "SpeakeasyLight")
                 {
                     hitInfo.rigidbody.AddForce(-hitInfo.normal * 100f);
                 }
 
                 if (target != null)
                 {
-                    if (hitInfo.collider.name == "Head")
-                    {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage * 2);
-                    }
-                    else
+                    if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                     {
                         StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage);

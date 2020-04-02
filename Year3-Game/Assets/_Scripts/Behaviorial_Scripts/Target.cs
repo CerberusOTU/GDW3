@@ -14,10 +14,19 @@ public class Target : MonoBehaviour
     PlayerStatus healthUI;
     PlayerStatus2 healthUI2;
 
+    PlayerStatus3 healthUI3;
+    PlayerStatus4 healthUI4;
+
     public Image Grenade1;
     public Image Grenade2;
     public Image Player2Grenade1;
     public Image Player2Grenade2;
+
+
+    public Image Player3Grenade1;
+    public Image Player3Grenade2;
+    public Image Player4Grenade1;
+    public Image Player4Grenade2;
 
     //public Camera cam;
     //public Camera deathcam;
@@ -45,11 +54,10 @@ public class Target : MonoBehaviour
 
     private Weapon weaponScript;
     private Weapon2 weaponScript2;
+    private Weapon3 weaponScript3;
+    private Weapon4 weaponScript4;
 
     public GameObject weapon1;
-    public GameObject weapon2;
-
-    private float distanceToSpawnPoint1, distanceToSpawnPoint2, distanceToSpawnPoint3, distanceToSpawnPoint4;
 
     Score score;
     Score2 score2;
@@ -57,7 +65,6 @@ public class Target : MonoBehaviour
     public GameObject BaseModel;
     public GameObject Ragdoll;
     GameObject go;
-
 
 int Max(float[] arr)
 {
@@ -86,8 +93,7 @@ int Max(float[] arr)
           this.gameObject.transform.position = playerSpawn[index].position;
           this.gameObject.transform.rotation = playerSpawn[index].rotation;
         }
-
-        if(this.name == "Player2")
+        else if(this.name == "Player2")
         {
         for(int i = 0; i < playerSpawn.Length; i++)
         {
@@ -98,7 +104,29 @@ int Max(float[] arr)
           this.gameObject.transform.position = playerSpawn[index].position;
           this.gameObject.transform.rotation = playerSpawn[index].rotation;
         }
+        else if(this.name == "Player3")
+        {
+        for(int i = 0; i < playerSpawn.Length; i++)
+        {
+            dist[i] = Vector3.Distance(GameObject.Find("Player4").GetComponent<Transform>().position, playerSpawn[i].position);
+        }
+            int index = Max(dist);
+          
+          this.gameObject.transform.position = playerSpawn[index].position;
+          this.gameObject.transform.rotation = playerSpawn[index].rotation;
+        }
 
+        else if(this.name == "Player4")
+        {
+        for(int i = 0; i < playerSpawn.Length; i++)
+        {
+            dist[i] = Vector3.Distance(GameObject.Find("Player3").GetComponent<Transform>().position, playerSpawn[i].position);
+        }
+            int index = Max(dist);
+          
+          this.gameObject.transform.position = playerSpawn[index].position;
+          this.gameObject.transform.rotation = playerSpawn[index].rotation;
+        }
     }
 
     void Start()
@@ -108,37 +136,18 @@ int Max(float[] arr)
         Vector3 startPos = KilledEnemy.transform.localPosition;
         Vector3 startPos2 = KilledIcon.transform.localPosition;
 
-        weaponScript = GetComponent<Weapon>();
-        weaponScript2 = GetComponent<Weapon2>();
+        weaponScript = GameObject.FindObjectOfType<Weapon>();
+        weaponScript2 = GameObject.FindObjectOfType<Weapon2>();
+        weaponScript3 = GameObject.FindObjectOfType<Weapon3>();
+        weaponScript4 = GameObject.FindObjectOfType<Weapon4>();
 
         healthUI = GameObject.FindObjectOfType<PlayerStatus>();
         healthUI2 = GameObject.FindObjectOfType<PlayerStatus2>();
+        healthUI3 = GameObject.FindObjectOfType<PlayerStatus3>();
+        healthUI4 = GameObject.FindObjectOfType<PlayerStatus4>();
 
         score = GameObject.FindObjectOfType<Score>();
         score2 = GameObject.FindObjectOfType<Score2>();
-
-        //generate respawn transforms
-        for (int i = 0; i < 4; i++)
-        {
-            Transform temp = Instantiate(defaultSpawn.transform);
-            SpawnPos.Add(temp);
-            //temp.transform.parent = this.transform;
-        }
-
-        //set weapon spawn locations
-
-        SpawnPos[0].position = new Vector3(-85.4f, 1f, 45f);
-        SpawnPos[0].localRotation *= Quaternion.Euler(0f, 180f, 0f);
-
-        SpawnPos[1].position = new Vector3(-50.7f, 1f, -1.1f);
-        SpawnPos[1].localRotation *= Quaternion.Euler(0f, 270f, 0f);
-
-        SpawnPos[2].position = new Vector3(-110.3f, 1f, 22.6f);
-        SpawnPos[2].localRotation *= Quaternion.Euler(0f, 90, 0f);
-
-        SpawnPos[3].position = new Vector3(-102.6f, 1f, -15.3f);
-        SpawnPos[3].localRotation *= Quaternion.Euler(0f, 90f, 0f);
-
 
         KilledEnemy.canvasRenderer.SetAlpha(0f);
         KilledIcon.canvasRenderer.SetAlpha(0f);
@@ -165,9 +174,8 @@ int Max(float[] arr)
 
     public void takeDamage(float amount)
     {
-
         health -= amount;
-        if (health < 30 && beatTrigger == false)
+        /* if (health < 30 && beatTrigger == false)
         {
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player Effects/Heartbeat", weaponScript.currentWeapon);
             beatTrigger = true;
@@ -175,7 +183,7 @@ int Max(float[] arr)
         else if(health >= 30)
         {
             beatTrigger = false;
-        }
+        } */
         if (this.gameObject.name == "Player")
         {
             healthUI.tookDamage = true;
@@ -186,7 +194,18 @@ int Max(float[] arr)
             healthUI2.tookDamage = true;
             healthUI2.PlayerHealth -= amount;
         }
-        if (health <= 0f && this.gameObject.name == "Player2")
+        else if (this.gameObject.name == "Player3")
+        {
+            healthUI3.tookDamage = true;
+            healthUI3.PlayerHealth -= amount;
+        }
+        else if (this.gameObject.name == "Player4")
+        {
+            healthUI4.tookDamage = true;
+            healthUI4.PlayerHealth -= amount;
+        }
+
+        if (health <= 0f && (this.gameObject.name == "Player2" || this.gameObject.name == "Player4"))
         {
 
             score.Kills += 1;
@@ -195,7 +214,7 @@ int Max(float[] arr)
             StartCoroutine(Die());
             StartCoroutine(UIElements());
         }
-        else if (health <= 0f && this.gameObject.name == "Player")
+        else if (health <= 0f && (this.gameObject.name == "Player" || this.gameObject.name == "Player3"))
         {
             score2.Kills += 1;
             KilledBy.text = "You were killed by " + weaponScript.PlayerName;
@@ -226,20 +245,15 @@ int Max(float[] arr)
 
     IEnumerator Die()
     {
-
         BaseModel.SetActive(false);
         GameObject go = Instantiate(Ragdoll, this.transform.position, this.transform.rotation); 
         Destroy(go, 3f);
         //Destroy(gameObject);
-        int index = Random.Range(0, 3);
-        Debug.Log(index);
-
-        Debug.Log(SpawnPos[index].position);
 
         health = 100f;
+
         if (this.gameObject.name == "Player")
         {
-
             weaponScript.loadout[0] = null;
             weaponScript.cam.enabled = !weaponScript.cam.enabled;
             weaponScript.deathcam.enabled = !weaponScript.deathcam.enabled;
@@ -278,52 +292,6 @@ int Max(float[] arr)
             Respawn.canvasRenderer.SetAlpha(0f);
             whiteBanner.canvasRenderer.SetAlpha(0f);
 
-           /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(27f, 3.2f, 34f));
-            distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(45f, 3.2f, 6f));
-            distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(10f, 3.2f, -19.5f));
-            distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player2").GetComponent<Transform>().position, new Vector3(-10f, 3.2f, 5.5f));
-
-            //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
-            //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
-            //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
-            //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
-
-            if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[0].position;
-                this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
-            }
-            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[1].position;
-                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-            }
-            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[2].position;
-                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-            }
-            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-            {
-                this.gameObject.transform.position = SpawnPos[3].position;
-                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-            }
-            else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[1].position;
-                this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-            }
-            else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-            {
-                this.gameObject.transform.position = SpawnPos[2].position;
-                this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-            }
-            else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-            {
-                this.gameObject.transform.position = SpawnPos[3].position;
-                this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-            } */
-
             Spawn();
             healthUI.PlayerHealth = 100;
             Grenade1.enabled = true;
@@ -337,46 +305,149 @@ int Max(float[] arr)
 
             BaseModel.SetActive(true);  
         }
-        else
+        else if(this.gameObject.name == "Player2")
         {
+            weaponScript2.loadout[0] = null;
+            weaponScript2.cam.enabled = !weaponScript2.cam.enabled;
+            weaponScript2.deathcam.enabled = !weaponScript2.deathcam.enabled;
+            weaponScript2.HUD.GetComponent<Canvas>().enabled = !weaponScript2.HUD.GetComponent<Canvas>().enabled;
+            weaponScript2.crossHair.enabled = false;
+            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
+            GameObject.Find("Player2").GetComponent<Movement2>().enabled = false;
+            weapon1.SetActive(false);
 
-            /*  distanceToSpawnPoint1 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[0].position);
-             distanceToSpawnPoint2 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[1].position);
-             distanceToSpawnPoint3 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[2].position);
-             distanceToSpawnPoint4 = Vector3.Distance(GameObject.Find("Player").GetComponent<Transform>().position, SpawnPos[3].position);
+            Banner.canvasRenderer.SetAlpha(1f);
+            KilledBy.canvasRenderer.SetAlpha(1f);
+            Respawn.canvasRenderer.SetAlpha(1f);
+            whiteBanner.canvasRenderer.SetAlpha(1f);
 
-             //Debug.Log("Spawn 1: " + distanceToSpawnPoint1);
-             //Debug.Log("Spawn 2: " + distanceToSpawnPoint2);
-             //Debug.Log("Spawn 3 " + distanceToSpawnPoint3);
-             //Debug.Log("Spawn 4: " + distanceToSpawnPoint4);
+            timeStart = true;
 
-             if (distanceToSpawnPoint1 > distanceToSpawnPoint2 && distanceToSpawnPoint1 > distanceToSpawnPoint3 && distanceToSpawnPoint1 > distanceToSpawnPoint4)
-             {
-                 this.gameObject.transform.position = SpawnPos[0].position;
-                 this.gameObject.transform.localRotation = SpawnPos[0].localRotation;
-             }
-             else if (distanceToSpawnPoint2 > distanceToSpawnPoint1 && distanceToSpawnPoint2 > distanceToSpawnPoint3 && distanceToSpawnPoint2 > distanceToSpawnPoint4)
-             {
-                 this.gameObject.transform.position = SpawnPos[1].position;
-                 this.gameObject.transform.localRotation = SpawnPos[1].localRotation;
-             }
-             else if (distanceToSpawnPoint3 > distanceToSpawnPoint1 && distanceToSpawnPoint3 > distanceToSpawnPoint2 && distanceToSpawnPoint3 > distanceToSpawnPoint4)
-             {
-                 this.gameObject.transform.position = SpawnPos[2].position;
-                 this.gameObject.transform.localRotation = SpawnPos[2].localRotation;
-             }
-             else if (distanceToSpawnPoint4 > distanceToSpawnPoint1 && distanceToSpawnPoint4 > distanceToSpawnPoint2 && distanceToSpawnPoint4 > distanceToSpawnPoint3)
-             {
-                 this.gameObject.transform.position = SpawnPos[3].position;
-                 this.gameObject.transform.localRotation = SpawnPos[3].localRotation;
-             } */
+            Fade.CrossFadeAlpha(1f, 2f, false);
+
+            yield return new WaitForSeconds(3f);
+
+            timeStart = false;
+            timeLeft = 3f;
+
+            Fade.canvasRenderer.SetAlpha(0f);
+            weapon1.SetActive(true);
+            GameObject.Find("Player2").GetComponent<Movement2>().enabled = true;
+            GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
+            weaponScript2.cam.enabled = !weaponScript2.cam.enabled;
+            weaponScript2.deathcam.enabled = !weaponScript2.deathcam.enabled;
+            weaponScript2.HUD.GetComponent<Canvas>().enabled = !weaponScript2.HUD.GetComponent<Canvas>().enabled;
+            weaponScript2.crossHair.enabled = true;
+
+            Banner.canvasRenderer.SetAlpha(0f);
+            KilledBy.canvasRenderer.SetAlpha(0f);
+            Respawn.canvasRenderer.SetAlpha(0f);
+            whiteBanner.canvasRenderer.SetAlpha(0f);
+
             Spawn();
             healthUI2.PlayerHealth = 100;
             Player2Grenade1.enabled = true;
             Player2Grenade2.enabled = true;
             weaponScript2.grenadeAmount = 2;
             Debug.Log("Grenades2: " + weaponScript2.grenadeAmount);
-        }
 
+            BaseModel.SetActive(true);  
+        }
+        else if(this.gameObject.name == "Player3")
+        {
+            weaponScript3.loadout[0] = null;
+            weaponScript3.cam.enabled = !weaponScript3.cam.enabled;
+            weaponScript3.deathcam.enabled = !weaponScript3.deathcam.enabled;
+            weaponScript3.HUD.GetComponent<Canvas>().enabled = !weaponScript3.HUD.GetComponent<Canvas>().enabled;
+            weaponScript3.crossHair.enabled = false;
+            GameObject.Find("Player3").GetComponent<Weapon3>().enabled = false;
+            GameObject.Find("Player3").GetComponent<Movement3>().enabled = false;
+            weapon1.SetActive(false);
+
+            Banner.canvasRenderer.SetAlpha(1f);
+            KilledBy.canvasRenderer.SetAlpha(1f);
+            Respawn.canvasRenderer.SetAlpha(1f);
+            whiteBanner.canvasRenderer.SetAlpha(1f);
+
+            timeStart = true;
+
+            Fade.CrossFadeAlpha(1f, 2f, false);
+
+            yield return new WaitForSeconds(3f);
+
+            timeStart = false;
+            timeLeft = 3f;
+
+            Fade.canvasRenderer.SetAlpha(0f);
+            weapon1.SetActive(true);
+            GameObject.Find("Player3").GetComponent<Movement3>().enabled = true;
+            GameObject.Find("Player3").GetComponent<Weapon3>().enabled = true;
+            weaponScript3.cam.enabled = !weaponScript3.cam.enabled;
+            weaponScript3.deathcam.enabled = !weaponScript3.deathcam.enabled;
+            weaponScript3.HUD.GetComponent<Canvas>().enabled = !weaponScript3.HUD.GetComponent<Canvas>().enabled;
+            weaponScript3.crossHair.enabled = true;
+
+            Banner.canvasRenderer.SetAlpha(0f);
+            KilledBy.canvasRenderer.SetAlpha(0f);
+            Respawn.canvasRenderer.SetAlpha(0f);
+            whiteBanner.canvasRenderer.SetAlpha(0f);
+
+            Spawn();
+            healthUI3.PlayerHealth = 100;
+            Player3Grenade1.enabled = true;
+            Player3Grenade2.enabled = true;
+            weaponScript3.grenadeAmount = 2;
+            Debug.Log("Grenades2: " + weaponScript3.grenadeAmount);
+
+            BaseModel.SetActive(true);  
+        }
+        else if(this.gameObject.name == "Player4")
+        {
+            weaponScript4.loadout[0] = null;
+            weaponScript4.cam.enabled = !weaponScript4.cam.enabled;
+            weaponScript4.deathcam.enabled = !weaponScript4.deathcam.enabled;
+            weaponScript4.HUD.GetComponent<Canvas>().enabled = !weaponScript4.HUD.GetComponent<Canvas>().enabled;
+            weaponScript4.crossHair.enabled = false;
+            GameObject.Find("Player4").GetComponent<Weapon4>().enabled = false;
+            GameObject.Find("Player4").GetComponent<Movement4>().enabled = false;
+            weapon1.SetActive(false);
+
+            Banner.canvasRenderer.SetAlpha(1f);
+            KilledBy.canvasRenderer.SetAlpha(1f);
+            Respawn.canvasRenderer.SetAlpha(1f);
+            whiteBanner.canvasRenderer.SetAlpha(1f);
+
+            timeStart = true;
+
+            Fade.CrossFadeAlpha(1f, 2f, false);
+
+            yield return new WaitForSeconds(3f);
+
+            timeStart = false;
+            timeLeft = 3f;
+
+            Fade.canvasRenderer.SetAlpha(0f);
+            weapon1.SetActive(true);
+            GameObject.Find("Player4").GetComponent<Movement4>().enabled = true;
+            GameObject.Find("Player4").GetComponent<Weapon4>().enabled = true;
+            weaponScript4.cam.enabled = !weaponScript4.cam.enabled;
+            weaponScript4.deathcam.enabled = !weaponScript4.deathcam.enabled;
+            weaponScript4.HUD.GetComponent<Canvas>().enabled = !weaponScript4.HUD.GetComponent<Canvas>().enabled;
+            weaponScript4.crossHair.enabled = true;
+
+            Banner.canvasRenderer.SetAlpha(0f);
+            KilledBy.canvasRenderer.SetAlpha(0f);
+            Respawn.canvasRenderer.SetAlpha(0f);
+            whiteBanner.canvasRenderer.SetAlpha(0f);
+
+            Spawn();
+            healthUI4.PlayerHealth = 100;
+            Player4Grenade1.enabled = true;
+            Player4Grenade2.enabled = true;
+            weaponScript4.grenadeAmount = 2;
+            Debug.Log("Grenades2: " + weaponScript4.grenadeAmount);
+
+            BaseModel.SetActive(true);  
+        }
     }
 }

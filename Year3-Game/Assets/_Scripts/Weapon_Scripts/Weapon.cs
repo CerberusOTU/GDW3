@@ -703,26 +703,16 @@ public class Weapon : MonoBehaviour
                 {
                     if (dist < 25f)
                     {
-                        if (hitInfo.collider.name == "Head")
+                        if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                         {
                             StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage * 1.5f);
-                        }
-                        else
-                        {
-                            StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage);
+                            target.takeDamage(loadout[currentIndex].damage * 1.25f);
                         }
                     }
                     else if (dist > 25f && dist < 35f)
                     {
 
-                        if (hitInfo.collider.name == "Head")
-                        {
-                            StartCoroutine(displayHitmark());
-                            target.takeDamage(loadout[currentIndex].damage * 0.75f);
-                        }
-                        else
+                        if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                         {
                             StartCoroutine(displayHitmark());
                             target.takeDamage(loadout[currentIndex].damage * 0.5f);
@@ -757,12 +747,7 @@ public class Weapon : MonoBehaviour
 
                 if (target != null)
                 {
-                    if (hitInfo.collider.name == "Head")
-                    {
-                        StartCoroutine(displayHitmark());
-                        target.takeDamage(loadout[currentIndex].damage * 2);
-                    }
-                    else
+                    if (hitInfo.collider.name == "Player2" || hitInfo.collider.name == "Player4")
                     {
                         StartCoroutine(displayHitmark());
                         target.takeDamage(loadout[currentIndex].damage);
@@ -773,8 +758,6 @@ public class Weapon : MonoBehaviour
                 {
                     Monkey.shatterThis = true;
                 }
-
-               
 
                 if (hitInfo.collider.tag == "Wood" || hitInfo.collider.tag == "Metal" || hitInfo.collider.tag == "Concrete")
                 {
