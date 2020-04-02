@@ -250,7 +250,7 @@ Transform:
   m_Father: {fileID: 6093908522494689439}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2697533564300139312
+--- !u!114 &1503121173759678181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8287145773937635549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb70a0e558eb764aa583a40e3b5f48b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f5885477ff5f1841a945d33fb471886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 3157165407059374004}
@@ -435,7 +435,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2f049ce74d0c3fb489aee673b1f86e51, type: 2}
+      objectReference: {fileID: 9100000, guid: 56c85967d1241644996e8876d007ae9e, type: 2}
     - target: {fileID: -6105438100913064326, guid: fa44a2005e05d5f4a9ff6df889337546,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

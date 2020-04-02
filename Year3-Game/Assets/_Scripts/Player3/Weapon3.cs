@@ -380,7 +380,7 @@ public class Weapon3 : MonoBehaviour
             }
         }
 
-        if ((Input.GetKeyDown(KeyCode.R) || controller.state3.Buttons.X == ButtonState.Pressed) && controller.prevState3.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
+        if ((Input.GetKeyDown(KeyCode.M) || controller.state3.Buttons.X == ButtonState.Pressed) && controller.prevState3.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
         {
             reloadCancel = false;
             PlayerisReloading = true;
