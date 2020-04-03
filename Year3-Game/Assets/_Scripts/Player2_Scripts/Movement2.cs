@@ -187,7 +187,7 @@ public class Movement2 : MonoBehaviour
         }
         else if (isSprinting)
         {
-            HeadBob(movementCounter, 0.05f, 0.025f);
+            HeadBob(movementCounter, 0.01f, 0.025f);
             movementCounter += Time.deltaTime * 7;
             weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetBob, Time.deltaTime * 15f);
         }
