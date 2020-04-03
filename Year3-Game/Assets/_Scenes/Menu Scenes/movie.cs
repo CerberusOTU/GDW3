@@ -6,13 +6,15 @@ public class movie : MonoBehaviour {
 	
     public string sceneName;
     float timer = 0.0f;
-
-	// Use this for initialization
-	void Start () {
+    Vector3 temp;
+    // Use this for initialization
+    void Start () {
 		((MovieTexture)GetComponent<Renderer>().material.mainTexture).Play ();
+     
 
 
-	}
+
+    }
 
     void Update()
     {
