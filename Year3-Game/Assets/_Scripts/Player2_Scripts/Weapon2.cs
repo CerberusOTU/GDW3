@@ -65,7 +65,7 @@ public class Weapon2 : MonoBehaviour
 
     private float currentCool;
 
-    private Motion player;
+    private Movement2 player;
     //Ammo UI///
     public Text AmmoText;
     public Text AmmoText2;
@@ -150,7 +150,7 @@ public class Weapon2 : MonoBehaviour
         _pool = GameObject.FindObjectOfType<PoolManager>();
         _tutManager = GameObject.FindObjectOfType<Tutorial_Manager>();
         _metricsLogger = GameObject.FindObjectOfType<MetricsLogger>();
-        player = GameObject.FindObjectOfType<Motion>();
+        player = GameObject.FindObjectOfType<Movement2>();
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
         HUD.GetComponent<Canvas>().enabled = true;
