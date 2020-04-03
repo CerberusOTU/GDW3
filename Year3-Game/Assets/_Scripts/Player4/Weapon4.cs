@@ -123,6 +123,10 @@ public class Weapon4 : MonoBehaviour
     public Image down_crosshair;
     public Image left_crosshair;
     public Image right_crosshair;
+     private Vector3 baseUp;
+    private Vector3 baseDown;
+    private Vector3 baseLeft;
+    private Vector3 baseRight;
 
     public RaycastHit hitInfo;
 
@@ -150,6 +154,13 @@ public class Weapon4 : MonoBehaviour
         hitMark.enabled = false;
         controller = GameObject.FindObjectOfType<Controller>();
         HUD.GetComponent<Canvas>().enabled = true;
+
+        
+        baseUp = new Vector3(up_crosshair.transform.localPosition.x,up_crosshair.transform.localPosition.y, up_crosshair.transform.localPosition.z);
+        baseDown = new Vector3(down_crosshair.transform.localPosition.x,down_crosshair.transform.localPosition.y, down_crosshair.transform.localPosition.z);
+        baseLeft = new Vector3(left_crosshair.transform.localPosition.x,left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
+        baseRight = new Vector3(right_crosshair.transform.localPosition.x,right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
+        
 
         //MainWeapon = GetComponent<Image>();
         //SideWeapon = GetComponent<Outline>();
@@ -260,10 +271,10 @@ public class Weapon4 : MonoBehaviour
         Reload();
         if (player.isSprinting)
         {
-            up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, 20f, up_crosshair.transform.localPosition.z);
-            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, -31.1f, down_crosshair.transform.localPosition.z);
-            left_crosshair.transform.localPosition = new Vector3(-27.3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
-            right_crosshair.transform.localPosition = new Vector3(26.2f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
+             up_crosshair.transform.localPosition = new Vector3(up_crosshair.transform.localPosition.x, up_crosshair.transform.localPosition.y + 3f, up_crosshair.transform.localPosition.z);
+            down_crosshair.transform.localPosition = new Vector3(down_crosshair.transform.localPosition.x, down_crosshair.transform.localPosition.y - 3f, down_crosshair.transform.localPosition.z);
+            left_crosshair.transform.localPosition = new Vector3(left_crosshair.transform.localPosition.x - 3f, left_crosshair.transform.localPosition.y, left_crosshair.transform.localPosition.z);
+            right_crosshair.transform.localPosition = new Vector3(right_crosshair.transform.localPosition.x + 3f, right_crosshair.transform.localPosition.y, right_crosshair.transform.localPosition.z);
         }
 
         float d = Input.GetAxis("Mouse ScrollWheel");
@@ -515,10 +526,10 @@ public class Weapon4 : MonoBehaviour
             }
 
             currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
-            up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, new Vector3(0.6f, 4f, 0f), Time.deltaTime * 4f);
-            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, new Vector3(0.6f, -15f, 0.0f), Time.deltaTime * 4f);
-            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, new Vector3(-11.3f, -4f, 0.0f), Time.deltaTime * 4f);
-            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, new Vector3(10.2f, -4f, 0.0f), Time.deltaTime * 4f);
+             up_crosshair.transform.localPosition = Vector3.Lerp(up_crosshair.transform.localPosition, baseUp, Time.deltaTime * 4f);
+            down_crosshair.transform.localPosition = Vector3.Lerp(down_crosshair.transform.localPosition, baseDown, Time.deltaTime * 4f);
+            left_crosshair.transform.localPosition = Vector3.Lerp(left_crosshair.transform.localPosition, baseLeft, Time.deltaTime * 4f);
+            right_crosshair.transform.localPosition = Vector3.Lerp(right_crosshair.transform.localPosition, baseRight, Time.deltaTime * 4f);
 
         }
 
