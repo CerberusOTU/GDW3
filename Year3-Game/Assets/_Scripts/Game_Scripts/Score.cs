@@ -10,6 +10,9 @@ public class Score : MonoBehaviour
     public Text killScore;
     public Text killScore2;
 
+     public Text killScore3;
+    public Text  killScore4;
+
     public Text condition;
 
     public Canvas player1;
@@ -50,6 +53,9 @@ public class Score : MonoBehaviour
     {
         killScore.text = Kills.ToString();
         killScore2.text = Kills.ToString();
+        killScore3.text = Kills.ToString();
+        killScore4.text = Kills.ToString();
+        
         if (Input.GetKeyDown(KeyCode.O))
         {
             Kills += 1;

@@ -9,6 +9,8 @@ public class Score2 : MonoBehaviour
     public int Kills = 0;
     public Text killScore;
     public Text killScore2;
+     public Text killScore3;
+    public Text  killScore4;
 
     public Text condition;
 
@@ -43,6 +45,9 @@ public class Score2 : MonoBehaviour
     {
         killScore.text = Kills.ToString();
         killScore2.text = Kills.ToString();
+        
+        killScore3.text = Kills.ToString();
+        killScore4.text = Kills.ToString();
         if (Input.GetKeyDown(KeyCode.L))
         {
             Kills += 1;
