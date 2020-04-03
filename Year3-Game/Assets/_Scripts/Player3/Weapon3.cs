@@ -246,7 +246,7 @@ public class Weapon3 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((controller.state3.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
+        if ((controller.state3.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0 && loadout[currentIndex].currentAmmo !=0)
         {
             GamePad.SetVibration((PlayerIndex)2, 0.5f, 0);
         }
