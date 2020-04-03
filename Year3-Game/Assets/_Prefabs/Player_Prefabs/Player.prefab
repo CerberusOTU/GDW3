@@ -5735,6 +5735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b451df717feffa4eac19e898882a474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalMove: 0
+  verticalMove: 0
   speed: 25
   sprintModifier: 1.3
   isSprinting: 0
@@ -5796,14 +5798,15 @@ MonoBehaviour:
   defaultSpawn: {fileID: 0}
   weaponParent: {fileID: 1432445155866290829}
   currentIndex: 0
+  currentWeapon: {fileID: 0}
   crossHair: {fileID: 1432445156997086673}
   hitMark: {fileID: 1432445157037321199}
   cam: {fileID: 1432445156551296833}
+  deathcam: {fileID: 0}
   reloadCancel: 0
   reloadDelay: 0
   AmmoText: {fileID: 0}
   AmmoText2: {fileID: 0}
-  Reloading: {fileID: 0}
   PickUp: {fileID: 0}
   MainWeapon: {fileID: 0}
   SideWeapon: {fileID: 0}
@@ -5815,6 +5818,8 @@ MonoBehaviour:
   RevolverSprite: {fileID: 0}
   Grenade1: {fileID: 0}
   Grenade2: {fileID: 0}
+  NOAMMO: {fileID: 0}
+  PlayerName: 
   muzzleFlash: {fileID: 1432445156809318902}
   M1911: {fileID: 11400000, guid: 35aea70b77242944c9d53cf3ded1f6bd, type: 2}
   Tommy: {fileID: 11400000, guid: 776c668a0a52d344ca14194657a723fb, type: 2}
@@ -5825,16 +5830,11 @@ MonoBehaviour:
   grenadePrefab: {fileID: 5474407304477632719, guid: b029acee6ddf3e242aee45adfc4855cc,
     type: 3}
   grenadeAmount: 2
-  RobertoTommy: {fileID: 0}
-  RobertoM1911: {fileID: 0}
-  RobertoRevolver: {fileID: 0}
-  RobertoMP40: {fileID: 0}
-  RobertoShotgun: {fileID: 0}
   up_crosshair: {fileID: 0}
   down_crosshair: {fileID: 0}
   left_crosshair: {fileID: 0}
   right_crosshair: {fileID: 0}
-  Type: 0
+  HUD: {fileID: 0}
   _metricsLogger: {fileID: 0}
   PlayerisReloading: 0
 --- !u!114 &1432445155675656355
@@ -5884,12 +5884,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpawn: {fileID: 0}
+  playerSpawn: []
   health: 100
   Grenade1: {fileID: 0}
   Grenade2: {fileID: 0}
   Player2Grenade1: {fileID: 0}
   Player2Grenade2: {fileID: 0}
-  kill: {fileID: 0}
+  Player3Grenade1: {fileID: 0}
+  Player3Grenade2: {fileID: 0}
+  Player4Grenade1: {fileID: 0}
+  Player4Grenade2: {fileID: 0}
+  KilledEnemy: {fileID: 0}
+  KilledIcon: {fileID: 0}
+  Fade: {fileID: 0}
+  Banner: {fileID: 0}
+  KilledBy: {fileID: 0}
+  Respawn: {fileID: 0}
+  whiteBanner: {fileID: 0}
+  maxTime: 3
+  weapon1: {fileID: 0}
+  BaseModel: {fileID: 0}
+  Ragdoll: {fileID: 0}
 --- !u!114 &2607112222224663915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5919,11 +5934,17 @@ MonoBehaviour:
   Kills: 0
   killScore: {fileID: 0}
   killScore2: {fileID: 0}
+  killScore3: {fileID: 0}
+  killScore4: {fileID: 0}
   condition: {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
   crossHair1: {fileID: 1432445156997086673}
   crossHair2: {fileID: 0}
+  crossHair3: {fileID: 0}
+  crossHair4: {fileID: 0}
 --- !u!114 &2607112222224664215
 MonoBehaviour:
   m_ObjectHideFlags: 0
