@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Movement3 : MonoBehaviour
 {
     Controller controller;
-    float horizontalMove;
-    float verticalMove;
+    public float horizontalMove;
+    public float verticalMove;
     public float speed;
     public float sprintModifier;
 

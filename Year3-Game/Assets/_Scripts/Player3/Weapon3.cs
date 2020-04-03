@@ -248,11 +248,11 @@ public class Weapon3 : MonoBehaviour
     {
         if ((controller.state3.Triggers.Right == 1) && !PlayerisReloading && loadout[currentIndex].ShotType == "Auto" && loadout[currentIndex].maxAmmo >= 0)
         {
-            GamePad.SetVibration((PlayerIndex)0, 0.5f, 0);
+            GamePad.SetVibration((PlayerIndex)2, 0.5f, 0);
         }
         else
         {
-            GamePad.SetVibration((PlayerIndex)0, 0, 0);
+            GamePad.SetVibration((PlayerIndex)2, 0, 0);
         }
     }
 
@@ -385,7 +385,10 @@ public class Weapon3 : MonoBehaviour
             reloadCancel = false;
             PlayerisReloading = true;
 
-        
+            if (loadout[currentIndex].maxAmmo > 0)
+            {
+                PlaySound(loadout[currentIndex].ReloadPath);
+            }
         }
 
         if ((Input.GetKeyDown(KeyCode.R) || controller.state3.Buttons.X == ButtonState.Pressed) && controller.prevState3.Buttons.X == ButtonState.Released && loadout[currentIndex].currentAmmo != loadout[currentIndex].clipSize && !PlayerisReloading)
@@ -393,7 +396,6 @@ public class Weapon3 : MonoBehaviour
             reloadCancel = false;
             PlayerisReloading = true;
             reloadDelay = 0.0f;
-            if(loadout[currentIndex].name != "Shotgun")
             PlaySound(loadout[currentIndex].ReloadPath);
 
         }
@@ -556,8 +558,6 @@ public class Weapon3 : MonoBehaviour
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
-            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Holster", currentWeapon);
-
         }
 
         currentIndex = _ind;
@@ -792,7 +792,6 @@ public class Weapon3 : MonoBehaviour
         hitMark.enabled = true;
 
         yield return new WaitForSeconds(0.05f);
-        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player Effects/Hit", currentWeapon);
         hitMark.enabled = false;
     }
 
@@ -1125,8 +1124,6 @@ public class Weapon3 : MonoBehaviour
                 origPosReset = false;
                 Shoot();
             }
-            if (loadout[currentIndex].currentAmmo == 0 && loadout[currentIndex].maxAmmo == 0)
-                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Effects/Dry Clip", currentWeapon);
         }
         if (controller.state3.Triggers.Right == 1)
         {

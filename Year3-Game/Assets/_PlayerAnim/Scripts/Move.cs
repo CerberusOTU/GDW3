@@ -40,11 +40,11 @@ public class Move : MonoBehaviour
         if (animator == null) return;
 
         //player 1 animations
-        if (this.gameObject.name == "FinalChar")
+        if(this.gameObject.name == "FinalChar")
         {
-            if (weapon.currentIndex == 1)
-            {
-                if (movement.isSprinting)
+        if (weapon.currentIndex == 1)
+        {
+            if(movement.isSprinting)
                 {
                     animator.SetInteger("Switch", 11);
                     animator.SetBool("isSprinting", true);
@@ -52,105 +52,105 @@ public class Move : MonoBehaviour
                 }
                 else
                 {
-                    animator.SetInteger("Switch", 1);
-                    animator.SetBool("isSprinting", false);
+                animator.SetInteger("Switch", 1);
+                animator.SetBool("isSprinting", false);
                 }
-
-                M1911.SetActive(true);
-                Tommy.SetActive(false);
-                Revolver.SetActive(false);
-                MP40.SetActive(false);
-                Shotgun.SetActive(false);
-            }
-            if (weapon.currentIndex == 0)
+            
+            M1911.SetActive(true);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+        }
+        if (weapon.currentIndex == 0)
+        {
+            if(weapon.loadout[0].name == "Tommy")
             {
-                if (weapon.loadout[0].name == "Tommy")
+                if(movement.isSprinting)
                 {
-                    if (movement.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 22);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 2);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(true);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 22);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 2);
+                animator.SetBool("isSprinting", false);
                 }
 
-
-                if (weapon.loadout[0].name == "Revolver")
+            M1911.SetActive(false);
+            Tommy.SetActive(true);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
+        
+        
+            if(weapon.loadout[0].name == "Revolver")
+            {
+                if(movement.isSprinting)
                 {
-                    if (movement.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 33);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 3);
-                        animator.SetBool("isSprinting", false);
-                    }
+                    animator.SetInteger("Switch", 33);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 3);
+                animator.SetBool("isSprinting", false);
+                }
+            
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(true);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
 
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(true);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+             if(weapon.loadout[0].name == "MP40")
+            {
+                 if(movement.isSprinting)
+                {
+                    animator.SetInteger("Switch", 44);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 4);
+                animator.SetBool("isSprinting", false);
                 }
 
-                if (weapon.loadout[0].name == "MP40")
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(true);
+            Shotgun.SetActive(false);
+            }
+
+             if(weapon.loadout[0].name == "Shotgun")
+            {
+                if(movement.isSprinting)
                 {
-                    if (movement.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 44);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 4);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(true);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 55);
+                    animator.SetBool("isSprinting", true);
                 }
-
-                if (weapon.loadout[0].name == "Shotgun")
+                else
                 {
-                    if (movement.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 55);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 5);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(true);
+                animator.SetInteger("Switch", 5);
+                animator.SetBool("isSprinting", false);
                 }
+                
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(true);
             }
         }
-        else if (this.gameObject.name == "FinalChar2")
+    }
+    else if(this.gameObject.name == "FinalChar2")
         {
-            if (weapon2.currentIndex == 1)
-            {
-                if (movement2.isSprinting)
+        if (weapon2.currentIndex == 1)
+        {
+            if(movement2.isSprinting)
                 {
                     animator.SetInteger("Switch", 11);
                     animator.SetBool("isSprinting", true);
@@ -158,105 +158,105 @@ public class Move : MonoBehaviour
                 }
                 else
                 {
-                    animator.SetInteger("Switch", 1);
-                    animator.SetBool("isSprinting", false);
+                animator.SetInteger("Switch", 1);
+                animator.SetBool("isSprinting", false);
                 }
-
-                M1911.SetActive(true);
-                Tommy.SetActive(false);
-                Revolver.SetActive(false);
-                MP40.SetActive(false);
-                Shotgun.SetActive(false);
-            }
-            if (weapon2.currentIndex == 0)
+            
+            M1911.SetActive(true);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+        }
+        if (weapon2.currentIndex == 0)
+        {
+            if(weapon2.loadout[0].name == "Tommy")
             {
-                if (weapon2.loadout[0].name == "Tommy")
+                if(movement2.isSprinting)
                 {
-                    if (movement2.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 22);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 2);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(true);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 22);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 2);
+                animator.SetBool("isSprinting", false);
                 }
 
-
-                if (weapon2.loadout[0].name == "Revolver")
+            M1911.SetActive(false);
+            Tommy.SetActive(true);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
+        
+        
+            if(weapon2.loadout[0].name == "Revolver")
+            {
+                if(movement2.isSprinting)
                 {
-                    if (movement2.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 33);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 3);
-                        animator.SetBool("isSprinting", false);
-                    }
+                    animator.SetInteger("Switch", 33);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 3);
+                animator.SetBool("isSprinting", false);
+                }
+            
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(true);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
 
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(true);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+             if(weapon2.loadout[0].name == "MP40")
+            {
+                 if(movement2.isSprinting)
+                {
+                    animator.SetInteger("Switch", 44);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 4);
+                animator.SetBool("isSprinting", false);
                 }
 
-                if (weapon2.loadout[0].name == "MP40")
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(true);
+            Shotgun.SetActive(false);
+            }
+
+             if(weapon2.loadout[0].name == "Shotgun")
+            {
+                if(movement2.isSprinting)
                 {
-                    if (movement2.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 44);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 4);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(true);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 55);
+                    animator.SetBool("isSprinting", true);
                 }
-
-                if (weapon2.loadout[0].name == "Shotgun")
+                else
                 {
-                    if (movement2.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 55);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 5);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(true);
+                animator.SetInteger("Switch", 5);
+                animator.SetBool("isSprinting", false);
                 }
+                
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(true);
             }
         }
-        else if (this.gameObject.name == "FinalChar3")
+    }
+    else if(this.gameObject.name == "FinalChar3")
         {
-            if (weapon3.currentIndex == 1)
-            {
-                if (movement3.isSprinting)
+        if (weapon3.currentIndex == 1)
+        {
+            if(movement3.isSprinting)
                 {
                     animator.SetInteger("Switch", 11);
                     animator.SetBool("isSprinting", true);
@@ -264,105 +264,105 @@ public class Move : MonoBehaviour
                 }
                 else
                 {
-                    animator.SetInteger("Switch", 1);
-                    animator.SetBool("isSprinting", false);
+                animator.SetInteger("Switch", 1);
+                animator.SetBool("isSprinting", false);
                 }
-
-                M1911.SetActive(true);
-                Tommy.SetActive(false);
-                Revolver.SetActive(false);
-                MP40.SetActive(false);
-                Shotgun.SetActive(false);
-            }
-            if (weapon3.currentIndex == 0)
+            
+            M1911.SetActive(true);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+        }
+        if (weapon3.currentIndex == 0)
+        {
+            if(weapon3.loadout[0].name == "Tommy")
             {
-                if (weapon3.loadout[0].name == "Tommy")
+                if(movement3.isSprinting)
                 {
-                    if (movement3.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 22);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 2);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(true);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 22);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 2);
+                animator.SetBool("isSprinting", false);
                 }
 
-
-                if (weapon3.loadout[0].name == "Revolver")
+            M1911.SetActive(false);
+            Tommy.SetActive(true);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
+        
+        
+            if(weapon3.loadout[0].name == "Revolver")
+            {
+                if(movement3.isSprinting)
                 {
-                    if (movement3.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 33);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 3);
-                        animator.SetBool("isSprinting", false);
-                    }
+                    animator.SetInteger("Switch", 33);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 3);
+                animator.SetBool("isSprinting", false);
+                }
+            
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(true);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
 
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(true);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+             if(weapon3.loadout[0].name == "MP40")
+            {
+                 if(movement3.isSprinting)
+                {
+                    animator.SetInteger("Switch", 44);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 4);
+                animator.SetBool("isSprinting", false);
                 }
 
-                if (weapon3.loadout[0].name == "MP40")
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(true);
+            Shotgun.SetActive(false);
+            }
+
+             if(weapon3.loadout[0].name == "Shotgun")
+            {
+                if(movement3.isSprinting)
                 {
-                    if (movement3.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 44);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 4);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(true);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 55);
+                    animator.SetBool("isSprinting", true);
                 }
-
-                if (weapon3.loadout[0].name == "Shotgun")
+                else
                 {
-                    if (movement3.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 55);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 5);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(true);
+                animator.SetInteger("Switch", 5);
+                animator.SetBool("isSprinting", false);
                 }
+                
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(true);
             }
         }
-        else if (this.gameObject.name == "FinalChar4")
+    }
+    else if(this.gameObject.name == "FinalChar4")
         {
-            if (weapon4.currentIndex == 1)
-            {
-                if (movement4.isSprinting)
+        if (weapon4.currentIndex == 1)
+        {
+            if(movement4.isSprinting)
                 {
                     animator.SetInteger("Switch", 11);
                     animator.SetBool("isSprinting", true);
@@ -370,105 +370,125 @@ public class Move : MonoBehaviour
                 }
                 else
                 {
-                    animator.SetInteger("Switch", 1);
-                    animator.SetBool("isSprinting", false);
+                animator.SetInteger("Switch", 1);
+                animator.SetBool("isSprinting", false);
                 }
-
-                M1911.SetActive(true);
-                Tommy.SetActive(false);
-                Revolver.SetActive(false);
-                MP40.SetActive(false);
-                Shotgun.SetActive(false);
-            }
-            if (weapon4.currentIndex == 0)
+            
+            M1911.SetActive(true);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+        }
+        if (weapon4.currentIndex == 0)
+        {
+            if(weapon4.loadout[0].name == "Tommy")
             {
-                if (weapon4.loadout[0].name == "Tommy")
+                if(movement4.isSprinting)
                 {
-                    if (movement4.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 22);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 2);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(true);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 22);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 2);
+                animator.SetBool("isSprinting", false);
                 }
 
-
-                if (weapon4.loadout[0].name == "Revolver")
+            M1911.SetActive(false);
+            Tommy.SetActive(true);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
+        
+        
+            if(weapon4.loadout[0].name == "Revolver")
+            {
+                if(movement4.isSprinting)
                 {
-                    if (movement4.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 33);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 3);
-                        animator.SetBool("isSprinting", false);
-                    }
+                    animator.SetInteger("Switch", 33);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 3);
+                animator.SetBool("isSprinting", false);
+                }
+            
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(true);
+            MP40.SetActive(false);
+            Shotgun.SetActive(false);
+            }
 
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(true);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(false);
+             if(weapon4.loadout[0].name == "MP40")
+            {
+                 if(movement4.isSprinting)
+                {
+                    animator.SetInteger("Switch", 44);
+                    animator.SetBool("isSprinting", true);
+                }
+                else
+                {
+                animator.SetInteger("Switch", 4);
+                animator.SetBool("isSprinting", false);
                 }
 
-                if (weapon4.loadout[0].name == "MP40")
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(true);
+            Shotgun.SetActive(false);
+            }
+
+             if(weapon4.loadout[0].name == "Shotgun")
+            {
+                if(movement4.isSprinting)
                 {
-                    if (movement4.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 44);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 4);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(true);
-                    Shotgun.SetActive(false);
+                    animator.SetInteger("Switch", 55);
+                    animator.SetBool("isSprinting", true);
                 }
-
-                if (weapon4.loadout[0].name == "Shotgun")
+                else
                 {
-                    if (movement4.isSprinting)
-                    {
-                        animator.SetInteger("Switch", 55);
-                        animator.SetBool("isSprinting", true);
-                    }
-                    else
-                    {
-                        animator.SetInteger("Switch", 5);
-                        animator.SetBool("isSprinting", false);
-                    }
-
-                    M1911.SetActive(false);
-                    Tommy.SetActive(false);
-                    Revolver.SetActive(false);
-                    MP40.SetActive(false);
-                    Shotgun.SetActive(true);
+                animator.SetInteger("Switch", 5);
+                animator.SetBool("isSprinting", false);
                 }
+                
+            M1911.SetActive(false);
+            Tommy.SetActive(false);
+            Revolver.SetActive(false);
+            MP40.SetActive(false);
+            Shotgun.SetActive(true);
             }
         }
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
+    }
+    float x = 0;
+    float y = 0;
+    if(this.gameObject.name == "FinalChar")
+    {
+        x = movement.horizontalMove;
+        y = movement.verticalMove;
+    }
+    else if(this.gameObject.name == "FinalChar2")
+    {
+        x = movement2.horizontalMove;
+        y = movement2.verticalMove;
+    }
+    else if(this.gameObject.name == "FinalChar3")
+    {
+        x = movement3.horizontalMove;
+        y = movement3.verticalMove;
+    }
+    else if(this.gameObject.name == "FinalChar4")
+    {
+        x = movement4.horizontalMove;
+        y = movement4.verticalMove;
+    }
 
         move(x, y);
-
+        
     }
     private void move(float x, float y)
     {

@@ -22,6 +22,19 @@ public class CountDown : MonoBehaviour
     public Canvas crossHair4;
     bool check = true;
 
+    void Start()
+    {
+        GameObject.Find("Player").GetComponent<Weapon>().enabled = false;
+        GameObject.Find("Player2").GetComponent<Weapon2>().enabled = false;
+        GameObject.Find("Player3").GetComponent<Weapon3>().enabled = false;
+        GameObject.Find("Player4").GetComponent<Weapon4>().enabled = false;
+
+        GameObject.Find("Player").GetComponent<Weapon>().enabled = true;
+        GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
+        GameObject.Find("Player3").GetComponent<Weapon3>().enabled = true;
+        GameObject.Find("Player4").GetComponent<Weapon4>().enabled = true;
+    }
+
     float timer = 0;
     void Update()
     {  

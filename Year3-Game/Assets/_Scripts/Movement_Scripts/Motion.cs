@@ -6,8 +6,8 @@ public class Motion : MonoBehaviour
 {
     Controller controller;
 
-    float horizontalMove;
-    float verticalMove;
+    public float horizontalMove;
+    public float verticalMove;
 
     Vector3 targetVelocity;
     public float speed;
