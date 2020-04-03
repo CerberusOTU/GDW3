@@ -816,7 +816,7 @@ public class Weapon2 : MonoBehaviour
             {
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
                 reloadDelay += Time.deltaTime;
-                Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
+                //Reloading.text = "Reloading..." + reloadDelay / loadout[currentIndex].reloadTime;
                 //Debug.Log("Reloading..." + reloadDelay / loadout[currentIndex].reloadTime);
                 if (reloadCancel)
                 {
@@ -824,7 +824,7 @@ public class Weapon2 : MonoBehaviour
                     reloadDelay = 0.0f;
                     reloadCancel = false;
                     PlayerisReloading = false;
-                    Reloading.text = " ";
+                    //Reloading.text = " ";
                     tempTime = Time.time;
                     return;
                 }
@@ -844,7 +844,7 @@ public class Weapon2 : MonoBehaviour
                         loadout[currentIndex].maxAmmo = 0;
                     }
                     PlayerisReloading = false;
-                    Reloading.text = " ";
+                    //Reloading.text = " ";
 
                     tempTime = Time.time;
 

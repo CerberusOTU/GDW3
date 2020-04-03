@@ -18,6 +18,8 @@ public class CountDown : MonoBehaviour
 
     public Canvas crossHair1;
     public Canvas crossHair2;
+    public Canvas crossHair3;
+    public Canvas crossHair4;
     bool check = true;
 
     float timer = 0;
@@ -32,6 +34,8 @@ public class CountDown : MonoBehaviour
             player4.enabled = false;
             crossHair1.enabled = false;
             crossHair2.enabled = false;
+            crossHair3.enabled = false;
+            crossHair4.enabled = false;
             GameObject.Find("Player").GetComponent<Motion>().enabled = false;
             GameObject.Find("Player2").GetComponent<Movement2>().enabled = false;
             GameObject.Find("Player3").GetComponent<Movement3>().enabled = false;
@@ -76,6 +80,8 @@ public class CountDown : MonoBehaviour
 
                 crossHair1.enabled = true;
                 crossHair2.enabled = true;
+                crossHair3.enabled = true;
+                crossHair4.enabled = true;
 
                 GameObject.Find("Player").GetComponent<Motion>().enabled = true;
                 GameObject.Find("Player2").GetComponent<Movement2>().enabled = true;
