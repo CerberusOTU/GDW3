@@ -190,7 +190,7 @@ public class ReloadAnimations3 : MonoBehaviour
         {
             Debug.Log("Shotgun ShellIn");
 
-            //FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Reloads/ShotgunShellIn", weaponScript.currentWeapon);
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Reloads/ShotgunShellIn", weaponScript.currentWeapon);
 
             weaponScript.loadout[0].currentAmmo += 1;
             weaponScript.loadout[0].maxAmmo -= 1;
@@ -202,7 +202,7 @@ public class ReloadAnimations3 : MonoBehaviour
 
     public void Cock()
     {
-        //FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Reloads/ShotgunCock", weaponScript.currentWeapon);
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Gun Reloads/ShotgunCock", weaponScript.currentWeapon);
     }
 
 }

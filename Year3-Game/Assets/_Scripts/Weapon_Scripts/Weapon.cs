@@ -402,11 +402,6 @@ public class Weapon : MonoBehaviour
             }
             reloadCancel = false;
             PlayerisReloading = true;
-
-            //if (loadout[currentIndex].maxAmmo > 0)
-            //{
-            //    PlaySound(loadout[currentIndex].ReloadPath);
-            //}
         }
 
         if ((Input.GetKeyDown(KeyCode.R) || controller.state.Buttons.X == ButtonState.Pressed) && 

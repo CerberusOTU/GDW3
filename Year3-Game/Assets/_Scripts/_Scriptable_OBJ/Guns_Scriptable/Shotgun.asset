@@ -16,7 +16,7 @@ MonoBehaviour:
   className: Shotgun
   ShotType: Single
   damage: 7
-  firerate: 0.5
+  firerate: 0.7
   bloom: 40
   recoil: 1
   maxRecoil_x: -50
@@ -26,7 +26,7 @@ MonoBehaviour:
   aimSpeed: 15
   reloadTime: 1.833
   alwaysMax: 18
-  maxAmmo: 18
+  maxAmmo: 3
   clipSize: 6
   currentAmmo: 6
   ShotPath: event:/Gun Shots/ShotgunShot
