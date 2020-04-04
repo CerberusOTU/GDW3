@@ -14,8 +14,7 @@ public class afterGameScript : MonoBehaviour
     {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-        winner1 = Score.member1;
-        winner2 = Score.member2;
+
 
     }
 

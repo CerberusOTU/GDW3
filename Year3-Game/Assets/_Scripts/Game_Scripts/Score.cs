@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Playables;
 public class Score : MonoBehaviour
 {
     public int Kills = 0;
@@ -30,23 +30,28 @@ public class Score : MonoBehaviour
     private Weapon3 weaponScript3;
     private Weapon4 weaponScript4;
 
-    public static Text member1;
-    public static Text member2;
+    public Canvas mainHud;
+    public Camera mainCamera;
+    public Text winners;
+    public PlayableDirector timeline;
+
+    bool check;
 
     int safety = 0;
     float timer;
 
     void Start()
     {
+        check = false;
         condition.enabled = false;
+        mainHud.enabled = false;
+        mainCamera.enabled = false;
 
         weaponScript = GameObject.FindObjectOfType<Weapon>();
         weaponScript2 = GameObject.FindObjectOfType<Weapon2>();      
         weaponScript3 = GameObject.FindObjectOfType<Weapon3>();
         weaponScript4 = GameObject.FindObjectOfType<Weapon4>();
-        Debug.Log("check start");
-        member1.text = "Testing1";
-        member2.text = "Testing2";
+
     }
 
     void Update()
@@ -65,18 +70,15 @@ public class Score : MonoBehaviour
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
+            winners.text = weaponScript.PlayerName.ToString() + " and " + weaponScript2.PlayerName.ToString() + " win!";
         }
 
       
-        Debug.Log("checkname " + weaponScript.PlayerName.ToString());
-        Debug.Log("checkname " + weaponScript2.PlayerName.ToString());
-           Debug.Log("checkmember " + member1.text.ToString());
-           Debug.Log("checkmember " + member2.text.ToString());
+     
 
         if (Kills == 5)
         {
-            member1.text = weaponScript.PlayerName.ToString();
-            member2.text = weaponScript2.PlayerName.ToString();
+
 
             Destroy(GetComponent<Target>());
             player1.enabled = false;
@@ -90,16 +92,29 @@ public class Score : MonoBehaviour
             crossHair4.enabled = false;
 
             condition.enabled = true;
-
+          
             timer += Time.deltaTime;
             if (timer >= 1)
             {
-                Time.timeScale = 1f;
-                Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
-
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                SceneManager.LoadScene("afterGame");
+                Time.timeScale = 1f;
+                Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
+                mainHud.enabled = true;
+                mainCamera.enabled = true;
+                timeline.Play();
+                
+                if (check == false)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Thing", weaponScript.currentWeapon);
+
+                    check = true;
+                }
+           if (timer >= 21)
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+                //SceneManager.LoadScene("afterGame");
             }
         }
     }

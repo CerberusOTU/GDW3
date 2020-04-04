@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Playables;
 public class Score2 : MonoBehaviour
 {
     public int Kills = 0;
@@ -29,11 +29,22 @@ public class Score2 : MonoBehaviour
     private Weapon3 weaponScript3;
     private Weapon4 weaponScript4;
 
+    public Canvas mainHud;
+    public Camera mainCamera;
+    public Text winners;
+    public PlayableDirector timeline;
+
+    bool check;
     int safety;
     float timer;
 
     void Start()
     {
+        check = false;
+        condition.enabled = false;
+        mainHud.enabled = false;
+        mainCamera.enabled = false;
+
         condition.enabled = false;
 
         weaponScript = GetComponent<Weapon>();
@@ -57,12 +68,15 @@ public class Score2 : MonoBehaviour
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
+            winners.text = weaponScript2.PlayerName.ToString() + " and " + weaponScript4.PlayerName.ToString() + " win!";
+
         }
 
-        if(Kills == 5)
+        if (Kills == 5)
         {
-            Destroy(GetComponent<Target>());
 
+
+            Destroy(GetComponent<Target>());
             player1.enabled = false;
             player2.enabled = false;
             player3.enabled = false;
@@ -70,19 +84,33 @@ public class Score2 : MonoBehaviour
 
             crossHair1.enabled = false;
             crossHair2.enabled = false;
+            crossHair3.enabled = false;
+            crossHair4.enabled = false;
 
             condition.enabled = true;
-            //GameData.member1.text = weaponScript3.PlayerName.ToString();
-           // GameData.member2.text = weaponScript4.PlayerName.ToString();
-            timer += Time.deltaTime;
 
-            if(timer >= 1)
+            timer += Time.deltaTime;
+            if (timer >= 1)
             {
-                Time.timeScale = 1f;
-                Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;  
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                SceneManager.LoadScene("afterGame");
+                Time.timeScale = 1f;
+                Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
+                mainHud.enabled = true;
+                mainCamera.enabled = true;
+                timeline.Play();
+
+                if (check == false)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Thing", weaponScript.currentWeapon);
+
+                    check = true;
+                }
+                if (timer >= 21)
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+                //SceneManager.LoadScene("afterGame");
             }
         }
     }
