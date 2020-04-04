@@ -64,7 +64,7 @@ public class Score2 : MonoBehaviour
             Kills += 1;
         }
 
-        if (Kills == 5 && safety < 1)
+        if (Kills == 10 && safety < 1)
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
@@ -72,7 +72,7 @@ public class Score2 : MonoBehaviour
 
         }
 
-        if (Kills == 5)
+        if (Kills == 10)
         {
 
 

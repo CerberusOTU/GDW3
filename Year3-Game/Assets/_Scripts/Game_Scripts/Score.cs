@@ -66,7 +66,7 @@ public class Score : MonoBehaviour
             Kills += 1;
         }
 
-        if (Kills == 5 && safety < 1)
+        if (Kills == 10 && safety < 1)
         {
             safety += 1;
             this.gameObject.AddComponent<SlowTime>();
@@ -76,7 +76,7 @@ public class Score : MonoBehaviour
       
      
 
-        if (Kills == 5)
+        if (Kills == 10)
         {
 
 
@@ -90,6 +90,11 @@ public class Score : MonoBehaviour
             crossHair2.enabled = false;
             crossHair3.enabled = false;
             crossHair4.enabled = false;
+
+            weaponScript.enabled = false;
+            weaponScript2.enabled = false;
+            weaponScript3.enabled = false;
+            weaponScript4.enabled = false;
 
             condition.enabled = true;
           
