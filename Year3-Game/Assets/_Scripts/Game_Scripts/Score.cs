@@ -109,12 +109,7 @@ public class Score : MonoBehaviour
                 mainCamera.enabled = true;
                 timeline.Play();
                 
-                if (check == false)
-                {
-                    FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Thing", weaponScript.currentWeapon);
-
-                    check = true;
-                }
+              
            if (timer >= 21)
                 {
                     SceneManager.LoadScene("Menu");

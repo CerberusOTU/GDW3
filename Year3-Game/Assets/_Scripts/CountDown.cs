@@ -16,6 +16,11 @@ public class CountDown : MonoBehaviour
     public Canvas player3;
     public Canvas player4;
 
+    public Camera deathcam;
+    public Camera deathcam2;
+    public Camera deathcam3;
+    public Camera deathcam4;
+
     public Canvas crossHair1;
     public Canvas crossHair2;
     public Canvas crossHair3;
@@ -33,6 +38,11 @@ public class CountDown : MonoBehaviour
         GameObject.Find("Player2").GetComponent<Weapon2>().enabled = true;
         GameObject.Find("Player3").GetComponent<Weapon3>().enabled = true;
         GameObject.Find("Player4").GetComponent<Weapon4>().enabled = true;
+
+        deathcam.enabled = false;
+        deathcam2.enabled = false;
+        deathcam3.enabled = false;
+        deathcam4.enabled = false;
     }
 
     float timer = 0;
